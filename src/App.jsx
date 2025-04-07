@@ -1,7 +1,15 @@
 import { Routes, Route } from 'react-router';
 
+// Importamos los componentes de las páginas que vamos a usar
+// En este caso, Home y About son componentes que representan páginas
+// de nuestra aplicación
+// Estos componentes se encuentran en la carpeta "pages"
+// y son archivos .jsx
+
 import Home from './pages/Home';
 import About from './pages/About';
+import Test from './pages/Test';
+
 import './App.css'
 
 
@@ -17,6 +25,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
+      <Route path="/test" element={<Test />} />
     </Routes>
   );
 }
