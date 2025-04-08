@@ -10,8 +10,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Test from './pages/Test';
 
-import './App.css'
-
+import './App.css';
 
 // Dentro de Routes, definimos las rutas de nuestra aplicación
 // Cada ruta se define con un componente Route
