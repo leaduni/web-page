@@ -6,9 +6,12 @@ import { Routes, Route } from 'react-router';
 // Estos componentes se encuentran en la carpeta "pages"
 // y son archivos .jsx
 
-import Home from './pages/Home';
-import About from './pages/About';
-import Test from './pages/Test';
+import HomePage from './pages/HomePage';
+import ApplicationPage from './pages/ApplicationPage';
+import NewsPage from './pages/NewsPage';
+import PillarsPage from './pages/PillarsPage';
+import OrganizationPage from './pages/OrganizationPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 import './App.css';
 
@@ -22,9 +25,14 @@ import './App.css';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/test" element={<Test />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/application" element={<ApplicationPage />} />
+      <Route path="/news" element={<NewsPage />} />
+      <Route path="/pillars" element={<PillarsPage />} />
+      <Route path="/organization" element={<OrganizationPage />} />
+      <Route path="*" element={<NotFoundPage />} />
+      {/* La ruta "*" captura todas las rutas que no coinciden con las anteriores */}
+      {/* Esto es útil para mostrar una página 404 o Not Found */}
     </Routes>
   );
 }
