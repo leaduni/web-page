@@ -16,11 +16,12 @@
 }
 
 /* Add smooth transitions */
-.carousel, .carousel-item {
+.carousel,
+.carousel-item {
   transition: transform 0.5s ease-out;
 }
 
 /* Add hover effect */
 .carousel-item:hover {
   transform: scale(1.05) translateZ(10px);
-} 
+}
