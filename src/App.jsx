@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
+
 
 // Importamos los componentes de las páginas que vamos a usar
 // En este caso, Home y About son componentes que representan páginas
@@ -24,16 +25,16 @@ import './App.css';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/application" element={<ApplicationPage />} />
-      <Route path="/news" element={<NewsPage />} />
-      <Route path="/pillars" element={<PillarsPage />} />
-      <Route path="/organization" element={<OrganizationPage />} />
-      <Route path="*" element={<NotFoundPage />} />
-      {/* La ruta "*" captura todas las rutas que no coinciden con las anteriores */}
-      {/* Esto es útil para mostrar una página 404 o Not Found */}
-    </Routes>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/application" element={<ApplicationPage />} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/pillars" element={<PillarsPage />} />
+          <Route path="/organization" element={<OrganizationPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+          {/* La ruta "*" captura todas las rutas que no coinciden con las anteriores */}
+          {/* Esto es útil para mostrar una página 404 o Not Found */}      
+        </Routes>
   );
 }
 
