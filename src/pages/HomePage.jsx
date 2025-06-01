@@ -1,12 +1,12 @@
 import { Link } from 'react-router';
-
+import { HeroSection } from '../components/Inicio/HeroSection';
+/* import { ContactoSection } from '../components/Contacto/ContactoSection'; */
 function HomePage() {
   return (
     <div>
-      <main>
-        <h1>Página de Inicio</h1>
-        <p>Esta es la página de inicio de nuestra aplicación.</p>
-        <Link to="/news"> NEWS </Link>;
+      <main className="min-h-screen w-full bg-black">
+      <HeroSection />
+      {/* <ContactoSection /> */}
       </main>
     </div>
   );
