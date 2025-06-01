@@ -3,7 +3,7 @@ import { Award, BookOpen, Briefcase, GraduationCap, Heart, Users, UserCircle } f
 import PillarDetails from '../components/PillarDetails';
 import PillarCarousel from '../components/PillarCarousel';
 import '../styles/carousel.css';
-import { Header } from '../components/Header';
+//import { Header } from '../components/Header';
 
 
 const pillars = [
@@ -160,12 +160,10 @@ const PillarsPage = () => {
 
   useEffect(() => {
     if (selectedPillar && detailRef.current) {
-      // Calculamos la posición del elemento
       const element = detailRef.current;
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - 100; // 100px de offset para el header
+      const offsetPosition = elementPosition + window.pageYOffset - 100;
 
-      // Realizamos el scroll
       window.scrollTo({
         top: offsetPosition,
         behavior: "smooth"
@@ -180,7 +178,7 @@ const PillarsPage = () => {
   
       {/* Contenido principal */}
       <div className="min-h-screen text-white px-4 py-12">
-        <Header />
+
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-pink-300 to-purple-300 bg-clip-text text-transparent">
             Nuestros Pilares
