@@ -20,11 +20,11 @@ const pillars = [
       'Programas de mentoría con líderes experimentados',
       'Proyectos prácticos de liderazgo en equipo',
     ],
-    coordinator: 'Francisco Morales',
+    coordinator: 'Joseph Chuquipiondo Robles',
     coverImage: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg',
     events: [
       {
-        title: 'LEAD en los Colegios de SJL',
+        title: 'LEAD en los Colegios',
         image: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg',
         date: '15 de Mayo, 2025',
       },
@@ -54,8 +54,8 @@ const pillars = [
       'Tutorías personalizadas',
       'Talleres de métodos de estudio',
     ],
-    coordinator: 'María García',
-    coverImage: 'https://images.pexels.com/photos/3769714/pexels-photo-3769714.jpeg',
+    coordinator: 'Diogo Abregu Gonzales',
+    coverImage: 'https://images.pexels.com/photos/3861959/pexels-photo-3861959.jpeg',
     events: [
       {
         title: 'Sesión de Tutorías',
@@ -88,8 +88,8 @@ const pillars = [
       'Talleres de liderazgo femenino',
       'Networking profesional',
     ],
-    coordinator: 'Ana López',
-    coverImage: 'https://images.pexels.com/photos/3861959/pexels-photo-3861959.jpeg',
+    coordinator: 'Angela Cori Salas',
+    coverImage: 'https://images.pexels.com/photos/3184298/pexels-photo-3184298.jpeg',
     events: [
       {
         title: 'Mujeres en Ingeniería',
@@ -122,7 +122,7 @@ const pillars = [
       'Conexiones con empresas',
       'Desarrollo de CV y marca personal',
     ],
-    coordinator: 'Carlos Ruiz',
+    coordinator: 'Yuleimy Lucas Zasiga',
     coverImage: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg',
     events: [
       {
@@ -152,17 +152,17 @@ const pillars = [
     mission:
       'Desarrollar proyectos sociales que beneficien a la comunidad y fomenten la responsabilidad social.',
     activities: ['Proyectos comunitarios', 'Voluntariado', 'Iniciativas de sostenibilidad'],
-    coordinator: 'Patricia Torres',
-    coverImage: 'https://images.pexels.com/photos/6646917/pexels-photo-6646917.jpeg',
+    coordinator: 'Gabriel Wei Siguas ',
+    coverImage: 'https://images.pexels.com/photos/6646930/pexels-photo-6646930.jpeg',
     events: [
       {
         title: 'Voluntariado Comunitario',
-        image: 'https://images.pexels.com/photos/6646917/pexels-photo-6646917.jpeg',
+        image: 'https://images.pexels.com/photos/6646930/pexels-photo-6646930.jpeg',
         date: '1 de Junio, 2025',
       },
       {
         title: 'Proyecto Sostenible',
-        image: 'https://images.pexels.com/photos/6646917/pexels-photo-6646917.jpeg',
+        image: 'https://images.pexels.com/photos/6646930/pexels-photo-6646930.jpeg',
         date: '3 de Junio, 2025',
       },
       {
@@ -185,7 +185,7 @@ const pillars = [
       'Desarrollo de liderazgo interno',
       'Gestión de proyectos',
     ],
-    coordinator: 'Roberto Díaz',
+    coordinator: 'Enrique Torres Julca',
     coverImage: 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg',
     events: [
       {
@@ -215,7 +215,7 @@ const pillars = [
     mission:
       'Proporcionar educación complementaria de calidad para el desarrollo integral de los estudiantes.',
     activities: ['Cursos especializados', 'Talleres prácticos', 'Certificaciones'],
-    coordinator: 'Luis Mendoza',
+    coordinator: 'Cesar Salazar Reyes',
     coverImage: 'https://images.pexels.com/photos/3184644/pexels-photo-3184644.jpeg',
     events: [
       {
@@ -275,7 +275,7 @@ const PillarsPage = () => {
           </p>
 
           {/* 3D Carousel */}
-          <div className="mb-12">
+          <div className="mt-[-40px] mb-8">
             <PillarCarousel
               pillars={pillars}
               selectedPillar={selectedPillar}

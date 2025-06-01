@@ -16,7 +16,8 @@ const PillarDetails = ({ pillar }) => {
 
           <p className="text-white mb-6">{pillar.description}</p>
 
-          <h3 className="text-xl font-semibold text-purple-300 mb-3">Misión</h3>
+          
+          <h3 className="text-xl font-semibold text-purple-300 mb-3">Mision</h3>
           <p className="text-white mb-6">{pillar.mission}</p>
 
           <h3 className="text-xl font-semibold text-purple-300 mb-3">Actividades</h3>
@@ -28,6 +29,7 @@ const PillarDetails = ({ pillar }) => {
 
           <h3 className="text-xl font-semibold text-purple-300 mb-3">Coordinador</h3>
           <p className="text-white">{pillar.coordinator}</p>
+
         </div>
 
         <div className="md:w-1/3">
