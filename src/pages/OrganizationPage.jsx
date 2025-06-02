@@ -147,7 +147,7 @@ const memberDetails = {
       ],
       liderados: [
         'Programa de Integración LEAD – Abril 2023',
-        'Ciclo de Talleres “Bienestar y Equipo” – Nov 2023'
+        'Ciclo de Talleres "Bienestar y Equipo" – Nov 2023'
       ]
     },
     habilidades: {
@@ -231,7 +231,7 @@ const memberDetails = {
       ],
       liderados: [
         'Ciclo de Asesorías en Matemática y Física – May 2023',
-        'Programa “Impulsa tu Ciclo” – Ago 2023'
+        'Programa "Impulsa tu Ciclo" – Ago 2023'
       ]
     },
     habilidades: {
@@ -255,7 +255,7 @@ const memberDetails = {
     eventos: {
       premios: [
         'Embajadora STEM Perú 2023',
-        'Ganadora del Concurso “Voces que Inspiran” 2022'
+        'Ganadora del Concurso "Voces que Inspiran" 2022'
       ],
       liderados: [
         'Foro Mujeres que Inspiran – Mar 2023',
@@ -311,11 +311,11 @@ const memberDetails = {
     eventos: {
       premios: [
         'Reconocimiento a la Iniciativa Ambiental Estudiantil 2023',
-        'Mención en el Reto “UNI Sostenible” 2022'
+        'Mención en el Reto "UNI Sostenible" 2022'
       ],
       liderados: [
         'Campaña de Reciclaje en Campus – Jun 2023',
-        'Voluntariado “Uniendo Manos por Lima” – Dic 2023'
+        'Voluntariado "Uniendo Manos por Lima" – Dic 2023'
       ]
     },
     habilidades: {
@@ -370,7 +370,7 @@ const memberDetails = {
         'Reconocimiento al Mejor Spot Audiovisual LEAD'
       ],
       liderados: [
-        'Campaña “LEAD: Aprende dejando huella” – Ene 2024',
+        'Campaña "LEAD: Aprende dejando huella" – Ene 2024',
         'Taller de Branding Estudiantil – Ago 2023'
       ]
     },
@@ -394,7 +394,7 @@ const memberDetails = {
     contacto: ['Correo', 'LinkedIn', 'Portafolio', 'Github', 'Curriculum Vitae'],
     eventos: {
       premios: [
-        '2do lugar en “Pitch de Campañas con Impacto” – FISI 2023',
+        '2do lugar en "Pitch de Campañas con Impacto" – FISI 2023',
         'Reconocimiento por Mérito en Gestión Digital – LEAD'
       ],
       liderados: [
@@ -427,7 +427,7 @@ const memberDetails = {
       ],
       liderados: [
         'Bootcamp de Introducción a Python – Feb 2024',
-        'Taller “IA desde Cero” – Oct 2023'
+        'Taller "IA desde Cero" – Oct 2023'
       ]
     },
     habilidades: {
@@ -456,83 +456,114 @@ const memberDetails = {
 
 
   return (
-    <section className="min-h-screen bg-[#111136] text-white py-12">
-      <div className="max-w-6xl mx-auto px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-white">Dirección General de LEAD UNI</h1>
+    <section className="min-h-screen bg-gradient-to-b from-[#1A0B2E] via-[#2D1B4E] to-[#1A0B2E] text-white py-16">
+      <div className="max-w-7xl mx-auto px-4">
+        <h1 className="text-5xl md:text-6xl font-bold text-center mb-8">
+          <span className="bg-gradient-to-r from-[#FF1CF7] to-[#00F0FF] text-transparent bg-clip-text">
+            Dirección General
+          </span>
+        </h1>
+        <p className="text-center text-lg text-white/80 max-w-2xl mx-auto mb-16">
+          Conoce al equipo que lidera LEAD UNI y trabaja día a día para impulsar el desarrollo integral de nuestra comunidad estudiantil.
+        </p>
 
-        {/* ORGANIGRAMA*/}
-        <section className="section bg-[#0A0922]">
-          <div className="container">
-            <div className="bg-gradient-to-br from-[#1E144C] to-[#090421] rounded-xl p-10 border border-purple-500/20 mb-16">
-              <div className="flex flex-col items-center space-y-6">
-                <div className="bg-[#a0218b] text-white px-8 py-4 text-lg font-semibold rounded-lg shadow-md">
-                  Presidenta
+        {/* ORGANIGRAMA */}
+        <section className="mb-20">
+          <div className="container mx-auto">
+            <div className="relative bg-gradient-to-br from-[#1E144C]/50 to-[#090421]/50 rounded-2xl p-12 border border-purple-500/20 backdrop-blur-sm">
+              {/* Líneas conectoras */}
+              <div className="absolute inset-0 flex flex-col items-center">
+                <div className="w-px h-20 bg-gradient-to-b from-[#FF1CF7] to-[#00F0FF] mt-32"></div>
+                <div className="w-3/4 h-px bg-gradient-to-r from-transparent via-[#FF1CF7] to-transparent mt-4"></div>
+              </div>
+
+              <div className="relative flex flex-col items-center space-y-12">
+                {/* Presidencia */}
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-[#FF1CF7] to-[#00F0FF] rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                  <div className="relative px-12 py-6 bg-[#1A0B2E] rounded-lg ring-1 ring-purple-500/20">
+                    <h3 className="text-2xl font-bold text-center text-white">Presidencia</h3>
+                  </div>
                 </div>
-                <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
-                  <div className="bg-[#c33175] px-6 py-3 text-white font-medium rounded-md shadow">
-                    Vicepresidente
-                  </div>
-                  <div className="bg-[#c33175] px-6 py-3 text-white font-medium rounded-md shadow">
-                    Jefe de Personal
-                  </div>
-                  <div className="bg-[#c33175] px-6 py-3 text-white font-medium rounded-md shadow">
-                    Tesorería
-                  </div>
+
+                {/* Cargos principales */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+                  {['Vicepresidencia', 'Jefatura de Personal', 'Tesorería'].map((cargo) => (
+                    <div key={cargo} className="relative group">
+                      <div className="absolute -inset-1 bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] rounded-lg blur opacity-20 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
+                      <div className="relative px-8 py-4 bg-[#1A0B2E] rounded-lg ring-1 ring-purple-500/20">
+                        <h3 className="text-xl font-semibold text-center text-white">{cargo}</h3>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Carrusel 3D visual realista */}
+        {/* Carrusel 3D */}
         <Carrusel
           pillars={pillars}
           activePillar={activePillar}
           setActivePillar={setActivePillar}
         />
 
-
-        <div className="text-center text-white/80 mb-12">
-          <p className="mb-2">Conoce los objetivos de cada pilar</p>
-          <Link to="/pillars" className="text-[#a0218b] hover:text-[#ff86ff] font-semibold">Ir a "Nuestros Pilares" </Link>
+        {/* Sección Explorar Pilares */}
+        <div className="my-8 py-8 border-y border-purple-900/20">
+          <div className="text-center">
+            <p className="text-lg text-white/70 mb-6">Descubre más sobre nuestros pilares y su impacto</p>
+            <Link 
+              to="/pillars" 
+              className="inline-flex items-center px-8 py-3 bg-[#1A0B2E] hover:bg-[#2D1B4E] border border-[#4C1D95] rounded-full font-semibold text-[#8B5CF6] hover:text-[#A78BFA] transition-all duration-300 shadow-lg shadow-purple-900/20"
+            >
+              Explorar Pilares
+            </Link>
+          </div>
         </div>
 
-        <div className="relative mb-10">
-          <button onClick={() => scrollTabs('left')} className="absolute left-2 top-1/2 -translate-y-1/2 bg-[#0b0b1f] hover:bg-[#a0218b]/40 text-white border border-white/10 shadow-md rounded-full p-2 z-30">
-            <ChevronLeft />
+        {/* Tabs de departamentos */}
+        <div className="relative mb-12">
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 bg-gradient-to-r from-[#1A0B2E] to-transparent w-20 h-full z-10"></div>
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 bg-gradient-to-l from-[#1A0B2E] to-transparent w-20 h-full z-10"></div>
+          
+          <button onClick={() => scrollTabs('left')} className="absolute left-2 top-1/2 -translate-y-1/2 bg-[#1A0B2E] hover:bg-[#2D1B4E] text-white border border-purple-500/20 shadow-lg shadow-purple-500/10 rounded-full p-2 z-20 transition-colors">
+            <ChevronLeft className="w-6 h-6" />
           </button>
+          
           <div
             ref={tabsRef}
-            className="flex overflow-hidden gap-2 px-12 py-2 rounded-lg border border-[#3a1e6a] scrollbar-none"
+            className="flex overflow-x-auto gap-2 px-12 py-4 rounded-xl border border-purple-900/20 scrollbar-none"
             style={{ scrollBehavior: 'smooth' }}
           >
             {departments.map((dept, idx) => (
-          <button
-            key={dept.id}
-            onClick={() => setActiveTab(dept.id)}
-            className={`px-4 py-2 font-medium transition-colors whitespace-nowrap
-              ${activeTab === dept.id
-                ? 'bg-[#a0218b] text-white'
-                : 'bg-[#111136] text-white/70 hover:text-white'}
-              ${idx !== departments.length - 1 ? 'border-r border-[#3a1e6a]' : ''}
-            `}
-          >
-            {dept.label}
-          </button>
-        ))}
+              <button
+                key={dept.id}
+                onClick={() => setActiveTab(dept.id)}
+                className={`px-6 py-3 font-medium transition-all rounded-lg whitespace-nowrap
+                  ${activeTab === dept.id
+                    ? 'bg-gradient-to-r from-[#8B5CF6] to-[#6D28D9] text-white shadow-lg shadow-purple-900/30'
+                    : 'bg-[#1A0B2E] text-white/70 hover:text-white hover:bg-[#2D1B4E]'}
+                `}
+              >
+                {dept.label}
+              </button>
+            ))}
           </div>
-          <button onClick={() => scrollTabs('right')} className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#0b0b1f] hover:bg-[#a0218b]/40 text-white border border-white/10 shadow-md rounded-full p-2 z-30">
-            <ChevronRight />
+          
+          <button onClick={() => scrollTabs('right')} className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#1A0B2E] hover:bg-[#2D1B4E] text-white border border-purple-500/20 shadow-lg shadow-purple-500/10 rounded-full p-2 z-20 transition-colors">
+            <ChevronRight className="w-6 h-6" />
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {/* Grid de miembros */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {members[activeTab]?.map((member) => (
             <MemberCard key={member.name} member={member} onSelect={setSelectedMember} />
           ))}
         </div>
 
-
+        {/* Modal de miembro */}
         {selectedMember && (
           <MemberModal
             selectedMember={selectedMember}
