@@ -1,25 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Button } from "../General/button";
+import React, { useEffect, useRef } from "react";
 import microsoftTeam from "../../assets/images/IMG_5097.jpeg";
 import { AlianzasSection } from "./Section/AlianzasSection";
 import { ActividadSection } from "./Section/ActividadSection";
 import { PilaresSection } from "./Section/PilaresSection";
 import { ContactoSection } from "./Section/ContactoSection";
+import { HEADER_HEIGHT } from "../header";
+
 export const HeroSection = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const quienesSomosTitleRef = useRef(null);
   const quienesSomosContentRef = useRef(null);
   const quienesSomosImageRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -61,32 +51,15 @@ export const HeroSection = () => {
 
   return (
     <>
-    <section className="relative w-full min-h-screen bg-gradient-to-b from-black via-[#1A0B2E] via-50% to-black to-90% overflow-hidden">
+    <section 
+      className="relative w-full min-h-screen bg-gradient-to-b from-black via-[#1A0B2E] via-50% to-black to-90% overflow-hidden"
+      style={{ minHeight: `calc(100vh - ${HEADER_HEIGHT}px)` }}
+    >
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-transparent to-transparent"></div>
-      
-      {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-black/80 backdrop-blur-md shadow-lg shadow-purple-900/20' 
-          : 'bg-transparent'
-      }`}>
-        <div className="container mx-auto px-8 py-4 flex justify-between items-center">
-          <div className="text-white text-2xl font-bold">
-            LEAD UNI
-          </div>
-          <ul className="flex gap-8 text-[#FFFFFF]">
-            <li><a href="#inicio" className="hover:text-[#FF1CF7] transition-colors">Inicio</a></li>
-            <li><a href="#organigrama" className="hover:text-[#FF1CF7] transition-colors">Organigrama</a></li>
-            <li><a href="#noticias" className="hover:text-[#FF1CF7] transition-colors">Noticias</a></li>
-            <li><a href="#pilares" className="hover:text-[#FF1CF7] transition-colors">Pilares</a></li>
-            <li><a href="#convocatoria" className="hover:text-[#FF1CF7] transition-colors">Convocatoria</a></li>
-          </ul>
-        </div>
-      </nav>
 
       {/* Main content container */}
-      <div className="container mx-auto min-h-screen flex items-center pt-12">
+      <div className="container mx-auto min-h-screen flex items-center">
         <div className="w-full grid grid-cols-2 gap-8 px-8">
           {/* Text content */}
           <div className="flex flex-col justify-center items-start ml-[12%]">
