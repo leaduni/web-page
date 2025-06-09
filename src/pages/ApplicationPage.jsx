@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
-import Header from '../components/Header';
+import Header from '../components/header';
 import FormCard from '../components/FormCard';
 import FormField from '../components/FormField';
 import TextInput from '../components/TextInput';
