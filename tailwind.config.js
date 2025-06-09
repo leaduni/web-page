@@ -5,7 +5,14 @@ export default {
     './src/**/*.{js,jsx,ts,tsx}', // escanea todos los componentes
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['League Spartan', 'system-ui', 'sans-serif'],
+        spartan: ['League Spartan', 'sans-serif'],
+        teachers: ['Teachers', 'serif'],
+        yrsa: ['Yrsa', 'serif'],
+      },
+    },
   },
   plugins: [require('@tailwindcss/typography')],
 };

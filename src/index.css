@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Las fuentes se cargan desde index.html */
+html {
+  font-family: 'League Spartan', system-ui, sans-serif;
+}

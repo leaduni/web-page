@@ -68,7 +68,7 @@ export default function NewsDetailPage() {
             transition={{ duration: 0.7, ease: 'easeOut' }}
             className="max-w-4xl mx-auto px-4 py-12"
           >
-            <div className="mb-8">
+            <div className="mb-4 text-center">
               <Link
                 to="/news"
                 className="text-purple-300 hover:underline text-sm transition-colors"

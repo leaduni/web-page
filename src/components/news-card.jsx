@@ -1,5 +1,18 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 15,
+    },
+  },
+};
 export function NewsCard({
   id,
   title,
@@ -12,37 +25,48 @@ export function NewsCard({
 }) {
   return (
     <Link to={`/news/${id}`} className="group">
-      <article className="bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-purple-500/50 transition-all duration-300 max-w-2xl">
-        <div className="relative h-48 w-full">
-          <img
-            src={imageUrl}
-            alt={title}
-            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-          />
-          <div className="absolute top-4 left-4">
-            <span className="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+      <motion.div
+        key={id}
+        variants={itemVariants}
+        whileHover={{ scale: 1.02 }}
+        className="group relative bg-black/30 backdrop-blur-sm rounded-3xl overflow-hidden border border-purple-900/20 hover:border-purple-600/40 transition-all duration-500 hover:shadow-[0_8px_30px_-5px_rgba(147,51,234,0.3)]"
+      >
+        {/* Placeholder para imagen con gradiente animado */}
+        <div className="h-48 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-black/30 to-black/30">
+            <img src={imageUrl} alt="" />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#B936F5]/10 via-[#FF1CF7]/10 to-[#00F0FF]/10 group-hover:opacity-30 transition-opacity duration-500"></div>
+        </div>
+
+        <div className="p-6">
+          <div className="flex justify-between items-start mb-4">
+            <span
+              className={`px-3 py-1 rounded-full text-sm font-medium bg-[#B936F5]/20 text-[#B936F5] border border-[#B936F5]/30`}
+            >
               {category}
             </span>
+            <span className="text-sm text-white/60">{date}</span>
           </div>
-        </div>
-        <div className="p-6">
-          <div className="flex items-center gap-4 text-sm text-gray-400 mb-3">
-            <span>{date}</span>
-            <span>•</span>
-            <span>{readTime} de lectura</span>
-          </div>
-          <h2 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
-            {title}
-          </h2>
-          <p className="text-gray-300 line-clamp-3 mb-4">{description}</p>
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white font-medium">
-              {author.charAt(0)}
+
+          <h3 className="text-xl font-bold mb-3 text-[#B936F5]">{title}</h3>
+
+          <p className="text-white/70 mb-4 line-clamp-2">{description}</p>
+
+          <div className="flex justify-between w-full text-white/70 items-center mb-4">
+            <span className="flex items-center gap-1">
+              <span className="font-medium">{readTime}</span>
+            </span>
+            <div className="flex items-center gap-2 ">
+              <span className="flex items-center gap-1">
+                <span className="font-medium">Escrito por {author}</span>
+              </span>
             </div>
-            <span className="text-sm text-gray-400">{author}</span>
           </div>
         </div>
-      </article>
+
+        <div className="absolute -inset-px bg-gradient-to-br from-[#B936F5] to-[#FF1CF7] opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+      </motion.div>
     </Link>
   );
 }
