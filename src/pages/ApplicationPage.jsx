@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import Header from '../components/header';
-import FormCard from '../components/FormCard';
-import FormField from '../components/FormField';
-import TextInput from '../components/TextInput';
-import SelectInput from '../components/SelectInput';
-import Checkbox from '../components/Checkbox';
-import PillarOption from '../components/PillarOption';
+import FormCard from '../components/application/FormCard';
+import FormField from '../components/application/FormField';
+import TextInput from '../components/application/TextInput';
+import SelectInput from '../components/application/SelectInput';
+import Checkbox from '../components/application/Checkbox';
+import PillarOption from '../components/application/PillarOption';
 import { GraduationCap, Users, BookOpen, Heart, Building2, Megaphone } from 'lucide-react';
 
 const careerOptions = [
