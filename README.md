@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/271c7702-9e9d-4994-b95a-3c47f1e0db25/deploy-status)](https://app.netlify.com/projects/lead-uni/deploys)
+
 # Página Web de LEAD UNI
 
 ## 📝 Descripción del Proyecto
