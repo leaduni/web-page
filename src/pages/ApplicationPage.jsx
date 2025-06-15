@@ -87,11 +87,6 @@ const ApplicationPage = () => {
       <div className="absolute bottom-10 left-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-[#7957f1] to-[#bf2a51] opacity-80 blur z-0" />
       <div className="absolute bottom-1/4 right-1/4 w-20 h-20 rounded-full bg-gradient-to-br from-[#d93340] to-[#030c40] opacity-60 blur z-0" />
 
-      {/* Header al inicio */}
-      <div className="relative z-20">
-        <Header />
-      </div>
-
       {/* Sección de bienvenida con fondo negro translúcido y esferas animadas */}
       <section
         className="w-full flex flex-col items-center justify-center min-h-[calc(100vh-64px)] pt-10 pb-6 z-20 relative overflow-hidden"
