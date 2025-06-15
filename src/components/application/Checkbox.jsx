@@ -1,17 +1,17 @@
 import React from 'react';
 import { Check } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const Checkbox = ({ checked, onChange, label }) => {
   const theme = useTheme();
-  
+
   return (
     <label className="flex items-center space-x-2 cursor-pointer">
-      <div 
+      <div
         className="w-5 h-5 rounded flex items-center justify-center transition-colors duration-200"
-        style={{ 
+        style={{
           backgroundColor: checked ? theme.colors.primary : 'transparent',
-          border: `1px solid ${checked ? theme.colors.primary : 'rgba(255, 255, 255, 0.3)'}`
+          border: `1px solid ${checked ? theme.colors.primary : 'rgba(255, 255, 255, 0.3)'}`,
         }}
         onClick={() => onChange(!checked)}
       >

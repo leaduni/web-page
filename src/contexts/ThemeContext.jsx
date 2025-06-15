@@ -1,6 +1,5 @@
 import React, { createContext, useContext, ReactNode } from 'react';
 
-
 const defaultTheme = {
   colors: {
     primary: '#ff6ec7',
@@ -21,14 +20,8 @@ const defaultTheme = {
   },
 };
 
-const ThemeContext = createContext<ThemeContextType>(defaultTheme);
-
 export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }) => {
-  return (
-    <ThemeContext.Provider value={defaultTheme}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={defaultTheme}>{children}</ThemeContext.Provider>;
 };

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Zap } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const Logo = () => {
   const theme = useTheme();
-  
+
   return (
     <div className="flex items-center space-x-2">
       <Zap size={24} color={theme.colors.primary} />
