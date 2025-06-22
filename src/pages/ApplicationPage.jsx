@@ -100,7 +100,6 @@ const ApplicationPage = () => {
     faculty: '',
     career: '',
     cycle: '',
-    acceptedTerms: false,
   });
   const [selectedPillar, setSelectedPillar] = useState(null);
   const [pillarSpecificData, setPillarSpecificData] = useState({
@@ -128,7 +127,7 @@ const ApplicationPage = () => {
     if (!formData.fullName || !formData.phone || !formData.email || 
         !formData.faculty || !formData.career || !formData.cycle || 
         !selectedPillar || !pillarSpecificData.projectType || 
-        !pillarSpecificData.skills || !leadUniDefinition || !formData.acceptedTerms) {
+        !pillarSpecificData.skills || !leadUniDefinition) {
       alert('Por favor, completa todos los campos requeridos antes de enviar el formulario.');
       return;
     }
@@ -142,14 +141,14 @@ const ApplicationPage = () => {
     // Agregar los parámetros de entrada
     const params = new URLSearchParams({
       'usp': 'pp_url',
-      'entry.200562055': formData.fullName, // Nombres y Apellidos
-      'entry.1644590164': formData.phone, // Número de celular
+      'entry.2005620554': formData.fullName, // Nombres y Apellidos
+      'entry.1201849899': formData.phone, // Número de celular
       'entry.1045781291': formData.email, // Dirección de correo electrónico
       'entry.1065046570': facultyOptions.find(f => f.value === formData.faculty)?.label || '', // Facultad
       'entry.1166974658': careerOptions.find(c => c.value === formData.career)?.label || '', // Carrera
       'entry.1403026133': cycleOptions.find(cy => cy.value === formData.cycle)?.label || '', // Ciclo Relativo
       'entry.21194440': pillarSpecificData.projectType, // ¿Cuál fue tu principal motivo para postular a este Pilar?
-      'entry.890700137': pillarSpecificData.skills, // ¿Qué habilidades te ayudarían a destacar en este pilar?
+      'entry.5426552': pillarSpecificData.skills, // ¿Qué habilidades te ayudarían a destacar en este pilar?
       'entry.1624972609': leadUniDefinition, // Para ti, ¿qué es LEAD UNI?
     });
 
