@@ -1,26 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-const alianzas = [
-  {
-    id: 1,
-    nombre: 'Google'
-  },
-  {
-    id: 2,
-    nombre: 'Cisco'
-  },
-  {
-    id: 3,
-    nombre: 'IBM'
-  },
-  {
-    id: 4,
-    nombre: 'Intel'
-  }
-];
-
 export const AlianzasSection = () => {
+  const [alianzas, setAlianzas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchAlianzas = async () => {
+      try {
+        const response = await fetch('https://sheetdb.io/api/v1/4qkiwzonp20d9');
+        const data = await response.json();
+        setAlianzas(data || []);
+      } catch (err) {
+        setError('Error al cargar alianzas');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAlianzas();
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
@@ -58,6 +58,10 @@ export const AlianzasSection = () => {
           </p>
         </div>
 
+        {/* Loading/Error */}
+        {loading && <div className="text-center text-white/60">Cargando alianzas...</div>}
+        {error && <div className="text-center text-red-400">{error}</div>}
+
         {/* Alianzas Grid */}
         <motion.div
           variants={containerVariants}
@@ -66,28 +70,52 @@ export const AlianzasSection = () => {
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto"
         >
-          {alianzas.map((alianza) => (
-            <motion.div
-              key={alianza.id}
-              variants={itemVariants}
-              className="group relative bg-black/30 backdrop-blur-sm rounded-3xl p-8 border border-purple-900/20 hover:border-purple-600/40 transition-all duration-300 hover:-translate-y-2"
-            >
-              <div className="absolute -inset-px bg-gradient-to-br from-[#B936F5] to-[#FF1CF7] opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-3xl"></div>
-              <div className="h-32 flex flex-col items-center justify-between">
-                <div className="flex-1 flex items-center justify-center">
-                  {/* Espacio para futura imagen */}
-                </div>
-                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/20 to-transparent"></div>
-                <div className="mt-4">
-                  <span className="text-sm bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] bg-clip-text text-transparent font-medium">
-                    {alianza.nombre}
+          {alianzas.map((alianza, idx) => {
+            // Convertir logo de Google Drive a enlace directo si es necesario
+            let logoUrl = alianza["Logo de la organización"];
+            if (logoUrl && logoUrl.includes('drive.google.com/open?id=')) {
+              const fileId = logoUrl.split('id=')[1];
+              logoUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+            }
+
+            return (
+              <motion.div
+                key={alianza.id || idx}
+                variants={itemVariants}
+                className="group relative bg-black/30 backdrop-blur-sm rounded-3xl p-8 border border-purple-900/20 hover:border-purple-600/40 transition-all duration-300 hover:-translate-y-2 flex flex-col items-center min-h-[380px] overflow-hidden justify-center"
+              >
+                {/* Overlay objetivo al hacer hover sobre toda la carta */}
+                {alianza["Objetivo de la alianza"] && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 p-6 rounded-3xl">
+                    <span className="text-white text-center text-base font-medium">{alianza["Objetivo de la alianza"]}</span>
+                  </div>
+                )}
+                <div className="absolute -inset-px bg-gradient-to-br from-[#B936F5] to-[#FF1CF7] opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-3xl z-10"></div>
+                <div className="flex flex-col items-center w-full z-10 flex-1 justify-center">
+                  {/* Logo rectangular más grande y perfectamente centrado */}
+                  <div className="w-36 h-36 flex items-center justify-center mb-4 mx-auto">
+                    {logoUrl ? (
+                      <img
+                        src={logoUrl}
+                        alt={alianza["Nombre de la organización"]}
+                        className="w-36 h-36 object-contain border-2 border-purple-400 bg-white shadow-md rounded-xl"
+                      />
+                    ) : (
+                      <div className="w-36 h-36 bg-purple-900/30 rounded-xl flex items-center justify-center text-purple-300 text-4xl font-bold">
+                        {alianza["Nombre de la organización"]?.[0] || '?'}
+                      </div>
+                    )}
+                  </div>
+                  {/* Nombre debajo del logo */}
+                  <span className="text-base bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] bg-clip-text text-transparent font-semibold text-center block w-full mb-2">
+                    {alianza["Nombre de la organización"]}
                   </span>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>
   );
-}; 
+};
