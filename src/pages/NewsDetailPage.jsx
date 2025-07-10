@@ -3,6 +3,7 @@ import { Calendar, Clock, User } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getNewsById } from '../services/newsService';
+import { Footer } from '../components/footer';
 
 export default function NewsDetailPage() {
   const { id } = useParams();
@@ -104,7 +105,12 @@ export default function NewsDetailPage() {
                 src={newsItem.imageUrl}
                 alt={newsItem.title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500"
+                onError={e => {
+                  e.target.src =
+                    'https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=800&q=80';
+                }}
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </motion.div>
             <motion.article
               className="prose prose-invert max-w-none text-lg mx-auto mb-12 transition-colors"
@@ -118,17 +124,11 @@ export default function NewsDetailPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.7, ease: 'easeOut' }}
-            >
-              <div className="w-full max-w-xl border-2 border-purple-300 rounded-lg p-8 flex flex-col md:flex-row items-center justify-between gap-4 bg-[#1e0a2e] transition-shadow duration-300 hover:shadow-purple-700/30">
-                <span className="text-2xl font-bold text-white">¿Más Información?</span>
-                <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg px-8 py-3 rounded-md border-2 border-white transition-all duration-300 focus:ring-2 focus:ring-pink-400 focus:outline-none">
-                  Suscribirse
-                </button>
-              </div>
-            </motion.div>
+            ></motion.div>
           </motion.div>
         )}
       </AnimatePresence>
+      <Footer />
     </main>
   );
 }

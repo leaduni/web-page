@@ -31,11 +31,18 @@ export function NewsCard({
         whileHover={{ scale: 1.02 }}
         className="group relative bg-black/30 backdrop-blur-sm rounded-3xl overflow-hidden border border-purple-900/20 hover:border-purple-600/40 transition-all duration-500 hover:shadow-[0_8px_30px_-5px_rgba(147,51,234,0.3)]"
       >
-        {/* Placeholder para imagen con gradiente animado */}
+        {/* Imagen con estilos mejorados */}
         <div className="h-48 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-black/30 to-black/30">
-            <img src={imageUrl} alt="" />
-          </div>
+          <img
+            src={imageUrl}
+            alt={title}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            onError={e => {
+              e.target.src =
+                'https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=800&q=80';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-black/30 to-black/30"></div>
           <div className="absolute inset-0 bg-gradient-to-br from-[#B936F5]/10 via-[#FF1CF7]/10 to-[#00F0FF]/10 group-hover:opacity-30 transition-opacity duration-500"></div>
         </div>
 

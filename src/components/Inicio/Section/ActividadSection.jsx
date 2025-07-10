@@ -6,23 +6,26 @@ const actividades = [
     id: 1,
     tipo: 'Evento',
     titulo: 'Workshop de Liderazgo Efectivo',
-    descripcion: 'Taller práctico sobre habilidades de liderazgo y trabajo en equipo con ejercicios dinámicos.',
-    fecha: '15 de Mayo, 2025'
+    descripcion:
+      'Taller práctico sobre habilidades de liderazgo y trabajo en equipo con ejercicios dinámicos.',
+    fecha: '15 de Mayo, 2025',
   },
   {
     id: 2,
     tipo: 'Noticia',
     titulo: 'LEAD UNI recibe reconocimiento institucional',
-    descripcion: 'Nuestro centro estudiantil fue reconocido por su contribución a la comunidad universitaria.',
-    fecha: '10 de Mayo, 2025'
+    descripcion:
+      'Nuestro centro estudiantil fue reconocido por su contribución a la comunidad universitaria.',
+    fecha: '10 de Mayo, 2025',
   },
   {
     id: 3,
     tipo: 'Proyecto',
     titulo: 'Lanzamiento del programa de mentoría 2025',
-    descripcion: 'Iniciamos nuestro programa anual de mentorías para conectar estudiantes con profesionales experimentados.',
-    fecha: '5 de Mayo, 2025'
-  }
+    descripcion:
+      'Iniciamos nuestro programa anual de mentorías para conectar estudiantes con profesionales experimentados.',
+    fecha: '5 de Mayo, 2025',
+  },
 ];
 
 export const ActividadSection = () => {
@@ -31,25 +34,25 @@ export const ActividadSection = () => {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
-      }
-    }
+        staggerChildren: 0.2,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    show: { 
-      y: 0, 
+    show: {
+      y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: 'spring',
         stiffness: 100,
-        damping: 15
-      }
-    }
+        damping: 15,
+      },
+    },
   };
 
-  const getBadgeColor = (tipo) => {
+  const getBadgeColor = tipo => {
     switch (tipo) {
       case 'Evento':
         return 'bg-[#B936F5]/20 text-[#B936F5] border border-[#B936F5]/30';
@@ -63,7 +66,7 @@ export const ActividadSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-[#1A0B2E] py-24 overflow-hidden">
+    <section className="relative min-h-screen bg-[#1A0B2E] py-12 sm:py-16 lg:py-24 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#B936F5]/10 via-transparent to-transparent"></div>
@@ -73,9 +76,9 @@ export const ActividadSection = () => {
       {/* Content Container */}
       <div className="relative container mx-auto px-4">
         {/* Section Title */}
-        <div className="text-center mb-16">
-          <motion.h2 
-            className="text-4xl font-bold mb-2"
+        <div className="text-center mb-12 lg:mb-16">
+          <motion.h2
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -85,8 +88,8 @@ export const ActividadSection = () => {
               Actividad Reciente
             </span>
           </motion.h2>
-          <motion.p 
-            className="text-white/60 text-base max-w-2xl mx-auto"
+          <motion.p
+            className="text-white/60 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -104,7 +107,7 @@ export const ActividadSection = () => {
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
         >
-          {actividades.map((actividad) => (
+          {actividades.map(actividad => (
             <motion.div
               key={actividad.id}
               variants={itemVariants}
@@ -119,21 +122,17 @@ export const ActividadSection = () => {
 
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${getBadgeColor(actividad.tipo)}`}>
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${getBadgeColor(actividad.tipo)}`}
+                  >
                     {actividad.tipo}
                   </span>
-                  <span className="text-sm text-white/60">
-                    {actividad.fecha}
-                  </span>
+                  <span className="text-sm text-white/60">{actividad.fecha}</span>
                 </div>
 
-                <h3 className="text-xl font-bold mb-3 text-[#B936F5]">
-                  {actividad.titulo}
-                </h3>
+                <h3 className="text-xl font-bold mb-3 text-[#B936F5]">{actividad.titulo}</h3>
 
-                <p className="text-white/70 mb-4 line-clamp-2">
-                  {actividad.descripcion}
-                </p>
+                <p className="text-white/70 mb-4 line-clamp-2">{actividad.descripcion}</p>
 
                 <button className="text-[#B936F5] hover:text-[#FF1CF7] transition-colors duration-300 font-medium">
                   Leer más →
@@ -147,4 +146,4 @@ export const ActividadSection = () => {
       </div>
     </section>
   );
-}; 
+};

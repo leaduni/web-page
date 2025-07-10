@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { NewsCard } from '../components/news-card';
 import { getAllNews } from '../services/newsService';
 import { Search, Filter } from 'lucide-react';
+import { Footer } from '../components/footer';
 
 export default function NewsPage() {
   const [news, setNews] = useState([]);
@@ -68,11 +69,15 @@ export default function NewsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#1e0a2e]">
-      <div className="container mx-auto px-4 py-12">
+    <section className="min-h-screen bg-gradient-to-b from-[#1A0B2E] via-[#2D1B4E] to-[#1A0B2E] text-white py-16">
+      <div className="container mx-auto px-4 ">
         {' '}
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold font-primary text-white mb-3">LEAD UNI Noticias</h1>
+          <h1 className="text-5xl md:text-6xl font-bold text-center mb-8">
+            <span className="bg-gradient-to-r from-[#FF1CF7] to-[#00F0FF] text-transparent bg-clip-text">
+              LEAD News
+            </span>
+          </h1>
           <p className="text-gray-400 max-w-2xl mx-auto mb-10">
             Mantente informado sobre las últimas noticias y eventos de LEAD UNI
           </p>
@@ -248,6 +253,7 @@ export default function NewsPage() {
           </div>
         )}
       </div>
-    </main>
+      <Footer />
+    </section>
   );
 }

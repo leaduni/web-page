@@ -6,3 +6,50 @@
 html {
   font-family: 'League Spartan', system-ui, sans-serif;
 }
+
+/* Estilos para imágenes de noticias */
+@layer components {
+  .news-image {
+    @apply object-cover transition-transform duration-500;
+  }
+
+  .news-image:hover {
+    @apply scale-110;
+  }
+
+  .news-card-image {
+    @apply absolute inset-0 w-full h-full object-cover transition-transform duration-500;
+  }
+
+  .news-detail-image {
+    @apply absolute inset-0 w-full h-full object-cover transition-transform duration-500;
+  }
+}
+
+/* Asegurar que las imágenes se carguen correctamente */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Estilos específicos para imágenes que no cargan */
+img[src=''],
+img:not([src]) {
+  opacity: 0;
+}
+
+/* Placeholder para imágenes que están cargando */
+.image-loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
