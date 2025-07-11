@@ -1,6 +1,11 @@
 import { useState, useEffect, useMemo } from 'react';
 import { NewsCard } from '../components/news-card';
-import { getAllNews } from '../services/newsService';
+import {
+  getAllNews,
+  getAllCategories,
+  getEnfoqueTags,
+  getPublicoTags,
+} from '../services/newsService';
 import { Search, Filter } from 'lucide-react';
 import { Footer } from '../components/footer';
 
@@ -9,20 +14,29 @@ export default function NewsPage() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedEnfoque, setSelectedEnfoque] = useState('');
+  const [selectedPublico, setSelectedPublico] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [categories, setCategories] = useState([]);
+  const [enfoqueOptions, setEnfoqueOptions] = useState([]);
+  const [publicoOptions, setPublicoOptions] = useState([]);
   const itemsPerPage = 6;
 
-  // Extraer todas las categorías únicas de las noticias
-  const categories = useMemo(() => {
-    if (!news.length) return [];
-    return ['Todas', ...new Set(news.map(item => item.category))];
-  }, [news]);
-
   useEffect(() => {
-    async function loadNews() {
+    async function loadNewsAndFilters() {
       try {
-        const newsData = await getAllNews();
+        const [newsData, categoriesData, enfoqueData, publicoData] = await Promise.all([
+          getAllNews(),
+          getAllCategories(),
+          getEnfoqueTags(),
+          getPublicoTags(),
+        ]);
+
         setNews(newsData);
+        setCategories(categoriesData);
+        setEnfoqueOptions(enfoqueData);
+        setPublicoOptions(publicoData);
+        console.log('NEWS DATA:', newsData);
       } catch (error) {
         console.error('Error loading news:', error);
       } finally {
@@ -30,10 +44,10 @@ export default function NewsPage() {
       }
     }
 
-    loadNews();
+    loadNewsAndFilters();
   }, []);
 
-  // Filtrar noticias según búsqueda y categoría
+  // Filtrar noticias según búsqueda y filtros múltiples
   const filteredNews = useMemo(() => {
     return news.filter(item => {
       const matchesSearch =
@@ -44,11 +58,16 @@ export default function NewsPage() {
       const matchesCategory =
         selectedCategory === '' ||
         selectedCategory === 'Todas' ||
-        item.category === selectedCategory;
+        item.category === selectedCategory ||
+        item.pillars.includes(selectedCategory);
 
-      return matchesSearch && matchesCategory;
+      const matchesEnfoque = selectedEnfoque === '' || item.tagsEnfoque.includes(selectedEnfoque);
+
+      const matchesPublico = selectedPublico === '' || item.tagsPublico.includes(selectedPublico);
+
+      return matchesSearch && matchesCategory && matchesEnfoque && matchesPublico;
     });
-  }, [news, searchTerm, selectedCategory]);
+  }, [news, searchTerm, selectedCategory, selectedEnfoque, selectedPublico]);
 
   // Calcular paginación
   const totalPages = Math.ceil(filteredNews.length / itemsPerPage);
@@ -56,11 +75,11 @@ export default function NewsPage() {
     const startIndex = (currentPage - 1) * itemsPerPage;
     return filteredNews.slice(startIndex, startIndex + itemsPerPage);
   }, [filteredNews, currentPage]);
-
+  console.log('PAGINATED NEWS:', paginatedNews);
   // Resetear página al cambiar filtros
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, selectedCategory]);
+  }, [searchTerm, selectedCategory, selectedEnfoque, selectedPublico]);
 
   // Manejar cambio de página
   const handlePageChange = pageNumber => {
@@ -82,9 +101,10 @@ export default function NewsPage() {
             Mantente informado sobre las últimas noticias y eventos de LEAD UNI
           </p>
 
-          {/* Buscador y filtros */}
-          <div className="flex flex-col md:flex-row gap-4 max-w-3xl mx-auto mb-8">
-            <div className="relative flex-grow">
+          {/* Buscador y filtros mejorados */}
+          <div className="space-y-4 max-w-6xl mx-auto mb-8">
+            {/* Buscador principal */}
+            <div className="relative max-w-md mx-auto">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-gray-400" />
               </div>
@@ -93,48 +113,139 @@ export default function NewsPage() {
                 placeholder="Buscar noticias..."
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
-                className="w-full bg-purple-900/20 border border-purple-500/30 rounded-lg py-2 pl-10 pr-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                className="w-full bg-purple-900/20 border border-purple-500/30 rounded-lg py-3 pl-10 pr-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
               />
             </div>
-            <div className="relative min-w-[200px]">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Filter className="h-5 w-5 text-gray-400" />
-              </div>
-              <select
-                value={selectedCategory}
-                onChange={e => setSelectedCategory(e.target.value)}
-                className="w-full bg-purple-900/20 border border-purple-500/30 rounded-lg py-2 pl-10 pr-3 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all cursor-pointer"
-              >
-                <option value="">Todas las categorías</option>
-                {categories.map(
-                  category =>
-                    category !== 'Todas' && (
+
+            {/* Filtros múltiples */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* Filtro de Categorías/Pilares */}
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Filter className="h-4 w-4 text-gray-400" />
+                </div>
+                <select
+                  value={selectedCategory}
+                  onChange={e => setSelectedCategory(e.target.value)}
+                  className="w-full bg-purple-900/20 border border-purple-500/30 rounded-lg py-2 pl-9 pr-8 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all cursor-pointer"
+                >
+                  <option value="">Todas las categorías</option>
+                  {categories
+                    .filter(cat => cat !== 'Todas')
+                    .map(category => (
                       <option
-                        className="bg-black rounded-md p-1 text-sm "
+                        className="bg-black rounded-md p-1 text-sm"
                         key={category}
                         value={category}
                       >
                         {category}
                       </option>
-                    )
-                )}
-              </select>
-              <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                <svg
-                  className="h-4 w-4 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M19 9l-7 7-7-7"
-                  ></path>
-                </svg>
+                    ))}
+                </select>
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <svg
+                    className="h-4 w-4 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M19 9l-7 7-7-7"
+                    ></path>
+                  </svg>
+                </div>
               </div>
-            </div>{' '}
+
+              {/* Filtro de Enfoque */}
+              <div className="relative">
+                <select
+                  value={selectedEnfoque}
+                  onChange={e => setSelectedEnfoque(e.target.value)}
+                  className="w-full bg-purple-700/20 border border-purple-400/30 rounded-lg py-2 pl-3 pr-8 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all cursor-pointer"
+                >
+                  <option value="">Todos los enfoques</option>
+                  {enfoqueOptions.map(enfoque => (
+                    <option
+                      className="bg-black rounded-md p-1 text-sm"
+                      key={enfoque}
+                      value={enfoque}
+                    >
+                      {enfoque}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <svg
+                    className="h-4 w-4 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M19 9l-7 7-7-7"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+
+              {/* Filtro de Público */}
+              <div className="relative">
+                <select
+                  value={selectedPublico}
+                  onChange={e => setSelectedPublico(e.target.value)}
+                  className="w-full bg-cyan-700/20 border border-cyan-400/30 rounded-lg py-2 pl-3 pr-8 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all cursor-pointer"
+                >
+                  <option value="">Todos los públicos</option>
+                  {publicoOptions.map(publico => (
+                    <option
+                      className="bg-black rounded-md p-1 text-sm"
+                      key={publico}
+                      value={publico}
+                    >
+                      {publico}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <svg
+                    className="h-4 w-4 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M19 9l-7 7-7-7"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Botón para limpiar filtros */}
+            {(selectedCategory || selectedEnfoque || selectedPublico || searchTerm) && (
+              <div className="text-center">
+                <button
+                  onClick={() => {
+                    setSearchTerm('');
+                    setSelectedCategory('');
+                    setSelectedEnfoque('');
+                    setSelectedPublico('');
+                  }}
+                  className="px-4 py-2 bg-gray-600/30 hover:bg-gray-600/50 text-gray-300 rounded-lg transition-colors text-sm"
+                >
+                  Limpiar todos los filtros
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Indicador de resultados */}
@@ -183,7 +294,7 @@ export default function NewsPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {paginatedNews.map(item => (
-              <NewsCard key={item.id} {...item} />
+              <NewsCard key={item.id} imageUrl={item.imageUrl} {...item} />
             ))}
           </div>
         )}{' '}

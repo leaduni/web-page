@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Calendar, Clock, User } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getNewsById } from '../services/newsService';
+import { getNewsById, getPillarEmoji } from '../services/newsService';
 import { Footer } from '../components/footer';
 
 export default function NewsDetailPage() {
@@ -58,7 +58,7 @@ export default function NewsDetailPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#1e0a2e] to-[#3a0a3d]">
+    <section className="min-h-screen bg-gradient-to-b from-[#1A0B2E] via-[#2D1B4E] to-[#1A0B2E] text-white py-12">
       <AnimatePresence>
         {show && (
           <motion.div
@@ -67,7 +67,7 @@ export default function NewsDetailPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 40 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="max-w-4xl mx-auto px-4 py-12"
+            className="max-w-4xl mx-auto px-4"
           >
             <div className="mb-4 text-center">
               <Link
@@ -77,9 +77,25 @@ export default function NewsDetailPage() {
                 Noticias / LEAD News
               </Link>
             </div>
-            <h1 className="text-5xl font-extrabold text-center text-pink-400 mb-4 leading-tight transition-colors">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center text-pink-400 mb-4 leading-tight transition-colors">
               {newsItem.title}
             </h1>
+
+            {/* Pilares con emojis */}
+            {newsItem.pillars && newsItem.pillars.length > 0 && (
+              <div className="flex justify-center gap-3 mb-6">
+                {newsItem.pillars.map((pillar, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 px-4 py-2 bg-purple-600/20 rounded-full border border-purple-500/30"
+                  >
+                    <span className="text-xl">{getPillarEmoji(pillar)}</span>
+                    <span className="text-purple-300 font-medium text-sm">{pillar}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
             <div className="flex flex-col items-center gap-2 mb-8">
               <div className="flex items-center gap-2 text-white">
                 <User className="w-5 h-5" />
@@ -96,6 +112,7 @@ export default function NewsDetailPage() {
                 </span>
               </div>
             </div>
+
             <motion.div
               className="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden mb-10 shadow-lg"
               whileHover={{ scale: 1.03 }}
@@ -112,6 +129,7 @@ export default function NewsDetailPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </motion.div>
+
             <motion.article
               className="prose prose-invert max-w-none text-lg mx-auto mb-12 transition-colors"
               initial={{ opacity: 0, y: 20 }}
@@ -119,6 +137,67 @@ export default function NewsDetailPage() {
               transition={{ delay: 0.3, duration: 0.7, ease: 'easeOut' }}
               dangerouslySetInnerHTML={{ __html: newsItem.content }}
             />
+
+            {/* Sección de Tags mejorada */}
+            <motion.div
+              className="max-w-4xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.7, ease: 'easeOut' }}
+            >
+              <div className="grid gap-6 md:grid-cols-3">
+                {/* Tags de Contenido */}
+                {newsItem.tagsContenido && newsItem.tagsContenido.length > 0 && (
+                  <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/30 hover:border-gray-600/50 transition-all duration-300">
+                    <h4 className="text-lg font-semibold text-white mb-3">Contenido</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {newsItem.tagsContenido.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="px-3 py-1 bg-gray-600/30 text-gray-300 rounded-full text-sm border border-gray-600/50 cursor-pointer hover:bg-gray-600/50 hover:text-white hover:shadow-lg hover:scale-105 transition-all duration-200"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Tags de Enfoque */}
+                {newsItem.tagsEnfoque && newsItem.tagsEnfoque.length > 0 && (
+                  <div className="bg-purple-800/30 rounded-lg p-4 border border-purple-700/30 hover:border-purple-600/50 transition-all duration-300">
+                    <h4 className="text-lg font-semibold text-purple-200 mb-3">Enfoque</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {newsItem.tagsEnfoque.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="px-3 py-1 bg-purple-600/30 text-purple-300 rounded-full text-sm border border-purple-600/50 cursor-pointer hover:bg-purple-600/50 hover:text-purple-100 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-105 transition-all duration-200"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Tags de Público */}
+                {newsItem.tagsPublico && newsItem.tagsPublico.length > 0 && (
+                  <div className="bg-cyan-800/30 rounded-lg p-4 border border-cyan-700/30 hover:border-cyan-600/50 transition-all duration-300">
+                    <h4 className="text-lg font-semibold text-cyan-200 mb-3">Público</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {newsItem.tagsPublico.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="px-3 py-1 bg-cyan-600/30 text-cyan-300 rounded-full text-sm border border-cyan-600/50 cursor-pointer hover:bg-cyan-600/50 hover:text-cyan-100 hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-105 transition-all duration-200"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.div>
             <motion.div
               className="flex flex-col items-center mt-12"
               initial={{ opacity: 0, y: 20 }}
@@ -129,6 +208,6 @@ export default function NewsDetailPage() {
         )}
       </AnimatePresence>
       <Footer />
-    </main>
+    </section>
   );
 }
