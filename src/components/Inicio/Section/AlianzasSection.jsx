@@ -1,6 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
+// Alianzas de respaldo si el API falla
+const alianzasDeRespaldo = [
+  {
+    "Nombre de la organización": "CIS UNI",
+    "Objetivo de la alianza": "Impulsar proyectos y relaciones públicas mediante actividades conjuntas como workshops, capacitaciones y webinars, alineadas a los objetivos comunes de IEEE CIS UNI y LEAD UNI.",
+    "Logo de la organización": "https://i.postimg.cc/HLbVyGfM/cis.png"
+  },
+  {
+    "Nombre de la organización": "INSPÍRATE UNI",
+    "Objetivo de la alianza": "Alianza estratégica para impulsar innovación y liderazgo a través de actividades que inspiran, conectan y transforman.",
+    "Logo de la organización": "https://i.postimg.cc/xT6TrL7J/inspirate.png"
+  },
+  {
+    "Nombre de la organización": "Rama Estudiantil IEEE UNI",
+    "Objetivo de la alianza": "Impulsar el crecimiento integral de los estudiantes, promoviendo espacios de formación, liderazgo e innovación mediante actividades conjuntas que generen impacto dentro y fuera de la universidad.",
+    "Logo de la organización": "https://i.postimg.cc/C54XqHDj/ieee-rama.png"
+  }
+];
+
 export const AlianzasSection = () => {
   const [alianzas, setAlianzas] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,9 +30,10 @@ export const AlianzasSection = () => {
       try {
         const response = await fetch('https://sheetdb.io/api/v1/4qkiwzonp20d9');
         const data = await response.json();
-        setAlianzas(data || []);
+        setAlianzas(data || alianzasDeRespaldo);
       } catch (err) {
         setError('Error al cargar alianzas');
+        setAlianzas(alianzasDeRespaldo); // 💡 Usar respaldo si falla el API
       } finally {
         setLoading(false);
       }
@@ -25,19 +45,17 @@ export const AlianzasSection = () => {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
+      transition: { staggerChildren: 0.2 }
+    }
   };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    show: { y: 0, opacity: 1 },
+    show: { y: 0, opacity: 1 }
   };
 
   return (
-    <section className="relative min-h-screen bg-[#1A0B2E] py-12 sm:py-16 lg:py-24 overflow-hidden">
+    <section className="relative min-h-screen bg-[#1A0B2E] py-24 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#B936F5]/10 via-transparent to-transparent"></div>
@@ -47,23 +65,20 @@ export const AlianzasSection = () => {
       {/* Content Container */}
       <div className="relative container mx-auto px-4">
         {/* Section Title */}
-        <div className="text-center mb-12 lg:mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold mb-2">
             <span className="bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] text-transparent bg-clip-text">
               Nuestras Alianzas
             </span>
           </h2>
-          <p className="text-white/80 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4">
-            Colaboramos con organizaciones y empresas para potenciar el desarrollo de nuestros
-            miembros.
+          <p className="text-white/80 text-base max-w-2xl mx-auto">
+            Colaboramos con organizaciones y empresas para potenciar el desarrollo de nuestros miembros.
           </p>
         </div>
 
         {/* Loading/Error */}
-        {loading && (
-          <div className="text-center text-white/60 text-sm sm:text-base">Cargando alianzas...</div>
-        )}
-        {error && <div className="text-center text-red-400 text-sm sm:text-base">{error}</div>}
+        {loading && <div className="text-center text-white/60">Cargando alianzas...</div>}
+        {error && <div className="text-center text-red-400">{error}</div>}
 
         {/* Alianzas Grid */}
         <motion.div
@@ -71,11 +86,11 @@ export const AlianzasSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-5xl mx-auto"
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto"
         >
           {alianzas.map((alianza, idx) => {
             // Convertir logo de Google Drive a enlace directo si es necesario
-            let logoUrl = alianza['Logo de la organización'];
+            let logoUrl = alianza["Logo de la organización"];
             if (logoUrl && logoUrl.includes('drive.google.com/open?id=')) {
               const fileId = logoUrl.split('id=')[1];
               logoUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
@@ -88,11 +103,9 @@ export const AlianzasSection = () => {
                 className="group relative bg-black/30 backdrop-blur-sm rounded-3xl p-8 border border-purple-900/20 hover:border-purple-600/40 transition-all duration-300 hover:-translate-y-2 flex flex-col items-center min-h-[380px] overflow-hidden justify-center"
               >
                 {/* Overlay objetivo al hacer hover sobre toda la carta */}
-                {alianza['Objetivo de la alianza'] && (
+                {alianza["Objetivo de la alianza"] && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 p-6 rounded-3xl">
-                    <span className="text-white text-center text-base font-medium">
-                      {alianza['Objetivo de la alianza']}
-                    </span>
+                    <span className="text-white text-center text-base font-medium">{alianza["Objetivo de la alianza"]}</span>
                   </div>
                 )}
                 <div className="absolute -inset-px bg-gradient-to-br from-[#B936F5] to-[#FF1CF7] opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-3xl z-10"></div>
@@ -102,18 +115,18 @@ export const AlianzasSection = () => {
                     {logoUrl ? (
                       <img
                         src={logoUrl}
-                        alt={alianza['Nombre de la organización']}
+                        alt={alianza["Nombre de la organización"]}
                         className="w-36 h-36 object-contain border-2 border-purple-400 bg-white shadow-md rounded-xl"
                       />
                     ) : (
                       <div className="w-36 h-36 bg-purple-900/30 rounded-xl flex items-center justify-center text-purple-300 text-4xl font-bold">
-                        {alianza['Nombre de la organización']?.[0] || '?'}
+                        {alianza["Nombre de la organización"]?.[0] || '?'}
                       </div>
                     )}
                   </div>
                   {/* Nombre debajo del logo */}
                   <span className="text-base bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] bg-clip-text text-transparent font-semibold text-center block w-full mb-2">
-                    {alianza['Nombre de la organización']}
+                    {alianza["Nombre de la organización"]}
                   </span>
                 </div>
               </motion.div>
