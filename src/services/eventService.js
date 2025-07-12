@@ -1,78 +1,221 @@
-const PAST_EVENTS_URL = 'https://api.sheety.co/2857d43ef362a7d0ed8ea6b48c2792d9/eventoss/respuestasDeFormulario1';
-const UPCOMING_EVENTS_URL = 'https://api.sheety.co/2857d43ef362a7d0ed8ea6b48c2792d9/eventosProximos/respuestasDeFormulario1';
+const PAST_EVENTS_URL = 'https://api.sheety.co/c770fc0f2cec952ae86b356ef4a77409/eventoss/respuestasDeFormulario1';
+const UPCOMING_EVENTS_URL = 'https://api.sheety.co/f871ed37eae4f5d98113a2867069d03c/eventosProximos/respuestasDeFormulario1';
 
-let cache = {
-  past: null,
-  upcoming: null,
+const EVENT_CACHE_KEY = 'lead_uni_event_cache';
+const EVENT_CACHE_DURATION =  10 * 60 * 1000; //10minutos
+
+// Caché en memoria
+let memoryCache = {
+  data: null,
+  timestamp: null,
+  isValid: function () {
+    return this.data && this.timestamp && Date.now() - this.timestamp < EVENT_CACHE_DURATION;
+  },
 };
 
-//export function transformGoogleDriveLink(url) {
-//  if (!url || typeof url !== 'string') {
-//    console.error("❌ URL inválida recibida en transformGoogleDriveLink:", url);
-  //  return null;
-  //}
+// Obtener del caché 
+function getCachedEvents() {
+  if (memoryCache.isValid()) return memoryCache.data;
 
-  //const match = url.match(/\/d\/([a-zA-Z0-9_-]+)\//);
-  //if (match && match[1]) {
-   // return `https://drive.google.com/uc?export=view&id=${match[1]}`;
-  //}
-
-  //console.error("❌ No se pudo extraer ID de la URL:", url);
-  //return null;
-//}
-
-export async function getPastEvents() {
-  if (cache.past) return cache.past;
+  const cached = localStorage.getItem(EVENT_CACHE_KEY);
+  if (!cached) return null;
 
   try {
-    const response = await fetch(PAST_EVENTS_URL);
-    const data = await response.json();
-
-    cache.past = data.respuestasDeFormulario1.map(event => {
-      //const transformedUrl = transformGoogleDriveLink(event.imagenUrl);
-      return {
-        nombreDelEvento: event.nombreDelEvento,
-        fechaDelEvento: event.fechaDelEvento,
-        pilar: event.pilar,
-        imagenUrl: event.imagenUrl,
-        descripcion: event.descripcion,
-        cantidadDeAsistentes: event.cantidadDeAsistentes,
-        cantidadDePonentes: event.cantidadDePonentes,
-        carrerasParticipantes: event.carrerasParticipantes,
-        universidadesParticipantes: event.universidadesParticipantes,
-        porcentajeCiclosSuperiores: event.porcentajeCiclosSuperiores,
-        nivelSatisfaccion: event.nivelSatisfaccion,
-      };
-    });
-
-    return cache.past;
-  } catch (error) {
-    console.error('Error fetching past events:', error);
-    return [];
+    const { data, timestamp } = JSON.parse(cached);
+    if (Date.now() - timestamp < EVENT_CACHE_DURATION) {
+      memoryCache.data = data;
+      memoryCache.timestamp = timestamp;
+      return data;
+    }
+  } catch {
+    localStorage.removeItem(EVENT_CACHE_KEY);
   }
+
+  return null;
 }
 
+// Guardar datos reales en caché
+
+function setCachedEvents(data) {
+  const isBackup = (event) => event?.esRespaldo === true;
+
+  const containsBackup =
+    data?.upcoming?.some(isBackup) || data?.past?.some(isBackup);
+
+  if (containsBackup) {
+    console.warn('Intento de guardar eventos de respaldo en caché. Cancelado.');
+    return;
+  }
+
+  const item = { data, timestamp: Date.now() };
+  memoryCache.data = data;
+  memoryCache.timestamp = item.timestamp;
+  localStorage.setItem(EVENT_CACHE_KEY, JSON.stringify(item));
+}
+
+// Convertir URL de imagen de Google Drive
+function formatImageUrl(url) {
+  if (!url || typeof url !== 'string') return '';
+  const match1 = url.match(/\/d\/([a-zA-Z0-9_-]+)\//);
+  if (match1 && match1[1]) return `https://drive.google.com/thumbnail?id=${match1[1]}&sz=w1000`;
+  const match2 = url.match(/id=([a-zA-Z0-9_-]+)/);
+  if (match2 && match2[1]) return `https://drive.google.com/thumbnail?id=${match2[1]}&sz=w1000`;
+  return url;
+}
+
+// Datos de respaldo 
+const staticFallbackUpcoming = [
+  {
+    nombreDelEvento: 'Podcast LeadUNI 🎙',
+    fechaTentativaDelEvento: '30/07/2025',
+    pilar: 'Liderazgo',
+    imagenUrl: 'https://drive.google.com/thumbnail?id=1NyOuUKksL3elUHHUTCeOpoMK9GqKmlbg&sz=w1000',
+    descripcionBreve: 'Desde el Pilar de Liderazgo de Lead UNI, estamos preparando un podcast pensado para inspirarte, retarte y ayudarte a crecer.¡Pronto en tus oídos! 👂🚀',
+    linkDeInscripcion: 'Mantente pendiente',
+    esRespaldo: true
+  },
+];
+
+const staticFallbackPast = [
+  {
+    nombreDelEvento: 'WOMEN LEADING DATA & IA💜🚀',
+    fechaDelEvento: '13/06/2025',
+    pilar: 'Impulso Femenino',
+    imagenUrl: 'https://drive.google.com/thumbnail?id=1GXIWUVFVCAJNoIA4do0dombACYPNYX4a&sz=w1000',
+    descripcion: 'Una jornada inspiradora donde mujeres líderes en tecnología compartieron sus historias reales de transformación e impacto sobre el uso de inteligencia artificial y análisis de datos para liderar el cambio en distintas industrias.',
+    cantidadDeAsistentes: 20,
+    cantidadDePonentes: 5,
+    carrerasParticipantes: 7,
+    universidadesParticipantes: 10,
+    porcentajeCiclosSuperiores: 50,
+    nivelSatisfaccion: 95,
+    esRespaldo: true
+  },
+  {
+    nombreDelEvento: 'Google Cloud Skills Boost',
+    fechaDelEvento: '25/05/2025',
+    pilar: 'Lead Academia',
+    imagenUrl: 'https://drive.google.com/thumbnail?id=1xbGynF9sZsggJxACCmvg_WUQcaeYUhbY&sz=w1000',
+    descripcion: 'Impulsamos una iniciativa de formación gratuita en tecnologías emergentes con cursos 100% online en inteligencia artificial, análisis de datos y cloud computing para certificarte con Google.',
+    esRespaldo: true
+  }
+];
+
 export async function getUpcomingEvents() {
-  if (cache.upcoming) return cache.upcoming;
+  const cached = getCachedEvents();
+  if (cached?.upcoming && memoryCache.isValid()) {
+    console.log("Usando eventos próximos desde caché válido");
+    return cached.upcoming;
+  }
 
   try {
     const response = await fetch(UPCOMING_EVENTS_URL);
     const data = await response.json();
 
-    cache.upcoming = data.respuestasDeFormulario1.map(event => {
-      return {
-        nombreDelEvento: event.nombreDelEvento,
-        fechaTentativaDelEvento: event.fechaTentativaDelEvento,
-        pilar: event.pilar,
-        imagenUrl: event.imagenUrl,
-        descripcionBreve: event.descripcionBreve,
-        linkDeInscripcion: event.linkDeInscripción,
-      };
-    });
+    if (data.errors || !Array.isArray(data.respuestasDeFormulario1)) {
+      throw new Error('API con error o datos inválidos');
+    }
 
-    return cache.upcoming;
+    const upcoming = data.respuestasDeFormulario1.map(event => ({
+      nombreDelEvento: event.nombreDelEvento,
+      fechaTentativaDelEvento: event.fechaTentativaDelEvento,
+      pilar: event.pilar,
+      imagenUrl: formatImageUrl(event.imagenUrl),
+      descripcionBreve: event.descripcionBreve || '',
+      linkDeInscripcion: event.linkDeInscripcion || '',
+      esRespaldo: false,
+    }));
+
+     upcoming.sort((a, b) => new Date(a.fechaTentativaDelEvento) - new Date(b.fechaTentativaDelEvento));
+
+    if (upcoming.length === 0) {
+      console.warn('API sin eventos.Usando respaldo');
+      return staticFallbackUpcoming.sort((a, b) => new Date(a.fechaTentativaDelEvento) - new Date(b.fechaTentativaDelEvento));; // ⚠️ NO guardar si está vacío
+    }
+
+
+    // Solo guardar si son reales
+    const updated = {
+      upcoming,
+      past: cached?.past || null,
+    };
+    setCachedEvents(updated);
+
+    return upcoming;
+
   } catch (error) {
-    console.error('Error fetching upcoming events:', error);
-    return [];
+    console.warn('ERROR en getUpcomingEvents:', error.message);
+    return staticFallbackUpcoming.sort((a, b) => new Date(a.fechaTentativaDelEvento) - new Date(b.fechaTentativaDelEvento)); // ⚠️ NO SE GUARDA NADA
   }
 }
+
+export async function getPastEvents() {
+  const cached = getCachedEvents();
+  if (cached?.past && memoryCache.isValid()) {
+    console.log("Usando eventos pasados desde caché válido");
+    return cached.past;
+  }
+
+  try {
+    const response = await fetch(PAST_EVENTS_URL);
+    const data = await response.json();
+
+    if (
+      data.errors ||
+      !Array.isArray(data.respuestasDeFormulario1) ||
+      data.respuestasDeFormulario1.length === 0
+    ) {
+      throw new Error('API con error o sin eventos pasados');
+    }
+
+    const past = data.respuestasDeFormulario1.map(event => ({
+      nombreDelEvento: event.nombreDelEvento,
+      fechaDelEvento: event.fechaDelEvento,
+      pilar: event.pilar,
+      descripcion: event.descripcion,
+      imagenUrl: formatImageUrl(event.imagenUrl),
+      cantidadDeAsistentes: event.cantidadDeAsistentes,
+      cantidadDePonentes: event.cantidadDePonentes,
+      carrerasParticipantes: event.carrerasParticipantes,
+      universidadesParticipantes: event.universidadesParticipantes,
+      porcentajeCiclosSuperiores: event.porcentajeCiclosSuperiores,
+      nivelSatisfaccion: event.nivelSatisfaccion,
+      esRespaldo: false,
+    }));
+
+    past.sort((a, b) => new Date(b.fechaDelEvento) - new Date(a.fechaDelEvento));
+
+    const upcoming = cached?.upcoming || staticFallbackUpcoming;
+
+    // Validación : detecta si los eventos pasados son respaldo
+    const esRespaldo = past.some(e => e.esRespaldo === true);
+
+    if (!esRespaldo) {
+      setCachedEvents({ past, upcoming });
+    } else {
+      console.warn('Eventos pasados detectados como respaldo.');
+    }
+
+    return past;
+  } catch (error) {
+    console.error('cargando eventos pasados:', error.message);
+    return staticFallbackPast.sort((a, b) => new Date(b.fechaDelEvento) - new Date(a.fechaDelEvento));
+  }
+}
+
+
+// Limpiar manualmente caché
+export function clearEventCache() {
+  memoryCache.data = null;
+  memoryCache.timestamp = null;
+  localStorage.removeItem(EVENT_CACHE_KEY);
+  console.log('Caché de eventos limpiado');
+}
+
+// Refrescar todo 
+export async function forceRefreshEvents() {
+  clearEventCache();
+  return Promise.all([getUpcomingEvents(), getPastEvents()]);
+}
+
+
