@@ -17,7 +17,7 @@ const PillarOption = ({ id, image, alt, selected, onClick }) => {
 
   return (
     <button
-      className={`w-20 h-20 rounded-2xl flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-xl overflow-visible relative ${selected ? 'ring-4 ring-[#ec46e1] scale-110' : ''}`}
+      className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-xl overflow-visible relative ${selected ? 'ring-4 ring-[#ec46e1] scale-110' : ''}`}
       style={{
         background: selected ? selectedBg : normalBg,
         border: `2.5px solid ${selected ? selectedBorder : normalBorder}`,
@@ -34,7 +34,7 @@ const PillarOption = ({ id, image, alt, selected, onClick }) => {
         <img 
           src={image} 
           alt={alt}
-          className="w-16 h-16 object-contain"
+          className="w-12 h-12 object-contain"
           onError={handleImageError}
         />
       ) : (

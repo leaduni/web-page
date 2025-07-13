@@ -54,39 +54,43 @@ const cycleOptions = [
 const pillarOptions = [
   {
     id: 'academic',
-    image: '/pillars/ExcelenciaAcademica.png',
+    image: <img src="/pillars/ExcelenciaAcademica.png" alt="Ícono de Excelencia Académica" className="w-8 h-8 object-contain" />,
     name: 'Excelencia Académica',
-    alt: 'Icono de Excelencia Académica',
   },
   {
     id: 'women',
-    image: '/pillars/ImpulsoFemenino.png',
+    image: <img src="/pillars/ImpulsoFemenino.png" alt="Ícono de Impulso Femenino" className="w-8 h-8 object-contain" />,
     name: 'Impulso Femenino',
-    alt: 'Icono de Impulso Femenino',
   },
   {
     id: 'academia',
-    image: '/pillars/LeadAcademia.png',
+    image: <img src="/pillars/LeadAcademia.png" alt="Ícono de LEAD Academia" className="w-8 h-8 object-contain" />,
     name: 'LEAD Academia',
-    alt: 'Icono de LEAD Academia',
   },
   {
     id: 'social',
-    image: '/pillars/ImpactoSocial.png',
+    image: <img src="/pillars/ImpactoSocial.png" alt="Ícono de Impacto Social" className="w-8 h-8 object-contain" />,
     name: 'Impacto Social',
-    alt: 'Icono de Impacto Social',
   },
   {
     id: 'chapter',
-    image: '/pillars/DesarrolloDelCapitulo.png',
+    image: <img src="/pillars/DesarrolloDelCapitulo.png" alt="Ícono de Desarrollo de Capítulo" className="w-8 h-8 object-contain" />,
     name: 'Desarrollo de Capítulo',
-    alt: 'Icono de Desarrollo de Capítulo',
   },
   {
     id: 'marketing',
-    image: '/pillars/Marketing.png',
+    image: <img src="/pillars/Marketing.png" alt="Ícono de Marketing" className="w-8 h-8 object-contain" />,
     name: 'Marketing',
-    alt: 'Icono de Marketing',
+  },
+  {
+    id: 'leadership',
+    image: <img src="/pillars/Liderazgo.png" alt="Ícono de Liderazgo" className="w-8 h-8 object-contain" />,
+    name: 'Liderazgo',
+  },
+  {
+    id: 'profesional',
+    image: <img src="/pillars/DessarrolloProfesional.png" alt="Ícono de Desarrollo Profesional" className="w-8 h-8 object-contain" />,
+    name: 'Desarrollo Profesional',
   },
 ];
 
@@ -119,7 +123,19 @@ const pillarContent = {
     description:
       'Estrategias de comunicación y promoción para dar visibilidad a las iniciativas del capítulo.',
   },
+  leadership: {
+    title: 'Liderazgo',
+    description:
+      'Desarrollo de habilidades de liderazgo, gestión de equipos y toma de decisiones estratégicas.',
+  },
+  professional: {
+    title: 'Desarrollo Profesional',
+    description:
+      'Preparación para el mundo laboral a través de networking, mentorías y desarrollo de competencias profesionales.',
+  },
 };
+
+const VISIBLE_PILLARS = 5; // cantidad de pilares visibles en el carrusel (impar)
 
 const ApplicationPage = () => {
   const theme = useTheme();
@@ -138,7 +154,9 @@ const ApplicationPage = () => {
   });
   const [leadUniDefinition, setLeadUniDefinition] = useState('');
   const [randomSpheres, setRandomSpheres] = useState([]);
-
+  const [showImage, setShowImage] = useState(false);
+  const [currentPillarIndex, setCurrentPillarIndex] = useState(0);
+  
   // Colores disponibles para las esferas
   const sphereColors = [
     { from: '#d93340', to: '#a6249d' },
@@ -198,6 +216,49 @@ const ApplicationPage = () => {
 
     return () => clearInterval(interval);
   }, []);
+  
+  // Efecto para controlar la visibilidad de la imagen decorativa
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      
+      // Mostrar imagen después de que el usuario haya scrolleado más allá de la sección de bienvenida
+      // La sección de bienvenida tiene aproximadamente 100vh, así que mostramos la imagen después de 80vh
+      if (scrollPosition > windowHeight * 0.6) {
+        setShowImage(true);
+      } else {
+        setShowImage(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Autoselección del pilar central
+  useEffect(() => {
+    const centerIndex = (currentPillarIndex + Math.floor(VISIBLE_PILLARS / 2)) % pillarOptions.length;
+    setSelectedPillar(pillarOptions[centerIndex].id);
+    // eslint-disable-next-line
+  }, [currentPillarIndex]);
+  
+  // Mover el carrusel para centrar el pilar seleccionado
+  const moveToCenter = (visibleIdx) => {
+    // visibleIdx: índice en el array de visibles (0 a VISIBLE_PILLARS-1)
+    // Queremos que visibleIdx quede en el centro
+    const diff = visibleIdx - Math.floor(VISIBLE_PILLARS / 2);
+    setCurrentPillarIndex((prev) => (prev + diff + pillarOptions.length) % pillarOptions.length);
+  };
+
+  // Obtener los pilares visibles en el carrusel
+  const getVisiblePillars = () => {
+    const visible = [];
+    for (let i = 0; i < VISIBLE_PILLARS; i++) {
+      visible.push(pillarOptions[(currentPillarIndex + i) % pillarOptions.length]);
+    }
+    return visible;
+  };
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({
@@ -291,7 +352,6 @@ const ApplicationPage = () => {
       }}
     >
       {/* Esferas decorativas aleatorias */}
-      {/* 'radial-gradient(ellipse at 60% 40%, #030c40 0%, #7957f1 60%, #a6249d 100%)' */}
       {randomSpheres.map(sphere => (
         <div
           key={sphere.id}
@@ -307,8 +367,8 @@ const ApplicationPage = () => {
 
       {/* Sección de bienvenida con fondo negro y esferas animadas */}
       <section className="w-full flex flex-col items-center justify-center min-h-screen pt-10 pb-6 z-20 relative overflow-hidden">
+        
         {/* Fondo negro */}
-
         <div className="absolute top-0 left-0 w-full h-full z-0">
           <div className="w-full h-full bg-[rgb(9,9,42)] min-h-[100%] border-0"></div>
         </div>
@@ -426,8 +486,8 @@ const ApplicationPage = () => {
         </div>
       </section>
 
-      {/* Imagen decorativa de la derecha, ahora en el fondo (z-0) */}
-      <div className="hidden lg:flex fixed right-0 top-0 h-full w-1/2 items-center justify-center z-0 pointer-events-none">
+      {/* Imagen decorativa de la derecha, ahora con control de visibilidad */}
+      <div className={`hidden lg:flex fixed right-0 top-0 h-full w-1/2 items-center justify-center z-0 pointer-events-none ${showImage ? 'opacity-100' : 'opacity-0'}`}>
         <div className="w-full h-full flex items-center justify-center relative">
           <img
             src="/student_stem.png"
@@ -494,21 +554,40 @@ const ApplicationPage = () => {
                 />
               </FormField>
             </FormCard>
-            <div className="text-center mb-8">
-              <h3 className="text-lg font-medium mb-4 text-[#ec46e1]">Seleccione el Pilar</h3>
-              <div className="flex flex-wrap justify-center gap-4">
-                {pillarOptions.map(pillar => (
-                  <PillarOption
-                    key={pillar.id}
-                    id={pillar.id}
-                    image={pillar.image}
-                    alt={pillar.alt}
-                    selected={selectedPillar === pillar.id}
-                    onClick={() => setSelectedPillar(pillar.id)}
-                  />
-                ))}
+            
+            {/* Carrusel SOLO de íconos de pilares */}
+            <div className="text-center mb-8 w-full max-w-lg mx-auto">
+              <h3 className="text-lg font-medium mb-6 text-[#ec46e1]">Seleccione el Pilar</h3>
+              <div className="flex items-center justify-center gap-2 relative" style={{ minHeight: 80 }}>
+                <div className="flex gap-2 items-center transition-all duration-300 ease-in-out">
+                  {getVisiblePillars().map((pillar, idx) => {
+                    const isCenter = idx === Math.floor(VISIBLE_PILLARS / 2);
+                    return (
+                      <div
+                        key={pillar.id}
+                        className={`transition-all duration-500 ease-in-out rounded-xl ${
+                          isCenter
+                            ? 'scale-110 ring-4 ring-[#d93340]/60 ring-offset-2 z-10'
+                            : 'opacity-60 blur-[2px] hover:opacity-90 hover:blur-0 cursor-pointer z-0'
+                        }`}
+                        style={{ zIndex: isCenter ? 2 : 1 }}
+                        onClick={() => {
+                          if (!isCenter) moveToCenter(idx);
+                        }}
+                      >
+                        <PillarOption
+                          id={pillar.id}
+                          icon={pillar.image}
+                          selected={isCenter}
+                          onClick={() => {}}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
+            
             {selectedPillar && (
               <FormCard title={`INFORMACIÓN SOBRE EL PILAR`}>
                 <div className="text-white">
