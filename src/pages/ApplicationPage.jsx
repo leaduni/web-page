@@ -5,7 +5,6 @@ import FormField from '../components/FormField';
 import TextInput from '../components/TextInput';
 import SelectInput from '../components/SelectInput';
 import PillarOption from '../components/PillarOption';
-import ContactSection from '../components/ContactSection';
 import { GraduationCap, Users, BookOpen, Heart, Building2, Megaphone } from 'lucide-react';
 
 const facultyOptions = [
