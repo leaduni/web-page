@@ -240,9 +240,12 @@ const ApplicationPage = () => {
 
   return (
     <div
-      className="min-h-screen relative overflow-hidden"
+      className="min-h-screen relative overflow-hidden [&::-webkit-scrollbar]:hidden"
       style={{
         background: 'linear-gradient(to bottom right, #09092a 0%, #36042f 100%)',
+        scrollbarWidth: 'none', // Firefox
+        msOverflowStyle: 'none', // Internet Explorer 10+
+        WebkitScrollbar: { display: 'none' }, // Chrome, Safari, Opera
       }}
     >
       {/* Esferas decorativas aleatorias */}
