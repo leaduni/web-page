@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { Header, HEADER_HEIGHT } from './components/header';
+import ContactSection from './components/ContactSection';
 // Importamos los componentes de las páginas que vamos a usar
 // En este caso, Home y About son componentes que representan páginas
 // de nuestra aplicación
@@ -42,7 +43,9 @@ function App() {
           {/* La ruta "*" captura todas las rutas que no coinciden con las anteriores */}
           {/* Esto es útil para mostrar una página 404 o Not Found */}
         </Routes>
+        
       </main>
+      <ContactSection />
     </div>
   );
 }
