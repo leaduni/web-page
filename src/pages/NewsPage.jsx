@@ -87,11 +87,10 @@ export default function NewsPage() {
   };
 
   return (
-    <section className="min-h-screen bg-gradient-to-b from-[#1A0B2E] via-[#2D1B4E] to-[#1A0B2E] text-white py-16">
+    <section className="min-h-screen w-full h-full bg-[rgb(9,9,42)]  border-0 text-white py-16">
       <div className="container mx-auto px-4 ">
-        {' '}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold text-center mb-8">
+        <div className="text-center mb-6">
+          <h1 className="text-5xl md:text-6xl font-bold text-center mb-4">
             <span className="bg-gradient-to-r from-[#FF1CF7] to-[#00F0FF] text-transparent bg-clip-text">
               LEAD News
             </span>

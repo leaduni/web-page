@@ -1,8 +1,9 @@
 import { Link, useParams } from 'react-router-dom';
-import { Calendar, Clock, User } from 'lucide-react';
+import { Calendar, Clock, User, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getNewsById, getPillarEmoji } from '../services/newsService';
+import logoLeadUniNews from '../assets/logo-lead-uni-news.png';
 
 export default function NewsDetailPage() {
   const { id } = useParams();
@@ -10,6 +11,44 @@ export default function NewsDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  // Función para manejar carga de imagen con timeout
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+    setImageError(false);
+  };
+
+  const handleImageError = e => {
+    console.log('🖼️ Error inicial en imagen, reintentando...');
+
+    // Para imágenes de Google Drive, intentar diferentes formatos
+    const currentSrc = e.target.src;
+
+    if (currentSrc.includes('drive.google.com/thumbnail')) {
+      // Si ya es thumbnail y falló, intentar con sz=w2000
+      if (currentSrc.includes('sz=w1000')) {
+        console.log('🔄 Reintentando con resolución mayor...');
+        e.target.src = currentSrc.replace('sz=w1000', 'sz=w2000');
+        return;
+      }
+
+      setTimeout(() => {
+        if (!imageLoaded) {
+          console.log('⚠️ Usando imagen de fallback definitiva');
+          setImageError(true);
+          e.target.src = logoLeadUniNews;
+        }
+      }, 1000);
+    } else {
+      // Para otras URLs, usar fallback directo
+      console.log('⚠️ Error en imagen no-Google Drive, usando fallback');
+      e.target.src = logoLeadUniNews;
+    }
+  };
+
   useEffect(() => {
     async function fetchNewsItem() {
       try {
@@ -26,7 +65,7 @@ export default function NewsDetailPage() {
       } finally {
         setLoading(false);
         // Iniciar animación después de cargar los datos
-        setTimeout(() => setShow(true), 60);
+        setTimeout(() => setShow(true), 5);
       }
     }
 
@@ -57,7 +96,7 @@ export default function NewsDetailPage() {
   }
 
   return (
-    <section className="min-h-screen bg-gradient-to-b from-[#1A0B2E] via-[#2D1B4E] to-[#1A0B2E] text-white py-12">
+    <section className="min-h-screen w-full h-full bg-[rgb(9,9,42)]  border-0 text-white py-12">
       <AnimatePresence>
         {show && (
           <motion.div
@@ -113,20 +152,34 @@ export default function NewsDetailPage() {
             </div>
 
             <motion.div
-              className="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden mb-10 shadow-lg"
+              className="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden mb-10 shadow-lg cursor-pointer"
               whileHover={{ scale: 1.03 }}
               transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+              onClick={() => setShowImageModal(true)}
             >
+              {/* Indicador de carga */}
+              {!imageLoaded && !imageError && (
+                <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-400"></div>
+                </div>
+              )}
+
               <img
                 src={newsItem.imageUrl}
                 alt={newsItem.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500"
-                onError={e => {
-                  e.target.src =
-                    'https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=800&q=80';
-                }}
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${
+                  imageLoaded ? 'opacity-100' : 'opacity-0'
+                }`}
+                onLoad={handleImageLoad}
+                onError={handleImageError}
+                loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              <div className="absolute inset-0 hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                <span className="bg-black/50 text-white px-3 py-1 rounded-full text-sm opacity-0 hover:opacity-100 transition-opacity duration-300">
+                  Click para ampliar
+                </span>
+              </div>
             </motion.div>
 
             <motion.article
@@ -203,6 +256,69 @@ export default function NewsDetailPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.7, ease: 'easeOut' }}
             ></motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Modal de imagen */}
+      <AnimatePresence>
+        {showImageModal && (
+          <motion.div
+            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setShowImageModal(false)}
+          >
+            <motion.div
+              className="relative max-w-7xl max-h-full"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              onClick={e => e.stopPropagation()}
+            >
+              {/* Botón de cerrar */}
+              <button
+                onClick={() => setShowImageModal(false)}
+                className="absolute top-4 right-4 z-10 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors duration-200"
+              >
+                <X size={24} />
+              </button>
+
+              {/* Imagen ampliada */}
+              <div className="relative">
+                {/* Indicador de carga para modal */}
+                {!imageLoaded && (
+                  <div className="absolute inset-0 bg-gray-800 rounded-lg flex items-center justify-center min-h-[400px]">
+                    <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-400"></div>
+                  </div>
+                )}
+
+                <img
+                  src={newsItem?.imageUrl}
+                  alt={newsItem?.title}
+                  className={`max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl transition-opacity duration-500 ${
+                    imageLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onLoad={handleImageLoad}
+                  onError={e => {
+                    console.log('🖼️ Error en imagen del modal, usando logo LEAD UNI');
+                    e.target.src = logoLeadUniNews;
+                  }}
+                  loading="eager"
+                />
+              </div>
+
+              {/* Título de la imagen */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent text-white p-6 rounded-b-lg">
+                <h3 className="text-lg font-semibold">{newsItem?.title}</h3>
+                <p className="text-sm text-gray-300 mt-1">
+                  {newsItem?.author} • {newsItem?.date}
+                </p>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

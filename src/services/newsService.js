@@ -126,8 +126,9 @@ function formatNewsData(rawData, index = 0) {
     rawData.redactor ||
     rawData['redactor (tuNombre)'] ||
     'Autor desconocido';
-  const pillar = rawData.pilar || rawData.Pilar || 'General';
-
+  console.log('rawData:', rawData);
+  const pillar = rawData.pilarRepresentante || rawData.pilar || rawData.Pilar || 'General';
+  console.log('Escogido pilar:', pillar);
   // Mejorar selección de imágenes - priorizar campos específicos
   const image1 =
     rawData['imagenDeLaNoticia'] || // Nuevo formato API
@@ -162,7 +163,6 @@ function formatNewsData(rawData, index = 0) {
     imageUrl: formatImageUrl(image1),
     imageUrl2: formatImageUrl(image2), // Segunda imagen opcional
     category: formatPillar(pillar),
-    // Nuevos campos para tags - soporte múltiple para diferentes estructuras
     tagsContenido: formatTags(
       rawData['tags-contenido'] || rawData.tagsContenido || rawData.Tags || ''
     ),
@@ -292,8 +292,11 @@ function formatImageUrl(imageUrl) {
  * @returns {string} - Categoría formateada
  */
 function formatPillar(pilar) {
-  if (!pilar) return 'General';
-
+  if (!pilar) {
+    console.log('general');
+    return 'General';
+  }
+  console.log('Pilar recibido:', pilar);
   const pilarMapping = {
     'P. Excelencia Académica': 'Excelencia Académica',
     'P. Impulso Femenino': 'Impulso Femenino',
@@ -326,8 +329,10 @@ function formatPillar(pilar) {
  * @returns {Array} - Array de pilares formateados
  */
 function formatPillars(pillarsString) {
-  if (!pillarsString) return ['General'];
+  console.log('Llamando a formatPillars con:', pillarsString);
 
+  if (!pillarsString) return ['General'];
+  console.log('Resultado de pillarsString');
   return pillarsString
     .split(',')
     .map(pillar => formatPillar(pillar.trim()))
@@ -405,131 +410,7 @@ function generateContent(description, tags) {
   return content;
 }
 
-// Datos simulados actualizados con la nueva estructura
 const simulatedApiData = [
-  {
-    id: 3,
-    'hora-registro': '10/07/2025 18:58:01',
-    titulo: 'LEAD UNI en Microsoft',
-    descripcion:
-      'El pasado 7 de julio, tuvimos la oportunidad de presentar a LEAD UNI en las oficinas de Microsoft Perú, compartiendo los avances que hemos logrado como organización estudiantil desde nuestra formación.\n\nDurante la jornada, expusimos nuestra visión, estructura y las iniciativas que venimos impulsando con mucho compromiso y pasión. También compartimos los primeros avances de los proyectos desarrollados por los distintos pilares de la organización, demostrando cómo, en poco tiempo, hemos logrado articular ideas con impacto en diversas áreas clave de nuestra comunidad.\n\nContamos con la grata presencia de Luis Coronel y Antonny Porlles, quienes acompañaron esta presentación y compartieron su perspectiva como miembros con amplia trayectoria dentro de la comunidad LEAD, enriqueciendo aún más esta experiencia para nosotros.\n\nEste espacio marcó un paso importante en nuestro crecimiento, reafirmando que cuando el talento se une con propósito, grandes cosas pueden lograrse. ¡Vamos con todo, LEAD UNI! 💜',
-    pilar: 'LEAD UNI',
-    'tags-contenido': 'Actividad Interna, Comunicado, Oportunidad, Resumen Mensual',
-    redactante: 'Diogo Abregu',
-    imagen1: 'https://drive.google.com/open?id=1V4QoR4RLf-miHSOftQA1135IbPmde8PD',
-    imagen2: '',
-    'tags-enfoque': 'Organización, Crecimiento',
-    'tags-publico': 'General',
-  },
-  {
-    id: 2,
-    'hora-registro': '08/07/2025 15:30:00',
-    titulo: 'LEAD en los Colegios de SJL',
-    descripcion:
-      'LEAD UNI llega a los colegios de San Juan de Lurigancho con su programa educativo. Una iniciativa que busca impactar positivamente en la educación de los jóvenes, proporcionando talleres de liderazgo y orientación académica.',
-    pilar: 'P. Impacto Social',
-    'tags-contenido': 'Proyecto, Outreach',
-    redactante: 'María González',
-    imagen1:
-      'https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=800&q=80',
-    imagen2: '',
-    'tags-enfoque': 'Educación, Comunidad',
-    'tags-publico': 'Estudiantes, Comunidad',
-  },
-  {
-    id: 1,
-    'hora-registro': '06/07/2025 10:15:22',
-    titulo: 'Nuevo Programa de Liderazgo',
-    descripcion:
-      'LEAD UNI lanza su nuevo programa de liderazgo para estudiantes universitarios, enfocado en desarrollar habilidades de gestión y emprendimiento. El programa incluye talleres prácticos, mentoría personalizada y proyectos de impacto social.',
-    pilar: 'P. Liderazgo',
-    'tags-contenido': 'Programa, Lanzamiento',
-    redactante: 'Carlos Ramírez',
-    imagen1:
-      'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80',
-    imagen2: '',
-    'tags-enfoque': 'Liderazgo, Desarrollo',
-    'tags-publico': 'Estudiantes',
-  },
-  {
-    id: 4,
-    'hora-registro': '05/07/2025 14:20:45',
-    titulo: 'Conferencia Internacional de Tecnología',
-    descripcion:
-      'LEAD UNI organiza conferencia internacional sobre innovación y tecnología, reuniendo a expertos de todo el mundo para discutir las últimas tendencias. El evento incluirá keynotes, paneles y talleres prácticos.',
-    pilar: 'P. Excelencia Académica, P. Marketing',
-    'tags-contenido': 'Evento, Conferencia, Internacional',
-    redactante: 'Ana López',
-    imagen1:
-      'https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=800&q=80',
-    imagen2: '',
-    'tags-enfoque': 'Tecnología, Innovación',
-    'tags-publico': 'Estudiantes, Profesionales',
-  },
-  {
-    id: 5,
-    'hora-registro': '04/07/2025 11:45:30',
-    titulo: 'Iniciativa de Impulso Femenino',
-    descripcion:
-      'LEAD UNI lanza una nueva iniciativa para promover el liderazgo femenino en STEM. El programa incluye mentorías, talleres especializados y networking con profesionales exitosas del sector tecnológico.',
-    pilar: 'P. Impulso Femenino',
-    'tags-contenido': 'Programa, Iniciativa, Lanzamiento',
-    redactante: 'Sofía Mendoza',
-    imagen1:
-      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
-    imagen2: '',
-    'tags-enfoque': 'STEM, Empoderamiento, Networking',
-    'tags-publico': 'Mujeres, Estudiantes',
-  },
-  {
-    id: 6,
-    'hora-registro': '03/07/2025 09:30:15',
-    titulo: 'Desarrollo del Capítulo LEAD',
-    descripcion:
-      'El capítulo LEAD UNI presenta su plan de crecimiento y expansión para el próximo semestre. Nuevas alianzas estratégicas y proyectos comunitarios marcan el rumbo hacia un mayor impacto estudiantil.',
-    pilar: 'P. Desarrollo de Capítulo',
-    'tags-contenido': 'Plan, Estrategia, Crecimiento',
-    redactante: 'Diego Torres',
-    imagen1:
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80',
-    imagen2: '',
-    'tags-enfoque': 'Estrategia, Alianzas',
-    'tags-publico': 'Miembros, Comunidad',
-  },
-  {
-    id: 7,
-    'hora-registro': '02/07/2025 16:00:00',
-    titulo: 'Campaña de Marketing Digital',
-    descripcion:
-      'LEAD UNI lanza su nueva campaña de marketing digital para aumentar la visibilidad de sus programas. La campaña incluye contenido interactivo en redes sociales y estrategias de engagement estudiantil.',
-    pilar: 'P. Marketing',
-    'tags-contenido': 'Campaña, Digital, Lanzamiento',
-    redactante: 'Lucía Vega',
-    imagen1:
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-    imagen2: '',
-    'tags-enfoque': 'Marketing Digital, Redes Sociales',
-    'tags-publico': 'General, Estudiantes',
-  },
-  {
-    id: 8,
-    'hora-registro': '01/07/2025 13:15:30',
-    titulo: 'Taller de Desarrollo Profesional',
-    descripcion:
-      'Nuevo taller enfocado en habilidades profesionales para estudiantes de ingeniería. Incluye técnicas de entrevista, elaboración de CV y networking profesional.',
-    pilar: 'P. Desarrollo Profesional',
-    'tags-contenido': 'Taller, Capacitación',
-    redactante: 'Roberto Silva',
-    imagen1:
-      'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80',
-    imagen2: '',
-    'tags-enfoque': 'Capacitación, Habilidades Blandas',
-    'tags-publico': 'Estudiantes, Profesionales',
-  },
-];
-
-// Datos de fallback de emergencia con estructura alternativa
-const emergencyFallbackData = [
   {
     id: 1,
     marcaTemporal: '10/07/2025 18:58:01',
@@ -540,7 +421,7 @@ const emergencyFallbackData = [
     'redactor (tuNombre)': 'Diogo Abregu',
     imagenDeLaNoticia: 'https://drive.google.com/open?id=1V4QoR4RLf-miHSOftQA1135IbPmde8PD',
     linkDeLaImagen: '',
-    pilar: 'LEAD UNI',
+    pilarRepresentante: 'LEAD UNI',
     tagsEnfoque: 'Organización, Crecimiento',
     tagsPúblico: 'General',
   },
@@ -554,14 +435,42 @@ const emergencyFallbackData = [
     'redactor (tuNombre)': 'Diogo Abregu',
     imagenDeLaNoticia: 'https://drive.google.com/open?id=1FCypvIUp0nSbRiTCffFAuiHad9oudIvu',
     linkDeLaImagen: '',
-    pilar: 'P. Excelencia Académica',
+    pilarRepresentante: 'P. Excelencia Académica, P. Impacto Social',
     tagsEnfoque: 'Logro, Anuncio',
     tagsPúblico: 'General',
   },
 ];
 
-// Convertir datos simulados al formato esperado por los componentes
-const newsData = simulatedApiData.map((item, index) => formatNewsData(item, index));
+const emergencyFallbackData = [
+  {
+    id: 1,
+    marcaTemporal: '10/07/2025 18:58:01',
+    tituloDeLaNoticia: 'LEAD UNI en Microsoft',
+    descripciónDeLaNoticia:
+      'El pasado 7 de julio, tuvimos la oportunidad de presentar a LEAD UNI en las oficinas de Microsoft Perú, compartiendo los avances que hemos logrado como organización estudiantil desde nuestra formación.\n\nDurante la jornada, expusimos nuestra visión, estructura y las iniciativas que venimos impulsando con mucho compromiso y pasión. También compartimos los primeros avances de los proyectos desarrollados por los distintos pilares de la organización, demostrando cómo, en poco tiempo, hemos logrado articular ideas con impacto en diversas áreas clave de nuestra comunidad.\n\nContamos con la grata presencia de Luis Coronel y Antonny Porlles, quienes acompañaron esta presentación y compartieron su perspectiva como miembros con amplia trayectoria dentro de la comunidad LEAD, enriqueciendo aún más esta experiencia para nosotros.\n\nEste espacio marcó un paso importante en nuestro crecimiento, reafirmando que cuando el talento se une con propósito, grandes cosas pueden lograrse. ¡Vamos con todo, LEAD UNI! 💜',
+    tagsContenido: 'Actividad Interna, Comunicado, Oportunidad, Resumen Mensual',
+    'redactor (tuNombre)': 'Diogo Abregu',
+    imagenDeLaNoticia: 'https://drive.google.com/open?id=1V4QoR4RLf-miHSOftQA1135IbPmde8PD',
+    linkDeLaImagen: '',
+    pilarRepresentante: 'LEAD UNI',
+    tagsEnfoque: 'Organización, Crecimiento',
+    tagsPúblico: 'General',
+  },
+  {
+    id: 2,
+    marcaTemporal: '10/07/2025 22:13:18',
+    tituloDeLaNoticia: 'Desarrollo de la Pagina Web LEAD UNI',
+    descripciónDeLaNoticia:
+      'En LEAD UNI sabemos que comunicar quiénes somos y lo que hacemos es tan importante como hacerlo con pasión. Por eso, una de nuestras primeras metas como organización fue comenzar a construir nuestra página web oficial: un espacio que represente nuestra identidad, nuestros pilares y nuestras ganas de transformar realidades.\n\nEl desarrollo de la web comenzó con la idea clara de que no solo debía ser informativa, sino también una carta de presentación viva de todo el trabajo que estamos haciendo como comunidad.\n\nDesde las primeras semanas nos organizamos en base a reuniones de planificación, donde cada integrante del equipo pudo aportar ideas y plantear mejoras. Poco a poco, fuimos asignando tareas, definiendo componentes y estructurando las secciones clave: desde el histórico de proyectos y el organigrama, hasta los pilares, convocatorias y la actividad reciente.\n\nGracias al compromiso del equipo, a una buena comunicación y a nuestra metodología basada en GitHub Projects, pudimos dividir el trabajo de manera ordenada y avanzar de forma constante. Cada línea de código, cada revisión y cada diseño fueron pensados para construir una web hecha con propósito.\n\nHoy seguimos avanzando en su desarrollo, puliendo los últimos detalles para brindar una experiencia clara, cercana y auténtica. Muy pronto estará disponible al público, y no podríamos estar más emocionados de compartirla con todos ustedes.\n\nPorque esto es solo el comienzo. 💻✨\n¡Vamos LEAD UNI!',
+    tagsContenido: 'Reconocimiento, Actividad Interna',
+    'redactor (tuNombre)': 'Diogo Abregu',
+    imagenDeLaNoticia: 'https://drive.google.com/open?id=1FCypvIUp0nSbRiTCffFAuiHad9oudIvu',
+    linkDeLaImagen: '',
+    pilarRepresentante: 'P. Excelencia Académica, P. Impacto Social',
+    tagsEnfoque: 'Logro, Anuncio',
+    tagsPúblico: 'General',
+  },
+];
 
 /**
  * Obtiene todas las noticias desde el endpoint con sistema de caché
@@ -569,7 +478,6 @@ const newsData = simulatedApiData.map((item, index) => formatNewsData(item, inde
  */
 export async function getAllNews() {
   try {
-    // Si no hay caché válido, hacer petición a la API PRIMERO
     console.log('🌐 Obteniendo datos frescos de la API...');
     const response = await fetch(API_URL);
 
@@ -579,7 +487,6 @@ export async function getAllNews() {
 
     const rawData = await response.json();
 
-    // La API de Sheety devuelve los datos en un objeto con clave "noticias"
     const newsArray = rawData.noticias || [];
 
     // Formatear los datos
@@ -709,7 +616,7 @@ export async function getAllCategories() {
     const categories = new Set();
 
     allNews.forEach(news => {
-      if (news.category) categories.add(news.category);
+      // Solo usar los pilares individuales del array pillars, no la categoría
       news.pillars.forEach(pillar => categories.add(pillar));
     });
 

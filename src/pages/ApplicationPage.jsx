@@ -52,41 +52,41 @@ const cycleOptions = [
 ];
 
 const pillarOptions = [
-  { 
-    id: 'academic', 
-    image: '/pillars/ExcelenciaAcademica.png', 
+  {
+    id: 'academic',
+    image: '/pillars/ExcelenciaAcademica.png',
     name: 'Excelencia Académica',
-    alt: 'Icono de Excelencia Académica'
+    alt: 'Icono de Excelencia Académica',
   },
-  { 
-    id: 'women', 
-    image: '/pillars/ImpulsoFemenino.png', 
+  {
+    id: 'women',
+    image: '/pillars/ImpulsoFemenino.png',
     name: 'Impulso Femenino',
-    alt: 'Icono de Impulso Femenino'
+    alt: 'Icono de Impulso Femenino',
   },
-  { 
-    id: 'academia', 
-    image: '/pillars/LeadAcademia.png', 
+  {
+    id: 'academia',
+    image: '/pillars/LeadAcademia.png',
     name: 'LEAD Academia',
-    alt: 'Icono de LEAD Academia'
+    alt: 'Icono de LEAD Academia',
   },
-  { 
-    id: 'social', 
-    image: '/pillars/ImpactoSocial.png', 
+  {
+    id: 'social',
+    image: '/pillars/ImpactoSocial.png',
     name: 'Impacto Social',
-    alt: 'Icono de Impacto Social'
+    alt: 'Icono de Impacto Social',
   },
-  { 
-    id: 'chapter', 
-    image: '/pillars/DesarrolloDelCapitulo.png', 
+  {
+    id: 'chapter',
+    image: '/pillars/DesarrolloDelCapitulo.png',
     name: 'Desarrollo de Capítulo',
-    alt: 'Icono de Desarrollo de Capítulo'
+    alt: 'Icono de Desarrollo de Capítulo',
   },
-  { 
-    id: 'marketing', 
-    image: '/pillars/Marketing.png', 
+  {
+    id: 'marketing',
+    image: '/pillars/Marketing.png',
     name: 'Marketing',
-    alt: 'Icono de Marketing'
+    alt: 'Icono de Marketing',
   },
 ];
 
@@ -310,10 +310,7 @@ const ApplicationPage = () => {
         {/* Fondo negro */}
 
         <div className="absolute top-0 left-0 w-full h-full z-0">
-          <div
-            className="w-full h-full"
-            style={{ background: 'rgb(9,9,42)', minHeight: '100%', borderRadius: 0 }}
-          ></div>
+          <div className="w-full h-full bg-[rgb(9,9,42)] min-h-[100%] border-0"></div>
         </div>
 
         {/* Esferas animadas */}

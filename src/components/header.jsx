@@ -34,14 +34,14 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+      className={`fixed top-0 w-full z-50 transition-all  duration-500 shadow shadow-[#1A0B2E] ${
         isScrolled
-          ? 'bg-[#1A0B2E]/85 backdrop-blur-xl border-b border-purple-900/30 shadow-lg shadow-purple-900/20'
-          : 'bg-transparent'
+          ? 'bg-[#1A0B2E]/85 backdrop-blur-xl border-b border-purple-900/30  shadow-purple-900/20'
+          : 'bg-transparent '
       }`}
       style={{ minHeight: `${HEADER_HEIGHT}px` }}
     >
-      <div className="container mx-auto px-6 md:px-8 py-4 flex justify-between items-center">
+      <div className="container mx-auto px-6 md:px-8 pt-4 flex justify-between items-center">
         {' '}
         <Link to="/" className="group relative flex items-center z-10">
           <motion.div
@@ -65,7 +65,7 @@ export function Header() {
           </motion.div>
         </Link>
         {/* Navegación para pantallas medianas y grandes */}
-        <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+        <nav className="hidden md:flex items-center gap-1">
           {navLinks.map(link => (
             <NavLink key={link.path} to={link.path} active={location.pathname === link.path}>
               {link.label}
