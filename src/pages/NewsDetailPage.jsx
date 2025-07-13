@@ -74,7 +74,7 @@ export default function NewsDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#1e0a2e] flex items-center justify-center">
+      <div className="min-h-screen bg-[rgb(9,9,42)] flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-4">Cargando...</h1>
         </div>
@@ -84,7 +84,7 @@ export default function NewsDetailPage() {
 
   if (error || !newsItem) {
     return (
-      <div className="min-h-screen bg-[#1e0a2e] flex items-center justify-center">
+      <div className="min-h-screen bg-[rgb(9,9,42)] flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-4">{error || 'Noticia no encontrada'}</h1>
           <Link to="/" className="text-purple-400 hover:underline">
