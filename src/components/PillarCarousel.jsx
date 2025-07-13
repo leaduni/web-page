@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 const PillarCarousel = ({ pillars, selectedPillar, onSelectPillar }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -40,13 +39,13 @@ const PillarCarousel = ({ pillars, selectedPillar, onSelectPillar }) => {
       >
         {pillars.map((pillar, index) => {
           const angle = (360 / pillars.length) * index;
-          const radius = 300; // Adjust this value to change the circle size
+          const radius = 300; 
           
           return (
             <div
               key={pillar.id}
-              className={`carousel-item absolute left-1/2 top-1/2 w-64 h-64 -ml-32 -mt-32 transition-all duration-300
-                ${selectedPillar?.id === pillar.id ? 'scale-110' : 'scale-100'}`}
+              className={`carousel-item absolute left-1/2 top-1/2 w-56 h-64 -ml-28 -mt-32 transition-all duration-300
+                ${selectedPillar?.id === pillar.id ? 'scale-110 z-20' : 'scale-95 rotate-y-12 z-10'}`}
               style={{
                 transform: `rotateY(${angle}deg) translateZ(${radius}px)`,
               }}

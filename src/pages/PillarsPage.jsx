@@ -151,20 +151,58 @@ const PillarsPage = () => {
           coverImage:
             'https://images.pexels.com/photos/3184644/pexels-photo-3184644.jpeg',
         },
+        {
+          id: 'marketing',
+          name: 'Marketing',
+          emoji: '📣',
+          logo: '/pillars/Marketing.png',
+          icon: <Briefcase className="h-6 w-6" />,
+          description:
+            'Potenciamos la visibilidad de nuestras actividades y fortalecemos nuestra marca institucional mediante estrategias creativas de comunicación y contenido.',
+          mission:
+            'Consolidar una imagen institucional sólida y coherente, difundiendo eficazmente nuestras iniciativas a través de distintos canales.',
+          activities: [
+            'Gestión de redes sociales',
+            'Diseño gráfico y branding',
+            'Cobertura de eventos y campañas de difusión',
+          ],
+          coordinator: 'Daniel Kevin Manayay Cadillo',
+          coverImage:
+            'https://images.pexels.com/photos/3182833/pexels-photo-3182833.jpeg',
+        },
 
+      //].map((p) => ({
+        //...p,
+        //...(p.id !== 'marketing' && {
+        //events: pastEvents
+          //.filter((e) => normalize(e.pilar) === normalize(p.name))
+          //.map((e) => ({ ...e, fecha: e.fechaDelEvento })),
+        //upcoming: upcomingEvents
+          //.filter((e) => normalize(e.pilar) === normalize(p.name))
+          //.map((e) => ({
+            //...e,
+            //fecha: e.fechaTentativaDelEvento,
+            //fechaTentativaDelEvento: e.fechaTentativaDelEvento, 
+          //})),
+        //}),
+      //}));
 
       ].map((p) => ({
         ...p,
-        events: pastEvents
-          .filter((e) => normalize(e.pilar) === normalize(p.name))
-          .map((e) => ({ ...e, fecha: e.fechaDelEvento })),
-        upcoming: upcomingEvents
-          .filter((e) => normalize(e.pilar) === normalize(p.name))
-          .map((e) => ({
-            ...e,
-            fecha: e.fechaTentativaDelEvento,
-            fechaTentativaDelEvento: e.fechaTentativaDelEvento, 
-          })),
+        events: p.id !== 'marketing'
+          ? pastEvents
+              .filter((e) => normalize(e.pilar) === normalize(p.name))
+              .map((e) => ({ ...e, fecha: e.fechaDelEvento }))
+          : [],
+        upcoming: p.id !== 'marketing'
+          ? upcomingEvents
+              .filter((e) => normalize(e.pilar) === normalize(p.name))
+              .map((e) => ({
+                ...e,
+                fecha: e.fechaTentativaDelEvento,
+                fechaTentativaDelEvento: e.fechaTentativaDelEvento,
+              }))
+          : [],
       }));
 
       setPillars(pillarsData);

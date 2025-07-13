@@ -66,12 +66,39 @@ function formatImageUrl(url) {
 // Datos de respaldo 
 const staticFallbackUpcoming = [
   {
-    nombreDelEvento: 'Podcast LeadUNI 🎙',
+    nombreDelEvento: 'Podcast LeadUNI 🎙️',
     fechaTentativaDelEvento: '30/07/2025',
     pilar: 'Liderazgo',
     imagenUrl: 'https://drive.google.com/thumbnail?id=1NyOuUKksL3elUHHUTCeOpoMK9GqKmlbg&sz=w1000',
     descripcionBreve: 'Desde el Pilar de Liderazgo de Lead UNI, estamos preparando un podcast pensado para inspirarte, retarte y ayudarte a crecer.¡Pronto en tus oídos! 👂🚀',
-    linkDeInscripcion: 'Mantente pendiente',
+
+    esRespaldo: true
+  },
+  {
+    nombreDelEvento: 'Marca Personal: Sé tu mejor Proyecto💜💼',
+    fechaTentativaDelEvento: '07/08/2025',
+    pilar: 'Desarrollo Profesional',
+    imagenUrl: 'https://drive.google.com/thumbnail?id=1bhaIPAb_h-1CPq4zdRBR2UQmA1x3i6D_&sz=w1000',
+    descripcionBreve: 'Taller enfocado en ayudarte a construir y potenciar tu marca personal, identificando tus fortalezas, valores y propósito para destacar en entornos académicos y profesionales. Mantente pendiente',
+
+    esRespaldo: true
+  },
+  {
+    nombreDelEvento: 'Litle Einstein🎓',
+    fechaTentativaDelEvento: '22/07/2025',
+    pilar: 'Impacto Social',
+    imagenUrl: 'https://drive.google.com/thumbnail?id=1NIyO9ltwIfVP8jA67i8-WygIBO5RPxfm&sz=w1000',
+    descripcionBreve: 'A través de este ciclo de visitas a colegios, miembros de Lead UNI llevarán charlas motivacionales y dinámicas formativas a estudiantes de nivel escolar, con el objetivo de despertar su interés por las áreas STEAM y fomentar el desarrollo del liderazgo desde temprana edad.',
+
+    esRespaldo: true
+  },
+  {
+    nombreDelEvento: 'Desarrollo Web💻-Pagina LeadUNI',
+    fechaTentativaDelEvento: '13/07/2025',
+    pilar: 'Excelencia Académica',
+    imagenUrl: 'https://drive.google.com/thumbnail?id=1ZFOlXNkpy_MTv_NE4UDSVJwAg5SnwqUh&sz=w1000',
+    descripcionBreve: 'Durante este proyecto colaborativo, el equipo de Excelencia Academica desarrolló la página web oficial de LeadUNI. Tiene como objetivo representar digitalmente a la organización, mostrando proyectos, eventos, noticias, convocatoria y presentando a los miembros clave de la comunidad.',
+    
     esRespaldo: true
   },
 ];
@@ -98,7 +125,15 @@ const staticFallbackPast = [
     imagenUrl: 'https://drive.google.com/thumbnail?id=1xbGynF9sZsggJxACCmvg_WUQcaeYUhbY&sz=w1000',
     descripcion: 'Impulsamos una iniciativa de formación gratuita en tecnologías emergentes con cursos 100% online en inteligencia artificial, análisis de datos y cloud computing para certificarte con Google.',
     esRespaldo: true
-  }
+  },
+  {
+    nombreDelEvento: '1° Integración LeadUNI',
+    fechaDelEvento: '18/05/2025',
+    pilar: 'Desarrollo del Capítulo',
+    imagenUrl: 'https://drive.google.com/thumbnail?id=1wtjBznBHjgmiq7z3wuMOWNcruas32USj&sz=w1000',
+    descripcion: 'Primera integración del equipo Lead UNI, un espacio de encuentro donde se realizaron dinámicas, charlas y actividades orientadas a fortalecer el propósito común, fomentar el trabajo en equipo y generar una conexión real entre las distintas áreas.',
+    esRespaldo: true
+  },
 ];
 
 export async function getUpcomingEvents() {

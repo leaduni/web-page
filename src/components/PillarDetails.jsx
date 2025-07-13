@@ -123,108 +123,113 @@ const PillarDetails = ({ pillar }) => {
           </div>
         </div>
       </div>
+      {/* Mostrar sección de eventos solo si NO es marketing */}
 
-      {/* Toggle */}
-      <div className="flex justify-center mb-6">
-        <div className="inline-flex border-2 border-purple-600 rounded-full overflow-hidden">
-          <button
-            onClick={() => setShowUpcoming(true)}
-            className={`px-4 py-1 font-semibold transition ${showUpcoming ? 'bg-purple-600 text-white' : 'bg-transparent text-purple-200'}`}
-          >
-            Eventos Próximos
-          </button>
-          <button
-            onClick={() => setShowUpcoming(false)}
-            className={`px-4 py-1 font-semibold transition ${!showUpcoming ? 'bg-purple-600 text-white' : 'bg-transparent text-purple-200'}`}
-          >
-            Eventos Pasados
-          </button>
-        </div>
-      </div>
-
-      {/* Cuenta regresiva */}
-      {showUpcoming && filteredUpcoming.length > 0 && (
-        <div className="text-center mb-10">
-          <h3 className="text-xl text-white mb-1">Próximo evento destacado:</h3>
-          <p className="text-2xl text-pink-400 font-bold mb-3">
-            {filteredUpcoming[0].nombreDelEvento}
-          </p>
-          <CountdownTimer fechaStr={filteredUpcoming[0].fechaTentativaDelEvento} grande />
-        </div>
-      )}
-
-      {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-        {eventsToShow.length > 0 ? (
-          eventsToShow.map((event, index) => (
-            <div
-              key={index}
-              className="bg-purple-900/30 backdrop-blur-sm rounded-lg overflow-hidden transition-transform duration-300 hover:transform hover:scale-[1.02] cursor-pointer"
-              onClick={() => handleOpenModal({ ...event })}
-            >
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={event.imagenUrl}
-                  alt={event.nombreDelEvento || event.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                />
-                <div className="absolute top-4 right-4">
-                  <span className="bg-purple-800/50 text-purple-200 text-xs px-3 py-1 rounded-full">
-                    {pillar.name}
-                  </span>
-                </div>
-                {showUpcoming && event.fechaTentativaDelEvento && (
-                  <div className="absolute top-4 left-4">
-                    <CountdownTimer fechaStr={event.fechaTentativaDelEvento} />
-                  </div>
-                )}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-purple-900/90 to-transparent p-4">
-                  <div className="flex items-center text-purple-300 text-sm mb-2">
-                    <Calendar size={16} className="mr-2" />
-                    <span>{event.fechaTentativaDelEvento || event.fechaDelEvento || 'Fecha no disponible'}</span>
-                  </div>
-                  <h4 className="text-white font-semibold">
-                    {event.nombreDelEvento || event.title}
-                  </h4>
-                </div>
-              </div>
+      {pillar.id !== 'marketing' && (
+        <>
+          {/* Toggle */}
+          <div className="flex justify-center mb-6">
+            <div className="inline-flex border-2 border-purple-600 rounded-full overflow-hidden">
+              <button
+                onClick={() => setShowUpcoming(true)}
+                className={`px-4 py-1 font-semibold transition ${showUpcoming ? 'bg-purple-600 text-white' : 'bg-transparent text-purple-200'}`}
+              >
+                Eventos Próximos
+              </button>
+              <button
+                onClick={() => setShowUpcoming(false)}
+                className={`px-4 py-1 font-semibold transition ${!showUpcoming ? 'bg-purple-600 text-white' : 'bg-transparent text-purple-200'}`}
+              >
+                Eventos Pasados
+              </button>
             </div>
-          ))
-        ) : (
-          <p className="text-purple-100 text-center col-span-full">
-            No hay eventos para mostrar. ¡Mantente pendiente a nuestras publicaciones!
-          </p>
-        )}
-      </div>
-      {/* Paginación */}
-      {!showUpcoming && totalPages > 1 && (
-        <div className="flex justify-center mt-4 space-x-2">
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            className={`px-3 py-1 rounded ${currentPage === 1 ? 'bg-purple-800/30 text-purple-400 cursor-not-allowed' : 'bg-purple-700 text-white hover:bg-purple-600'}`}
-            disabled={currentPage === 1}
-          >
-            Anterior
-          </button>
+          </div>
 
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
-            <button
-              key={num}
-              onClick={() => setCurrentPage(num)}
-              className={`px-3 py-1 rounded ${num === currentPage ? 'bg-pink-600 text-white' : 'bg-purple-800/30 text-purple-300 hover:bg-purple-700'}`}
-            >
-              {num}
-            </button>
-          ))}
+          {/* Cuenta regresiva */}
+          {showUpcoming && filteredUpcoming.length > 0 && (
+            <div className="text-center mb-10">
+              <h3 className="text-xl text-white mb-1">Próximo evento destacado:</h3>
+              <p className="text-2xl text-pink-400 font-bold mb-3">
+                {filteredUpcoming[0].nombreDelEvento}
+              </p>
+              <CountdownTimer fechaStr={filteredUpcoming[0].fechaTentativaDelEvento} grande />
+            </div>
+          )}
 
-          <button
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-            className={`px-3 py-1 rounded ${currentPage === totalPages ? 'bg-purple-800/30 text-purple-400 cursor-not-allowed' : 'bg-purple-700 text-white hover:bg-purple-600'}`}
-            disabled={currentPage === totalPages}
-          >
-            Siguiente
-          </button>
-        </div>
+          {/* Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            {eventsToShow.length > 0 ? (
+              eventsToShow.map((event, index) => (
+                <div
+                  key={index}
+                  className="bg-purple-900/30 backdrop-blur-sm rounded-lg overflow-hidden transition-transform duration-300 hover:transform hover:scale-[1.02] cursor-pointer"
+                  onClick={() => handleOpenModal({ ...event })}
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={event.imagenUrl}
+                      alt={event.nombreDelEvento || event.title}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    />
+                    <div className="absolute top-4 right-4">
+                      <span className="bg-purple-800/50 text-purple-200 text-xs px-3 py-1 rounded-full">
+                       {pillar.name}
+                      </span>
+                    </div>
+                    {showUpcoming && event.fechaTentativaDelEvento && (
+                      <div className="absolute top-4 left-4">
+                        <CountdownTimer fechaStr={event.fechaTentativaDelEvento} />
+                      </div>
+                    )}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-purple-900/90 to-transparent p-4">
+                      <div className="flex items-center text-purple-300 text-sm mb-2">
+                        <Calendar size={16} className="mr-2" />
+                        <span>{event.fechaTentativaDelEvento || event.fechaDelEvento || 'Fecha no disponible'}</span>
+                      </div>
+                      <h4 className="text-white font-semibold">
+                        {event.nombreDelEvento || event.title}
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-purple-100 text-center col-span-full">
+                No hay eventos para mostrar. ¡Mantente pendiente a nuestras publicaciones!
+              </p>
+            )}
+          </div>
+          {/* Paginación */}
+          {!showUpcoming && totalPages > 1 && (
+            <div className="flex justify-center mt-4 space-x-2">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                className={`px-3 py-1 rounded ${currentPage === 1 ? 'bg-purple-800/30 text-purple-400 cursor-not-allowed' : 'bg-purple-700 text-white hover:bg-purple-600'}`}
+                disabled={currentPage === 1}
+              >
+                Anterior
+              </button>
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
+                <button
+                  key={num}
+                  onClick={() => setCurrentPage(num)}
+                  className={`px-3 py-1 rounded ${num === currentPage ? 'bg-pink-600 text-white' : 'bg-purple-800/30 text-purple-300 hover:bg-purple-700'}`}
+                >
+                  {num}
+                </button>
+              ))}
+
+              <button
+                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                className={`px-3 py-1 rounded ${currentPage === totalPages ? 'bg-purple-800/30 text-purple-400 cursor-not-allowed' : 'bg-purple-700 text-white hover:bg-purple-600'}`}
+                disabled={currentPage === totalPages}
+              >
+                Siguiente
+              </button>
+            </div>
+          )}
+        </>
       )}
 
       {/* Modal */}
