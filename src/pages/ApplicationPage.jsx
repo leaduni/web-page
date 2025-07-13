@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
-import FormCard from '../components/application/FormCard';
-import FormField from '../components/application/FormField';
-import TextInput from '../components/application/TextInput';
-import SelectInput from '../components/application/SelectInput';
-import Checkbox from '../components/application/Checkbox';
-import PillarOption from '../components/application/PillarOption';
+import FormCard from '../components/FormCard';
+import FormField from '../components/FormField';
+import TextInput from '../components/TextInput';
+import SelectInput from '../components/SelectInput';
+import PillarOption from '../components/PillarOption';
+import ContactSection from '../components/ContactSection';
 import { GraduationCap, Users, BookOpen, Heart, Building2, Megaphone } from 'lucide-react';
 
 const facultyOptions = [
@@ -107,6 +107,67 @@ const ApplicationPage = () => {
     skills: '',
   });
   const [leadUniDefinition, setLeadUniDefinition] = useState('');
+  const [randomSpheres, setRandomSpheres] = useState([]);
+
+  // Colores disponibles para las esferas
+  const sphereColors = [
+    { from: '#d93340', to: '#a6249d' },
+    { from: '#a6249d', to: '#7957f1' },
+    { from: '#7957f1', to: '#d93340' },
+    { from: '#d93340', to: '#7957f1' },
+    { from: '#a6249d', to: '#d93340' },
+    { from: '#7957f1', to: '#a6249d' },
+  ];
+
+  // Función para generar posición aleatoria
+  const getRandomPosition = () => {
+    // Generar posiciones completamente aleatorias
+    const top = Math.random() * 80 + 10; // Entre 10% y 90%
+    const left = Math.random() * 80 + 10; // Entre 10% y 90%
+    
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+    };
+  };
+
+  // Función para generar tamaño aleatorio
+  const getRandomSize = () => {
+    const sizes = ['w-8 h-8', 'w-10 h-10', 'w-12 h-12', 'w-16 h-16', 'w-20 h-20'];
+    return sizes[Math.floor(Math.random() * sizes.length)];
+  };
+
+  // Función para generar esfera aleatoria
+  const generateRandomSphere = () => {
+    const position = getRandomPosition();
+    const size = getRandomSize();
+    const color = sphereColors[Math.floor(Math.random() * sphereColors.length)];
+    const id = Date.now() + Math.random();
+
+    return {
+      id,
+      position,
+      size,
+      color,
+      opacity: Math.random() * 0.4 + 0.3, // Opacidad entre 0.3 y 0.7
+    };
+  };
+
+  // Efecto para manejar las esferas aleatorias
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Generar nueva esfera
+      const newSphere = generateRandomSphere();
+      setRandomSpheres(prev => [...prev, newSphere]);
+
+      // Remover la esfera después de 6 segundos
+      setTimeout(() => {
+        setRandomSpheres(prev => prev.filter(sphere => sphere.id !== newSphere.id));
+      }, 6000);
+    }, 10000); // Cada 10 segundos
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({
@@ -120,6 +181,26 @@ const ApplicationPage = () => {
       ...prev,
       [field]: value,
     }));
+  };
+
+  const scrollToForm = () => {
+    const formSection = document.getElementById('application-form');
+    if (formSection) {
+      formSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
+  const scrollToInfo = () => {
+    const infoSection = document.getElementById('info-section');
+    if (infoSection) {
+      infoSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   };
 
   const handleSubmitForm = () => {
@@ -162,27 +243,34 @@ const ApplicationPage = () => {
     <div
       className="min-h-screen relative overflow-hidden"
       style={{
-        background: 'radial-gradient(ellipse at 60% 40%, #030c40 0%, #7957f1 60%, #a6249d 100%)',
+        background: 'linear-gradient(to bottom right, #09092a 0%, #36042f 100%)',
       }}
     >
-      {/* Esferas decorativas flotantes */}
-      <div className="absolute top-1/4 left-2/3 w-24 h-24 rounded-full bg-gradient-to-br from-[#d93340] to-[#a6249d] opacity-70 blur-2xl z-0" />
-      <div className="absolute top-1/2 left-3/4 w-12 h-12 rounded-full bg-gradient-to-br from-[#bf2a51] to-[#7957f1] opacity-80 blur z-0" />
-      <div className="absolute top-1/3 left-1/4 w-16 h-16 rounded-full bg-gradient-to-br from-[#a6249d] to-[#d93340] opacity-60 blur z-0" />
-      <div className="absolute bottom-10 left-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-[#7957f1] to-[#bf2a51] opacity-80 blur z-0" />
-      <div className="absolute bottom-1/4 right-1/4 w-20 h-20 rounded-full bg-gradient-to-br from-[#d93340] to-[#030c40] opacity-60 blur z-0" />
+      {/* Esferas decorativas aleatorias */}
+      {/* 'radial-gradient(ellipse at 60% 40%, #030c40 0%, #7957f1 60%, #a6249d 100%)' */}
+      {randomSpheres.map(sphere => (
+        <div
+          key={sphere.id}
+          className={`absolute ${sphere.size} rounded-full bg-gradient-to-br blur-2xl z-0 transition-all duration-1000 ease-in-out`}
+          style={{
+            top: sphere.position.top,
+            left: sphere.position.left,
+            background: `linear-gradient(to bottom right, ${sphere.color.from}, ${sphere.color.to})`,
+            opacity: sphere.opacity,
+          }}
+        />
+      ))}
 
-      {/* Sección de bienvenida con fondo negro translúcido y esferas animadas */}
+      {/* Sección de bienvenida con fondo negro y esferas animadas */}
       <section
-        className="w-full flex flex-col items-center justify-center min-h-[calc(100vh-64px)] pt-10 pb-6 z-20 relative overflow-hidden"
-        style={{ minHeight: 'calc(100vh - 64px)' }}
+        className="w-full flex flex-col items-center justify-center min-h-screen pt-10 pb-6 z-20 relative overflow-hidden"
       >
-        {/* Fondo negro translúcido */}
+        {/* Fondo negro */}
 
         <div className="absolute top-0 left-0 w-full h-full z-0">
           <div
             className="w-full h-full"
-            style={{ background: 'rgba(3,12,64,0.92)', minHeight: '100%', borderRadius: 0 }}
+            style={{ background: 'rgb(9,9,42)', minHeight: '100%', borderRadius: 0 }}
           ></div>
         </div>
 
@@ -204,10 +292,10 @@ const ApplicationPage = () => {
           alt="Logo LEAD UNI"
           className="w-1/3 max-w-xs object-contain shadow-xl mb-4 bg-transparent relative z-10"
         />
-        <div className="relative z-10 flex flex-col items-center w-full max-w-2xl px-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-2 text-center drop-shadow-lg">
+        <div className="relative z-10 flex flex-col items-center w-full max-w-2xl px-4 py-10">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-2 text-center drop-shadow-lg py-5">
             Centro Estudiantil{' '}
-            <span className="bg-gradient-to-r from-[#d93340] via-[#a6249d] to-[#7957f1] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#d93340] to-[#a6249d] bg-clip-text text-transparent">
               LEAD UNI
             </span>
           </h1>
@@ -216,33 +304,33 @@ const ApplicationPage = () => {
             profesional e impacto social.
           </p>
           <div className="flex flex-wrap gap-4 justify-center mt-4">
-            <button className="bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white px-8 py-2 rounded-full shadow-lg font-bold hover:scale-105 transition">
+            <button className="bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white px-8 py-2 rounded-full shadow-lg font-bold hover:scale-105 transition" onClick={scrollToForm}>
               Únete
             </button>
-            <button className="border-2 border-[#7957f1] text-white px-8 py-2 rounded-full shadow-lg font-bold hover:scale-105 transition bg-[#030c40]/80">
+            <button className="border-2 border-[#a6249d] text-white px-8 py-2 rounded-full shadow-lg font-bold hover:scale-105 transition bg-[#030c40]/80" onClick={scrollToInfo}>
               Descubre
             </button>
           </div>
         </div>
       </section>
 
-      {/* Sección informativa con fondo negro translúcido */}
-      <section className="w-full flex flex-col items-center justify-center py-8 px-4 z-20 relative">
+      {/* Sección informativa con fondo negro */}
+      <section id="info-section" className="w-full flex flex-col items-center justify-center min-h-screen py-8 px-4 z-20 relative">
         <div className="absolute top-0 left-0 w-full h-full z-0">
           <div
             className="w-full h-full"
-            style={{ background: 'rgba(3,12,64,0.92)', minHeight: '100%', borderRadius: 0 }}
+            style={{ background: 'rgb(9,9,42)', minHeight: '100%', borderRadius: 0 }}
           ></div>
         </div>
-        <div className="max-w-3xl w-full bg-[#030c40]/80 rounded-2xl shadow-xl p-6 mb-8 border border-[#7957f1]/40 relative z-10">
+        <div className="max-w-3xl w-full bg-[#19092a]/80 rounded-2xl shadow-xl p-6 mb-8 border border-[#a6249d]/40 relative z-10">
           <h2 className="text-2xl font-bold text-[#d93340] mb-2 text-center">
             ¿Por qué unirte a{' '}
-            <span className="bg-gradient-to-r from-[#d93340] via-[#a6249d] to-[#7957f1] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#d93340] to-[#a6249d] bg-clip-text text-transparent">
               LEAD UNI
             </span>
             ?
           </h2>
-          <ul className="list-disc list-inside text-[#f3eafd] text-lg space-y-2 mb-6">
+          <ul className="list-disc list-inside text-[#f3eafd] text-lg space-y-2 mb-6 py-4">
             <li>Desarrolla habilidades de liderazgo y trabajo en equipo.</li>
             <li>Participa en proyectos de impacto social y académico.</li>
             <li>Accede a talleres, charlas y mentorías exclusivas.</li>
@@ -250,7 +338,7 @@ const ApplicationPage = () => {
             <li>¡Y mucho más!</li>
           </ul>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
-            <div className="bg-gradient-to-br from-[#d93340]/30 to-[#7957f1]/20 rounded-xl p-6 shadow-lg flex flex-col items-center">
+            <div className="bg-gradient-to-br from-[#d93340]/30 to-[#19092a]/20 rounded-xl p-6 shadow-lg flex flex-col items-center">
               <svg width="48" height="48" fill="none" viewBox="0 0 24 24" className="mb-2">
                 <circle cx="12" cy="12" r="10" fill="#ff6ec7" opacity="0.2" />
                 <path
@@ -261,19 +349,19 @@ const ApplicationPage = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <h3 className="text-xl font-semibold text-[#7957f1] mb-1">Cronograma</h3>
+              <h3 className="text-xl font-semibold text-[#d93340] mb-1">Cronograma</h3>
               <ul className="text-[#f3eafd] text-base list-disc list-inside">
                 <li>Postulación: hasta 31 de agosto</li>
                 <li>Entrevistas: 2-6 de septiembre</li>
                 <li>Resultados: 10 de septiembre</li>
               </ul>
             </div>
-            <div className="bg-gradient-to-br from-[#a6249d]/30 to-[#bf2a51]/20 rounded-xl p-6 shadow-lg flex flex-col items-center">
+            <div className="bg-gradient-to-br from-[#19092a]/30 to-[#bf2a51]/20 rounded-xl p-6 shadow-lg flex flex-col items-center">
               <svg width="48" height="48" fill="none" viewBox="0 0 24 24" className="mb-2">
-                <rect x="4" y="4" width="16" height="16" rx="8" fill="#7873f5" opacity="0.2" />
+                <rect x="3" y="4" width="16" height="16" rx="10" fill="#ff6ec7" opacity="0.2" />
                 <path
                   d="M8 12l2 2 4-4"
-                  stroke="#7873f5"
+                  stroke="#ff6ec7"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -292,51 +380,18 @@ const ApplicationPage = () => {
 
       {/* Imagen decorativa de la derecha, ahora en el fondo (z-0) */}
       <div className="hidden lg:flex fixed right-0 top-0 h-full w-1/2 items-center justify-center z-0 pointer-events-none">
-        <div className="w-[90%] h-[80%] flex items-center justify-center relative">
-          <div
-            className="overflow-visible shadow-2xl relative"
-            style={{
-              width: '100%',
-              height: '100%',
-              clipPath:
-                'polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)',
-              boxShadow: '0 12px 48px 0 rgba(0,0,0,0.25)',
-              border: '6px solid rgba(255,255,255,0.18)',
-              zIndex: 0,
-              background: 'transparent',
-            }}
-          >
-            <img
-              src="https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              alt="Students in STEM"
-              className="w-full h-full object-cover"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                WebkitMaskImage: 'radial-gradient(circle at 50% 50%, white 60%, transparent 100%)',
-                maskImage: 'radial-gradient(circle at 50% 50%, white 60%, transparent 100%)',
-                filter: 'blur(0.5px)',
-              }}
-            />
-            {/* Capa de desenfoque progresivo */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                pointerEvents: 'none',
-                WebkitMaskImage: 'radial-gradient(circle at 50% 50%, transparent 60%, black 100%)',
-                maskImage: 'radial-gradient(circle at 50% 50%, transparent 60%, black 100%)',
-                backdropFilter: 'blur(16px)',
-                zIndex: 1,
-              }}
-            />
-          </div>
+        <div className="w-full h-full flex items-center justify-center relative">
+          <img
+            src="/student_stem.png"
+            alt="Students in STEM"
+            className="object-contain mx-auto"
+            style={{ display: 'block' }}
+          />
         </div>
       </div>
 
       {/* Sección de formulario y cuadros para rellenar datos */}
-      <section className="w-full flex flex-col items-center justify-center py-8 px-4 z-20 relative">
+      <section id="application-form" className="w-full flex flex-col items-center justify-center min-h-screen py-8 px-4 z-20 relative">
         <div className="container mx-auto px-4 py-8 flex flex-col lg:flex-row">
           <div className="lg:w-1/2">
             <FormCard
@@ -392,7 +447,7 @@ const ApplicationPage = () => {
               </FormField>
             </FormCard>
             <div className="text-center mb-8">
-              <h3 className="text-lg font-medium mb-4 text-[#a6249d]">Seleccione el Pilar</h3>
+              <h3 className="text-lg font-medium mb-4 text-[#ec46e1]">Seleccione el Pilar</h3>
               <div className="flex flex-wrap justify-center gap-4">
                 {pillarOptions.map(pillar => (
                   <PillarOption
@@ -408,7 +463,9 @@ const ApplicationPage = () => {
             {selectedPillar && (
               <FormCard title={`INFORMACIÓN SOBRE EL PILAR`}>
                 <div className="text-white">
-                  <h3 className="text-xl font-bold mb-2 text-[#bf2a51]">
+                  <h3
+                    className="text-xl font-bold mb-2 bg-gradient-to-r from-[#bf2a51] to-[#a6249d] bg-clip-text text-transparent"
+                  >
                     {pillarContent[selectedPillar].title}
                   </h3>
                   <p className="text-[#f3eafd]">{pillarContent[selectedPillar].description}</p>
@@ -463,88 +520,6 @@ const ApplicationPage = () => {
           </div>
         </div>
       </section>
-
-      {/* Contact Section */}
-      <footer className="w-full mt-16 flex flex-col items-center justify-center py-10 bg-[#030c40]/80 backdrop-blur-md border-t border-[#7957f1]/40 z-20 relative">
-        <h2 className="text-2xl font-bold mb-4 text-[#d93340]">Contáctanos</h2>
-        <div className="flex flex-wrap gap-6 items-center justify-center mb-4">
-          <a
-            href="https://instagram.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:scale-110 transition-transform"
-            title="Instagram"
-          >
-            <svg width="32" height="32" fill="none" viewBox="0 0 24 24">
-              <rect width="24" height="24" rx="7" fill="#E1306C" />
-              <path
-                d="M16.98 2H7.02A5.02 5.02 0 0 0 2 7.02v9.96A5.02 5.02 0 0 0 7.02 22h9.96A5.02 5.02 0 0 0 22 16.98V7.02A5.02 5.02 0 0 0 16.98 2ZM12 17.2A5.2 5.2 0 1 1 17.2 12 5.2 5.2 0 0 1 12 17.2Zm6.4-9.44a1.2 1.2 0 1 1-1.2-1.2 1.2 1.2 0 0 1 1.2 1.2Z"
-                fill="#fff"
-              />
-              <circle cx="12" cy="12" r="3.2" fill="#fff" />
-            </svg>
-          </a>
-          <a
-            href="https://facebook.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:scale-110 transition-transform"
-            title="Facebook"
-          >
-            <svg width="32" height="32" fill="none" viewBox="0 0 24 24">
-              <rect width="24" height="24" rx="7" fill="#1877F3" />
-              <path
-                d="M15.67 8.5h-1.34V7.5c0-.32.26-.58.58-.58h.76V5.08A10.1 10.1 0 0 0 14.1 5c-1.2 0-2.02.73-2.02 2.07v1.43H10v2h2.08v5.42h2.25V10.5h1.51l.24-2Z"
-                fill="#fff"
-              />
-            </svg>
-          </a>
-          <a
-            href="https://linkedin.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:scale-110 transition-transform"
-            title="LinkedIn"
-          >
-            <svg width="32" height="32" fill="none" viewBox="0 0 24 24">
-              <rect width="24" height="24" rx="7" fill="#0A66C2" />
-              <path
-                d="M8.34 17.34H5.67V9.67h2.67v7.67ZM7 8.67A1.33 1.33 0 1 1 7 6a1.33 1.33 0 0 1 0 2.67Zm10.34 8.67h-2.67v-3.67c0-.88-.32-1.48-1.12-1.48-.61 0-.97.41-1.13.8-.06.15-.08.36-.08.57v3.78h-2.67s.04-6.13 0-7.67h2.67v1.09c.35-.54.98-1.31 2.39-1.31 1.75 0 3.06 1.14 3.06 3.59v4.3Z"
-                fill="#fff"
-              />
-            </svg>
-          </a>
-          <a
-            href="mailto:contacto@leaduni.com"
-            className="hover:scale-110 transition-transform"
-            title="Correo"
-          >
-            <svg width="32" height="32" fill="none" viewBox="0 0 24 24">
-              <rect width="24" height="24" rx="7" fill="#EA4335" />
-              <path
-                d="M19.5 7.5v9a1.5 1.5 0 0 1-1.5 1.5h-12A1.5 1.5 0 0 1 4.5 16.5v-9A1.5 1.5 0 0 1 6 6h12a1.5 1.5 0 0 1 1.5 1.5Zm-1.5 0-6 4.5-6-4.5m12 9h-12v-7.5l6 4.5 6-4.5V16.5Z"
-                fill="#fff"
-              />
-            </svg>
-          </a>
-          <a
-            href="tel:+51999999999"
-            className="hover:scale-110 transition-transform"
-            title="Teléfono"
-          >
-            <svg width="32" height="32" fill="none" viewBox="0 0 24 24">
-              <rect width="24" height="24" rx="7" fill="#34A853" />
-              <path
-                d="M17.7 15.29l-2.2-1a1 1 0 0 0-1.13.21l-.97.99a7.49 7.49 0 0 1-3.54-3.54l.99-.97a1 1 0 0 0 .21-1.13l-1-2.2A1 1 0 0 0 8.1 7H6.5A1.5 1.5 0 0 0 5 8.5c0 6.08 4.92 11 11 11a1.5 1.5 0 0 0 1.5-1.5v-1.6a1 1 0 0 0-.8-.98Z"
-                fill="#fff"
-              />
-            </svg>
-          </a>
-        </div>
-        <div className="text-[#f3eafd] text-sm">
-          &copy; {new Date().getFullYear()} LEAD | UNI. Todos los derechos reservados.
-        </div>
-      </footer>
     </div>
   );
 };
