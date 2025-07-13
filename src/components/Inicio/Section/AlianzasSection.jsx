@@ -21,25 +21,9 @@ const alianzasDeRespaldo = [
 ];
 
 export const AlianzasSection = () => {
-  const [alianzas, setAlianzas] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchAlianzas = async () => {
-      try {
-        const response = await fetch('https://sheetdb.io/api/v1/4qkiwzonp20d9');
-        const data = await response.json();
-        setAlianzas(Array.isArray(data) ? data : alianzasDeRespaldo);
-      } catch (err) {
-        setError('Error al cargar alianzas');
-        setAlianzas(alianzasDeRespaldo); // Usar respaldo si falla el API
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchAlianzas();
-  }, []);
+  const alianzas = alianzasDeRespaldo;
+  const loading = false;
+  const error = null;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -85,7 +69,7 @@ export const AlianzasSection = () => {
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto"
         >
-          {Array.isArray(alianzas) && alianzas.map((alianza, idx) => {
+          {alianzas.map((alianza, idx) => {
             // Convertir logo de Google Drive a enlace directo si es necesario
             let logoUrl = alianza["Logo de la organización"];
             if (logoUrl && logoUrl.includes('drive.google.com/open?id=')) {
@@ -102,16 +86,12 @@ export const AlianzasSection = () => {
                 {/* Overlay objetivo al hacer hover sobre toda la carta */}
                 {alianza["Objetivo de la alianza"] && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 p-6 rounded-3xl">
-                    <span className="text-white text-center text-base font-medium">
-                      {alianza["Objetivo de la alianza"]}
-                    </span>
+                    <span className="text-white text-center text-base font-medium">{alianza["Objetivo de la alianza"]}</span>
                   </div>
                 )}
-
                 <div className="absolute -inset-px bg-gradient-to-br from-[#B936F5] to-[#FF1CF7] opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-3xl z-10"></div>
-
                 <div className="flex flex-col items-center w-full z-10 flex-1 justify-center">
-                  {/* Logo */}
+                  {/* Logo rectangular más grande y perfectamente centrado */}
                   <div className="w-36 h-36 flex items-center justify-center mb-4 mx-auto">
                     {logoUrl ? (
                       <img
@@ -125,8 +105,7 @@ export const AlianzasSection = () => {
                       </div>
                     )}
                   </div>
-
-                  {/* Nombre */}
+                  {/* Nombre debajo del logo */}
                   <span className="text-base bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] bg-clip-text text-transparent font-semibold text-center block w-full mb-2">
                     {alianza["Nombre de la organización"]}
                   </span>
@@ -139,6 +118,7 @@ export const AlianzasSection = () => {
     </section>
   );
 };
+
 
 
 

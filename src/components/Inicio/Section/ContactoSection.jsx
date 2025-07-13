@@ -4,7 +4,10 @@ import { handleSubmit } from '../../../services/contactService';
 
 export const ContactoSection = () => {
   return (
-    <section className="relative min-h-screen bg-transparent py-12 sm:py-16 lg:py-24 overflow-hidden">
+    <section
+      id="contacto"
+      className="relative min-h-screen bg-transparent py-12 sm:py-16 lg:py-24 overflow-hidden"
+    >
       {/* Background Effects */}
       <div className="absolute inset-0 bg-transparent"></div>
 
@@ -76,18 +79,10 @@ export const ContactoSection = () => {
                   name="asunto"
                   className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[#B936F5] transition-colors text-sm"
                 >
-                  <option value="" className="bg-[#1A0B2E]">
-                    Selecciona un asunto
-                  </option>
-                  <option value="general" className="bg-[#1A0B2E]">
-                    Consulta General
-                  </option>
-                  <option value="unirse" className="bg-[#1A0B2E]">
-                    Unirse al Equipo
-                  </option>
-                  <option value="colaboracion" className="bg-[#1A0B2E]">
-                    Propuesta de Colaboración
-                  </option>
+                  <option value="" className="bg-[#1A0B2E]">Selecciona un asunto</option>
+                  <option value="general" className="bg-[#1A0B2E]">Consulta General</option>
+                  <option value="unirse" className="bg-[#1A0B2E]">Unirse al Equipo</option>
+                  <option value="colaboracion" className="bg-[#1A0B2E]">Propuesta de Colaboración</option>
                 </select>
               </div>
 
