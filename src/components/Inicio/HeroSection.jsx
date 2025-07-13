@@ -52,11 +52,11 @@ export const HeroSection = () => {
   return (
     <>
       <section
-        className="relative w-full min-h-screen bg-gradient-to-b from-black via-[#1A0B2E] via-50% to-black to-90% overflow-hidden"
+        className="relative w-full min-h-screen bg-transparent overflow-hidden"
         style={{ minHeight: `calc(100vh - ${HEADER_HEIGHT}px)` }}
       >
         {/* Background gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-transparent"></div>
 
         {/* Main content container */}
         <div className="container mx-auto min-h-screen flex items-center px-4 lg:px-8">
@@ -134,13 +134,9 @@ export const HeroSection = () => {
       </section>
 
       {/* Quienes Somos Section */}
-      <section className="relative w-full min-h-[80vh] bg-[#1A0B2E] overflow-hidden flex items-center py-8 lg:py-16">
+      <section className="relative w-full min-h-[80vh] bg-transparent overflow-hidden flex items-center py-8 lg:py-16">
         {/* Background gradient overlay */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-black via-[#1A0B2E] via-50% to-black to-90%"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#B936F5]/10 via-[#FF1CF7]/5 to-transparent"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-[#00F0FF]/5 via-purple-950/10 to-transparent"></div>
-        </div>
+        <div className="absolute inset-0 bg-transparent"></div>
 
         {/* Content Container */}
         <div className="relative w-full">
@@ -204,7 +200,7 @@ export const HeroSection = () => {
         </div>
       </section>
 
-      <div className="bg-gradient-to-b from-black via-[#1A0B2E] to-black">
+      <div className="bg-transparent">
         <PilaresSection />
         <AlianzasSection />
         <ActividadSection />
@@ -213,3 +209,4 @@ export const HeroSection = () => {
     </>
   );
 };
+

@@ -4,12 +4,9 @@ import { handleSubmit } from '../../../services/contactService';
 
 export const ContactoSection = () => {
   return (
-    <section className="relative min-h-screen bg-[#1A0B2E] py-12 sm:py-16 lg:py-24 overflow-hidden">
+    <section className="relative min-h-screen bg-transparent py-12 sm:py-16 lg:py-24 overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#B936F5]/10 via-transparent to-transparent"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-[#00F0FF]/5 via-transparent to-transparent"></div>
-      </div>
+      <div className="absolute inset-0 bg-transparent"></div>
 
       <div className="relative container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center max-w-6xl mx-auto">

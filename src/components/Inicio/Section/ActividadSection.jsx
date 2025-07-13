@@ -66,12 +66,9 @@ export const ActividadSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-[#1A0B2E] py-12 sm:py-16 lg:py-24 overflow-hidden">
+    <section className="relative min-h-screen bg-transparent py-12 sm:py-16 lg:py-24 overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#B936F5]/10 via-transparent to-transparent"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-[#00F0FF]/5 via-transparent to-transparent"></div>
-      </div>
+      <div className="absolute inset-0 bg-transparent"></div>
 
       {/* Content Container */}
       <div className="relative container mx-auto px-4">
@@ -123,7 +120,9 @@ export const ActividadSection = () => {
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <span
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${getBadgeColor(actividad.tipo)}`}
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${getBadgeColor(
+                      actividad.tipo
+                    )}`}
                   >
                     {actividad.tipo}
                   </span>
@@ -147,3 +146,5 @@ export const ActividadSection = () => {
     </section>
   );
 };
+
+

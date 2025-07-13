@@ -33,7 +33,7 @@ export const AlianzasSection = () => {
         setAlianzas(data || alianzasDeRespaldo);
       } catch (err) {
         setError('Error al cargar alianzas');
-        setAlianzas(alianzasDeRespaldo); // 💡 Usar respaldo si falla el API
+        setAlianzas(alianzasDeRespaldo); // Usar respaldo si falla el API
       } finally {
         setLoading(false);
       }
@@ -55,12 +55,9 @@ export const AlianzasSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-[#1A0B2E] py-24 overflow-hidden">
+    <section className="relative min-h-screen bg-transparent py-24 overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#B936F5]/10 via-transparent to-transparent"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-[#00F0FF]/5 via-transparent to-transparent"></div>
-      </div>
+      <div className="absolute inset-0 bg-transparent"></div>
 
       {/* Content Container */}
       <div className="relative container mx-auto px-4">
@@ -105,12 +102,16 @@ export const AlianzasSection = () => {
                 {/* Overlay objetivo al hacer hover sobre toda la carta */}
                 {alianza["Objetivo de la alianza"] && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 p-6 rounded-3xl">
-                    <span className="text-white text-center text-base font-medium">{alianza["Objetivo de la alianza"]}</span>
+                    <span className="text-white text-center text-base font-medium">
+                      {alianza["Objetivo de la alianza"]}
+                    </span>
                   </div>
                 )}
+
                 <div className="absolute -inset-px bg-gradient-to-br from-[#B936F5] to-[#FF1CF7] opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-3xl z-10"></div>
+
                 <div className="flex flex-col items-center w-full z-10 flex-1 justify-center">
-                  {/* Logo rectangular más grande y perfectamente centrado */}
+                  {/* Logo */}
                   <div className="w-36 h-36 flex items-center justify-center mb-4 mx-auto">
                     {logoUrl ? (
                       <img
@@ -124,7 +125,8 @@ export const AlianzasSection = () => {
                       </div>
                     )}
                   </div>
-                  {/* Nombre debajo del logo */}
+
+                  {/* Nombre */}
                   <span className="text-base bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] bg-clip-text text-transparent font-semibold text-center block w-full mb-2">
                     {alianza["Nombre de la organización"]}
                   </span>
@@ -137,3 +139,6 @@ export const AlianzasSection = () => {
     </section>
   );
 };
+
+
+
