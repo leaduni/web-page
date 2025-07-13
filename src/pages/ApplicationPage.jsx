@@ -54,43 +54,51 @@ const cycleOptions = [
 const pillarOptions = [
   {
     id: 'academic',
-    image: <img src="/pillars/ExcelenciaAcademica.png" alt="Ícono de Excelencia Académica" className="w-8 h-8 object-contain" />,
+    image: '/pillars/ExcelenciaAcademica.png',
     name: 'Excelencia Académica',
+    alt: 'Ícono de Excelencia Académica'
   },
   {
     id: 'women',
-    image: <img src="/pillars/ImpulsoFemenino.png" alt="Ícono de Impulso Femenino" className="w-8 h-8 object-contain" />,
+    image: '/pillars/ImpulsoFemenino.png',
     name: 'Impulso Femenino',
+    alt: 'Ícono de Impulso Femenino'
   },
   {
     id: 'academia',
-    image: <img src="/pillars/LeadAcademia.png" alt="Ícono de LEAD Academia" className="w-8 h-8 object-contain" />,
+    image: '/pillars/LeadAcademia.png',
     name: 'LEAD Academia',
+    alt: 'Ícono de LEAD Academia'
   },
   {
     id: 'social',
-    image: <img src="/pillars/ImpactoSocial.png" alt="Ícono de Impacto Social" className="w-8 h-8 object-contain" />,
+    image: '/pillars/ImpactoSocial.png',
     name: 'Impacto Social',
+    alt: 'Ícono de Impacto Social'
   },
   {
     id: 'chapter',
-    image: <img src="/pillars/DesarrolloDelCapitulo.png" alt="Ícono de Desarrollo de Capítulo" className="w-8 h-8 object-contain" />,
+    image: '/pillars/DesarrolloDelCapitulo.png',
     name: 'Desarrollo de Capítulo',
+    alt: 'Ícono de Desarrollo de Capítulo'
   },
   {
     id: 'marketing',
-    image: <img src="/pillars/Marketing.png" alt="Ícono de Marketing" className="w-8 h-8 object-contain" />,
+    image: '/pillars/Marketing.png',
     name: 'Marketing',
+    alt: 'Ícono de Marketing'
   },
   {
     id: 'leadership',
-    image: <img src="/pillars/Liderazgo.png" alt="Ícono de Liderazgo" className="w-8 h-8 object-contain" />,
+    image: '/pillars/Liderazgo.png',
     name: 'Liderazgo',
+    alt: 'Ícono de Liderazgo'
   },
   {
     id: 'profesional',
-    image: <img src="/pillars/DessarrolloProfesional.png" alt="Ícono de Desarrollo Profesional" className="w-8 h-8 object-contain" />,
+    image: '/pillars/DessarrolloProfesional.png',
     name: 'Desarrollo Profesional',
+    alt: 'Ícono de Desarrollo Profesional'
   },
 ];
 
@@ -577,7 +585,8 @@ const ApplicationPage = () => {
                       >
                         <PillarOption
                           id={pillar.id}
-                          icon={pillar.image}
+                          image={pillar.image}
+                          alt={pillar.alt}
                           selected={isCenter}
                           onClick={() => {}}
                         />
