@@ -7,7 +7,6 @@ import {
   getPublicoTags,
 } from '../services/newsService';
 import { Search, Filter } from 'lucide-react';
-import { Footer } from '../components/footer';
 
 export default function NewsPage() {
   const [news, setNews] = useState([]);
@@ -364,7 +363,6 @@ export default function NewsPage() {
           </div>
         )}
       </div>
-      <Footer />
     </section>
   );
 }

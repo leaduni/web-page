@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
-import FormCard from '../components/FormCard';
-import FormField from '../components/FormField';
-import TextInput from '../components/TextInput';
-import SelectInput from '../components/SelectInput';
-import PillarOption from '../components/PillarOption';
+import FormCard from '../components/application/FormCard';
+import FormField from '../components/application/FormField';
+import TextInput from '../components/application/TextInput';
+import SelectInput from '../components/application/SelectInput';
+import PillarOption from '../components/application/PillarOption';
 import { GraduationCap, Users, BookOpen, Heart, Building2, Megaphone } from 'lucide-react';
+
+const facultyOptions = [
+  { value: 'fim', label: 'Facultad de Ingeniería Mecánica' },
+  { value: 'fiee', label: 'Facultad de Ingeniería Eléctrica y Electrónica' },
+  { value: 'fic', label: 'Facultad de Ingeniería Civil' },
+  { value: 'fiq', label: 'Facultad de Ingeniería Química y Textil' },
+  { value: 'figmm', label: 'Facultad de Ingeniería Geológica, Minera y Metalúrgica' },
+  { value: 'fia', label: 'Facultad de Ingeniería Ambiental' },
+  { value: 'fip', label: 'Facultad de Ingeniería Pesquera' },
+  { value: 'fie', label: 'Facultad de Ingeniería Económica' },
+  { value: 'fiaa', label: 'Facultad de Ingeniería Arquitectura y Artes' },
+];
 
 const careerOptions = [
   { value: 'sistemas', label: 'Ing. de Sistemas' },
@@ -13,6 +25,29 @@ const careerOptions = [
   { value: 'mecatronica', label: 'Ing. Mecatrónica' },
   { value: 'civil', label: 'Ing. Civil' },
   { value: 'ambiental', label: 'Ing. Ambiental' },
+  { value: 'mecanica', label: 'Ing. Mecánica' },
+  { value: 'electrica', label: 'Ing. Eléctrica' },
+  { value: 'electronica', label: 'Ing. Electrónica' },
+  { value: 'quimica', label: 'Ing. Química' },
+  { value: 'textil', label: 'Ing. Textil' },
+  { value: 'minera', label: 'Ing. de Minas' },
+  { value: 'metalurgica', label: 'Ing. Metalúrgica' },
+  { value: 'pesquera', label: 'Ing. Pesquera' },
+  { value: 'economica', label: 'Ing. Económica' },
+  { value: 'arquitectura', label: 'Arquitectura' },
+];
+
+const cycleOptions = [
+  { value: '1', label: '1er Ciclo' },
+  { value: '2', label: '2do Ciclo' },
+  { value: '3', label: '3er Ciclo' },
+  { value: '4', label: '4to Ciclo' },
+  { value: '5', label: '5to Ciclo' },
+  { value: '6', label: '6to Ciclo' },
+  { value: '7', label: '7mo Ciclo' },
+  { value: '8', label: '8vo Ciclo' },
+  { value: '9', label: '9no Ciclo' },
+  { value: '10', label: '10mo Ciclo' },
 ];
 
 const pillarOptions = [
@@ -59,17 +94,159 @@ const ApplicationPage = () => {
   const theme = useTheme();
   const [formData, setFormData] = useState({
     fullName: '',
+    phone: '',
+    email: '',
+    faculty: '',
     career: '',
     cycle: '',
-    acceptedTerms: false,
   });
   const [selectedPillar, setSelectedPillar] = useState(null);
+  const [pillarSpecificData, setPillarSpecificData] = useState({
+    projectType: '',
+    skills: '',
+  });
+  const [leadUniDefinition, setLeadUniDefinition] = useState('');
+  const [randomSpheres, setRandomSpheres] = useState([]);
+
+  // Colores disponibles para las esferas
+  const sphereColors = [
+    { from: '#d93340', to: '#a6249d' },
+    { from: '#a6249d', to: '#7957f1' },
+    { from: '#7957f1', to: '#d93340' },
+    { from: '#d93340', to: '#7957f1' },
+    { from: '#a6249d', to: '#d93340' },
+    { from: '#7957f1', to: '#a6249d' },
+  ];
+
+  // Función para generar posición aleatoria
+  const getRandomPosition = () => {
+    // Generar posiciones completamente aleatorias
+    const top = Math.random() * 80 + 10; // Entre 10% y 90%
+    const left = Math.random() * 80 + 10; // Entre 10% y 90%
+
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+    };
+  };
+
+  // Función para generar tamaño aleatorio
+  const getRandomSize = () => {
+    const sizes = ['w-8 h-8', 'w-10 h-10', 'w-12 h-12', 'w-16 h-16', 'w-20 h-20'];
+    return sizes[Math.floor(Math.random() * sizes.length)];
+  };
+
+  // Función para generar esfera aleatoria
+  const generateRandomSphere = () => {
+    const position = getRandomPosition();
+    const size = getRandomSize();
+    const color = sphereColors[Math.floor(Math.random() * sphereColors.length)];
+    const id = Date.now() + Math.random();
+
+    return {
+      id,
+      position,
+      size,
+      color,
+      opacity: Math.random() * 0.4 + 0.3, // Opacidad entre 0.3 y 0.7
+    };
+  };
+
+  // Efecto para manejar las esferas aleatorias
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Generar nueva esfera
+      const newSphere = generateRandomSphere();
+      setRandomSpheres(prev => [...prev, newSphere]);
+
+      // Remover la esfera después de 6 segundos
+      setTimeout(() => {
+        setRandomSpheres(prev => prev.filter(sphere => sphere.id !== newSphere.id));
+      }, 6000);
+    }, 10000); // Cada 10 segundos
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({
       ...prev,
       [field]: value,
     }));
+  };
+
+  const handlePillarSpecificChange = (field, value) => {
+    setPillarSpecificData(prev => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const scrollToForm = () => {
+    const formSection = document.getElementById('application-form');
+    if (formSection) {
+      formSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
+  const scrollToInfo = () => {
+    const infoSection = document.getElementById('info-section');
+    if (infoSection) {
+      infoSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
+  const handleSubmitForm = () => {
+    // Verificar que todos los campos requeridos estén completos
+    if (
+      !formData.fullName ||
+      !formData.phone ||
+      !formData.email ||
+      !formData.faculty ||
+      !formData.career ||
+      !formData.cycle ||
+      !selectedPillar ||
+      !pillarSpecificData.projectType ||
+      !pillarSpecificData.skills ||
+      !leadUniDefinition
+    ) {
+      alert('Por favor, completa todos los campos requeridos antes de enviar el formulario.');
+      return;
+    }
+
+    // Obtener el nombre del pilar seleccionado
+    const selectedPillarName =
+      pillarOptions.find(pillar => pillar.id === selectedPillar)?.name || '';
+
+    // Construir la URL del formulario de Google con los parámetros
+    const googleFormUrl = new URL(
+      'https://docs.google.com/forms/d/e/1FAIpQLSc1mIy-z6khAdySOylpJIDZVmwZHDznzrjxRbH44jBqDW0dcw/viewform'
+    );
+
+    // Agregar los parámetros de entrada
+    const params = new URLSearchParams({
+      usp: 'pp_url',
+      'entry.2005620554': formData.fullName, // Nombres y Apellidos
+      'entry.1201849899': formData.phone, // Número de celular
+      'entry.1045781291': formData.email, // Dirección de correo electrónico
+      'entry.1065046570': facultyOptions.find(f => f.value === formData.faculty)?.label || '', // Facultad
+      'entry.1166974658': careerOptions.find(c => c.value === formData.career)?.label || '', // Carrera
+      'entry.1403026133': cycleOptions.find(cy => cy.value === formData.cycle)?.label || '', // Ciclo Relativo
+      'entry.21194440': pillarSpecificData.projectType, // ¿Cuál fue tu principal motivo para postular a este Pilar?
+      'entry.5426552': pillarSpecificData.skills, // ¿Qué habilidades te ayudarían a destacar en este pilar?
+      'entry.1624972609': leadUniDefinition, // Para ti, ¿qué es LEAD UNI?
+    });
+
+    googleFormUrl.search = params.toString();
+
+    // Redirigir al formulario de Google
+    window.open(googleFormUrl.toString(), '_blank');
   };
 
   return (
@@ -240,14 +417,36 @@ const ApplicationPage = () => {
       >
         <div className="container mx-auto px-4 py-8 flex flex-col lg:flex-row">
           <div className="lg:w-1/2">
-            <FormCard
-              title="Información General"
-              subtitle="Completamos tu registro en 2 días hábiles."
-            >
-              <FormField label="Nombre Completo">
+            <FormCard title="Información General" subtitle="Cuentamos un poco más sobre ti">
+              <FormField label="Nombres y Apellidos">
                 <TextInput
                   value={formData.fullName}
                   onChange={e => handleInputChange('fullName', e.target.value)}
+                  placeholder="Ingresa tu nombre completo"
+                />
+              </FormField>
+              <FormField label="Número de Celular">
+                <TextInput
+                  type="tel"
+                  value={formData.phone}
+                  onChange={e => handleInputChange('phone', e.target.value)}
+                  placeholder="Ej: 999 999 999"
+                />
+              </FormField>
+              <FormField label="Dirección de Correo Electrónico">
+                <TextInput
+                  type="email"
+                  value={formData.email}
+                  onChange={e => handleInputChange('email', e.target.value)}
+                  placeholder="ejemplo@correo.com"
+                />
+              </FormField>
+              <FormField label="Facultad">
+                <SelectInput
+                  options={facultyOptions}
+                  value={formData.faculty}
+                  onChange={value => handleInputChange('faculty', value)}
+                  placeholder="Selecciona tu facultad"
                 />
               </FormField>
               <FormField label="Carrera">
@@ -255,30 +454,17 @@ const ApplicationPage = () => {
                   options={careerOptions}
                   value={formData.career}
                   onChange={value => handleInputChange('career', value)}
+                  placeholder="Selecciona tu carrera"
                 />
               </FormField>
               <FormField label="Ciclo Relativo">
-                <TextInput
+                <SelectInput
+                  options={cycleOptions}
                   value={formData.cycle}
-                  onChange={e => handleInputChange('cycle', e.target.value)}
+                  onChange={value => handleInputChange('cycle', value)}
+                  placeholder="Selecciona tu ciclo"
                 />
               </FormField>
-              <Checkbox
-                checked={formData.acceptedTerms}
-                onChange={checked => handleInputChange('acceptedTerms', checked)}
-                label={
-                  <>
-                    Acepto los términos y condiciones
-                    <a
-                      href="#"
-                      className="ml-1 underline hover:text-white transition-colors"
-                      style={{ color: theme.colors.primary }}
-                    >
-                      Leer T&Cs
-                    </a>
-                  </>
-                }
-              />
             </FormCard>
             <div className="text-center mb-8">
               <h3 className="text-lg font-medium mb-4 text-[#ec46e1]">Seleccione el Pilar</h3>
@@ -307,21 +493,31 @@ const ApplicationPage = () => {
             {selectedPillar && (
               <FormCard title="INFORMACIÓN ESPECÍFICA PARA POSTULAR AL PILAR">
                 <div className="text-white">
-                  <p className="text-[#a6249d] italic">
-                    Complete la información específica requerida para este pilar.
-                  </p>
-                  <FormField label="Experiencia Previa">
+                  <FormField label="¿Cuál fue tu principal motivo para postular a este Pilar?">
                     <TextInput
-                      value=""
-                      onChange={() => {}}
-                      placeholder="Describe tu experiencia previa en este campo"
+                      value={pillarSpecificData.projectType}
+                      onChange={e => handlePillarSpecificChange('projectType', e.target.value)}
+                      placeholder="Describe tus motivos para postular a este pilar"
                     />
                   </FormField>
-                  <FormField label="Motivación">
+                  <FormField label="¿Qué habilidades te ayudarían a destacar en este pilar?">
                     <TextInput
-                      value=""
-                      onChange={() => {}}
-                      placeholder="¿Por qué te interesa este pilar?"
+                      value={pillarSpecificData.skills}
+                      onChange={e => handlePillarSpecificChange('skills', e.target.value)}
+                      placeholder="Menciona las habilidades que posees o quieres desarrollar"
+                    />
+                  </FormField>
+                </div>
+              </FormCard>
+            )}
+            {selectedPillar && (
+              <FormCard title="REFLEXIÓN FINAL">
+                <div className="text-white">
+                  <FormField label="Para ti, ¿qué es LEAD UNI?">
+                    <TextInput
+                      value={leadUniDefinition}
+                      onChange={e => setLeadUniDefinition(e.target.value)}
+                      placeholder="Comparte tu visión sobre LEAD UNI"
                     />
                   </FormField>
                 </div>
@@ -333,6 +529,7 @@ const ApplicationPage = () => {
                 <button
                   className="bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white px-10 py-3 rounded-full shadow-lg font-bold text-lg hover:scale-105 transition"
                   type="button"
+                  onClick={handleSubmitForm}
                 >
                   Enviar Solicitud
                 </button>

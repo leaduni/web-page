@@ -28,7 +28,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1A0B2E] via-[#2D1B4E] to-[#1A0B2E]">
       <Header />
-      <main 
+      <main
         style={{ paddingTop: `${HEADER_HEIGHT}px` }}
         className="min-h-screen bg-gradient-to-b from-[#1A0B2E] via-[#2D1B4E] via-50% to-[#1A0B2E]"
       >
@@ -43,7 +43,6 @@ function App() {
           {/* La ruta "*" captura todas las rutas que no coinciden con las anteriores */}
           {/* Esto es útil para mostrar una página 404 o Not Found */}
         </Routes>
-        
       </main>
       <ContactSection />
     </div>

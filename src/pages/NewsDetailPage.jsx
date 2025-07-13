@@ -3,7 +3,6 @@ import { Calendar, Clock, User } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getNewsById, getPillarEmoji } from '../services/newsService';
-import { Footer } from '../components/footer';
 
 export default function NewsDetailPage() {
   const { id } = useParams();
@@ -207,7 +206,6 @@ export default function NewsDetailPage() {
           </motion.div>
         )}
       </AnimatePresence>
-      <Footer />
     </section>
   );
 }
