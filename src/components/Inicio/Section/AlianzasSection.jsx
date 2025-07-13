@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 // Alianzas de respaldo si el API falla
@@ -47,12 +47,12 @@ export const AlianzasSection = () => {
       <div className="relative container mx-auto px-4">
         {/* Section Title */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-2">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 px-4">
             <span className="bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] text-transparent bg-clip-text">
               Nuestras Alianzas
             </span>
           </h2>
-          <p className="text-white/80 text-base max-w-2xl mx-auto">
+          <p className="text-white/80 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4">
             Colaboramos con organizaciones y empresas para potenciar el desarrollo de nuestros miembros.
           </p>
         </div>
@@ -70,7 +70,6 @@ export const AlianzasSection = () => {
           className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto"
         >
           {alianzas.map((alianza, idx) => {
-            // Convertir logo de Google Drive a enlace directo si es necesario
             let logoUrl = alianza["Logo de la organización"];
             if (logoUrl && logoUrl.includes('drive.google.com/open?id=')) {
               const fileId = logoUrl.split('id=')[1];
@@ -83,7 +82,6 @@ export const AlianzasSection = () => {
                 variants={itemVariants}
                 className="group relative bg-black/30 backdrop-blur-sm rounded-3xl p-8 border border-purple-900/20 hover:border-purple-600/40 transition-all duration-300 hover:-translate-y-2 flex flex-col items-center min-h-[380px] overflow-hidden justify-center"
               >
-                {/* Overlay objetivo al hacer hover sobre toda la carta */}
                 {alianza["Objetivo de la alianza"] && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 p-6 rounded-3xl">
                     <span className="text-white text-center text-base font-medium">{alianza["Objetivo de la alianza"]}</span>
@@ -91,7 +89,6 @@ export const AlianzasSection = () => {
                 )}
                 <div className="absolute -inset-px bg-gradient-to-br from-[#B936F5] to-[#FF1CF7] opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-3xl z-10"></div>
                 <div className="flex flex-col items-center w-full z-10 flex-1 justify-center">
-                  {/* Logo rectangular más grande y perfectamente centrado */}
                   <div className="w-36 h-36 flex items-center justify-center mb-4 mx-auto">
                     {logoUrl ? (
                       <img
@@ -105,7 +102,6 @@ export const AlianzasSection = () => {
                       </div>
                     )}
                   </div>
-                  {/* Nombre debajo del logo */}
                   <span className="text-base bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] bg-clip-text text-transparent font-semibold text-center block w-full mb-2">
                     {alianza["Nombre de la organización"]}
                   </span>
@@ -118,6 +114,7 @@ export const AlianzasSection = () => {
     </section>
   );
 };
+
 
 
 

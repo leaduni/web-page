@@ -22,7 +22,8 @@ export const ContactoSection = () => {
                 alt="Equipo LEAD UNI en Microsoft"
                 className="w-full h-[300px] sm:h-[400px] lg:h-auto object-cover lg:object-contain rounded-3xl"
               />
-              <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+              {/* Fondo degradado mejorado */}
+              <div className="absolute bottom-0 left-0 right-0 h-40 sm:h-48 lg:h-56 bg-gradient-to-t from-black via-black/60 to-transparent flex flex-col justify-end p-6 lg:p-8 z-10">
                 <h3 className="text-xl lg:text-2xl font-bold text-white mb-2">Nuestro Equipo</h3>
                 <p className="text-white/90 text-sm lg:text-base">
                   Conoce al equipo detrás de LEAD UNI y únete a nuestra comunidad
@@ -114,3 +115,4 @@ export const ContactoSection = () => {
     </section>
   );
 };
+

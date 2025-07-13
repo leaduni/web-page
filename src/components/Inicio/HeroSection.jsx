@@ -49,7 +49,6 @@ export const HeroSection = () => {
     };
   }, []);
 
-  // Scroll handlers
   const handleScrollContacto = () => {
     const el = document.getElementById('contacto');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -63,7 +62,7 @@ export const HeroSection = () => {
   return (
     <>
       <section
-        className="relative w-full min-h-screen bg-transparent overflow-hidden"
+        className="relative w-full min-h-screen bg-gradient-to-b from-[#13001a] via-[#1A0029] to-black overflow-hidden border-b border-purple-800/40"
         style={{ minHeight: `calc(100vh - ${HEADER_HEIGHT}px)` }}
       >
         <div className="absolute inset-0 bg-transparent"></div>
@@ -74,18 +73,15 @@ export const HeroSection = () => {
               <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
                 Centro Estudiantil
               </h1>
-
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 lg:mb-8">
                 <span className="bg-gradient-to-r from-[#FF1CF7] to-[#00F0FF] text-transparent bg-clip-text">
                   LEAD UNI
                 </span>
               </div>
-
               <p className="text-white/90 text-center lg:text-start sm:text-lg lg:text-xl mb-8 lg:mb-12 leading-relaxed px-4 lg:px-0">
                 Formando líderes para transformar el futuro a través de excelencia académica,
                 desarrollo profesional e impacto social.
               </p>
-
               <div className="flex gap-4 lg:gap-6 flex-col justify-center lg:justify-start sm:flex-row w-full sm:w-auto">
                 <div className="relative group cursor-pointer">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] rounded-full opacity-75 group-hover:opacity-100 transition duration-300"></div>
@@ -95,7 +91,7 @@ export const HeroSection = () => {
                     className="relative w-full sm:w-[160px] px-6 py-3 lg:py-4 bg-[#B936F5] hover:bg-[#a020f0] rounded-full leading-none flex items-center justify-center transition-all duration-300 hover:-translate-y-1 active:translate-y-0"
                   >
                     <span className="text-white text-base lg:text-lg font-medium select-none">
-                      Únete
+                      Contáctanos
                     </span>
                   </button>
                 </div>
@@ -122,12 +118,10 @@ export const HeroSection = () => {
                   <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 bg-[#00F0FF] rounded-full" />
                   <div className="absolute top-[40%] left-[10%] w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 bg-[#B936F5] rounded-full" />
                 </div>
-
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32 rounded-full bg-[#B936F5] opacity-50 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite]" />
                   <div className="absolute w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32 rounded-full bg-gradient-to-r from-[#FF1CF7] to-[#00F0FF] animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]" />
                 </div>
-
                 <div className="absolute inset-0">
                   <div className="absolute top-[30%] left-[30%] w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-[#FF1CF7] to-transparent rounded-full animate-[bounce_3s_infinite]" />
                   <div className="absolute bottom-[30%] right-[30%] w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gradient-to-bl from-[#00F0FF] to-transparent rounded-full animate-[bounce_3s_infinite_0.5s]" />
