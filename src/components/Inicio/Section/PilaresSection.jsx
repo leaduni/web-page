@@ -135,13 +135,9 @@ export const PilaresSection = () => {
   };
 
   return (
-    <section id="pilares" className="relative bg-[#1A0B2E] py-8 sm:py-12 lg:py-16 overflow-hidden">
+    <section id="pilares" className="relative bg-transparent py-8 sm:py-12 lg:py-16 overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#B936F5]/20 via-[#B936F5]/5 to-transparent"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-[#00F0FF]/10 via-[#00F0FF]/5 to-transparent"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent,rgba(0,0,0,0.3))]"></div>
-      </div>
+      <div className="absolute inset-0 bg-transparent"></div>
 
       {/* Content Container */}
       <div className="relative container mx-auto px-4">

@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { Calendar } from 'lucide-react';
 
-// 👉 Función para parsear fecha en formato DD/MM/YYYY
+// Función para parsear fecha en formato DD/MM/YYYY
 const parseFechaLatina = (fechaStr) => {
   const [dia, mes, anio] = fechaStr.split('/');
   return new Date(`${anio}-${mes}-${dia}T00:00:00`);
@@ -22,7 +22,7 @@ const EventModal = ({ event, onClose, tipo }) => {
         behavior: 'smooth'
       });
     }
-    console.log("📆 Fecha recibida:", event.fechaTentativaDelEvento || event.fechaDelEvento);
+    console.log("Fecha recibida:", event.fechaTentativaDelEvento || event.fechaDelEvento);
 
 
     if (tipo === 'proximo' && event.fechaTentativaDelEvento) {
@@ -111,7 +111,7 @@ const EventModal = ({ event, onClose, tipo }) => {
 
           {event.porcentajeCiclosSuperiores && (
             <div className={`${metricBoxStyle} from-[#ff69b4] via-[#ff4dbc] to-[#ff85c1]`}>
-              <span className="text-2xl font-extrabold drop-shadow">{event.porcentajeCiclosSuperiores}%</span>
+              <span className="text-2xl font-extrabold drop-shadow">+{event.porcentajeCiclosSuperiores}%</span>
               <span className="text-xs font-medium text-center">Ciclos Superiores</span>
             </div>
           )}

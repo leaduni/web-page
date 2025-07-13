@@ -4,9 +4,9 @@ import { HeroSection } from '../components/Inicio/HeroSection';
 function HomePage() {
   return (
     <div>
-      <main className="min-h-screen w-full bg-black">
-      <HeroSection />
-      {/* <ContactoSection /> */}
+      <main className="min-h-screen w-full bg-[#1A0B2E]">
+        <HeroSection />
+        {/* <ContactoSection /> */}
       </main>
     </div>
   );
