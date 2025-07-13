@@ -84,7 +84,7 @@ const staticFallbackUpcoming = [
     esRespaldo: true
   },
   {
-    nombreDelEvento: 'Litle Einstein🎓',
+    nombreDelEvento: 'Litle Einstein-Visita a colegios🎓',
     fechaTentativaDelEvento: '22/07/2025',
     pilar: 'Impacto Social',
     imagenUrl: 'https://drive.google.com/thumbnail?id=1NIyO9ltwIfVP8jA67i8-WygIBO5RPxfm&sz=w1000',
