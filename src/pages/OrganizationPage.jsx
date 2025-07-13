@@ -34,13 +34,13 @@ const OrganizationPage = () => {
   ];
 
   const pillars = [
-    { title: 'Desarrollo del Capítulo', description: 'Fortalecemos conexiones entre miembros, creando un ambiente inclusivo y colaborativo.' },
-    { title: 'Excelencia Académica', description: 'Promovemos una base académica sólida con mentorías y recursos para el éxito.' },
-    { title: 'Liderazgo', description: 'Empoderamos estudiantes con habilidades, confianza y visión para liderar éticamente.' },
-    { title: 'Desarrollo Profesional', description: 'Desarrollamos habilidades críticas para preparar líderes responsables.' },
-    { title: 'Impacto Comunitario', description: 'Fomentamos el servicio y voluntariado, desarrollando empatía y deber cívico.' },
-    { title: 'Impulso Femenino', description: 'Promovemos el empoderamiento e inclusión, reduciendo disparidades de género.' },
-    { title: 'LEAD Academia', description: 'Creamos eventos para inspirar y educar, construyendo futuros líderes.' },
+    { title: 'Desarrollo del Capítulo', description: 'Fortalecemos conexiones entre miembros, creando un ambiente inclusivo y colaborativo.', image: '/pillars/DesarrolloDelCapitulo.png' },
+    { title: 'Excelencia Académica', description: 'Promovemos una base académica sólida con mentorías y recursos para el éxito.', image: '/pillars/ExcelenciaAcademica.png' },
+    { title: 'Liderazgo', description: 'Empoderamos estudiantes con habilidades, confianza y visión para liderar éticamente.', image: '/pillars/Liderazgo.png' },
+    { title: 'Desarrollo Profesional', description: 'Desarrollamos habilidades críticas para preparar líderes responsables.', image: '/pillars/DesarrolloProfesional.png' },
+    { title: 'Impacto Comunitario', description: 'Fomentamos el servicio y voluntariado, desarrollando empatía y deber cívico.', image: '/pillars/ImpactoSocial.png' },
+    { title: 'Impulso Femenino', description: 'Promovemos el empoderamiento e inclusión, reduciendo disparidades de género.', image: '/pillars/ImpulsoFemenino.png' },
+    { title: 'LEAD Academia', description: 'Creamos eventos para inspirar y educar, construyendo futuros líderes.', image: '/pillars/LeadAcademia.png' },
   ];
 
   const members = {
@@ -470,7 +470,7 @@ const memberDetails = {
         {/* ORGANIGRAMA */}
         <section className="mb-20">
           <div className="container mx-auto">
-            <div className="relative bg-gradient-to-br from-[#1E144C]/50 to-[#090421]/50 rounded-2xl p-12 border border-purple-500/20 backdrop-blur-sm">
+            <div className="relative bg-gradient-to-br from-[#2D1B4E]/30 to-[#1A0B2E]/30 rounded-2xl p-12 border-2 border-purple-500/50 backdrop-blur-sm shadow-lg">
               {/* Líneas conectoras */}
               <div className="absolute inset-0 flex flex-col items-center">
                 <div className="w-px h-20 bg-gradient-to-b from-[#FF1CF7] to-[#00F0FF] mt-32"></div>
@@ -481,7 +481,7 @@ const memberDetails = {
                 {/* Presidencia */}
                 <div className="relative group">
                   <div className="absolute -inset-1 bg-gradient-to-r from-[#FF1CF7] to-[#00F0FF] rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-                  <div className="relative px-12 py-6 bg-[#1A0B2E] rounded-lg ring-1 ring-purple-500/20">
+                  <div className="relative px-12 py-6 bg-[#1A0B2E] rounded-lg border-2 border-purple-500/50 shadow-lg">
                     <h3 className="text-2xl font-bold text-center text-white">Presidencia</h3>
                   </div>
                 </div>
@@ -491,7 +491,7 @@ const memberDetails = {
                   {['Vicepresidencia', 'Jefatura de Personal', 'Tesorería'].map((cargo) => (
                     <div key={cargo} className="relative group">
                       <div className="absolute -inset-1 bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] rounded-lg blur opacity-20 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
-                      <div className="relative px-8 py-4 bg-[#1A0B2E] rounded-lg ring-1 ring-purple-500/20">
+                      <div className="relative px-8 py-4 bg-[#1A0B2E] rounded-lg border-2 border-purple-500/50 shadow-lg">
                         <h3 className="text-xl font-semibold text-center text-white">{cargo}</h3>
                       </div>
                     </div>
@@ -510,12 +510,12 @@ const memberDetails = {
         />
 
         {/* Sección Explorar Pilares */}
-        <div className="my-8 py-8 border-y border-purple-900/20">
+                  <div className="my-8 py-8 border-y-2 border-purple-500/50">
           <div className="text-center">
-            <p className="text-lg text-white/70 mb-6">Descubre más sobre nuestros pilares y su impacto</p>
+            <p className="text-xl md:text-2xl font-semibold text-white/80 mb-7">Descubre más sobre nuestros pilares y su impacto</p>
             <Link 
               to="/pillars" 
-              className="inline-flex items-center px-8 py-3 bg-[#1A0B2E] hover:bg-[#2D1B4E] border border-[#4C1D95] rounded-full font-semibold text-[#8B5CF6] hover:text-[#A78BFA] transition-all duration-300 shadow-lg shadow-purple-900/20"
+              className="inline-flex items-center px-10 py-4 text-lg md:text-xl bg-[#1A0B2E] hover:bg-[#2D1B4E] border-2 border-[#8B5CF6] rounded-full font-bold text-[#8B5CF6] hover:text-[#A78BFA] transition-all duration-300 shadow-lg shadow-purple-900/20"
             >
               Explorar Pilares
             </Link>
@@ -533,7 +533,7 @@ const memberDetails = {
           
           <div
             ref={tabsRef}
-            className="flex overflow-x-auto gap-2 px-12 py-4 rounded-xl border border-purple-900/20 scrollbar-none"
+            className="flex overflow-x-auto gap-2 px-12 py-4 rounded-xl border-2 border-purple-500/50 scrollbar-none shadow-lg"
             style={{ scrollBehavior: 'smooth' }}
           >
             {departments.map((dept, idx) => (

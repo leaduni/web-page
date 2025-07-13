@@ -19,17 +19,17 @@ const PillarCarousel = ({ pillars, selectedPillar, onSelectPillar }) => {
       <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20">
         <button
           onClick={() => rotateCarousel('prev')}
-          className="bg-purple-600/30 hover:bg-purple-600/50 p-3 rounded-full transition-all"
+          className="bg-purple-600/30 hover:bg-purple-600/50 p-6 rounded-full transition-all"
         >
-          ←
+          <span className="text-white text-4xl font-bold">←</span>
         </button>
       </div>
       <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20">
         <button
           onClick={() => rotateCarousel('next')}
-          className="bg-purple-600/30 hover:bg-purple-600/50 p-3 rounded-full transition-all"
+          className="bg-purple-600/30 hover:bg-purple-600/50 p-6 rounded-full transition-all"
         >
-          →
+          <span className="text-white text-4xl font-bold">→</span>
         </button>
       </div>
       <div 
@@ -59,10 +59,12 @@ const PillarCarousel = ({ pillars, selectedPillar, onSelectPillar }) => {
                     : 'bg-purple-900/30 hover:bg-purple-800/50'
                   }`}
               >
-                <div className={`p-4 rounded-full mb-3 text-4xl ${
-                  selectedPillar?.id === pillar.id ? 'bg-pink-700/50' : 'bg-purple-700/30'
-                }`}>
-                  {pillar.emoji}
+                <div className={`p-4 rounded-full mb-3 text-4xl ${selectedPillar?.id === pillar.id ? 'bg-pink-700/50' : 'bg-purple-700/30'}`}>
+                  {pillar.logo ? (
+                    <img src={pillar.logo} alt={pillar.name} className="w-12 h-12 object-contain mx-auto" />
+                  ) : (
+                    pillar.emoji
+                  )}
                 </div>
 
                 <span className="text-lg font-medium text-center">{pillar.name}</span>

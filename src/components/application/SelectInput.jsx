@@ -38,6 +38,7 @@ const SelectInput = ({ options, value, onChange, placeholder = 'Select an option
             <div
               key={option.value}
               className="px-4 py-2 cursor-pointer hover:bg-black/20 transition-colors duration-150"
+              style={{ color: '#fff' }}
               onClick={() => {
                 onChange(option.value);
                 setIsOpen(false);

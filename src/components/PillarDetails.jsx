@@ -91,7 +91,13 @@ const PillarDetails = ({ pillar }) => {
       <div className="flex flex-col md:flex-row gap-8 mb-12">
         <div className="md:w-2/3 text-left">
           <div className="flex items-center mb-4">
-            <div className="p-2 rounded-full bg-pink-700/40 mr-4 text-3xl">{pillar.emoji}</div>
+            <div className="mr-4 text-3xl">
+              {pillar.logo ? (
+                <img src={pillar.logo} alt={pillar.name} className="w-12 h-12 object-contain" />
+              ) : (
+                pillar.emoji
+              )}
+            </div>
             <h2 className="text-2xl font-bold text-purple-300">Pilar {pillar.name}</h2>
           </div>
           <p className="text-white mb-6">{pillar.description}</p>

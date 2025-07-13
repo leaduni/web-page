@@ -5,7 +5,8 @@ import FormField from '../components/application/FormField';
 import TextInput from '../components/application/TextInput';
 import SelectInput from '../components/application/SelectInput';
 import PillarOption from '../components/application/PillarOption';
-import { GraduationCap, Users, BookOpen, Heart, Building2, Megaphone } from 'lucide-react';
+// Removemos la importación de iconos de Lucide React
+// import { GraduationCap, Users, BookOpen, Heart, Building2, Megaphone } from 'lucide-react';
 
 const facultyOptions = [
   { value: 'fim', label: 'Facultad de Ingeniería Mecánica' },
@@ -51,12 +52,42 @@ const cycleOptions = [
 ];
 
 const pillarOptions = [
-  { id: 'academic', icon: <GraduationCap size={24} color="white" />, name: 'Excelencia Académica' },
-  { id: 'women', icon: <Users size={24} color="white" />, name: 'Impulso Femenino' },
-  { id: 'academia', icon: <BookOpen size={24} color="white" />, name: 'LEAD Academia' },
-  { id: 'social', icon: <Heart size={24} color="white" />, name: 'Impacto Social' },
-  { id: 'chapter', icon: <Building2 size={24} color="white" />, name: 'Desarrollo de Capítulo' },
-  { id: 'marketing', icon: <Megaphone size={24} color="white" />, name: 'Marketing' },
+  { 
+    id: 'academic', 
+    image: '/pillars/ExcelenciaAcademica.png', 
+    name: 'Excelencia Académica',
+    alt: 'Icono de Excelencia Académica'
+  },
+  { 
+    id: 'women', 
+    image: '/pillars/ImpulsoFemenino.png', 
+    name: 'Impulso Femenino',
+    alt: 'Icono de Impulso Femenino'
+  },
+  { 
+    id: 'academia', 
+    image: '/pillars/LeadAcademia.png', 
+    name: 'LEAD Academia',
+    alt: 'Icono de LEAD Academia'
+  },
+  { 
+    id: 'social', 
+    image: '/pillars/ImpactoSocial.png', 
+    name: 'Impacto Social',
+    alt: 'Icono de Impacto Social'
+  },
+  { 
+    id: 'chapter', 
+    image: '/pillars/DesarrolloDelCapitulo.png', 
+    name: 'Desarrollo de Capítulo',
+    alt: 'Icono de Desarrollo de Capítulo'
+  },
+  { 
+    id: 'marketing', 
+    image: '/pillars/Marketing.png', 
+    name: 'Marketing',
+    alt: 'Icono de Marketing'
+  },
 ];
 
 const pillarContent = {
@@ -473,7 +504,8 @@ const ApplicationPage = () => {
                   <PillarOption
                     key={pillar.id}
                     id={pillar.id}
-                    icon={pillar.icon}
+                    image={pillar.image}
+                    alt={pillar.alt}
                     selected={selectedPillar === pillar.id}
                     onClick={() => setSelectedPillar(pillar.id)}
                   />

@@ -26,6 +26,7 @@ const PillarsPage = () => {
           id: 'liderazgo',
           name: 'Liderazgo',
           emoji: '🧭',
+          logo: '/pillars/Liderazgo.png',
           icon: <Award className="h-6 w-6" />,
           description:
             'Desarrollamos habilidades de liderazgo efectivo a través de talleres, mentoría y capacitaciones prácticas que permiten a los estudiantes descubrir y potenciar sus capacidades directivas.',
@@ -44,6 +45,7 @@ const PillarsPage = () => {
           id: 'excelencia_academica',
           name: 'Excelencia Académica',
           emoji: '💻',
+          logo: '/pillars/ExcelenciaAcademica.png',
           icon: <BookOpen className="h-6 w-6" />,
           description:
             'Promovemos la excelencia académica mediante programas de estudio, tutorías y recursos educativos que ayudan a los estudiantes a alcanzar su máximo potencial académico.',
@@ -62,6 +64,7 @@ const PillarsPage = () => {
           id: 'desarrollo_profesional',
           name: 'Desarrollo Profesional',
           emoji: '💼',
+          logo: '/pillars/DesarrolloProfesional.png',
           icon: <Briefcase className="h-6 w-6" />,
           description:
             'Preparamos a los estudiantes para su futuro profesional mediante talleres, conexiones con la industria y desarrollo de habilidades laborales.',
@@ -80,6 +83,7 @@ const PillarsPage = () => {
           id: 'impulso_femenino',
           name: 'Impulso Femenino',
           emoji: '🌟',
+          logo: '/pillars/ImpulsoFemenino.png',
           icon: <UserCircle className="h-6 w-6" />,
           description:
             'Empoderamos a las mujeres en la ingeniería a través de programas específicos, mentorías y oportunidades de desarrollo profesional.',
@@ -98,6 +102,7 @@ const PillarsPage = () => {
           id: 'impacto_social',
           name: 'Impacto Social',
           emoji: '🤝',
+          logo: '/pillars/ImpactoSocial.png',
           icon: <Heart className="h-6 w-6" />,
           description:
             'Creamos proyectos que generan un impacto positivo en la sociedad, aplicando nuestros conocimientos en beneficio de la comunidad.',
@@ -116,6 +121,7 @@ const PillarsPage = () => {
           id: 'desarrollo_capitulo',
           name: 'Desarrollo del Capítulo',
           emoji: '🧩',
+          logo: '/pillars/DesarrolloDelCapitulo.png',
           icon: <Users className="h-6 w-6" />,
           description:
             'Trabajamos en el crecimiento y fortalecimiento de nuestra organización para brindar mejores oportunidades a nuestros miembros.',
@@ -134,6 +140,7 @@ const PillarsPage = () => {
           id: 'lead_academia',
           name: 'Lead Academia',
           emoji: '🚀',
+          logo: '/pillars/LeadAcademia.png',
           icon: <GraduationCap className="h-6 w-6" />,
           description:
             'Ofrecemos programas educativos especializados para complementar la formación académica y desarrollar habilidades específicas.',

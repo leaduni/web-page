@@ -30,7 +30,7 @@ export const AlianzasSection = () => {
       try {
         const response = await fetch('https://sheetdb.io/api/v1/4qkiwzonp20d9');
         const data = await response.json();
-        setAlianzas(data || alianzasDeRespaldo);
+        setAlianzas(Array.isArray(data) ? data : alianzasDeRespaldo);
       } catch (err) {
         setError('Error al cargar alianzas');
         setAlianzas(alianzasDeRespaldo); // Usar respaldo si falla el API
@@ -85,7 +85,7 @@ export const AlianzasSection = () => {
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto"
         >
-          {alianzas.map((alianza, idx) => {
+          {Array.isArray(alianzas) && alianzas.map((alianza, idx) => {
             // Convertir logo de Google Drive a enlace directo si es necesario
             let logoUrl = alianza["Logo de la organización"];
             if (logoUrl && logoUrl.includes('drive.google.com/open?id=')) {
