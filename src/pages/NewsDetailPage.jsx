@@ -121,11 +121,11 @@ export default function NewsDetailPage() {
 
             {/* Pilares con emojis */}
             {newsItem.pillars && newsItem.pillars.length > 0 && (
-              <div className="flex justify-center gap-3 mb-6">
+              <div className="flex flex-col w-3/4 mx-auto md:flex-row justify-center gap-3 mb-6">
                 {newsItem.pillars.map((pillar, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-2 px-4 py-2 bg-purple-600/20 rounded-full border border-purple-500/30"
+                    className="items-center w-full flex justify-center  gap-2 px-4 py-2 bg-purple-600/20 rounded-full border border-purple-500/30"
                   >
                     <span className="text-xl">{getPillarEmoji(pillar)}</span>
                     <span className="text-purple-300 font-medium text-sm">{pillar}</span>
