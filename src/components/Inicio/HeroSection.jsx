@@ -70,8 +70,9 @@ export const HeroSection = () => {
         <div className="container mx-auto min-h-screen flex items-center px-6 sm:px-8 lg:px-12">
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 mb-4 gap-8 lg:gap-12">
             <div className="flex flex-col justify-center lg:ml-[12%] text-center lg:text-left order-2 lg:order-1">
-              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 lg:mb-8 bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text text-center lg:text-left drop-shadow-xl">
-                Centro Estudiantil LEAD UNI
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 lg:mb-8 text-center lg:text-left drop-shadow-xl">
+                <span className="block text-white">Centro Estudiantil</span>
+                <span className="block bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text">LEAD UNI</span>
               </h1>
               <p className="text-base sm:text-lg lg:text-xl text-white/90 text-center lg:text-start mb-8 lg:mb-12 leading-relaxed px-2 sm:px-4 lg:px-0">
                 Formando líderes para transformar el futuro a través de excelencia académica,
