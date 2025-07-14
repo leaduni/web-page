@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
 const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setActiveMemberTab, memberDetails }) => {
   const details = memberDetails[selectedMember.name];
+  const [showingContactIdx, setShowingContactIdx] = useState(null);
+  const [copiedIdx, setCopiedIdx] = useState(null);
   
   const tabs = [
     { id: 'info', label: 'Información' },
@@ -19,37 +21,69 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
-          className="relative w-full max-w-4xl bg-[#1A0B2E] rounded-2xl overflow-hidden"
+          className="relative w-full max-w-4xl bg-[#1A0B2E] rounded-2xl overflow-hidden overflow-y-auto max-h-[90vh]"
         >
-          {/* Header con gradiente */}
-          <div className="relative h-48 bg-gradient-to-r from-[#4D3B6E] to-[#8B5CF6]">
+          {/* Header con gradiente y posicionamiento para continuidad */}
+          <div className="relative bg-gradient-to-r from-[#4D3B6E] to-[#8B5CF6] pb-3 md:h-32 md:mb-5">
             <button
               onClick={() => setSelectedMember(null)}
               className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
             >
               <X className="w-6 h-6 text-white" />
             </button>
-            
-            <div className="absolute -bottom-16 left-8 flex items-end gap-6">
+            {/* Desktop: imagen y texto alineados horizontalmente */}
+            <div className="absolute left-8 top-full -translate-y-1/2 z-20 items-center gap-6 md:flex hidden mb-2">
               <div className="relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-[#4D3B6E] to-[#8B5CF6] rounded-full blur"></div>
                 <img
                   src={selectedMember.image}
                   alt={selectedMember.name}
-                  className="relative w-32 h-32 rounded-full object-cover border-4 border-[#1A0B2E]"
+                  className="relative w-32 h-32 rounded-full object-cover border-4 border-[#1A0B2E] bg-white"
                 />
               </div>
-              <div className="mb-4 text-white">
-                <h2 className="text-2xl font-bold">{selectedMember.name}</h2>
-                <p className="text-white/80">{selectedMember.position}</p>
+              <div className="flex flex-col justify-center">
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-0 leading-tight">{selectedMember.name}</h2>
+                <p className="text-white/80 bg-[#1A0B2E] px-2 py-1 rounded-b-lg w-fit shadow-lg mt-1 text-base md:text-lg">{selectedMember.position}</p>
               </div>
             </div>
+            {/* Móvil: imagen, nombre y cargo centrados verticalmente, todo dentro del fondo violeta */}
+            <div className="flex flex-col items-center justify-center md:hidden pt-6 px-6">
+              <div className="relative mb-2">
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#4D3B6E] to-[#8B5CF6] rounded-full blur"></div>
+                <img
+                  src={selectedMember.image}
+                  alt={selectedMember.name}
+                  className="relative w-24 h-24 rounded-full object-cover border-4 border-[#1A0B2E] bg-white"
+                />
+              </div>
+              <h2 className="text-lg font-bold text-white mb-1 leading-tight text-center mt-2">{selectedMember.name}</h2>
+              <p className="text-white/90 text-sm font-medium text-center mt-0">{selectedMember.position}</p>
+            </div>
           </div>
+          {/* Espaciado prudente entre header y tabs - solo móvil */}
+          <div className="mb-6 md:mb-0"></div>
 
           {/* Contenido */}
-          <div className="p-8 pt-20">
+          <div className="pt-0 px-4 pb-8 md:p-8 md:pt-20">
             {/* Tabs */}
-            <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
+            {/* Móvil: tabs en dos filas de dos botones */}
+            <div className="grid grid-cols-2 gap-2 md:hidden border-b border-[#4D3B6E] mt-0 pb-5 mb-4">
+              {tabs.map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveMemberTab(tab.id)}
+                  className={`px-4 py-2 rounded-full font-semibold transition-colors text-base shadow-sm border focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-offset-2 focus:ring-offset-[#1A0B2E] duration-150 ${
+                    activeMemberTab === tab.id
+                      ? 'bg-gradient-to-r from-[#8B5CF6] to-[#4D3B6E] text-white border-[#8B5CF6] scale-105'
+                      : 'bg-white/5 text-white/70 hover:text-white hover:bg-white/10 border-[#3B2560]'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            {/* Escritorio: tabs en una fila horizontal */}
+            <div className="hidden md:flex gap-2 border-b border-[#4D3B6E] pb-4 mb-4 overflow-x-auto">
               {tabs.map(tab => (
                 <button
                   key={tab.id}
@@ -69,34 +103,34 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
             <div className="space-y-6">
               {activeMemberTab === 'info' && (
                 <div className="prose prose-invert max-w-none">
-                  <p className="text-white/80 leading-relaxed">{details.bio}</p>
+                  <p className="text-white/90 leading-relaxed text-justify text-base md:text-lg tracking-wide px-1 md:px-0">
+                    {details.bio}
+                  </p>
                 </div>
               )}
 
               {activeMemberTab === 'eventos' && (
                 <div className="space-y-8">
                   <div>
-                    <h3 className="text-xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-[#4D3B6E]">
+                    <h3 className="text-xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#B983FF] to-[#8B5CF6]">
                       Premios y Reconocimientos
                     </h3>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3 bg-white/5 rounded-xl p-4 border border-[#8B5CF6]/20">
                       {details.eventos.premios.map((premio, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-white/80">
-                          <span className="text-[#8B5CF6]">•</span>
-                          {premio}
+                        <li key={idx} className="text-white/90 text-base">
+                          <span className="mr-2 text-[#B983FF]">–</span>{premio}
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-[#4D3B6E]">
+                    <h3 className="text-xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#B983FF] to-[#8B5CF6]">
                       Eventos Liderados
                     </h3>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3 bg-white/5 rounded-xl p-4 border border-[#8B5CF6]/20">
                       {details.eventos.liderados.map((evento, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-white/80">
-                          <span className="text-[#8B5CF6]">•</span>
-                          {evento}
+                        <li key={idx} className="text-white/90 text-base">
+                          <span className="mr-2 text-[#8B5CF6]">–</span>{evento}
                         </li>
                       ))}
                     </ul>
@@ -105,16 +139,16 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
               )}
 
               {activeMemberTab === 'habilidades' && (
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-8">
                   <div>
-                    <h3 className="text-xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-[#4D3B6E]">
+                    <h3 className="text-xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#B983FF] to-[#8B5CF6] drop-shadow-sm tracking-wide">
                       Habilidades Blandas
                     </h3>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-3">
                       {details.habilidades.soft.map((skill, idx) => (
                         <span
                           key={idx}
-                          className="px-4 py-2 rounded-full bg-white/5 text-white/80 text-sm"
+                          className="px-5 py-2 rounded-full bg-white/10 shadow-md text-white/90 text-base font-medium backdrop-blur-sm border border-[#8B5CF6]/30"
                         >
                           {skill}
                         </span>
@@ -122,14 +156,14 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-[#4D3B6E]">
+                    <h3 className="text-xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#B983FF] to-[#8B5CF6] drop-shadow-sm tracking-wide">
                       Habilidades Técnicas
                     </h3>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-3">
                       {details.habilidades.hard.map((skill, idx) => (
                         <span
                           key={idx}
-                          className="px-4 py-2 rounded-full bg-white/5 text-white/80 text-sm"
+                          className="px-5 py-2 rounded-full bg-white/10 shadow-md text-white/90 text-base font-medium backdrop-blur-sm border border-[#8B5CF6]/30"
                         >
                           {skill}
                         </span>
@@ -140,15 +174,77 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
               )}
 
               {activeMemberTab === 'contacto' && (
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {details.contacto.map((medio, idx) => (
-                    <button
-                      key={idx}
-                      className="p-4 rounded-xl bg-white/5 hover:bg-[#4D3B6E]/30 transition-colors group"
-                    >
-                      <p className="text-white/80 group-hover:text-white text-center">{medio}</p>
-                    </button>
-                  ))}
+                <div className="relative">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {(() => {
+                      const labels = [
+                        { label: 'Correo personal', type: 'email' },
+                        { label: 'Correo institucional', type: 'email' },
+                        { label: 'Celular', type: 'phone' },
+                        { label: 'LinkedIn', type: 'link' },
+                        { label: 'Curriculum Vitae', type: 'link' },
+                        { label: 'Github', type: 'link' },
+                        { label: 'Portafolio', type: 'link' },
+                        { label: 'Otro', type: 'link' },
+                      ];
+                      const values = details.contacto || [];
+                      return labels.map((item, idx) => {
+                        const value = values[idx];
+                        if (!value) return null;
+                        let href = undefined;
+                        if (item.type === 'phone') href = `http://wa.me/+51${value}`;
+                        else if (item.type === 'link') href = value;
+                        // Mostrar el correo real si está seleccionado
+                        const showReal = (showingContactIdx === idx && item.type === 'email');
+                        if (item.type === 'email') {
+                          return (
+                            <div key={item.label} className="relative w-full flex flex-col items-center">
+                              {copiedIdx === idx && (
+                                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#4D3B6E] text-white px-4 py-2 rounded-full shadow-lg text-sm font-semibold z-50 animate-fade-in-out pointer-events-none">
+                                  ¡Copiado!
+                                </div>
+                              )}
+                              <button
+                                type="button"
+                                className="h-16 w-full rounded-xl flex items-center justify-center text-center transition-colors group bg-white/10 shadow-md border border-[#8B5CF6]/30 cursor-pointer select-none text-base font-semibold text-white/90 backdrop-blur-sm"
+                                onClick={() => {
+                                  setShowingContactIdx(idx);
+                                  if (navigator.clipboard) {
+                                    navigator.clipboard.writeText(value);
+                                    setCopiedIdx(idx);
+                                    setTimeout(() => {
+                                      setCopiedIdx(null);
+                                    }, 600);
+                                  }
+                                }}
+                                onBlur={() => { setShowingContactIdx(null); setCopiedIdx(null); }}
+                                onMouseLeave={() => { setShowingContactIdx(null); setCopiedIdx(null); }}
+                                tabIndex={0}
+                              >
+                                <span className="text-white/80 group-hover:text-white text-center break-all px-2">
+                                  {showReal ? value : item.label}
+                                </span>
+                              </button>
+                            </div>
+                          );
+                        }
+                        return (
+                          <a
+                            key={item.label}
+                            href={href}
+                            target={href ? '_blank' : undefined}
+                            rel="noopener noreferrer"
+                            className="h-16 w-full rounded-xl flex items-center justify-center text-center transition-colors group bg-white/10 shadow-md border border-[#8B5CF6]/30 cursor-pointer select-none text-base font-semibold text-white/90 backdrop-blur-sm"
+                            tabIndex={0}
+                          >
+                            <span className="text-white/80 group-hover:text-white text-center break-all px-2">
+                              {item.label}
+                            </span>
+                          </a>
+                        );
+                      });
+                    })()}
+                  </div>
                 </div>
               )}
             </div>

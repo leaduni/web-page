@@ -7,7 +7,7 @@ import MemberModal from '../components/organigrama/MemberModal';
 import Carrusel from '../components/organigrama/Carrusel';
 
 const OrganizationPage = () => {
-  const [activeTab, setActiveTab] = useState('direccion');
+  const [activeTab, setActiveTab] = useState('todos');
   const [activeMemberTab, setActiveMemberTab] = useState('info');
   const [selectedMember, setSelectedMember] = useState(null);
   const [activePillar, setActivePillar] = useState(0);
@@ -45,35 +45,35 @@ const OrganizationPage = () => {
 
   const members = {
   direccion: [
-    { name: 'Arianna Micaela Yauri Azabache', position: 'Presidenta', image: '/placeholder-profile.png' },
+    { name: 'Arianna Micaela Yauri Azabache', position: 'Presidenta', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436112/7b539560-c13f-4647-89c1-0c380a1d856e_-_Arianna_Yauri_ek5wmw.jpg', imgClass: 'object-[center_top]' },  
     { name: 'Jose Martin Rojas Sanchez', position: 'Vicepresidente', image: '/placeholder-profile.png' },
-    { name: 'Claudia Ballarta Ulloa', position: 'Jefe de Personal', image: '/placeholder-profile.png' },
-    { name: 'Miguel Anthony Castañeda Villanueva', position: 'Tesorero', image: '/placeholder-profile.png' },
+    { name: 'Claudia Ballarta Ulloa', position: 'Jefa de Personal', image: '/placeholder-profile.png' },
+    { name: 'Miguel Anthony Castañeda Villanueva', position: 'Tesorero', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752450012/WhatsApp_Image_2025-06-02_at_19.57.59_f83fh8.jpg', imgClass: 'object-top md:object-center' },  
   ],
   liderazgo: [
-    { name: 'Joseph Petter Chuquipiondo Robles', position: 'Pilar de Liderazgo', image: '/placeholder-profile.png' },
+    { name: 'Petter Joseph Chuquipiondo Robles', position: 'Director del Pilar de Liderazgo', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436142/IMG_5268_-_Joseph_Robles_boo88g.jpg' },
   ],
   academica: [
-    { name: 'Diogo Fabricio Abregu Gonzales', position: 'Pilar de Excelencia Académica', image: '/placeholder-profile.png' },
+    { name: 'Diogo Fabricio Abregu Gonzales', position: 'Director del Pilar de Excelencia Académica', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752430661/careta_-_Diogo_Abregu_Gonzales_fb0pgy.jpg' },
   ],
   femenina: [
-    { name: 'Angela Cori Salas', position: 'Pilar de Impulso Femenino', image: '/placeholder-profile.png' },
+    { name: 'Angela Cori Salas', position: 'Directora del Pilar de Impulso Femenino', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436134/IMG-20250712-WA0035_-_ANGELA_CORI_SALAS_w3i03r.jpg', imgClass: 'object-[center_top]' },
   ],
   profesional: [
-    { name: 'Yuleimy Yasmin Lucas Zasiga', position: 'Pilar de Desarrollo Profesional', image: '/placeholder-profile.png' },
+    { name: 'Yuleimy Yasmin Lucas Zasiga', position: 'Directora del Pilar de Desarrollo Profesional', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436196/foto1_-_YULEIMY_YASMIN_LUCAS_ZASIGA_uu03fd.jpg', imgClass: 'object-top' }, 
   ],
   social: [
-    { name: 'Gabriel Wei Wei Siguas', position: 'Pilar de Impacto Social', image: '/placeholder-profile.png' },
+    { name: 'Gabriel Wei Wei Siguas', position: 'Director del Pilar de Impacto Comunitario', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436149/IMG_4317_-_GABRIEL_WEI_WEI_SIGUAS_yvgngt.jpg' },
   ],
   capitulo: [
-    { name: 'Enrique Torres Julca', position: 'Pilar de Desarrollo del Capítulo', image: '/placeholder-profile.png' },
+    { name: 'Enrique Torres Julca', position: 'Director del Pilar de Desarrollo del Capítulo', image: '/placeholder-profile.png' },
   ],
   marketing: [
-    { name: 'Daniel Kevin Manayay Cadillo', position: 'Director de Marketing', image: '/placeholder-profile.png' },
+    { name: 'Daniel Kevin Manayay Cadillo', position: 'Director de Marketing', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436127/515495259_17914512348150651_1323602709192233497_n_-_Daniel_Manayay_zz6em8.jpg', imgClass: 'object-top' },
     { name: 'Eliane Brenda Antara Gallupe', position: 'Subdirectora de Marketing', image: '/placeholder-profile.png' },
   ],
   academia: [
-    { name: 'Cesar Miguel Salazar Reyes', position: 'Pilar de LEAD Academia', image: '/placeholder-profile.png' },
+    { name: 'Cesar Miguel Salazar Reyes', position: 'Director del Pilar de LEAD Academia', image: '/placeholder-profile.png' },
   ],
   todos: [],
 };
@@ -82,31 +82,64 @@ members.todos = Object.values(members).filter((_, k) => k !== 'todos').flatMap((
 
 const memberDetails = {
   "Arianna Micaela Yauri Azabache": {
-    bio: "Presidenta de LEAD UNI y estudiante de Ingeniería de Telecomunicaciones. Con experiencia en desarrollo web, gestión de equipos y creación de contenido audiovisual. Le motiva impulsar espacios donde la tecnología, el liderazgo y el trabajo en equipo se unan.",
-    contacto: ['Correo', 'LinkedIn', 'Portafolio', 'Github', 'Curriculum Vitae'],
+    bio: "Soy estudiante de Ingeniería de Telecomunicaciones, apasionada por impulsar la tecnología para generar impacto social e inclusión. Actualmente, presidenta de LEAD UNI, busco reducir la brecha de género en el sector tecnológico empoderando a las mujeres mediante la innovación, la educación y el liderazgo. Busco oportunidades en equipos con propósito donde pueda crecer como desarrolladora y agente de cambios. Mi objetivo es contribuir a soluciones que sean técnicamente sólidas y socialmente significativas.",
+    contacto: [
+      'ariannayauric@gmail.com',
+      'arianna.yauri.a@uni.pe',
+      '976845801',
+      'https://www.linkedin.com/in/arianna-yauri-azabache-a2132a2b8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
+      'https://drive.google.com/open?id=1Qj47SVRyflgOESQwGRgVJdKKNJ1iqBnz',
+      'https://github.com/AriannaYauri',
+      '', // Portafolio vacío
+      ''  // Otro vacío
+    ],
     eventos: {
       premios: [
-        '1er puesto - Hackathon "Women in Tech 2023"',
-        '2do puesto - Hackathon Nacional UNI 2022'
+        'Ganador Primer Lugar – Concurso ISC UNI 2024',
+        'Reconocimiento por NUNA, una solución de tecnología de viajes que utiliza IA para descentralizar el turismo en Perú y generar perspectivas estratégicas para la industria.',
+        'Segundo Lugar – Hackathon Innova BCP (Edición para Mujeres 2025)',
+        'Finalista – Hackathon Meta Llama LATAM',
+        'Ganador – Hackathon EmpoderaTech (MIMP)',
+        'Becaria del DAAD',
+        'Destacada – La Voz Revista Internacional'
       ],
       liderados: [
-        'Congreso de Innovación Estudiantil – Oct 2023',
-        'Taller IA para escolares – Mar 2024'
+        'Ponente – Eventos STEM: STEMos Unidas y panel Mujeres en Telecomunicaciones y Redes.',
+        'Directora – Departamento de Proyectos, CCT UNI: Primera participación mayoritaria femenina en el departamento.'
       ]
     },
     habilidades: {
-      soft: [
-        'Liderazgo proactivo',
-        'Resolución de conflictos',
-        'Comunicación efectiva'
-      ],
       hard: [
-        'Python, JavaScript (React)',
-        'PostgreSQL, MongoDB',
-        'Liderazgo proactivo',
-        'Edición de video'
+        'C++',
+        'Python',
+        'JavaScript',
+        'TypeScript',
+        'SQL',
+        'React',
+        'HTML',
+        'CSS',
+        'Tailwind CSS',
+        'Git',
+        'Linux',
+        'Power BI',
+        'Excel',
+        'GCP',
+        'Kubernetes',
+        'Docker',
+        'Figma',
+        'Vercel',
+        'Ubuntu',
+        'IoT'
+      ],
+      soft: [
+        'Scrum',
+        'Trabajo Interdisciplinario',
+        'Liderazgo',
+        'Adaptabilidad',
+        'Proactividad'
       ]
-    }
+    },
+    image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436112/7b539560-c13f-4647-89c1-0c380a1d856e_-_Arianna_Yauri_ek5wmw.jpg'
   },
 
   "Jose Martin Rojas Sanchez": {
@@ -166,169 +199,223 @@ const memberDetails = {
   },
 
   "Miguel Anthony Castañeda Villanueva": {
-    bio: "Tesorero de LEAD UNI y estudiante de Ingeniería de Sistemas. Apasionado por el desarrollo de software, la automatización de procesos y el análisis financiero. Comprometido con una gestión transparente y digital del presupuesto estudiantil.",
-    contacto: ['Correo', 'LinkedIn', 'Portafolio', 'Github', 'Curriculum Vitae'],
+    bio: "Soy Tesorero de LEAD UNI y estudiante de Ingeniería de Sistemas. Tengo experiencia en desarrollo web, inteligencia artificial y servicios en la nube (especialmente AWS). Me interesa el mundo DevOps y la IA Generativa. Me apasiona la tecnología, aprender constantemente y el trabajo en equipo.",
+    contacto: [
+      'anthonycast2404@gmail.com',
+      'miguel.castaneda.v@uni.pe',
+      '958363132',
+      'https://www.linkedin.com/in/miguel-anthony-casta%C3%B1eda-villanueva-69b194271/',
+      '', // CV vacío
+      'https://github.com/Anthony240406',
+      '', // Portafolio vacío
+      'https://www.credly.com/users/miguel-anthony-castaneda-villanueva'
+    ],
     eventos: {
       premios: [
-        'Reconocimiento por innovación en herramientas internas LEAD 2023',
-        '1er puesto en reto de Finanzas Digitales UNI 2022'
+        '2do puesto - Feria de Proyectos 2024-1 ABET-FIIS'
       ],
       liderados: [
-        'Implementación de Panel de Finanzas – Jul 2023',
-        'Taller de Finanzas Personales para miembros – Mar 2024'
+        'Taller de Programación para estudiantes de FIIS (UNI) - Mar 2024',
+        'Asesorías académicas de cursos básicos para ingresantes FIIS (UNI) - Mar 2024'
       ]
     },
     habilidades: {
-      soft: [
-        'Responsabilidad financiera',
-        'Pensamiento analítico',
-        'Adaptabilidad en equipos multidisciplinarios'
-      ],
       hard: [
-        'Python (Flask), SQL y PostgreSQL',
-        'Automatización con Google Apps Script',
-        'Dashboards financieros con Google Data Studio',
-        'Control de presupuestos y auditorías internas'
+        'Python (nivel intermedio)',
+        'SQL (PostgreSQL, SQL Server)',
+        'HTML',
+        'CSS',
+        'JavaScript',
+        'Modelado de Datos',
+        'Linux'
+      ],
+      soft: [
+        'Liderazgo',
+        'Resolución de problemas',
+        'Proactividad'
       ]
-    }
+    },
+        image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752450012/WhatsApp_Image_2025-06-02_at_19.57.59_f83fh8.jpg'
   },
 
-  "Joseph Petter Chuquipiondo Robles": {
-    bio: "Pilar de Liderazgo en LEAD UNI y estudiante de Ingeniería Civil. Promotor del liderazgo con propósito en entornos estudiantiles, con experiencia en formación de líderes juveniles, facilitación de dinámicas grupales y vocería institucional.",
-    contacto: ['Correo', 'LinkedIn', 'Portafolio', 'Github', 'Curriculum Vitae'],
+  "Petter Joseph Chuquipiondo Robles": {
+    bio: "Soy estudiante de Ingeniería de Telecomunicaciones en la Universidad Nacional de Ingeniería (UNI), actualmente lidero el pilar de Liderazgo en LEAD UNI y me desempeño como vicepresidente en IEEE CIS UNI. Me apasiona el desarrollo de soluciones innovadoras que integren desarrollo web, IOT y IA. He participado en diversos proyectos y concursos a nivel universitario, utilizando herramientas de ingeniería para crear propuestas disruptivas y responsables con el medio ambiente. Me motiva el aprendizaje en comunidad, especialmente en temas como inteligencia computacional, cloud computing, y disfruto involucrarme en iniciativas que desafíen mis límites, como Challengues y Hackathons, con el propósito de contribuir a una sociedad más verde y más conectada.",
+    contacto: [
+      'petter.chuquipiondo.r@gmail.com',
+      'petter.chuquipiondo.r@uni.pe',
+      '955329623',
+      'https://www.linkedin.com/in/joseph-chuquipiondo-robles-230733256',
+      'https://drive.google.com/open?id=1WeglPKoAWUU6u0TMOfmxxc1YoMeUMwtK',
+      'https://github.com/JosephRobles23',
+      '', // Portafolio vacío
+      ''  // Otro vacío
+    ],
     eventos: {
       premios: [
-        'Reconocimiento a la Trayectoria en Liderazgo Estudiantil – UNI 2023',
-        'Mención especial – Semana del Liderazgo LEAD 2022'
+        '4to puesto - Hackathon “Llama Impact Pan-LATAM Hackathon-es Summary” 2024, Organizado por Lablab.ai and Meta'
       ],
       liderados: [
-        'Taller de Liderazgo Ético – Jun 2023',
-        'Bootcamp de Comunicación y Liderazgo – Ene 2024'
+        'STEM Fair UNI CCT 2023'
       ]
     },
     habilidades: {
       soft: [
-        'Oratoria motivacional',
+        'Liderazgo',
         'Trabajo en equipo',
-        'Desarrollo de liderazgo personal'
+        'Comunicación efectiva',
+        'Proactividad'
       ],
       hard: [
-        'Planificación de eventos formativos',
-        'Diseño de mallas de formación',
-        'Moderación de sesiones participativas',
-        'Gestión de tiempo y liderazgo ágil'
+        'React',
+        'TailwindCSS',
+        'Git y GitHub',
+        'Python',
+        'SQL',
+        'AWS'
       ]
     }
   },
 
   "Diogo Fabricio Abregu Gonzales": {
-    bio: "Pilar de Excelencia Académica en LEAD UNI y estudiante de Ingeniería Electrónica. Enfocado en el desarrollo académico de los miembros mediante mentorías, material especializado y espacios de aprendizaje colaborativo. Cree firmemente en la educación como motor de cambio.",
-    contacto: ['Correo', 'LinkedIn', 'Portafolio', 'Github', 'Curriculum Vitae'],
+    bio: "Soy el actual director del Pilar de Excelencia Académica en LEAD UNI y estudiante de Ingeniería de Sistemas con enfoque en Inteligencia Artificial. He participado en hackatones, desarrollado asistentes virtuales, plataformas de inversión y sistemas para startups. Me apasiona la IA generativa, el desarrollo de productos digitales y la tecnología aplicada a startups. Mi propósito personal es transformar ideas en soluciones tecnológicas que generen valor real en las personas y sus comunidades.",
+    contacto: [
+      'diogofabricio17@gmail.com',
+      'diogo.abregu.g@uni.pe',
+      '923790280',
+      'https://www.linkedin.com/in/diogo-abregu-g/',
+      'https://drive.google.com/open?id=1gfqaD0uYqUeBqWhMLmZs_BSdYt3vGxl0',
+      'https://github.com/DiogoFabricioAG',
+      '', // Portafolio vacío
+      ''  // Otro vacío
+    ],
     eventos: {
       premios: [
-        'Ganador – Olimpiada de Matemática UNI 2023',
-        'Reconocimiento a la Mentoría Estudiantil – LEAD 2022'
+        'Finalista - Dataton Labora Tech 2024'
       ],
       liderados: [
-        'Ciclo de Asesorías en Matemática y Física – May 2023',
-        'Programa "Impulsa tu Ciclo" – Ago 2023'
+        'Transformación Digital del Comedor Universitario - Mar 2025'
       ]
     },
     habilidades: {
       soft: [
-        'Capacidad de enseñanza',
-        'Pensamiento lógico',
-        'Empatía con estudiantes de primer ciclo'
+        'Liderazgo',
+        'Comunicación efectiva',
+        'Trabajo en equipo',
+        'Resiliencia'
       ],
       hard: [
-        'MATLAB, LaTeX',
-        'Diseño de sesiones académicas',
-        'Tutoría personalizada',
-        'Evaluación y seguimiento de progreso académico'
+        'Python',
+        'SQL',
+        'Javascript',
+        'Typescript',
+        'Java'
       ]
-    }
+    },
+    image: 'https://drive.google.com/open?id=1MD_wU7psaHyyF2AWUCvrex_W38mXYExU'
   },
 
   "Angela Cori Salas": {
-    bio: "Pilar de Impulso Femenino en LEAD UNI y estudiante de Ingeniería Química. Defensora de la equidad de género en entornos académicos y tecnológicos. Lidera iniciativas para visibilizar y empoderar a las mujeres en ingeniería y ciencias.",
-    contacto: ['Correo', 'LinkedIn', 'Portafolio', 'Github', 'Curriculum Vitae'],
+    bio: "Soy la actual directora del Pilar de Impulso Femenino en LEAD UNI y estudiante de Ingeniería Industrial. Fui practicante de Gobierno de Datos en Interbank y tengo un gran interés en data analytics. Mi propósito es impulsar y motivar a que más chicas puedan ser parte del mundo STEM.",
+    contacto: [
+      'acorisalas@gmail.com',
+      'angela.cori.s@uni.pe',
+      '981454272',
+      'https://www.linkedin.com/in/angela-cori-salas?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+      '', // CV vacío
+      '', // Github vacío
+      '', // Portafolio vacío
+      ''  // Otro vacío
+    ],
     eventos: {
       premios: [
-        'Embajadora STEM Perú 2023',
-        'Ganadora del Concurso "Voces que Inspiran" 2022'
+        'Finalista - Hackaton Becas BCP 2025'
       ],
-      liderados: [
-        'Foro Mujeres que Inspiran – Mar 2023',
-        'Círculo de Lectura Feminista – Oct 2023'
+      liderados: [    
+        'Women Leading Data & IA - junio 2025'
       ]
     },
     habilidades: {
       soft: [
-        'Liderazgo inclusivo',
-        'Perspectiva de género',
-        'Habilidades de comunicación empática'
+        'Trabajo en equipo',
+        'Comunicación',
+        'Empatía'
       ],
       hard: [
-        'Organización de eventos sociales',
-        'Campañas de sensibilización',
-        'Gestión de redes sociales con enfoque institucional',
-        'Redacción de artículos de opinión'
+        'Power BI',
+        'SQL'
       ]
     }
   },
 
   "Yuleimy Yasmin Lucas Zasiga": {
-    bio: "Pilar de Desarrollo Profesional en LEAD UNI y estudiante de Ingeniería de Higiene y Seguridad Industrial. Orientada a fortalecer las habilidades laborales y de empleabilidad de los miembros. Fomenta una mentalidad de crecimiento y preparación para el mundo corporativo.",
-    contacto: ['Correo', 'LinkedIn', 'Portafolio', 'Github', 'Curriculum Vitae'],
+    bio: "Soy la actual directora del Pilar de Desarrollo Profesional en LEAD UNI y estudiante de Ingeniería de Sistemas. He desarrollado proyectos web en ProyectaUNI y Lead  UNI, y he participado activamente en el Congreso Programático de Ideas, Proyectos e Investigaciones – Gran Foro de las 5 Hélices: 'GuiaGO'. Me apasionan la inteligencia artificial, el análisis y la ciencia de datos, así como la automatización de procesos. Mi motivación es generar un impacto real a través de soluciones digitales que mejoren procesos, potencien habilidades y conecten a jóvenes con nuevas oportunidades.",
+    contacto: [
+      'yuleiyaslz@gmail.com',
+      'yuleimy.lucas.z@uni.pe',
+      '955441347',
+      'https://www.linkedin.com/in/yuleimy-lucas',
+      'https://drive.google.com/open?id=1fQxslJL_uiCMgEo54RcrZE6denjPvseN',
+      'https://github.com/YuleimyLZ',
+      '', // Portafolio vacío
+      ''  // Otro vacío
+    ],
     eventos: {
       premios: [
-        'Certificada en Empleabilidad Joven – Fundación Telefónica 2023',
-        'Beca para programa de Liderazgo Profesional – Red Joven Perú'
+        '1er puesto - P1MP 2024-2'
       ],
       liderados: [
-        'Semana de Empleabilidad y Talleres de CV – Abr 2023',
-        'Simulación de Entrevistas Profesionales – Dic 2023'
+        'Webinars: Herramientas de Microsoft para la gestión de proyectos - Feb 2025'
       ]
     },
     habilidades: {
       soft: [
-        'Orientación a resultados',
-        'Coaching básico',
-        'Inteligencia emocional'
+        'Comunicación efectiva',
+        'Trabajo en equipo',
+        'Liderazgo',
+        'Pensamiento crítico',
+        'Adaptabilidad al cambio',
+        'Escucha activa',
+        'Resiliencia',
+        'Creatividad e innovación',
+        'Empatía'
       ],
       hard: [
-        'Preparación de CVs y cartas de presentación',
-        'Uso de plataformas como LinkedIn Learning y Miro',
-        'Manejo de entrevistas STAR',
-        'Seguimiento de desempeño profesional'
+        'SQL',
+        'Power BI',
+        'Excel',
+        'Python',
+        'JavaScript',
+        'MySQL / PostgreSQL',
+        'React',
+        'Figma'
       ]
     }
   },
 
   "Gabriel Wei Wei Siguas": {
-    bio: "Pilar de Impacto Social en LEAD UNI y estudiante de Ingeniería Ambiental. Promueve proyectos con enfoque comunitario, educación ambiental y voluntariado con impacto sostenible. Cree en el rol transformador de los ingenieros al servicio de la sociedad.",
-    contacto: ['Correo', 'LinkedIn', 'Portafolio', 'Github', 'Curriculum Vitae'],
+    bio: "Soy el actual director del Pilar de Impacto Comunitario en LEAD UNI y estudiante de Ingeniería de Sistemas. Tengo experiencia como miembro de CCAT y fui subdirector de Relaciones Públicas en CC. Núcleo. Me interesan las finanzas y el análisis de datos. Mi motivación es fomentar el crecimiento autónomo de la comunidad e inspirar a las personas demostrando que el cambio y las grandes cosas están al alcance de todos.",
+    contacto: [
+      'gabrielweiwei1@gmail.com',
+      'gabriel.wei.s@uni.pe',
+      '959260609',
+      'https://www.linkedin.com/in/gabriel-wei',
+      '', // CV vacío
+      '', // Github vacío
+      '', // Portafolio vacío
+      ''  // Otro vacío
+    ],
     eventos: {
-      premios: [
-        'Reconocimiento a la Iniciativa Ambiental Estudiantil 2023',
-        'Mención en el Reto "UNI Sostenible" 2022'
-      ],
-      liderados: [
-        'Campaña de Reciclaje en Campus – Jun 2023',
-        'Voluntariado "Uniendo Manos por Lima" – Dic 2023'
-      ]
+      premios: [],
+      liderados: []
     },
     habilidades: {
       soft: [
-        'Conciencia social',
-        'Trabajo con comunidades',
-        'Gestión colaborativa de proyectos'
+        'Comunicación',
+        'Trabajo en equipo'
       ],
       hard: [
-        'Diseño de campañas con Canva y CapCut',
-        'Formulación de proyectos sociales',
-        'Educación ambiental',
-        'Gestión de voluntarios'
+        'Java',
+        'C++'
       ]
     }
   },
@@ -362,31 +449,36 @@ const memberDetails = {
   },
 
   "Daniel Kevin Manayay Cadillo": {
-    bio: "Director de Marketing en LEAD UNI y estudiante de Ingeniería de Sistemas. Especialista en branding estudiantil, estrategias de posicionamiento y comunicación visual. Su enfoque se basa en conectar con el público mediante experiencias creativas.",
-    contacto: ['Correo', 'LinkedIn', 'Portafolio', 'Github', 'Curriculum Vitae'],
+    bio: "Soy Director de Marketing en LEAD UNI y estudiante de Ingeniería de Sistemas. He sido miembro del CCAT en el CODE (área de RR.PP.), voluntario en SSAMI en RR.PP. y delegado de especialidad en 2024. Apasionado por el mundo tech, los modelos de Frontier AI y el impacto transversal de la inteligencia artificial a nivel profesional. Me motiva conectar y desarrollar networking, fortalecer mis habilidades blandas y el liderazgo. Estoy en crecimiento continuo para impulsar el cambio positivo en mi entorno, redefinir nuestros límites, nuestra mentalidad y fomentar el trabajo en equipo.",
+    contacto: [
+      'danielkevinmanayay@gmail.com',
+      'daniel.manayay.c@uni.pe',
+      '914877192',
+      'https://www.linkedin.com/in/daniel-manayay-cadillo-269453287',
+      '', // CV vacío
+      'https://github.com/DanielManayayC',
+      '', // Portafolio vacío
+      ''  // Otro vacío
+    ],
     eventos: {
       premios: [
-        'Ganador - Desafío Creativo UNI 2023',
-        'Reconocimiento al Mejor Spot Audiovisual LEAD'
+        // No se reportan premios en la ficha
       ],
       liderados: [
-        'Campaña "LEAD: Aprende dejando huella" – Ene 2024',
-        'Taller de Branding Estudiantil – Ago 2023'
+        // No se reportan eventos liderados en la ficha
       ]
     },
     habilidades: {
-      soft: [
-        'Pensamiento visual',
-        'Innovación en campañas',
-        'Gestión de equipos creativos'
-      ],
       hard: [
-        'Edición en Adobe Premiere / Illustrator',
-        'Copywriting y storytelling',
-        'Gestión de redes sociales',
-        'Diseño de identidades gráficas'
+        'SQL'
+      ],
+      soft: [
+        'Liderazgo',
+        'Comunicación efectiva',
+        'Trabajo en equipo'
       ]
-    }
+    },
+    image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436127/515495259_17914512348150651_1323602709192233497_n_-_Daniel_Manayay_zz6em8.jpg'
   },
 
   "Eliane Brenda Antara Gallupe": {
