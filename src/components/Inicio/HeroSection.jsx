@@ -62,28 +62,23 @@ export const HeroSection = () => {
   return (
     <>
       <section
-        className="relative w-full min-h-screen bg-gradient-to-b from-[#13001a] via-[#1A0029] to-black overflow-hidden border-b border-purple-800/40"
+        className="relative w-full min-h-screen bg-[rgb(9,9,42)] overflow-hidden border-b border-[#a6249d]/20"
         style={{ minHeight: `calc(100vh - ${HEADER_HEIGHT}px)` }}
       >
         <div className="absolute inset-0 bg-transparent"></div>
 
-        <div className="container mx-auto min-h-screen flex items-center px-4 lg:px-8">
+        <div className="container mx-auto min-h-screen flex items-center px-6 sm:px-8 lg:px-12">
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 mb-4 gap-8 lg:gap-12">
             <div className="flex flex-col justify-center lg:ml-[12%] text-center lg:text-left order-2 lg:order-1">
-              <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-                Centro Estudiantil
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 lg:mb-8 bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text text-center lg:text-left drop-shadow-xl">
+                Centro Estudiantil LEAD UNI
               </h1>
-              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 lg:mb-8">
-                <span className="bg-gradient-to-r from-[#FF1CF7] to-[#00F0FF] text-transparent bg-clip-text">
-                  LEAD UNI
-                </span>
-              </div>
-              <p className="text-white/90 text-center lg:text-start sm:text-lg lg:text-xl mb-8 lg:mb-12 leading-relaxed px-4 lg:px-0">
+              <p className="text-base sm:text-lg lg:text-xl text-white/90 text-center lg:text-start mb-8 lg:mb-12 leading-relaxed px-2 sm:px-4 lg:px-0">
                 Formando líderes para transformar el futuro a través de excelencia académica,
                 desarrollo profesional e impacto social.
               </p>
-              <div className="flex gap-4 lg:gap-6 flex-col justify-center lg:justify-start sm:flex-row w-full sm:w-auto">
-                <div className="relative group cursor-pointer">
+              <div className="flex gap-4 lg:gap-6 flex-col justify-center lg:justify-start sm:flex-row w-full sm:w-auto mt-4">
+                <div className="relative group cursor-pointer mb-3 sm:mb-0">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] rounded-full opacity-75 group-hover:opacity-100 transition duration-300"></div>
                   <button
                     type="button"
@@ -133,15 +128,15 @@ export const HeroSection = () => {
       </section>
 
       <section id="quienes-somos" className="relative w-full min-h-[80vh] bg-transparent overflow-hidden flex items-center py-8 lg:py-16">
-        <div className="absolute inset-0 bg-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1A0B2E] via-[#2D1B4E]/80 to-[#1A0B2E] opacity-90"></div>
 
         <div className="relative w-full">
           <div className="container mx-auto px-4 mb-8 lg:mb-12">
             <div ref={quienesSomosTitleRef} className="text-center opacity-0 translate-y-10 transition-all duration-1000 ease-out">
-              <h2 className="bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] text-transparent bg-clip-text text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 px-4">
+              <h2 className="bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 px-4">
                 ¿Quiénes somos?
               </h2>
-              <p className="text-white/80 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4">
+              <p className="text-white/80 text-sm sm:text-base lg:text-lg max-w-xs sm:max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto px-4 text-center">
                 Conoce más sobre nuestra historia y misión como centro estudiantil
               </p>
             </div>
@@ -150,9 +145,9 @@ export const HeroSection = () => {
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-12 max-w-6xl mx-auto">
               <div className="w-full lg:w-1/2 order-2 lg:order-1">
-                <div ref={quienesSomosContentRef} className="bg-black/30 backdrop-blur-sm rounded-3xl p-6 sm:p-8 opacity-0 -translate-x-10 transition-all duration-1000 ease-out">
-                  <p className="text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed">
-                    <span className="text-[#FF1CF7] font-bold">LEAD UNI</span> es un centro
+                <div ref={quienesSomosContentRef} className="bg-black/30 backdrop-blur-sm rounded-3xl p-6 sm:p-8 md:p-10 opacity-0 -translate-x-10 transition-all duration-1000 ease-out">
+                  <p className="text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed text-center lg:text-left px-2 sm:px-4">
+                    <span className="text-[#d93340] font-bold">LEAD UNI</span> es un centro
                     estudiantil fundado con la misión de potenciar el desarrollo integral de los
                     estudiantes universitarios a través de programas innovadores, actividades
                     formativas y oportunidades de crecimiento personal y profesional.

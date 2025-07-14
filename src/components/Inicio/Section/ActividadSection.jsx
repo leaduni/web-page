@@ -38,27 +38,25 @@ export const ActividadSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-transparent py-12 sm:py-16 lg:py-24 overflow-hidden">
+    <section className="relative min-h-screen w-full bg-[rgb(9,9,42)] py-12 sm:py-16 lg:py-24 overflow-hidden border-0">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1A0B2E] via-[#2D1B4E]/80 to-[#1A0B2E] opacity-90"></div>
 
       {/* Content Container */}
       <div className="relative container mx-auto px-4">
         {/* Section Title */}
         <div className="text-center mb-12 lg:mb-16">
           <motion.h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="bg-gradient-to-r from-[#B936F5]/80 to-[#FF1CF7]/80 text-transparent bg-clip-text">
-              Actividad Reciente
-            </span>
+            Actividad Reciente
           </motion.h2>
           <motion.p
-            className="text-white/60 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4"
+            className="text-white/80 text-sm sm:text-base lg:text-lg max-w-xs sm:max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto px-4 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

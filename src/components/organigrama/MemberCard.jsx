@@ -13,9 +13,9 @@ const MemberCard = ({ member, onSelect }) => {
       style={{ minHeight: '440px' }}
     >
       {/* Efecto de brillo y sombra en hover */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-[#4D3B6E] to-[#8B5CF6] rounded-2xl blur-lg opacity-0 group-hover:opacity-60 transition-all duration-500 pointer-events-none z-10"></div>
+      <div className="absolute -inset-1 bg-gradient-to-r from-[#d93340] to-[#a6249d] rounded-2xl blur-lg opacity-0 group-hover:opacity-60 transition-all duration-500 pointer-events-none z-10"></div>
       {/* Contenido principal */}
-      <div className="relative bg-[#1A0B2E] border-2 border-purple-500/30 rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 z-20 flex flex-col h-full">
+      <div className="relative bg-[#1A0B2E] border-2 border-[#a6249d]/40 rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 z-20 flex flex-col h-full">
         {/* Imagen con overlay gradiente */}
         <div className="relative h-72 md:h-64 overflow-hidden flex-shrink-0 flex items-center justify-center bg-[#1A0B2E]">
           <img
@@ -29,21 +29,21 @@ const MemberCard = ({ member, onSelect }) => {
             style={{ maxHeight: '100%', maxWidth: '100%' }}
           />
           {/* Overlay gradiente más suave */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1A0B2E]/70 via-transparent to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#d93340]/20 via-transparent to-transparent z-10 pointer-events-none"></div>
         </div>
         {/* Información */}
         <div className="relative z-20 p-6 flex flex-col flex-1 justify-between min-h-[120px]">
           <div>
-            <h3 className="text-xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-[#4D3B6E] break-words">
+            <h3 className="text-xl font-bold mb-2 text-white break-words">
               {member.name}
             </h3>
-            <p className="text-white/80 text-sm">
+            <p className="text-white text-sm">
               {member.position}
             </p>
           </div>
           {/* Botón ver más */}
           <div className="mt-4 flex justify-end">
-            <button className="text-sm text-white/60 hover:text-[#8B5CF6] flex items-center gap-1 transition-colors group-hover:text-[#8B5CF6]">
+            <button className="text-sm text-white hover:text-[#d93340] flex items-center gap-1 transition-colors group-hover:text-[#d93340] font-medium">
               Ver más
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 

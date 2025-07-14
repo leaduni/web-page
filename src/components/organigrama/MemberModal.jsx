@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
@@ -6,6 +6,13 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
   const details = memberDetails[selectedMember.name];
   const [showingContactIdx, setShowingContactIdx] = useState(null);
   const [copiedIdx, setCopiedIdx] = useState(null);
+  // Estado para expandir/cerrar habilidades técnicas
+  const [showAllHardSkills, setShowAllHardSkills] = useState(false);
+
+  // Contraer la lista de habilidades técnicas al cambiar de tab
+  useEffect(() => {
+    setShowAllHardSkills(false);
+  }, [activeMemberTab]);
   
   const tabs = [
     { id: 'info', label: 'Información' },
@@ -24,7 +31,7 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
           className="relative w-full max-w-4xl bg-[#1A0B2E] rounded-2xl overflow-hidden overflow-y-auto max-h-[90vh]"
         >
           {/* Header con gradiente y posicionamiento para continuidad */}
-          <div className="relative bg-gradient-to-r from-[#4D3B6E] to-[#8B5CF6] pb-3 md:h-32 md:mb-5">
+          <div className="relative bg-gradient-to-r from-[#d93340] to-[#a6249d] pb-3 md:h-32 md:mb-5">
             <button
               onClick={() => setSelectedMember(null)}
               className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
@@ -34,7 +41,7 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
             {/* Desktop: imagen y texto alineados horizontalmente */}
             <div className="absolute left-8 top-full -translate-y-1/2 z-20 items-center gap-6 md:flex hidden mb-2">
               <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#4D3B6E] to-[#8B5CF6] rounded-full blur"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#d93340] to-[#a6249d] rounded-full blur"></div>
                 <img
                   src={selectedMember.image}
                   alt={selectedMember.name}
@@ -43,13 +50,13 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
               </div>
               <div className="flex flex-col justify-center">
                 <h2 className="text-2xl md:text-3xl font-bold text-white mb-0 leading-tight">{selectedMember.name}</h2>
-                <p className="text-white/80 bg-[#1A0B2E] px-2 py-1 rounded-b-lg w-fit shadow-lg mt-1 text-base md:text-lg">{selectedMember.position}</p>
+                <p className="text-white bg-[#1A0B2E] px-2 py-1 rounded-b-lg w-fit shadow-lg mt-1 text-base md:text-lg">{selectedMember.position}</p>
               </div>
             </div>
             {/* Móvil: imagen, nombre y cargo centrados verticalmente, todo dentro del fondo violeta */}
             <div className="flex flex-col items-center justify-center md:hidden pt-6 px-6">
               <div className="relative mb-2">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#4D3B6E] to-[#8B5CF6] rounded-full blur"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#d93340] to-[#a6249d] rounded-full blur"></div>
                 <img
                   src={selectedMember.image}
                   alt={selectedMember.name}
@@ -57,7 +64,7 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                 />
               </div>
               <h2 className="text-lg font-bold text-white mb-1 leading-tight text-center mt-2">{selectedMember.name}</h2>
-              <p className="text-white/90 text-sm font-medium text-center mt-0">{selectedMember.position}</p>
+              <p className="text-white text-sm font-medium text-center mt-0">{selectedMember.position}</p>
             </div>
           </div>
           {/* Espaciado prudente entre header y tabs - solo móvil */}
@@ -67,15 +74,15 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
           <div className="pt-0 px-4 pb-8 md:p-8 md:pt-20">
             {/* Tabs */}
             {/* Móvil: tabs en dos filas de dos botones */}
-            <div className="grid grid-cols-2 gap-2 md:hidden border-b border-[#4D3B6E] mt-0 pb-5 mb-4">
+            <div className="grid grid-cols-2 gap-2 md:hidden border-b border-[#a6249d] mt-0 pb-5 mb-4">
               {tabs.map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveMemberTab(tab.id)}
-                  className={`px-4 py-2 rounded-full font-semibold transition-colors text-base shadow-sm border focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-offset-2 focus:ring-offset-[#1A0B2E] duration-150 ${
+                  className={`px-4 py-2 rounded-full font-semibold transition-colors text-base shadow-sm border focus:outline-none focus:ring-2 focus:ring-[#d93340] focus:ring-offset-2 focus:ring-offset-[#1A0B2E] duration-150 ${
                     activeMemberTab === tab.id
-                      ? 'bg-gradient-to-r from-[#8B5CF6] to-[#4D3B6E] text-white border-[#8B5CF6] scale-105'
-                      : 'bg-white/5 text-white/70 hover:text-white hover:bg-white/10 border-[#3B2560]'
+                      ? 'bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white border-[#d93340] scale-105'
+                      : 'bg-white/5 text-white/70 hover:text-white hover:bg-white/10 border-[#a6249d]/40'
                   }`}
                 >
                   {tab.label}
@@ -83,14 +90,14 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
               ))}
             </div>
             {/* Escritorio: tabs en una fila horizontal */}
-            <div className="hidden md:flex gap-2 border-b border-[#4D3B6E] pb-4 mb-4 overflow-x-auto">
+            <div className="hidden md:flex gap-2 border-b border-[#a6249d] pb-4 mb-4 overflow-x-auto">
               {tabs.map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveMemberTab(tab.id)}
                   className={`px-6 py-2 rounded-full font-medium transition-colors ${
                     activeMemberTab === tab.id
-                      ? 'bg-gradient-to-r from-[#4D3B6E] to-[#8B5CF6] text-white'
+                      ? 'bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white'
                       : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
                   }`}
                 >
@@ -103,7 +110,7 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
             <div className="space-y-6">
               {activeMemberTab === 'info' && (
                 <div className="prose prose-invert max-w-none">
-                  <p className="text-white/90 leading-relaxed text-justify text-base md:text-lg tracking-wide px-1 md:px-0">
+                  <p className="text-white leading-relaxed text-justify text-base md:text-lg tracking-wide px-1 md:px-0">
                     {details.bio}
                   </p>
                 </div>
@@ -112,25 +119,25 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
               {activeMemberTab === 'eventos' && (
                 <div className="space-y-8">
                   <div>
-                    <h3 className="text-xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#B983FF] to-[#8B5CF6]">
+                    <h3 className="text-xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#d93340] to-[#a6249d]">
                       Premios y Reconocimientos
                     </h3>
-                    <ul className="space-y-3 bg-white/5 rounded-xl p-4 border border-[#8B5CF6]/20">
+                    <ul className="space-y-3 bg-white/5 rounded-xl p-4 border border-[#a6249d]/20">
                       {details.eventos.premios.map((premio, idx) => (
-                        <li key={idx} className="text-white/90 text-base">
-                          <span className="mr-2 text-[#B983FF]">–</span>{premio}
+                        <li key={idx} className="text-white text-base">
+                          <span className="mr-2 text-[#d93340]">–</span>{premio}
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <h3 className="text-xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#B983FF] to-[#8B5CF6]">
+                    <h3 className="text-xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#d93340] to-[#a6249d]">
                       Eventos Liderados
                     </h3>
-                    <ul className="space-y-3 bg-white/5 rounded-xl p-4 border border-[#8B5CF6]/20">
+                    <ul className="space-y-3 bg-white/5 rounded-xl p-4 border border-[#a6249d]/20">
                       {details.eventos.liderados.map((evento, idx) => (
-                        <li key={idx} className="text-white/90 text-base">
-                          <span className="mr-2 text-[#8B5CF6]">–</span>{evento}
+                        <li key={idx} className="text-white text-base">
+                          <span className="mr-2 text-[#a6249d]">–</span>{evento}
                         </li>
                       ))}
                     </ul>
@@ -141,14 +148,14 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
               {activeMemberTab === 'habilidades' && (
                 <div className="space-y-8">
                   <div>
-                    <h3 className="text-xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#B983FF] to-[#8B5CF6] drop-shadow-sm tracking-wide">
+                    <h3 className="text-xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#d93340] to-[#a6249d] drop-shadow-sm tracking-wide">
                       Habilidades Blandas
                     </h3>
                     <div className="flex flex-wrap gap-3">
                       {details.habilidades.soft.map((skill, idx) => (
                         <span
                           key={idx}
-                          className="px-5 py-2 rounded-full bg-white/10 shadow-md text-white/90 text-base font-medium backdrop-blur-sm border border-[#8B5CF6]/30"
+                          className="px-5 py-2 rounded-full bg-white/10 shadow-md text-white text-base font-medium backdrop-blur-sm border border-[#a6249d]/30"
                         >
                           {skill}
                         </span>
@@ -156,18 +163,26 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#B983FF] to-[#8B5CF6] drop-shadow-sm tracking-wide">
+                    <h3 className="text-xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#d93340] to-[#a6249d] drop-shadow-sm tracking-wide">
                       Habilidades Técnicas
                     </h3>
-                    <div className="flex flex-wrap gap-3">
-                      {details.habilidades.hard.map((skill, idx) => (
+                    <div className="flex flex-wrap gap-3 mb-2">
+                      {(showAllHardSkills ? details.habilidades.hard : details.habilidades.hard.slice(0, 6)).map((skill, idx) => (
                         <span
                           key={idx}
-                          className="px-5 py-2 rounded-full bg-white/10 shadow-md text-white/90 text-base font-medium backdrop-blur-sm border border-[#8B5CF6]/30"
+                          className="px-5 py-2 rounded-full bg-white/10 shadow-md text-white text-base font-medium backdrop-blur-sm border border-[#a6249d]/30"
                         >
                           {skill}
                         </span>
                       ))}
+                      {details.habilidades.hard.length > 6 && !showAllHardSkills && (
+                        <button
+                          className="px-5 py-2 rounded-full bg-[#a6249d] text-white text-base font-semibold border border-[#a6249d]/30 hover:bg-[#d93340] transition-colors"
+                          onClick={() => setShowAllHardSkills(true)}
+                        >
+                          +{details.habilidades.hard.length - 6}
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -200,13 +215,13 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                           return (
                             <div key={item.label} className="relative w-full flex flex-col items-center">
                               {copiedIdx === idx && (
-                                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#4D3B6E] text-white px-4 py-2 rounded-full shadow-lg text-sm font-semibold z-50 animate-fade-in-out pointer-events-none">
+                                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#a6249d] text-white px-4 py-2 rounded-full shadow-lg text-sm font-semibold z-50 animate-fade-in-out pointer-events-none">
                                   ¡Copiado!
                                 </div>
                               )}
                               <button
                                 type="button"
-                                className="h-16 w-full rounded-xl flex items-center justify-center text-center transition-colors group bg-white/10 shadow-md border border-[#8B5CF6]/30 cursor-pointer select-none text-base font-semibold text-white/90 backdrop-blur-sm"
+                                className="h-16 w-full rounded-xl flex items-center justify-center text-center transition-colors group bg-white/10 shadow-md border border-[#a6249d]/30 cursor-pointer select-none text-base font-semibold text-white backdrop-blur-sm"
                                 onClick={() => {
                                   setShowingContactIdx(idx);
                                   if (navigator.clipboard) {
@@ -221,7 +236,7 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                                 onMouseLeave={() => { setShowingContactIdx(null); setCopiedIdx(null); }}
                                 tabIndex={0}
                               >
-                                <span className="text-white/80 group-hover:text-white text-center break-all px-2">
+                                <span className="text-white group-hover:text-white text-center break-all px-2">
                                   {showReal ? value : item.label}
                                 </span>
                               </button>
@@ -234,10 +249,10 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                             href={href}
                             target={href ? '_blank' : undefined}
                             rel="noopener noreferrer"
-                            className="h-16 w-full rounded-xl flex items-center justify-center text-center transition-colors group bg-white/10 shadow-md border border-[#8B5CF6]/30 cursor-pointer select-none text-base font-semibold text-white/90 backdrop-blur-sm"
+                            className="h-16 w-full rounded-xl flex items-center justify-center text-center transition-colors group bg-white/10 shadow-md border border-[#a6249d]/30 cursor-pointer select-none text-base font-semibold text-white backdrop-blur-sm"
                             tabIndex={0}
                           >
-                            <span className="text-white/80 group-hover:text-white text-center break-all px-2">
+                            <span className="text-white group-hover:text-white text-center break-all px-2">
                               {item.label}
                             </span>
                           </a>

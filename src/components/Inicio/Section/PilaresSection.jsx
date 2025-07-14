@@ -5,46 +5,46 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 const pilares = [
   {
     id: 1,
-    emoji: '🧭',
+    image: '/pillars/Liderazgo.png',
     title: 'Pilar Liderazgo',
     description:
       'Formamos líderes con valores y habilidades para dirigir equipos e iniciativas con visión y propósito.',
   },
   {
     id: 2,
-    emoji: '💻',
+    image: '/pillars/ExcelenciaAcademica.png',
     title: 'Pilar Excelencia Académica',
     description:
       'Impulsamos el alto rendimiento académico y el desarrollo continuo de habilidades técnicas.',
   },
   {
     id: 3,
-    emoji: '✨',
+    image: '/pillars/ImpulsoFemenino.png',
     title: 'Pilar Impulso Femenino',
     description: 'Empoderamos y promovemos el liderazgo femenino en el campo de la tecnología.',
   },
   {
     id: 4,
-    emoji: '💼',
+    image: '/pillars/DesarrolloProfesional.png',
     title: 'Pilar Desarrollo Profesional',
     description: 'Facilitamos oportunidades de crecimiento y conexiones profesionales valiosas.',
   },
   {
     id: 5,
-    emoji: '🤝',
+    image: '/pillars/ImpactoSocial.png',
     title: 'Pilar Impacto Social',
     description:
       'Generamos cambios positivos en nuestra comunidad a través de proyectos significativos.',
   },
   {
     id: 6,
-    emoji: '🧩',
+    image: '/pillars/DesarrolloDelCapitulo.png',
     title: 'Pilar Desarrollo del Capítulo',
     description: 'Fortalecemos y expandimos nuestro capítulo para maximizar nuestro impacto.',
   },
   {
     id: 7,
-    emoji: '📈',
+    image: '/pillars/LeadAcademia.png',
     title: 'Pilar Lead Academia',
     description: 'Desarrollamos programas educativos innovadores para potenciar el aprendizaje.',
   },
@@ -144,18 +144,16 @@ export const PilaresSection = () => {
         {/* Section Title */}
         <div className="text-center mb-6 lg:mb-8">
           <motion.h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-white/90"
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text drop-shadow-xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="bg-gradient-to-r from-[#B936F5]/80 to-[#FF1CF7]/80 text-transparent bg-clip-text">
-              Nuestros Pilares
-            </span>
+            Nuestros Pilares
           </motion.h2>
           <motion.p
-            className="text-white/60 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4"
+            className="text-white/80 text-sm sm:text-base lg:text-lg max-w-xs sm:max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto px-4 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -184,7 +182,9 @@ export const PilaresSection = () => {
                   variants={cardVariants}
                 >
                   <div className="p-6 h-full flex flex-col">
-                    <span className="text-4xl block mb-3">{pilares[currentIndex].emoji}</span>
+                    <span className="block mb-3 flex items-center justify-center">
+                      <img src={pilares[currentIndex].image} alt={pilares[currentIndex].title} className="w-16 h-16 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]" />
+                    </span>
                     <h3 className="text-lg font-bold bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] text-transparent bg-clip-text mb-3">
                       {pilares[currentIndex].title}
                     </h3>
@@ -201,16 +201,16 @@ export const PilaresSection = () => {
 
             {/* Mobile Navigation */}
             <button
-              className="absolute left-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-30 p-0.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300"
               onClick={() => paginate(-1)}
             >
-              <ChevronLeft className="w-5 h-5 text-white" />
+              <ChevronLeft className="w-3 h-3 text-white" />
             </button>
             <button
-              className="absolute right-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300"
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-30 p-0.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300"
               onClick={() => paginate(1)}
             >
-              <ChevronRight className="w-5 h-5 text-white" />
+              <ChevronRight className="w-3 h-3 text-white" />
             </button>
           </div>
 
@@ -295,8 +295,8 @@ export const PilaresSection = () => {
                 variants={cardVariants}
               >
                 <div className="p-8 h-full flex flex-col">
-                  <span className="text-4xl block mb-3">
-                    {pilares[(currentIndex - 2 + pilares.length) % pilares.length].emoji}
+                  <span className="block mb-3 flex items-center justify-center">
+                    <img src={pilares[(currentIndex - 2 + pilares.length) % pilares.length].image} alt={pilares[(currentIndex - 2 + pilares.length) % pilares.length].title} className="w-16 h-16 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]" />
                   </span>
                   <h3 className="text-lg font-bold text-white/70 mb-2">
                     {pilares[(currentIndex - 2 + pilares.length) % pilares.length].title}
@@ -343,8 +343,8 @@ export const PilaresSection = () => {
                 variants={cardVariants}
               >
                 <div className="p-8 h-full flex flex-col">
-                  <span className="text-5xl block mb-4">
-                    {pilares[(currentIndex - 1 + pilares.length) % pilares.length].emoji}
+                  <span className="block mb-4 flex items-center justify-center">
+                    <img src={pilares[(currentIndex - 1 + pilares.length) % pilares.length].image} alt={pilares[(currentIndex - 1 + pilares.length) % pilares.length].title} className="w-20 h-20 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]" />
                   </span>
                   <h3 className="text-xl font-bold text-white/70 mb-3">
                     {pilares[(currentIndex - 1 + pilares.length) % pilares.length].title}
@@ -383,15 +383,17 @@ export const PilaresSection = () => {
                   whileTap="tap"
                   variants={cardVariants}
                 >
-                  <div className="p-10 h-full flex flex-col">
-                    <span className="text-6xl block mb-4">{pilares[currentIndex].emoji}</span>
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] text-transparent bg-clip-text mb-4">
+                  <div className="p-10 h-full flex flex-col h-full pb-10">
+                    <span className="block mb-4 flex items-center justify-center">
+                      <img src={pilares[currentIndex].image} alt={pilares[currentIndex].title} className="w-24 h-24 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]" />
+                    </span>
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] text-transparent bg-clip-text mb-1">
                       {pilares[currentIndex].title}
                     </h3>
                     <p className="text-white/80 text-lg mb-3 flex-grow">
                       {pilares[currentIndex].description}
                     </p>
-                    <button className="text-sm text-[#B936F5] hover:text-[#FF1CF7] transition-colors text-left font-medium">
+                    <button className="text-sm text-[#B936F5] hover:text-[#FF1CF7] transition-colors text-left font-medium mt-auto mb-4">
                       Leer más →
                     </button>
                   </div>
@@ -431,8 +433,8 @@ export const PilaresSection = () => {
                 variants={cardVariants}
               >
                 <div className="p-8 h-full flex flex-col">
-                  <span className="text-4xl block mb-3">
-                    {pilares[(currentIndex + 1) % pilares.length].emoji}
+                  <span className="block mb-3 flex items-center justify-center">
+                    <img src={pilares[(currentIndex + 1) % pilares.length].image} alt={pilares[(currentIndex + 1) % pilares.length].title} className="w-16 h-16 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]" />
                   </span>
                   <h3 className="text-lg font-bold text-white/70 mb-2">
                     {pilares[(currentIndex + 1) % pilares.length].title}
@@ -479,8 +481,8 @@ export const PilaresSection = () => {
                 variants={cardVariants}
               >
                 <div className="p-8 h-full flex flex-col">
-                  <span className="text-5xl block mb-4">
-                    {pilares[(currentIndex + 2) % pilares.length].emoji}
+                  <span className="block mb-4 flex items-center justify-center">
+                    <img src={pilares[(currentIndex + 2) % pilares.length].image} alt={pilares[(currentIndex + 2) % pilares.length].title} className="w-20 h-20 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]" />
                   </span>
                   <h3 className="text-xl font-bold text-white/70 mb-3">
                     {pilares[(currentIndex + 2) % pilares.length].title}

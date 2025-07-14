@@ -91,12 +91,12 @@ export default function NewsPage() {
       <div className="container mx-auto px-4 ">
         <div className="text-center mb-6">
           <h1 className="text-5xl md:text-6xl font-bold text-center mb-4">
-            <span className="bg-gradient-to-r py-3 from-[#FF1CF7] to-[#00F0FF] text-transparent bg-clip-text">
+            <span className="bg-gradient-to-r py-3 from-[#d93340] to-[#a6249d] text-transparent bg-clip-text">
               Últimas Noticias
             </span>
           </h1>
-          <p className="text-gray-400 max-w-2xl mx-auto mb-10">
-            Mantente informado sobre las últimas noticias y eventos de LEAD UNI
+          <p className="text-xl md:text-2xl font-semibold text-white/80 mx-auto mb-10 text-center whitespace-normal max-w-xs sm:max-w-xl lg:max-w-3xl xl:max-w-4xl">
+            Mantente informado sobre las últimas noticias y eventos de LEAD UNI.
           </p>
 
           {/* Buscador y filtros mejorados */}
@@ -104,14 +104,14 @@ export default function NewsPage() {
             {/* Buscador principal */}
             <div className="relative max-w-md mx-auto">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-gray-400" />
+                <Search className="h-5 w-5 text-[#a6249d]" />
               </div>
               <input
                 type="text"
                 placeholder="Buscar noticias..."
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
-                className="w-full bg-purple-900/20 border border-purple-500/30 rounded-lg py-3 pl-10 pr-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                className="w-full bg-[#1A0B2E]/80 border border-[#a6249d]/40 rounded-lg py-3 pl-10 pr-3 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-[#d93340] focus:border-transparent transition-all placeholder-white/70"
               />
             </div>
 
@@ -120,19 +120,19 @@ export default function NewsPage() {
               {/* Filtro de Categorías/Pilares */}
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Filter className="h-4 w-4 text-gray-400" />
+                  <Filter className="h-4 w-4 text-[#d93340]" />
                 </div>
                 <select
                   value={selectedCategory}
                   onChange={e => setSelectedCategory(e.target.value)}
-                  className="w-full bg-purple-900/20 border border-purple-500/30 rounded-lg py-2 pl-9 pr-8 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all cursor-pointer"
+                  className="w-full bg-[#1A0B2E]/80 border border-[#d93340]/40 rounded-lg py-2 pl-9 pr-8 text-white font-semibold appearance-none focus:outline-none focus:ring-2 focus:ring-[#d93340] focus:border-transparent transition-all cursor-pointer"
                 >
                   <option value="">Todas las categorías</option>
                   {categories
                     .filter(cat => cat !== 'Todas')
                     .map(category => (
                       <option
-                        className="bg-black rounded-md p-1 text-sm"
+                        className="bg-[#1A0B2E] text-white font-semibold rounded-md p-1 text-sm"
                         key={category}
                         value={category}
                       >
@@ -142,7 +142,7 @@ export default function NewsPage() {
                 </select>
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                   <svg
-                    className="h-4 w-4 text-gray-400"
+                    className="h-4 w-4 text-[#d93340]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -162,12 +162,12 @@ export default function NewsPage() {
                 <select
                   value={selectedEnfoque}
                   onChange={e => setSelectedEnfoque(e.target.value)}
-                  className="w-full bg-purple-700/20 border border-purple-400/30 rounded-lg py-2 pl-3 pr-8 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all cursor-pointer"
+                  className="w-full bg-[#1A0B2E]/80 border border-[#ff6ec7]/40 rounded-lg py-2 pl-3 pr-8 text-white font-semibold appearance-none focus:outline-none focus:ring-2 focus:ring-[#ff6ec7] focus:border-transparent transition-all cursor-pointer"
                 >
                   <option value="">Todos los enfoques</option>
                   {enfoqueOptions.map(enfoque => (
                     <option
-                      className="bg-black rounded-md p-1 text-sm"
+                      className="bg-[#1A0B2E] text-white font-semibold rounded-md p-1 text-sm"
                       key={enfoque}
                       value={enfoque}
                     >
@@ -177,7 +177,7 @@ export default function NewsPage() {
                 </select>
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                   <svg
-                    className="h-4 w-4 text-gray-400"
+                    className="h-4 w-4 text-[#ff6ec7]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -197,12 +197,12 @@ export default function NewsPage() {
                 <select
                   value={selectedPublico}
                   onChange={e => setSelectedPublico(e.target.value)}
-                  className="w-full bg-cyan-700/20 border border-cyan-400/30 rounded-lg py-2 pl-3 pr-8 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all cursor-pointer"
+                  className="w-full bg-[#1A0B2E]/80 border border-[#a6249d]/40 rounded-lg py-2 pl-3 pr-8 text-white font-semibold appearance-none focus:outline-none focus:ring-2 focus:ring-[#a6249d] focus:border-transparent transition-all cursor-pointer"
                 >
                   <option value="">Todos los públicos</option>
                   {publicoOptions.map(publico => (
                     <option
-                      className="bg-black rounded-md p-1 text-sm"
+                      className="bg-[#1A0B2E] text-white font-semibold rounded-md p-1 text-sm"
                       key={publico}
                       value={publico}
                     >
@@ -212,7 +212,7 @@ export default function NewsPage() {
                 </select>
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                   <svg
-                    className="h-4 w-4 text-gray-400"
+                    className="h-4 w-4 text-[#a6249d]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

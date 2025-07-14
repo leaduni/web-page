@@ -18,7 +18,7 @@ const PillarCarousel = ({ pillars, selectedPillar, onSelectPillar }) => {
       <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20">
         <button
           onClick={() => rotateCarousel('prev')}
-          className="bg-purple-600/30 hover:bg-purple-600/50 p-6 rounded-full transition-all"
+          className="bg-gradient-to-br from-[#d93340] to-[#a6249d] hover:from-[#a6249d] hover:to-[#d93340] p-6 rounded-full transition-all border-2 border-[#a6249d]/40 shadow-lg"
         >
           <span className="text-white text-4xl font-bold">←</span>
         </button>
@@ -26,7 +26,7 @@ const PillarCarousel = ({ pillars, selectedPillar, onSelectPillar }) => {
       <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20">
         <button
           onClick={() => rotateCarousel('next')}
-          className="bg-purple-600/30 hover:bg-purple-600/50 p-6 rounded-full transition-all"
+          className="bg-gradient-to-br from-[#d93340] to-[#a6249d] hover:from-[#a6249d] hover:to-[#d93340] p-6 rounded-full transition-all border-2 border-[#a6249d]/40 shadow-lg"
         >
           <span className="text-white text-4xl font-bold">→</span>
         </button>
@@ -52,13 +52,13 @@ const PillarCarousel = ({ pillars, selectedPillar, onSelectPillar }) => {
             >
               <button
                 onClick={() => onSelectPillar(pillar)}
-                className={`w-full h-full flex flex-col items-center justify-center p-6 rounded-xl backdrop-blur-sm
+                className={`w-full h-full flex flex-col items-center justify-center p-6 rounded-xl backdrop-blur-sm border-2 border-[#a6249d]/40 shadow-lg
                   ${selectedPillar?.id === pillar.id 
-                    ? 'bg-gradient-to-r from-purple-800/80 to-pink-800/80 shadow-lg' 
-                    : 'bg-purple-900/30 hover:bg-purple-800/50'
+                    ? 'bg-gradient-to-r from-[#d93340]/80 to-[#a6249d]/80' 
+                    : 'bg-[#1A0B2E]/80 hover:bg-gradient-to-r hover:from-[#d93340]/60 hover:to-[#a6249d]/60'
                   }`}
               >
-                <div className={`p-4 rounded-full mb-3 text-4xl ${selectedPillar?.id === pillar.id ? 'bg-pink-700/50' : 'bg-purple-700/30'}`}>
+                <div className={`p-4 rounded-full mb-3 text-4xl ${selectedPillar?.id === pillar.id ? 'bg-[#d93340]/40' : 'bg-[#a6249d]/20'}`}>
                   {pillar.logo ? (
                     <img src={pillar.logo} alt={pillar.name} className="w-12 h-12 object-contain mx-auto" />
                   ) : (
@@ -66,7 +66,7 @@ const PillarCarousel = ({ pillars, selectedPillar, onSelectPillar }) => {
                   )}
                 </div>
 
-                <span className="text-lg font-medium text-center">{pillar.name}</span>
+                <span className="text-lg font-bold text-center text-white drop-shadow-md">{pillar.name}</span>
               </button>
             </div>
           );

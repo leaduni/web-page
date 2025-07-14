@@ -115,7 +115,7 @@ export default function NewsDetailPage() {
                 Noticias / LEAD News
               </Link>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center text-pink-400 mb-4 leading-tight transition-colors">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text mb-4 leading-tight transition-colors">
               {newsItem.title}
             </h1>
 

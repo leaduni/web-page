@@ -15,11 +15,11 @@ const Carrusel = ({ pillars, activePillar, setActivePillar }) => {
   };
 
   return (
-    <section className="relative min-h-[320px] md:min-h-[480px] bg-gradient-to-b from-[#1A0B2E] via-[#2D1B4E] to-[#1A0B2E] py-8 md:py-16 overflow-hidden border-2 border-purple-500/50 rounded-2xl">
+    <section className="relative min-h-[320px] md:min-h-[480px] bg-[rgb(9,9,42)] py-8 md:py-16 overflow-hidden border-2 border-[#a6249d]/40 rounded-2xl">
       {/* Background Effects */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#2D1B4E]/15 via-[#1A0B2E]/8 to-transparent"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#4C1D95]/8 via-[#2D1B4E]/3 to-transparent"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#d93340]/10 via-[#a6249d]/10 to-transparent"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#a6249d]/10 via-[#d93340]/10 to-transparent"></div>
       </div>
 
       {/* Desktop 3D Carousel */}
@@ -29,7 +29,7 @@ const Carrusel = ({ pillars, activePillar, setActivePillar }) => {
           <div className="absolute inset-0 flex items-center justify-center" style={{ perspective: '2000px' }}>
             {/* Navigation Buttons */}
             <motion.button
-              className="absolute left-4 z-50 p-4 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#a78bfa] shadow-lg hover:scale-110 transition-all duration-300 border-2 border-white/20"
+              className="absolute left-4 z-50 p-4 rounded-full bg-gradient-to-br from-[#d93340] to-[#a6249d] shadow-lg hover:scale-110 transition-all duration-300 border-2 border-[#a6249d]/40"
               whileHover={{ scale: 1.12 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => paginate(-1)}
@@ -39,7 +39,7 @@ const Carrusel = ({ pillars, activePillar, setActivePillar }) => {
             </motion.button>
             
             <motion.button
-              className="absolute right-4 z-50 p-4 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#a78bfa] shadow-lg hover:scale-110 transition-all duration-300 border-2 border-white/20"
+              className="absolute right-4 z-50 p-4 rounded-full bg-gradient-to-br from-[#d93340] to-[#a6249d] shadow-lg hover:scale-110 transition-all duration-300 border-2 border-[#a6249d]/40"
               whileHover={{ scale: 1.12 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => paginate(1)}
@@ -70,7 +70,7 @@ const Carrusel = ({ pillars, activePillar, setActivePillar }) => {
               }}
             >
               <motion.div 
-                className="w-[420px] h-[260px] bg-[#1A0B2E]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-purple-500/50 shadow-lg"
+                className="w-[420px] h-[260px] bg-[#1A0B2E]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-[#a6249d]/40 shadow-lg"
                 whileHover={{ scale: 1.02 }}
               >
                 <div className="p-8 h-full flex flex-col">
@@ -109,7 +109,7 @@ const Carrusel = ({ pillars, activePillar, setActivePillar }) => {
               }}
             >
               <motion.div 
-                className="w-[450px] h-[280px] bg-[#1A0B2E]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-purple-500/50 shadow-lg"
+                className="w-[450px] h-[280px] bg-[#1A0B2E]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-[#a6249d]/40 shadow-lg"
                 whileHover={{ scale: 1.02 }}
               >
                 <div className="p-8 h-full flex flex-col">
@@ -145,14 +145,14 @@ const Carrusel = ({ pillars, activePillar, setActivePillar }) => {
               style={{ transformStyle: 'preserve-3d' }}
             >
               <motion.div 
-                className="w-[500px] h-[300px] bg-[#1A0B2E]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-purple-500/50 shadow-[0_8px_30px_-5px_rgba(91,33,182,0.3)]"
+                className="w-[500px] h-[300px] bg-[#1A0B2E]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-[#a6249d]/40 shadow-[0_8px_30px_-5px_rgba(217,51,64,0.3)]"
                 whileHover={{ scale: 1.02 }}
               >
                 <div className="p-8 h-full flex flex-col">
                   <div className="mb-4 flex justify-center">
                     <img src={pillars[activePillar].image} alt="icon" className="w-24 h-24 object-contain mx-auto mt-2 drop-shadow-lg" />
                   </div>
-                  <h3 className="text-3xl font-extrabold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-[#7c3aed] to-[#a78bfa] text-center">
+                  <h3 className="text-3xl font-extrabold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-[#d93340] to-[#a6249d] text-center">
                     {pillars[activePillar].title}
                   </h3>
                   <p className="text-white/90 text-lg flex-grow text-center">
@@ -184,7 +184,7 @@ const Carrusel = ({ pillars, activePillar, setActivePillar }) => {
               }}
             >
               <motion.div 
-                className="w-[450px] h-[280px] bg-[#1A0B2E]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-purple-500/50 shadow-lg"
+                className="w-[450px] h-[280px] bg-[#1A0B2E]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-[#a6249d]/40 shadow-lg"
                 whileHover={{ scale: 1.02 }}
               >
                 <div className="p-8 h-full flex flex-col">
@@ -223,7 +223,7 @@ const Carrusel = ({ pillars, activePillar, setActivePillar }) => {
               }}
             >
               <motion.div 
-                className="w-[420px] h-[260px] bg-[#1A0B2E]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-purple-500/50 shadow-lg"
+                className="w-[420px] h-[260px] bg-[#1A0B2E]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-[#a6249d]/40 shadow-lg"
                 whileHover={{ scale: 1.02 }}
               >
                 <div className="p-8 h-full flex flex-col">
@@ -247,7 +247,7 @@ const Carrusel = ({ pillars, activePillar, setActivePillar }) => {
               <button
                 key={index}
                 onClick={() => setActivePillar(index)}
-                className={`w-4 h-4 rounded-full transition-all duration-300 border-2 border-white/30 ${index === activePillar ? 'bg-gradient-to-r from-[#7c3aed] to-[#a78bfa] shadow-lg' : 'bg-[#2D1B4E] hover:bg-[#4C1D95]'}`}
+                className={`w-4 h-4 rounded-full transition-all duration-300 border-2 border-[#a6249d]/40 ${index === activePillar ? 'bg-gradient-to-r from-[#d93340] to-[#a6249d] shadow-lg' : 'bg-[#2D1B4E] hover:bg-[#d93340]'}`}
               />
             ))}
           </div>
@@ -257,22 +257,22 @@ const Carrusel = ({ pillars, activePillar, setActivePillar }) => {
       <div className="block md:hidden">
         <div className="relative h-[260px] w-full max-w-xs mx-auto flex items-center justify-center">
           <button
-            className="absolute left-0 z-10 p-3 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#a78bfa] shadow-lg border-2 border-white/20"
+            className="absolute left-0 z-10 p-3 rounded-full bg-gradient-to-br from-[#d93340] to-[#a6249d] shadow-lg border-2 border-[#a6249d]/40"
             onClick={() => paginate(-1)}
           >
             <ChevronLeft className="w-6 h-6 text-white" />
           </button>
-          <div className="w-full h-[220px] bg-[#1A0B2E]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-purple-500/50 shadow-lg flex flex-col items-center justify-center px-4">
+          <div className="w-full h-[220px] bg-[#1A0B2E]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-[#a6249d]/40 shadow-lg flex flex-col items-center justify-center px-4">
             <img src={pillars[activePillar].image} alt="icon" className="w-16 h-16 object-contain mb-2" />
             <h3 className="text-lg font-bold text-white mb-1 text-center">
               {pillars[activePillar].title}
             </h3>
-            <p className="text-white/80 text-sm text-center">
+            <p className="text-white text-sm text-center">
               {pillars[activePillar].description}
             </p>
           </div>
           <button
-            className="absolute right-0 z-10 p-3 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#a78bfa] shadow-lg border-2 border-white/20"
+            className="absolute right-0 z-10 p-3 rounded-full bg-gradient-to-br from-[#d93340] to-[#a6249d] shadow-lg border-2 border-[#a6249d]/40"
             onClick={() => paginate(1)}
           >
             <ChevronRight className="w-6 h-6 text-white" />
@@ -284,7 +284,7 @@ const Carrusel = ({ pillars, activePillar, setActivePillar }) => {
             <button
               key={index}
               onClick={() => setActivePillar(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 border-2 border-white/30 ${index === activePillar ? 'bg-gradient-to-r from-[#7c3aed] to-[#a78bfa] shadow-lg' : 'bg-[#2D1B4E] hover:bg-[#4C1D95]'}`}
+              className={`w-3 h-3 rounded-full transition-all duration-300 border-2 border-[#a6249d]/40 ${index === activePillar ? 'bg-gradient-to-r from-[#d93340] to-[#a6249d] shadow-lg' : 'bg-[#2D1B4E] hover:bg-[#d93340]'}`}
             />
           ))}
         </div>

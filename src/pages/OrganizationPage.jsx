@@ -40,6 +40,7 @@ const OrganizationPage = () => {
     { title: 'Desarrollo Profesional', description: 'Desarrollamos habilidades críticas para preparar líderes responsables.', image: '/pillars/DesarrolloProfesional.png' },
     { title: 'Impacto Comunitario', description: 'Fomentamos el servicio y voluntariado, desarrollando empatía y deber cívico.', image: '/pillars/ImpactoSocial.png' },
     { title: 'Impulso Femenino', description: 'Promovemos el empoderamiento e inclusión, reduciendo disparidades de género.', image: '/pillars/ImpulsoFemenino.png' },
+    { title: 'Marketing', description: 'Potenciamos la visibilidad y el alcance de nuestras iniciativas, conectando con la comunidad y difundiendo el impacto de LEAD UNI.', image: '/pillars/Marketing.png' },
     { title: 'LEAD Academia', description: 'Creamos eventos para inspirar y educar, construyendo futuros líderes.', image: '/pillars/LeadAcademia.png' },
   ];
 
@@ -116,11 +117,9 @@ const memberDetails = {
         'TypeScript',
         'SQL',
         'React',
-        'HTML',
-        'CSS',
+        'HTML / CSS',
         'Tailwind CSS',
-        'Git',
-        'Linux',
+        'Linux (Ubuntu)',
         'Power BI',
         'Excel',
         'GCP',
@@ -128,7 +127,6 @@ const memberDetails = {
         'Docker',
         'Figma',
         'Vercel',
-        'Ubuntu',
         'IoT'
       ],
       soft: [
@@ -548,32 +546,37 @@ const memberDetails = {
 
 
   return (
-    <section className="min-h-screen bg-gradient-to-b from-[#1A0B2E] via-[#2D1B4E] to-[#1A0B2E] text-white py-16">
+    <section className="min-h-screen w-full h-full bg-[rgb(9,9,42)] text-white py-16">
       <div className="max-w-7xl mx-auto px-4">
-        <h1 className="text-5xl md:text-6xl font-bold text-center mb-8">
-          <span className="bg-gradient-to-r from-[#FF1CF7] to-[#00F0FF] text-transparent bg-clip-text">
+        <h1 className="text-5xl md:text-6xl font-bold text-center mb-4">
+          <span className="bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text">
             Dirección General
           </span>
         </h1>
-        <p className="text-center text-lg text-white/80 max-w-2xl mx-auto mb-16">
+        <p className="text-xl md:text-2xl font-semibold text-white/80 mx-auto mb-10 text-center whitespace-normal max-w-xs sm:max-w-xl lg:max-w-3xl xl:max-w-4xl">
           Conoce al equipo que lidera LEAD UNI y trabaja día a día para impulsar el desarrollo integral de nuestra comunidad estudiantil.
         </p>
 
         {/* ORGANIGRAMA */}
         <section className="mb-20">
           <div className="container mx-auto">
-            <div className="relative bg-gradient-to-br from-[#2D1B4E]/30 to-[#1A0B2E]/30 rounded-2xl p-12 border-2 border-purple-500/50 backdrop-blur-sm shadow-lg">
+            <div className="relative rounded-2xl p-12 border-2 border-[#a6249d]/40 backdrop-blur-sm shadow-lg overflow-hidden">
+              {/* Fondo degradado radial igual al carrusel */}
+              <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#d93340]/10 via-[#a6249d]/10 to-transparent"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#a6249d]/10 via-[#d93340]/10 to-transparent"></div>
+              </div>
               {/* Líneas conectoras */}
-              <div className="absolute inset-0 flex flex-col items-center">
-                <div className="w-px h-20 bg-gradient-to-b from-[#FF1CF7] to-[#00F0FF] mt-32"></div>
-                <div className="w-3/4 h-px bg-gradient-to-r from-transparent via-[#FF1CF7] to-transparent mt-4"></div>
+              <div className="absolute inset-0 flex flex-col items-center z-10">
+                <div className="w-px h-20 bg-gradient-to-b from-[#d93340] to-[#a6249d] mt-32"></div>
+                <div className="w-3/4 h-px bg-gradient-to-r from-transparent via-[#d93340] to-transparent mt-4"></div>
               </div>
 
-              <div className="relative flex flex-col items-center space-y-12">
+              <div className="relative flex flex-col items-center space-y-12 z-10">
                 {/* Presidencia */}
                 <div className="relative group">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-[#FF1CF7] to-[#00F0FF] rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-                  <div className="relative px-12 py-6 bg-[#1A0B2E] rounded-lg border-2 border-purple-500/50 shadow-lg">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-[#d93340] to-[#a6249d] rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                  <div className="relative px-12 py-6 bg-[#1A0B2E] rounded-lg border-2 border-[#a6249d]/40 shadow-lg">
                     <h3 className="text-2xl font-bold text-center text-white">Presidencia</h3>
                   </div>
                 </div>
@@ -582,8 +585,8 @@ const memberDetails = {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
                   {['Vicepresidencia', 'Jefatura de Personal', 'Tesorería'].map((cargo) => (
                     <div key={cargo} className="relative group">
-                      <div className="absolute -inset-1 bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] rounded-lg blur opacity-20 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
-                      <div className="relative px-8 py-4 bg-[#1A0B2E] rounded-lg border-2 border-purple-500/50 shadow-lg">
+                      <div className="absolute -inset-1 bg-gradient-to-r from-[#d93340] to-[#a6249d] rounded-lg blur opacity-20 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
+                      <div className="relative px-8 py-4 bg-[#1A0B2E] rounded-lg border-2 border-[#a6249d]/40 shadow-lg">
                         <h3 className="text-xl font-semibold text-center text-white">{cargo}</h3>
                       </div>
                     </div>
@@ -602,12 +605,12 @@ const memberDetails = {
         />
 
         {/* Sección Explorar Pilares */}
-                  <div className="my-8 py-8 border-y-2 border-purple-500/50">
+        <div className="my-8 py-8 border-y-2 border-[#a6249d]/40">
           <div className="text-center">
             <p className="text-xl md:text-2xl font-semibold text-white/80 mb-7">Descubre más sobre nuestros pilares y su impacto</p>
             <Link 
               to="/pillars" 
-              className="inline-flex items-center px-10 py-4 text-lg md:text-xl bg-[#1A0B2E] hover:bg-[#2D1B4E] border-2 border-[#8B5CF6] rounded-full font-bold text-[#8B5CF6] hover:text-[#A78BFA] transition-all duration-300 shadow-lg shadow-purple-900/20"
+              className="inline-flex items-center px-10 py-4 text-lg md:text-xl bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white border-2 border-[#a6249d] rounded-full font-bold hover:bg-[#36042f] hover:text-[#ff6ec7] transition-all duration-300 shadow-lg shadow-pink-900/20"
             >
               Explorar Pilares
             </Link>
@@ -619,13 +622,13 @@ const memberDetails = {
           <div className="absolute left-0 top-1/2 -translate-y-1/2 bg-gradient-to-r from-[#1A0B2E] to-transparent w-20 h-full z-10"></div>
           <div className="absolute right-0 top-1/2 -translate-y-1/2 bg-gradient-to-l from-[#1A0B2E] to-transparent w-20 h-full z-10"></div>
           
-          <button onClick={() => scrollTabs('left')} className="absolute left-2 top-1/2 -translate-y-1/2 bg-[#1A0B2E] hover:bg-[#2D1B4E] text-white border border-purple-500/20 shadow-lg shadow-purple-500/10 rounded-full p-2 z-20 transition-colors">
+          <button onClick={() => scrollTabs('left')} className="absolute left-2 top-1/2 -translate-y-1/2 bg-[#1A0B2E] hover:bg-[#36042f] text-white border border-[#a6249d]/40 shadow-lg shadow-pink-900/10 rounded-full p-2 z-20 transition-colors">
             <ChevronLeft className="w-6 h-6" />
           </button>
           
           <div
             ref={tabsRef}
-            className="flex overflow-x-auto gap-2 px-12 py-4 rounded-xl border-2 border-purple-500/50 scrollbar-none shadow-lg"
+            className="flex overflow-x-auto gap-2 px-12 py-4 rounded-xl border-2 border-[#a6249d]/40 scrollbar-none shadow-lg"
             style={{ scrollBehavior: 'smooth' }}
           >
             {departments.map((dept, idx) => (
@@ -634,8 +637,8 @@ const memberDetails = {
                 onClick={() => setActiveTab(dept.id)}
                 className={`px-6 py-3 font-medium transition-all rounded-lg whitespace-nowrap
                   ${activeTab === dept.id
-                    ? 'bg-gradient-to-r from-[#8B5CF6] to-[#6D28D9] text-white shadow-lg shadow-purple-900/30'
-                    : 'bg-[#1A0B2E] text-white/70 hover:text-white hover:bg-[#2D1B4E]'}
+                    ? 'bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white shadow-lg shadow-pink-900/30'
+                    : 'bg-[#1A0B2E] text-white/70 hover:text-white hover:bg-[#36042f]'}
                 `}
               >
                 {dept.label}
@@ -643,7 +646,7 @@ const memberDetails = {
             ))}
           </div>
           
-          <button onClick={() => scrollTabs('right')} className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#1A0B2E] hover:bg-[#2D1B4E] text-white border border-purple-500/20 shadow-lg shadow-purple-500/10 rounded-full p-2 z-20 transition-colors">
+          <button onClick={() => scrollTabs('right')} className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#1A0B2E] hover:bg-[#36042f] text-white border border-[#a6249d]/40 shadow-lg shadow-pink-900/10 rounded-full p-2 z-20 transition-colors">
             <ChevronRight className="w-6 h-6" />
           </button>
         </div>

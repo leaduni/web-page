@@ -34,12 +34,12 @@ export const ContactoSection = () => {
 
           {/* Right Column - Contact Form */}
           <div className="bg-black/30 backdrop-blur-sm rounded-3xl p-6 sm:p-8 lg:p-10 border border-white/10 w-full max-w-xl mx-auto order-1 lg:order-2">
-            <div className="text-center mb-6 lg:mb-8">
-              <h2 className="text-3xl sm:text-4xl lg:text-4xl font-bold mb-2 bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] text-transparent bg-clip-text">
-                Contáctanos
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-3xl font-extrabold mb-3 bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text">
+                Nuestras Redes Sociales
               </h2>
-              <p className="text-white/80 text-sm sm:text-base">
-                ¿Tienes preguntas o comentarios? Estamos aquí para ayudarte.
+              <p className="text-sm text-white/80 max-w-xs sm:max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto">
+                Conecta con nosotros y forma parte de la comunidad LEAD UNI
               </p>
             </div>
 

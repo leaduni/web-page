@@ -46,14 +46,12 @@ export const AlianzasSection = () => {
       {/* Content Container */}
       <div className="relative container mx-auto px-4">
         {/* Section Title */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 px-4">
-            <span className="bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] text-transparent bg-clip-text">
-              Nuestras Alianzas
-            </span>
+        <div className="text-center mb-12 lg:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text">
+            Alianzas Estratégicas
           </h2>
-          <p className="text-white/80 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4">
-            Colaboramos con organizaciones y empresas para potenciar el desarrollo de nuestros miembros.
+          <p className="text-white/80 text-sm sm:text-base lg:text-lg max-w-xs sm:max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto px-4 text-center">
+            Conoce a las organizaciones y empresas que colaboran con LEAD UNI para potenciar el impacto estudiantil.
           </p>
         </div>
 

@@ -57,8 +57,8 @@ export function NewsCard({
         <motion.div
           key={id}
           variants={itemVariants}
-          whileHover={{ scale: 1.02 }}
-          className="group relative bg-black/30 backdrop-blur-sm rounded-3xl border border-purple-900/20 hover:border-purple-600/40 transition-all duration-500 hover:shadow-[0_8px_30px_-5px_rgba(147,51,234,0.3)]"
+          whileHover={{ scale: 1.03 }}
+          className="group relative bg-[#1A0B2E]/90 backdrop-blur-md rounded-3xl border-2 border-[#a6249d]/40 hover:border-[#d93340]/70 shadow-lg shadow-pink-900/20 transition-all duration-500 hover:shadow-[0_8px_30px_-5px_rgba(217,51,64,0.25)]"
         >
           {/* Imagen con estilos mejorados */}
           <div className="h-48 relative overflow-hidden rounded-t-3xl">
@@ -71,7 +71,7 @@ export function NewsCard({
                   'https://drive.google.com/thumbnail?id=1FCypvIUp0nSbRiTCffFAuiHad9oudIvu&sz=w1000';
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-black/30 to-black/30"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#d93340]/10 via-[#a6249d]/10 to-transparent"></div>
             <div className="absolute inset-0 bg-gradient-to-br from-[#B936F5]/10 via-[#FF1CF7]/10 to-[#00F0FF]/10 group-hover:opacity-30 transition-opacity duration-500"></div>
 
             {/* Emojis de pilares en la esquina superior izquierda */}
@@ -127,14 +127,16 @@ export function NewsCard({
           <div className="p-6">
             <div className="flex justify-between items-start mb-4">
               <span
-                className={`px-3 py-1 rounded-full text-sm font-medium bg-[#B936F5]/20 text-[#B936F5] border border-[#B936F5]/30`}
+                className="px-3 py-1 rounded-full text-sm font-bold bg-gradient-to-r from-[#2d0a2e]/80 to-[#a6249d]/80 text-white border border-[#a6249d]/60 shadow-sm transition-all duration-200"
               >
                 Noticias
               </span>
               <span className="text-sm text-white/60">{date}</span>
             </div>
 
-            <h3 className="text-xl font-bold mb-3 text-[#B936F5]">{title}</h3>
+            <h3 className="text-xl font-bold mb-3 bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text">
+              {title}
+            </h3>
 
             <p className="text-white/70 mb-4 line-clamp-2">{description}</p>
 
@@ -143,7 +145,7 @@ export function NewsCard({
               {tagsEnfoque.slice(0, 3).map((tag, index) => (
                 <span
                   key={`enfoque-${index}`}
-                  className="px-2 py-1 bg-purple-600/20 text-purple-300 rounded-md text-xs font-medium border border-purple-600/30"
+                  className="px-2 py-1 bg-gradient-to-r from-[#2d0a2e]/80 to-[#a6249d]/80 text-white rounded-md text-xs font-bold border border-[#d93340]/60 shadow-sm transition-all duration-700 ease-in-out hover:from-[#d93340]/90 hover:to-[#a6249d]/90 hover:text-white hover:shadow-lg active:scale-95 active:bg-[#d93340]"
                 >
                   {tag}
                 </span>
@@ -151,7 +153,7 @@ export function NewsCard({
               {tagsPublico.slice(0, 2).map((tag, index) => (
                 <span
                   key={`publico-${index}`}
-                  className="px-2 py-1 bg-cyan-600/20 text-cyan-300 rounded-md text-xs font-medium border border-cyan-600/30"
+                  className="px-2 py-1 bg-gradient-to-r from-[#0a2d2e]/80 to-[#00F0FF]/80 text-white rounded-md text-xs font-bold border border-[#00F0FF]/60 shadow-sm transition-all duration-700 ease-in-out hover:from-[#00F0FF]/90 hover:to-[#a6249d]/90 hover:text-white hover:shadow-lg active:scale-95 active:bg-[#00F0FF]"
                 >
                   {tag}
                 </span>
@@ -175,7 +177,7 @@ export function NewsCard({
             </div>
           </div>
 
-          <div className="absolute rounded-3xl -inset-px bg-gradient-to-br from-[#B936F5] to-[#FF1CF7] opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+          <div className="absolute rounded-3xl -inset-px bg-gradient-to-br from-[#a6249d]/30 via-[#d93340]/20 to-[#FF1CF7]/10 opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none"></div>
         </motion.div>
       </Link>
     </div>

@@ -230,19 +230,16 @@ const PillarsPage = () => {
 
   return (
     <>
-      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-[#09092a] to-[#36042f]" />
-
-      <div className="min-h-screen text-white px-4 py-4">
-        <div className="max-w-7xl mx-auto">
+      <section className="min-h-screen w-full h-full bg-[rgb(9,9,42)] text-white py-16">
+        <div className="max-w-7xl mx-auto px-4">
           <h1 className="text-5xl md:text-6xl font-bold text-center mb-4">
-            <span className="bg-gradient-to-r from-[#FF1CF7] to-[#00F0FF] text-transparent bg-clip-text">
+            <span className="bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text">
               Nuestros Pilares
             </span>
           </h1>
 
-          <p className="text-center text-lg mb-2 max-w-3xl mx-auto">
-            LEAD UNI se organiza en siete pilares, cada uno enfocado en un área específica de
-            desarrollo para nuestros miembros y la comunidad universitaria.
+          <p className="text-xl md:text-2xl font-semibold text-white/80 mx-auto mb-10 text-center whitespace-normal max-w-xs sm:max-w-xl lg:max-w-3xl xl:max-w-4xl">
+            LEAD UNI se organiza en ocho pilares, cada uno enfocado en un área específica de desarrollo para nuestros miembros y la comunidad universitaria.<br className='hidden md:block' /> 
           </p>
 
           <div className="flex-grow flex items-center justify-center">
@@ -259,7 +256,7 @@ const PillarsPage = () => {
             </div>
           )}
         </div>
-      </div>
+      </section>
     </>
 
   );
