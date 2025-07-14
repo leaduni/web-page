@@ -96,7 +96,7 @@ const pillarOptions = [
   },
   {
     id: 'profesional',
-    image: '/pillars/DessarrolloProfesional.png',
+    image: '/pillars/DesarrolloProfesional.png',
     name: 'Desarrollo Profesional',
     alt: 'Ícono de Desarrollo Profesional'
   },
