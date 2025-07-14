@@ -1,7 +1,7 @@
 # netlify.toml
 [build]
   command = "npm run build" # O tu comando de build, ej: "yarn build"
-  publish = "build"         # Tu carpeta de build, ej: "dist", "public"
+  publish = "dist"         # Tu carpeta de build, ej: "dist", "public"
 
 [[redirects]]
   from = "/sitemap.xml"
