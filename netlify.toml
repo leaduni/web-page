@@ -7,7 +7,7 @@
   from = "/sitemap.xml"
   to = "/sitemap.xml"
   status = 200
-  force = false # Opcional: force = true asegura que se sirva incluso si hay conflicto, pero no suele ser necesario aquí.
+  headers = {Content-Type = "application/xml"} # <-- Añade esta línea
 
 [[redirects]]
   from = "/robots.txt"
