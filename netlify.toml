@@ -1,13 +1,13 @@
 # netlify.toml
 [build]
-  command = "npm run build" # O tu comando de build, ej: "yarn build"
-  publish = "dist"         # Tu carpeta de build, ej: "dist", "public"
+  command = "npm run build"
+  publish = "dist"
 
 [[redirects]]
   from = "/sitemap.xml"
   to = "/sitemap.xml"
   status = 200
-  headers = {Content-Type = "application/xml"} # <-- Añade esta línea
+  headers = {Content-Type = "application/xml"}
 
 [[redirects]]
   from = "/robots.txt"
