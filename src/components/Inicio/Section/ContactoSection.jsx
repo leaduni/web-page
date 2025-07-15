@@ -36,7 +36,7 @@ export const ContactoSection = () => {
           <div className="bg-black/30 backdrop-blur-sm rounded-3xl p-6 sm:p-8 lg:p-10 border border-white/10 w-full max-w-xl mx-auto order-1 lg:order-2">
             <div className="text-center mb-8">
               <h2 className="text-2xl md:text-3xl font-extrabold mb-3 bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text">
-                Nuestras Redes Sociales
+                Contactanos
               </h2>
               <p className="text-sm text-white/80 max-w-xs sm:max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto">
                 Conecta con nosotros y forma parte de la comunidad LEAD UNI
@@ -80,10 +80,18 @@ export const ContactoSection = () => {
                   name="asunto"
                   className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[#B936F5] transition-colors text-sm"
                 >
-                  <option value="" className="bg-[#1A0B2E]">Selecciona un asunto</option>
-                  <option value="general" className="bg-[#1A0B2E]">Consulta General</option>
-                  <option value="unirse" className="bg-[#1A0B2E]">Unirse al Equipo</option>
-                  <option value="colaboracion" className="bg-[#1A0B2E]">Propuesta de Colaboración</option>
+                  <option value="" className="bg-[#1A0B2E]">
+                    Selecciona un asunto
+                  </option>
+                  <option value="general" className="bg-[#1A0B2E]">
+                    Consulta General
+                  </option>
+                  <option value="unirse" className="bg-[#1A0B2E]">
+                    Unirse al Equipo
+                  </option>
+                  <option value="colaboracion" className="bg-[#1A0B2E]">
+                    Propuesta de Colaboración
+                  </option>
                 </select>
               </div>
 
@@ -115,4 +123,3 @@ export const ContactoSection = () => {
     </section>
   );
 };
-

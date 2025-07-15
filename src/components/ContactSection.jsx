@@ -192,53 +192,70 @@ const ContactSection = () => {
                 </div>
               </div>
 
-              {/* Tarjeta Kick */}
+              {/* Tarjeta Twitch */}
               <div className="group relative">
                 <div
-                  className="absolute inset-0 bg-gradient-to-br from-[#53FC18] to-[#00D100] rounded-xl transform group-hover:scale-105 transition-all duration-500 shadow-lg"
+                  className="absolute inset-0 bg-gradient-to-br from-[#9146FF] to-[#6441A4] rounded-xl transform group-hover:scale-105 transition-all duration-500 shadow-lg"
                   style={{
                     transform: 'perspective(1000px) rotateX(-3deg) rotateY(3deg)',
-                    boxShadow: '0 15px 30px rgba(83, 252, 24, 0.3)',
+                    boxShadow: '0 15px 30px rgba(145, 70, 255, 0.3)',
                   }}
                 />
                 <div
-                  className="relative bg-[#09092a]/90 backdrop-blur-sm rounded-xl p-4 border border-[#53FC18]/30 hover:border-[#53FC18]/60 transition-all duration-500"
+                  className="relative bg-[#09092a]/90 backdrop-blur-sm rounded-xl p-4 border border-[#9146FF]/30 hover:border-[#9146FF]/60 transition-all duration-500"
                   style={{
                     transform: 'perspective(1000px) rotateX(-3deg) rotateY(3deg)',
                     boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
                   }}
                 >
                   <div className="flex flex-col items-center text-center">
-                    <div className="w-10 h-10 p-1 bg-gradient-to-br from-[#53FC18] to-[#00D100] rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 mb-2">
+                    <div className="w-10 h-10 p-1 bg-gradient-to-br from-[#9146FF] to-[#6441A4] rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 mb-2">
                       <svg
-                        width="933"
-                        height="300"
-                        viewBox="0 0 933 300"
-                        fill="none"
                         xmlns="http://www.w3.org/2000/svg"
+                        xmlSpace="preserve"
+                        viewBox="0 0 2400 2800"
+                        className="w-6 h-6"
                       >
-                        <g clip-path="url(#clip0_9790_492437)">
-                          <g clip-path="url(#clip1_9790_492437)">
-                            <path
-                              fill-rule="evenodd"
-                              clip-rule="evenodd"
-                              d="M0 0H100V66.6667H133.333V33.3333H166.667V0H266.667V100H233.333V133.333H200V166.667H233.333V200H266.667V300H166.667V266.667H133.333V233.333H100V300H0V0ZM666.667 0H766.667V66.6667H800V33.3333H833.333V0H933.333V100H900V133.333H866.667V166.667H900V200H933.333V300H833.333V266.667H800V233.333H766.667V300H666.667V0ZM300 0H400V300H300V0ZM533.333 0H466.667V33.3333H433.333V266.667H466.667V300H533.333H633.333V200H533.333V100H633.333V0H533.333Z"
-                              fill="#FFF"
-                            />
-                          </g>
+                        <path fill="#fff" d="m2200 1300-400 400h-400l-350 350v-350H600V200h1600z" />
+                        <g fill="#9146ff">
+                          <path d="M500 0 0 500v1800h600v500l500-500h400l900-900V0H500zm1700 1300-400 400h-400l-350 350v-350H600V200h1600v1100z" />
+                          <path d="M1700 550h200v600h-200zm-550 0h200v600h-200z" />
                         </g>
-                        <defs>
-                          <clipPath id="clip0_9790_492437">
-                            <rect width="933" height="300" fill="white" />
-                          </clipPath>
-                          <clipPath id="clip1_9790_492437">
-                            <rect width="933.333" height="300" fill="white" />
-                          </clipPath>
-                        </defs>
                       </svg>
                     </div>
-                    <h3 className="text-white font-bold text-sm">Kick</h3>
-                    <p className="text-[#f3eafd] text-xs">@lead_uni</p>
+                    <h3 className="text-white font-bold text-sm">Twitch</h3>
+                    <p className="text-[#f3eafd] text-xs">leadunioficial</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Tarjeta Kick - Próximamente */}
+            <div className="mb-6">
+              <div className="group relative max-w-md mx-auto">
+                <div
+                  className="absolute inset-0 bg-gradient-to-br from-[#53FC18]/20 to-[#00D100]/20 rounded-xl transition-all duration-500 shadow-lg opacity-50"
+                  style={{
+                    transform: 'perspective(1000px) rotateX(2deg)',
+                    boxShadow: '0 15px 30px rgba(83, 252, 24, 0.1)',
+                  }}
+                />
+                <div
+                  className="relative bg-[#09092a]/60 backdrop-blur-sm rounded-xl p-6 border border-[#53FC18]/20 transition-all duration-500"
+                  style={{
+                    transform: 'perspective(1000px) rotateX(2deg)',
+                    boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
+                  }}
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#53FC18]/40 to-[#00D100]/40 rounded-lg flex items-center justify-center mb-3 opacity-50 border-2 border-[#53FC18]/30">
+                      <div className="w-6 h-6 rounded bg-gradient-to-br from-[#53FC18]/60 to-[#00D100]/60 animate-pulse"></div>
+                    </div>
+                    <h3 className="text-white/70 font-bold text-lg mb-2">???</h3>
+                    <div className="bg-gradient-to-r from-[#53FC18]/20 to-[#00D100]/20 px-4 py-2 rounded-full border border-[#53FC18]/30 mb-2">
+                      <p className="text-[#53FC18] text-sm font-semibold">PRÓXIMAMENTE</p>
+                    </div>
+                    <p className="text-[#f3eafd]/60 text-xs">Algo emocionante se acerca...</p>
                   </div>
                 </div>
               </div>

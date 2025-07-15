@@ -73,6 +73,11 @@ export const PilaresSection = () => {
   const [lastClickTime, setLastClickTime] = useState(0);
   const [easterEggMessage, setEasterEggMessage] = useState('');
 
+  // Estados para el swipe
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [dragOffset, setDragOffset] = useState(0);
+
   const handleCardClick = pillarTitle => {
     const now = Date.now();
 
@@ -100,6 +105,77 @@ export const PilaresSection = () => {
     }
   };
 
+  // Funciones para manejar el swipe en móviles
+  const handleTouchStart = e => {
+    if (isAnimating) return;
+    const touch = e.touches[0];
+    setDragStart({ x: touch.clientX, y: touch.clientY });
+    setIsDragging(true);
+    setDragOffset(0);
+  };
+
+  const handleTouchMove = e => {
+    if (!isDragging || isAnimating) return;
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - dragStart.x;
+    const deltaY = touch.clientY - dragStart.y;
+
+    // Solo permitir swipe horizontal si el movimiento es más horizontal que vertical
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      e.preventDefault(); // Prevenir scroll vertical
+      setDragOffset(deltaX);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging || isAnimating) return;
+
+    const threshold = 50; // Distancia mínima para activar el swipe
+
+    if (Math.abs(dragOffset) > threshold) {
+      if (dragOffset > 0) {
+        // Swipe hacia la derecha - ir al anterior
+        paginate(-1);
+      } else {
+        // Swipe hacia la izquierda - ir al siguiente
+        paginate(1);
+      }
+    }
+
+    setIsDragging(false);
+    setDragOffset(0);
+  };
+
+  const handleMouseDown = e => {
+    if (isAnimating) return;
+    setDragStart({ x: e.clientX, y: e.clientY });
+    setIsDragging(true);
+    setDragOffset(0);
+  };
+
+  const handleMouseMove = e => {
+    if (!isDragging || isAnimating) return;
+    const deltaX = e.clientX - dragStart.x;
+    setDragOffset(deltaX);
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging || isAnimating) return;
+
+    const threshold = 50;
+
+    if (Math.abs(dragOffset) > threshold) {
+      if (dragOffset > 0) {
+        paginate(-1);
+      } else {
+        paginate(1);
+      }
+    }
+
+    setIsDragging(false);
+    setDragOffset(0);
+  };
+
   const slideVariants = {
     enter: direction => ({
       x: direction > 0 ? '100%' : '-100%',
@@ -117,18 +193,18 @@ export const PilaresSection = () => {
       },
     }),
     center: {
-      x: 0,
+      x: isDragging ? `${dragOffset * 0.1}px` : 0,
       y: 0,
       opacity: 1,
       scale: 1,
-      rotateY: 0,
+      rotateY: isDragging ? dragOffset * 0.02 : 0,
       rotateX: 0,
       rotateZ: 0,
       transition: {
-        type: 'spring',
+        type: isDragging ? 'tween' : 'spring',
         damping: 20,
         stiffness: 100,
-        duration: 1.2,
+        duration: isDragging ? 0 : 1.2,
       },
     },
   };
@@ -213,7 +289,17 @@ export const PilaresSection = () => {
 
         {/* Mobile Carousel */}
         <div className="block lg:hidden">
-          <div className="relative h-[350px] max-w-sm mx-auto">
+          <div
+            className="relative h-[350px] max-w-sm mx-auto select-none"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            style={{ touchAction: 'pan-y' }}
+          >
             <AnimatePresence initial={false} custom={direction} mode="sync">
               <motion.div
                 key={currentIndex}
@@ -224,11 +310,19 @@ export const PilaresSection = () => {
                 className="absolute inset-0 flex items-center justify-center"
               >
                 <motion.div
-                  className="w-full max-w-[300px] h-[280px] bg-gradient-to-br from-[#2D1B4E] via-[#1A0B2E] to-black backdrop-blur-lg rounded-3xl overflow-hidden border border-purple-500/40 shadow-[0_8px_50px_-5px_rgba(147,51,234,0.5)] cursor-pointer"
+                  className={`w-full max-w-[300px] h-[280px] bg-gradient-to-br from-[#2D1B4E] via-[#1A0B2E] to-black backdrop-blur-lg rounded-3xl overflow-hidden border border-purple-500/40 shadow-[0_8px_50px_-5px_rgba(147,51,234,0.5)] cursor-pointer ${
+                    isDragging ? 'cursor-grabbing' : 'cursor-grab'
+                  }`}
                   whileHover="hover"
                   whileTap="tap"
                   variants={cardVariants}
-                  onClick={() => handleCardClick(pilares[currentIndex].title)}
+                  onClick={() => !isDragging && handleCardClick(pilares[currentIndex].title)}
+                  style={{
+                    transform: isDragging
+                      ? `translateX(${dragOffset}px) rotateY(${dragOffset * 0.1}deg)`
+                      : 'none',
+                    transition: isDragging ? 'none' : 'transform 0.3s ease-out',
+                  }}
                 >
                   <div className="p-6 h-full flex flex-col">
                     <span className="mb-3 flex items-center justify-center">
@@ -280,6 +374,19 @@ export const PilaresSection = () => {
                 }}
               />
             ))}
+          </div>
+
+          {/* Swipe Indicator */}
+          <div className="flex items-center justify-center mt-4 text-white/60 text-xs">
+            <motion.div
+              className="flex items-center gap-2"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: isDragging ? 0.3 : 1 }}
+            >
+              <span>←</span>
+              <span>Desliza para explorar</span>
+              <span>→</span>
+            </motion.div>
           </div>
         </div>
 
