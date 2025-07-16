@@ -456,10 +456,10 @@ const ApplicationPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
             <div className="bg-gradient-to-br from-[#d93340]/30 to-[#19092a]/20 rounded-xl p-6 shadow-lg flex flex-col items-center">
               <svg width="48" height="48" fill="none" viewBox="0 0 24 24" className="mb-2">
-                <circle cx="12" cy="12" r="10" fill="#ff6ec7" opacity="0.2" />
+                <circle cx="12" cy="12" r="10" fill="#fff" opacity="0.2" />
                 <path
                   d="M12 6v6l4 2"
-                  stroke="#ff6ec7"
+                  stroke="#fff"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -474,10 +474,10 @@ const ApplicationPage = () => {
             </div>
             <div className="bg-gradient-to-br from-[#19092a]/30 to-[#bf2a51]/20 rounded-xl p-6 shadow-lg flex flex-col items-center">
               <svg width="48" height="48" fill="none" viewBox="0 0 24 24" className="mb-2">
-                <rect x="3" y="4" width="16" height="16" rx="10" fill="#ff6ec7" opacity="0.2" />
+                <rect x="3" y="4" width="16" height="16" rx="10" fill="#fff" opacity="0.2" />
                 <path
                   d="M8 12l2 2 4-4"
-                  stroke="#ff6ec7"
+                  stroke="#fff"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -494,26 +494,25 @@ const ApplicationPage = () => {
         </div>
       </section>
 
-      {/* Imagen decorativa de la derecha, ahora con control de visibilidad */}
-      <div className={`hidden lg:flex fixed right-0 top-0 h-full w-1/2 items-center justify-center z-0 pointer-events-none ${showImage ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="w-full h-full flex items-center justify-center relative">
-          <img
-            src="/student_stem.png"
-            alt="Students in STEM"
-            className="object-contain mx-auto"
-            style={{ display: 'block' }}
-          />
-        </div>
-      </div>
-
       {/* Sección de formulario y cuadros para rellenar datos */}
       <section
         id="application-form"
         className="w-full flex flex-col items-center justify-center min-h-screen py-8 px-4 z-20 relative"
       >
+        {/* Imagen decorativa SOLO para la sección de inscripción, visible en escritorio */}
+        <div className="hidden lg:flex absolute right-0 top-0 h-full w-1/2 items-center justify-center z-0 pointer-events-none opacity-100">
+          <div className="w-full h-full flex items-center justify-center relative">
+            <img
+              src="/student_stem.png"
+              alt="Students in STEM"
+              className="object-contain mx-auto"
+              style={{ display: 'block' }}
+            />
+          </div>
+        </div>
         <div className="container mx-auto px-4 py-8 flex flex-col lg:flex-row">
           <div className="lg:w-1/2">
-            <FormCard title="Información General" subtitle="Cuentamos un poco más sobre ti">
+            <FormCard title={<span className="text-white">Información General</span>} subtitle="Cuentamos un poco más sobre ti">
               <FormField label="Nombres y Apellidos">
                 <TextInput
                   value={formData.fullName}
@@ -597,44 +596,50 @@ const ApplicationPage = () => {
               </div>
             </div>
             
+            {/* INFORMACIÓN SOBRE EL PILAR */}
             {selectedPillar && (
-              <FormCard title={`INFORMACIÓN SOBRE EL PILAR`}>
+              <FormCard title={<span className="text-white">INFORMACIÓN SOBRE EL PILAR</span>}>
                 <div className="text-white">
-                  <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-[#bf2a51] to-[#a6249d] bg-clip-text text-transparent">
+                  <h3 className="text-xl font-bold mb-2 text-[#ff6ec7]">
                     {pillarContent[selectedPillar].title}
                   </h3>
-                  <p className="text-[#f3eafd]">{pillarContent[selectedPillar].description}</p>
+                  <p className="text-white/90">{pillarContent[selectedPillar].description}</p>
                 </div>
               </FormCard>
             )}
+            {/* INFORMACIÓN ESPECÍFICA PARA POSTULAR AL PILAR */}
             {selectedPillar && (
-              <FormCard title="INFORMACIÓN ESPECÍFICA PARA POSTULAR AL PILAR">
+              <FormCard title={<span className="text-white">INFORMACIÓN ESPECÍFICA PARA POSTULAR AL <span className="text-white">PILAR</span></span>}>
                 <div className="text-white">
-                  <FormField label="¿Cuál fue tu principal motivo para postular a este Pilar?">
+                  <FormField label={<span className="text-[#ff6ec7] font-semibold">¿Cuál fue tu principal motivo para postular a este Pilar?</span>}>
                     <TextInput
                       value={pillarSpecificData.projectType}
                       onChange={e => handlePillarSpecificChange('projectType', e.target.value)}
                       placeholder="Describe tus motivos para postular a este pilar"
+                      className="text-white border-2 border-[#a6249d]/60 focus:border-[#d93340] bg-transparent"
                     />
                   </FormField>
-                  <FormField label="¿Qué habilidades te ayudarían a destacar en este pilar?">
+                  <FormField label={<span className="text-[#ff6ec7] font-semibold">¿Qué habilidades te ayudarían a destacar en este pilar?</span>}>
                     <TextInput
                       value={pillarSpecificData.skills}
                       onChange={e => handlePillarSpecificChange('skills', e.target.value)}
                       placeholder="Menciona las habilidades que posees o quieres desarrollar"
+                      className="text-white border-2 border-[#a6249d]/60 focus:border-[#d93340] bg-transparent"
                     />
                   </FormField>
                 </div>
               </FormCard>
             )}
+            {/* REFLEXIÓN FINAL */}
             {selectedPillar && (
-              <FormCard title="REFLEXIÓN FINAL">
+              <FormCard title={<span className="text-white">REFLEXIÓN <span className="text-white">FINAL</span></span>}>
                 <div className="text-white">
-                  <FormField label="Para ti, ¿qué es LEAD UNI?">
+                  <FormField label={<span className="text-[#ff6ec7] font-semibold">Para ti, ¿qué es LEAD UNI?</span>}>
                     <TextInput
                       value={leadUniDefinition}
                       onChange={e => setLeadUniDefinition(e.target.value)}
                       placeholder="Comparte tu visión sobre LEAD UNI"
+                      className="text-white border-2 border-[#a6249d]/60 focus:border-[#d93340] bg-transparent"
                     />
                   </FormField>
                 </div>

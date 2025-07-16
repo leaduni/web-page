@@ -6,10 +6,10 @@ export const ContactoSection = () => {
   return (
     <section
       id="contacto"
-      className="relative min-h-screen bg-transparent py-12 sm:py-16 lg:py-24 overflow-hidden"
+      className="relative min-h-screen bg-[rgb(9,9,42)] py-12 sm:py-16 lg:py-24 overflow-hidden"
     >
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-transparent"></div>
+      <div className="absolute inset-0 bg-[rgb(9,9,42)]"></div>
 
       <div className="relative container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center max-w-6xl mx-auto">
@@ -33,7 +33,7 @@ export const ContactoSection = () => {
           </div>
 
           {/* Right Column - Contact Form */}
-          <div className="bg-black/30 backdrop-blur-sm rounded-3xl p-6 sm:p-8 lg:p-10 border border-white/10 w-full max-w-xl mx-auto order-1 lg:order-2">
+          <div className="bg-[#1A0B2E]/90 backdrop-blur-lg rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#a6249d]/40 shadow-[0_8px_30px_-5px_rgba(34,48,91,0.2)] w-full max-w-xl mx-auto order-1 lg:order-2">
             <div className="text-center mb-8">
               <h2 className="text-2xl md:text-3xl font-extrabold mb-3 bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text">
                 Contactanos

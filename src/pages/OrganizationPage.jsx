@@ -47,34 +47,34 @@ const OrganizationPage = () => {
   const members = {
   direccion: [
     { name: 'Arianna Micaela Yauri Azabache', position: 'Presidenta', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436112/7b539560-c13f-4647-89c1-0c380a1d856e_-_Arianna_Yauri_ek5wmw.jpg', imgClass: 'object-[center_top]' },  
-    { name: 'Jose Martin Rojas Sanchez', position: 'Vicepresidente', image: '/placeholder-profile.png' },
-    { name: 'Claudia Ballarta Ulloa', position: 'Jefa de Personal', image: '/placeholder-profile.png' },
-    { name: 'Miguel Anthony Castañeda Villanueva', position: 'Tesorero', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752450012/WhatsApp_Image_2025-06-02_at_19.57.59_f83fh8.jpg', imgClass: 'object-top md:object-center' },  
+    { name: 'Jose Martin Rojas Sanchez', position: 'Vicepresidente', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752628013/WhatsApp_Image_2025-07-14_at_12.41.49_PM_-_Jose_Martin_Rojas_Sanchez_ergodj_tombkl.jpg' },
+    { name: 'Claudia Ballarta Ulloa', position: 'Jefa de Personal', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752624875/DSC_1000_-_Claudia_Ballarta1_h8czpc.jpg', imgClass: 'object-top' },
+    { name: 'Miguel Anthony Castañeda Villanueva', position: 'Tesorero', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752634476/WhatsApp_Image_2025-06-02_at_19.57.59_f83fh8_u447ka.jpg', imgClass: 'object-top md:object-center' },  
   ],
   liderazgo: [
-    { name: 'Petter Joseph Chuquipiondo Robles', position: 'Director del Pilar de Liderazgo', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436142/IMG_5268_-_Joseph_Robles_boo88g.jpg' },
+    { name: 'Petter Joseph Chuquipiondo Robles', position: 'Director del Pilar de Liderazgo', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752635075/IMG_5268_-_Joseph_Robles11_pgbfjk.jpg' },
   ],
   academica: [
-    { name: 'Diogo Fabricio Abregu Gonzales', position: 'Director del Pilar de Excelencia Académica', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752430661/careta_-_Diogo_Abregu_Gonzales_fb0pgy.jpg' },
+    { name: 'Diogo Fabricio Abregu Gonzales', position: 'Director del Pilar de Excelencia Académica', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752634090/careta_-_Diogo_Abregu_Gonzales1_pceeau.jpg' },
   ],
   femenina: [
     { name: 'Angela Cori Salas', position: 'Directora del Pilar de Impulso Femenino', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436134/IMG-20250712-WA0035_-_ANGELA_CORI_SALAS_w3i03r.jpg', imgClass: 'object-[center_top]' },
   ],
   profesional: [
-    { name: 'Yuleimy Yasmin Lucas Zasiga', position: 'Directora del Pilar de Desarrollo Profesional', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436196/foto1_-_YULEIMY_YASMIN_LUCAS_ZASIGA_uu03fd.jpg', imgClass: 'object-top' }, 
+    { name: 'Yuleimy Yasmin Lucas Zasiga', position: 'Directora del Pilar de Desarrollo Profesional', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752635408/foto1_-_YULEIMY_YASMIN_LUCAS_ZASIGA2_nmz1yn.jpg', imgClass: 'object-top' }, 
   ],
   social: [
     { name: 'Gabriel Wei Wei Siguas', position: 'Director del Pilar de Impacto Comunitario', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436149/IMG_4317_-_GABRIEL_WEI_WEI_SIGUAS_yvgngt.jpg' },
   ],
   capitulo: [
-    { name: 'Enrique Torres Julca', position: 'Director del Pilar de Desarrollo del Capítulo', image: '/placeholder-profile.png' },
+    { name: 'Enrique Torres Julca', position: 'Director del Pilar de Desarrollo del Capítulo', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752633861/WhatsApp_Image_2025-07-15_at_20.38.55_1_urdulk.jpg' },
   ],
   marketing: [
-    { name: 'Daniel Kevin Manayay Cadillo', position: 'Director de Marketing', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436127/515495259_17914512348150651_1323602709192233497_n_-_Daniel_Manayay_zz6em8.jpg', imgClass: 'object-top' },
-    { name: 'Eliane Brenda Antara Gallupe', position: 'Subdirectora de Marketing', image: '/placeholder-profile.png' },
+    { name: 'Daniel Kevin Manayay Cadillo', position: 'Director de Marketing', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752625998/515495259_17914512348150651_1323602709192233497_n_-_Daniel_Manayay_zncogm.jpg', imgClass: 'object-top' },
+    { name: 'Eliane Brenda Antara Gallupe', position: 'Subdirectora de Marketing', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752618464/foto_-_Brenda_Antara_zyhfah.jpg' },
   ],
   academia: [
-    { name: 'Cesar Miguel Salazar Reyes', position: 'Director del Pilar de LEAD Academia', image: '/placeholder-profile.png' },
+    { name: 'Cesar Miguel Salazar Reyes', position: 'Director del Pilar de LEAD Academia', image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752627821/Nueva1_foto_Linkendl_-_Cesar_salazar_qwgsnt_mhk6vl.jpg' },
   ],
   todos: [],
 };
@@ -141,59 +141,75 @@ const memberDetails = {
   },
 
   "Jose Martin Rojas Sanchez": {
-    bio: "Vicepresidente de LEAD UNI y estudiante de Ingeniería de Sistemas. Apasionado por la innovación educativa, la gestión de proyectos y el desarrollo de soluciones tecnológicas con impacto social.",
-    contacto: ['Correo', 'LinkedIn', 'Portafolio', 'Github', 'Curriculum Vitae'],
+    bio: "Soy Vicepresidente de LEAD UNI y estudiante de Ingeniería de Software. Actualmente me desempeño como Director del área Académica en CCN 2025 y Coordinador Académico en CEIIS 24-25. Me apasiona el Cloud Computing y me gusta aprender nuevas cosas y afrontar nuevos retos constantemente.",
+    contacto: [
+      'rojassanchezjosemartin@gmail.com',
+      'jose.rojas.s@uni.pe',
+      '927723495',
+      'https://www.linkedin.com/in/jose-martin-rojas-sanchez-4349b4300?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BGgUAKAzpS620EQBAowmbKQ%3D%3D',
+      '',
+      'https://github.com/JoseRojas-a11y',
+      '',
+      ''
+    ],
     eventos: {
-      premios: [
-        'Finalista - Concurso Nacional de Innovación 2023',
-        'Reconocimiento a la Gestión Estudiantil 2022'
-      ],
+      premios: [],
       liderados: [
-        'Jornada de Capacitación en Liderazgo - Sep 2023',
-        'Encuentro Nacional de Centros Estudiantiles - Ene 2024'
+        'OpenDay_Fiis - Jul 2025',
+        'Circuito empresarial - Mar 2025'
       ]
     },
     habilidades: {
-      soft: [
-        'Gestión de equipos',
-        'Pensamiento estratégico',
-        'Facilitación de talleres'
-      ],
       hard: [
-        'Python, TypeScript',
-        'Gestión de proyectos con Trello/Asana',
-        'Figma, Canva',
-        'Sistemas de automatización con Notion + APIs'
+        'Python',
+        'SQL',
+        'C++',
+        'Looker',
+        'GCP'
+      ],
+      soft: [
+        'Trabajo en equipo',
+        'Organización de proyectos',
+        'Gestión de eventos'
       ]
-    }
+    },
+    image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752628013/WhatsApp_Image_2025-07-14_at_12.41.49_PM_-_Jose_Martin_Rojas_Sanchez_ergodj_tombkl.jpg'
   },
 
   "Claudia Ballarta Ulloa": {
-    bio: "Jefe del Personal de LEAD UNI y estudiante de Ingeniería Industrial. Enfocada en la gestión del talento humano, con habilidades para la planificación organizacional, evaluación de desempeño y cultura de bienestar estudiantil. Apasionada por construir equipos colaborativos y resilientes.",
-    contacto: ['Correo', 'LinkedIn', 'Portafolio', 'Github', 'Curriculum Vitae'],
+    bio: "Soy estudiante de Ingeniería Industrial y actualmente me desempeño como Jefa de Personal en LEAD UNI. Desde este cargo, me enfoco en la organización y desarrollo de los distintos pilares de la comunidad. Entre mis principales intereses se encuentran la inteligencia artificial aplicada a la industria, la automatización de procesos y la ciberseguridad organizacional. Mi principal motivación es generar cambios positivos que contribuyan al bienestar de la comunidad universitaria.",
+    contacto: [
+      'ballartaclaudia2@gmail.com',
+      'claudia.ballarta.u@uni.pe',
+      '934463653',
+      'www.linkedin.com/in/claudia-belen-ballarta-ulloa-070221305',
+      'https://drive.google.com/open?id=1Lsr6ICn4l3UnBWbKgAilQ8uvqU6tchW6',
+      '', // Github vacío
+      '', // Portafolio vacío
+      ''  // Otro vacío
+    ],
     eventos: {
       premios: [
-        'Reconocimiento a la Gestión Humana – LEAD 2023',
-        'Participación destacada en Congreso de RRHH UNI 2022'
+        '1er puesto - Hackathon Innova BCP 2025'
       ],
       liderados: [
-        'Programa de Integración LEAD – Abril 2023',
-        'Ciclo de Talleres "Bienestar y Equipo" – Nov 2023'
+        'Charla de "Women Leading Data And IA" – Junio 2025'
       ]
     },
     habilidades: {
-      soft: [
-        'Empatía organizacional',
-        'Comunicación asertiva',
-        'Gestión de conflictos internos'
-      ],
       hard: [
-        'Gestión de personal con Excel y Trello',
-        'Diseño de encuestas de clima laboral',
-        'Presentaciones institucionales (Canva, PowerPoint)',
-        'Sistemas de entrevistas'
+        'C++',
+        'Python'
+      ],
+      soft: [
+        'Liderazgo',
+        'Comunicación asertiva',
+        'Empatía',
+        'Resolución de conflictos',
+        'Trabajo en equipo'
       ]
-    }
+    },
+    image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752624875/DSC_1000_-_Claudia_Ballarta1_h8czpc.jpg'
   },
 
   "Miguel Anthony Castañeda Villanueva": {
@@ -233,7 +249,7 @@ const memberDetails = {
         'Proactividad'
       ]
     },
-        image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752450012/WhatsApp_Image_2025-06-02_at_19.57.59_f83fh8.jpg'
+        image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752634476/WhatsApp_Image_2025-06-02_at_19.57.59_f83fh8_u447ka.jpg'
   },
 
   "Petter Joseph Chuquipiondo Robles": {
@@ -309,7 +325,7 @@ const memberDetails = {
         'Java'
       ]
     },
-    image: 'https://drive.google.com/open?id=1MD_wU7psaHyyF2AWUCvrex_W38mXYExU'
+    image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752634090/careta_-_Diogo_Abregu_Gonzales1_pceeau.jpg'
   },
 
   "Angela Cori Salas": {
@@ -419,31 +435,40 @@ const memberDetails = {
   },
 
   "Enrique Torres Julca": {
-    bio: "Pilar de Desarrollo del Capítulo en LEAD UNI y estudiante de Ingeniería Electrónica. Su misión es fortalecer la cohesión organizacional y construir una cultura institucional sólida a través de eventos, tradición y sentido de pertenencia.",
-    contacto: ['Correo', 'LinkedIn', 'Portafolio', 'Github', 'Curriculum Vitae'],
+    bio: "Soy estudiante de Ingeniería en Sistemas y actualmente asumo el cargo de Director del Pilar de Desarrollo del Capítulo en LEAD UNI. Anteriormente he asumido responsabilidades a nivel de mi facultad como delegado general de mi código en el periodo 2024, formo parte de los centros culturales Núcleo y CCAT, en las áreas de investigación y GDH. A nivel de la UNI conformé parte del IEEE CIS UNI e InspirateUNI como subdirector de R.R.P.P. y miembro de marketing. Además, actualmente soy parte del Centro de estudiantes de mi facultad, asumiendo el rol de coordinador académico de sistemas. Me gusta mucho la dualidad entre la tecnología y las ciencias, desarrollar actividades nuevas e innovar en diversos campos.",
+    contacto: [
+      'torresjulcaenrique@gmail.com',
+      'enrique.torres.j@uni.pe',
+      '939854051',
+      'https://www.linkedin.com/in/enrique-torres-julca-717227305?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+      '',
+      '',
+      '',
+      ''
+    ],
     eventos: {
       premios: [
-        'Reconocimiento a la Identidad LEAD UNI 2023',
-        '3er puesto en Concurso de Cultura Organizacional – IEEE UNI'
+        '2do puesto en categoría I de la Feria y concurso de proyectos 2025 en la FIIS'
       ],
       liderados: [
-        'Semana de Integración – May 2023',
-        'Desafío Trivia LEAD – Nov 2023'
+        'Taller de introducción a bigData - Jul 2024'
       ]
     },
     habilidades: {
-      soft: [
-        'Organización de comunidades',
-        'Escucha activa',
-        'Creatividad en dinámicas internas'
-      ],
       hard: [
-        'Logística de eventos internos',
-        'Gamificación con herramientas web',
-        'Gestión de base de datos de miembros',
-        'Diseño de merchandising institucional'
+        'SQL',
+        'C++',
+        'Java'
+      ],
+      soft: [
+        'Liderazgo',
+        'Comunicación efectiva',
+        'Pensamiento crítico',
+        'Resolución de problemas',
+        'Tolerancia y comprensión'
       ]
-    }
+    },
+    image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752633861/WhatsApp_Image_2025-07-15_at_20.38.55_1_urdulk.jpg'
   },
 
   "Daniel Kevin Manayay Cadillo": {
@@ -476,63 +501,94 @@ const memberDetails = {
         'Trabajo en equipo'
       ]
     },
-    image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752436127/515495259_17914512348150651_1323602709192233497_n_-_Daniel_Manayay_zz6em8.jpg'
+    image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752625998/515495259_17914512348150651_1323602709192233497_n_-_Daniel_Manayay_zncogm.jpg'
   },
 
   "Eliane Brenda Antara Gallupe": {
-    bio: "Subdirectora de Marketing en LEAD UNI y estudiante de Ingeniería Económica. Apoya en la gestión de contenido, análisis de métricas y planificación de campañas. Le motiva fusionar creatividad con datos para mejorar el alcance del capítulo.",
-    contacto: ['Correo', 'LinkedIn', 'Portafolio', 'Github', 'Curriculum Vitae'],
+    bio: "Soy Subdirectora de Marketing en LEAD UNI y estudiante de Ingeniería de Telecomunicaciones. Tengo experiencia en participación de proyectos y eventos universitarios enfocados en liderazgo, gestión y tecnología. Me apasiona la Inteligencia Artificial y todo lo relacionado con su aplicación tecnológica y social. Mi propósito es impulsar la innovación a través del conocimiento y la tecnología, promoviendo soluciones que generen un impacto positivo en la comunidad y contribuyan al desarrollo del país.",
+    contacto: [
+      'antara.brenda16@gmail.com',
+      'eliane.antara.g@uni.pe',
+      '982895721',
+      'www.linkedin.com/in/eliane-brenda-antara-gallupe-9657a426b',
+      '', // CV vacío
+      '', // Github vacío
+      '', // Portafolio vacío
+      ''  // Otro vacío
+    ],
     eventos: {
       premios: [
-        '2do lugar en "Pitch de Campañas con Impacto" – FISI 2023',
-        'Reconocimiento por Mérito en Gestión Digital – LEAD'
+        'Ganadora Beca DAAD – Visita de Estudios en Alemania (Study Visits by Groups of Foreign Students) 2024',
+        'Finalista – Concurso de Desarrollo de Soluciones con IA 2024'
       ],
       liderados: [
-        'Planificación de contenido 2024',
-        'Lanzamiento de la nueva identidad gráfica LEAD – Dic 2023'
+        'Directora de Marketing del evento "Warmisitay Tele: Celebrando el Día Internacional de la Mujer en la Ingeniería", en colaboración con IEEE Comsoc UNMSM y el CCT-UNI 2023',
+        'Apoyo en logística y contenido para el taller "Fundamentos de Machine Learning" 2025'
       ]
     },
     habilidades: {
-      soft: [
-        'Proactividad organizativa',
-        'Colaboración en equipo creativo',
-        'Sentido estético'
-      ],
       hard: [
-        'Manejo de KPIs en redes sociales',
-        'Edición básica con Canva y CapCut',
-        'Gestión de cronogramas',
-        'Análisis de métricas de engagement'
+        'Python',
+        'SQL',
+        'Excel',
+        'Power BI'
+      ],
+      soft: [
+        'Liderazgo',
+        'Comunicación efectiva',
+        'Trabajo en equipo',
+        'Organización de eventos',
+        'Pensamiento crítico'
       ]
-    }
+    },
+    image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752618464/foto_-_Brenda_Antara_zyhfah.jpg'
   },
 
   "Cesar Miguel Salazar Reyes": {
-    bio: "Pilar de LEAD Academia y estudiante de Ingeniería Mecatrónica. Promotor de espacios de aprendizaje tecnológico para estudiantes con enfoque en innovación, robótica y nuevas tendencias. Su visión es democratizar el conocimiento técnico.",
-    contacto: ['Correo', 'LinkedIn', 'Portafolio', 'Github', 'Curriculum Vitae'],
+    bio: "Me encuentro en 9no ciclo de la carrera Ingeniería de Sistemas, actualmente ocupo el cargo de Director del Pilar LEAD Academia. Tengo experiencia previa en participaciones de competencias tecnológicas como hackathones donde he podido desarrollar ideas innovadoras junto a un grupo de personas. También he sido parte del centro de estudiantes de mi facultad (FIIS) lo que me ayudó a mejorar mis habilidades de gestión. Respecto a mi carrera profesional me encuentro practicando en el banco BBVA en el área de Finanzas. Me encuentro especializándome en Data Analytics y con interés en Data Science e Inteligencia Artificial. Mi motivación es poder ayudar a crear soluciones con ayuda de tecnología para mejorar la vida de las personas y poder hacer del mundo algo mucho mejor.",
+    contacto: [
+      'cesar02090295@gmail.com',
+      'cesar.salazar.r@uni.pe',
+      '936111644',
+      'www.linkedin.com/in/cesarsalazarreyes',
+      'https://drive.google.com/open?id=1H7o0MdNfsC1DG4PnJuFbN8u-y8V6GCCO',
+      '', // Github vacío
+      '', // Portafolio vacío
+      ''  // Otro vacío
+    ],
     eventos: {
       premios: [
-        'Finalista – Reto Robótica UNI 2023',
-        'Reconocimiento al Desarrollo de Contenido Técnico – LEAD'
+        '1er puesto en el reto New Tech de la Hackathon Rimac 2024',
+        '2do puesto en el Road to Start Lima 2024',
+        'Participación en la competencia mundial Start Hack 2025 en Suiza',
+        '2do puesto en la Hackathon BCP 2025'
       ],
       liderados: [
-        'Bootcamp de Introducción a Python – Feb 2024',
-        'Taller "IA desde Cero" – Oct 2023'
+        'Bienvenida de Cachimbos – Marzo 2024'
       ]
     },
     habilidades: {
-      soft: [
-        'Curiosidad por aprender',
-        'Claridad para enseñar',
-        'Visión académica'
-      ],
       hard: [
-        'Python, Arduino, ROS',
-        'Diseño de sesiones técnicas',
-        'Automatización de recursos educativos',
-        'Creación de material audiovisual de aprendizaje'
+        'Python',
+        'SQL',
+        'Power BI',
+        'Looker Studio',
+        'Excel',
+        'JavaScript',
+        'Google Cloud Platform',
+        'Spark',
+        'Hadoop'
+      ],
+      soft: [
+        'Liderazgo',
+        'Adaptabilidad',
+        'Enfoque analítico',
+        'Creatividad',
+        'Resiliencia',
+        'Comunicación efectiva'
       ]
-    }
+    },
+    image: 'https://res.cloudinary.com/dcozbyikt/image/upload/v1752627821/Nueva1_foto_Linkendl_-_Cesar_salazar_qwgsnt_mhk6vl.jpg'
   },
 
 };
@@ -610,7 +666,7 @@ const memberDetails = {
             <p className="text-xl md:text-2xl font-semibold text-white/80 mb-7">Descubre más sobre nuestros pilares y su impacto</p>
             <Link 
               to="/pillars" 
-              className="inline-flex items-center px-10 py-4 text-lg md:text-xl bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white border-2 border-[#a6249d] rounded-full font-bold hover:bg-[#36042f] hover:text-[#ff6ec7] transition-all duration-300 shadow-lg shadow-pink-900/20"
+              className="inline-flex items-center px-6 py-2 text-base md:text-lg bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white border-2 border-[#a6249d] rounded-full font-bold hover:bg-[#36042f] hover:text-[#ff6ec7] transition-all duration-300 shadow-lg shadow-pink-900/20"
             >
               Explorar Pilares
             </Link>

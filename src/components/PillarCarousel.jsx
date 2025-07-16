@@ -15,20 +15,20 @@ const PillarCarousel = ({ pillars, selectedPillar, onSelectPillar }) => {
   }, [selectedPillar]);
   return (
     <div className="carousel-container relative h-[400px] w-full overflow-hidden perspective">
-      <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20">
+      <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-20 md:left-4">
         <button
           onClick={() => rotateCarousel('prev')}
-          className="bg-gradient-to-br from-[#d93340] to-[#a6249d] hover:from-[#a6249d] hover:to-[#d93340] p-6 rounded-full transition-all border-2 border-[#a6249d]/40 shadow-lg"
+          className="bg-gradient-to-br from-[#d93340] to-[#a6249d] hover:from-[#a6249d] hover:to-[#d93340] p-3 md:p-4 lg:p-6 rounded-full transition-all border-2 border-[#a6249d]/40 shadow-lg active:scale-95 focus:scale-95 duration-200 ease-out"
         >
-          <span className="text-white text-4xl font-bold">←</span>
+          <span className="text-white text-xl md:text-2xl lg:text-3xl font-bold">←</span>
         </button>
       </div>
-      <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20">
+      <div className="absolute right-0 top-1/2 transform -translate-y-1/2 z-20 md:right-4">
         <button
           onClick={() => rotateCarousel('next')}
-          className="bg-gradient-to-br from-[#d93340] to-[#a6249d] hover:from-[#a6249d] hover:to-[#d93340] p-6 rounded-full transition-all border-2 border-[#a6249d]/40 shadow-lg"
+          className="bg-gradient-to-br from-[#d93340] to-[#a6249d] hover:from-[#a6249d] hover:to-[#d93340] p-3 md:p-4 lg:p-6 rounded-full transition-all border-2 border-[#a6249d]/40 shadow-lg active:scale-95 focus:scale-95 duration-200 ease-out"
         >
-          <span className="text-white text-4xl font-bold">→</span>
+          <span className="text-white text-xl md:text-2xl lg:text-3xl font-bold">→</span>
         </button>
       </div>
       <div 

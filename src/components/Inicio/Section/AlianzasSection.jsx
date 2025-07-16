@@ -42,9 +42,9 @@ export const AlianzasSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-transparent py-24 overflow-hidden">
+    <section className="relative min-h-screen bg-[rgb(9,9,42)] py-24 overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-transparent"></div>
+      <div className="absolute inset-0 bg-[rgb(9,9,42)]"></div>
 
       {/* Content Container */}
       <div className="relative container mx-auto px-4">
@@ -82,23 +82,23 @@ export const AlianzasSection = () => {
               <motion.div
                 key={alianza.id || idx}
                 variants={itemVariants}
-                className="group relative bg-black/30 backdrop-blur-sm rounded-3xl p-8 border border-purple-900/20 hover:border-purple-600/40 transition-all duration-300 hover:-translate-y-2 flex flex-col items-center min-h-[380px] overflow-hidden justify-center"
+                className="group relative bg-[#1A0B2E]/90 backdrop-blur-lg rounded-3xl p-3 px-1 sm:p-6 sm:px-6 md:p-8 md:px-8 border border-[#a6249d]/40 shadow-[0_8px_30px_-5px_rgba(34,48,91,0.2)] hover:border-blue-400/40 transition-all duration-300 hover:-translate-y-2 flex flex-col items-center justify-center w-full max-w-[270px] sm:max-w-sm h-56 sm:h-72 md:h-96 overflow-hidden mx-auto"
               >
                 {alianza['Objetivo de la alianza'] && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 p-6 rounded-3xl">
-                    <span className="text-white text-center text-base font-medium">
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 p-4 sm:p-6 rounded-3xl">
+                    <span className="text-white text-center text-xs sm:text-base font-normal leading-relaxed px-3 py-2 break-words whitespace-pre-line rounded-xl bg-black/40 shadow-inner">
                       {alianza['Objetivo de la alianza']}
                     </span>
                   </div>
                 )}
                 <div className="absolute -inset-px bg-gradient-to-br from-[#B936F5] to-[#FF1CF7] opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-3xl z-10"></div>
-                <div className="flex flex-col items-center w-full z-10 flex-1 justify-center">
-                  <div className="w-36 h-36 flex items-center justify-center mb-4 mx-auto">
+                <div className="flex flex-col items-center w-full z-10 flex-1 justify-center justify-items-center text-center">
+                  <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 flex items-center justify-center mb-3 sm:mb-4 mx-auto mx-auto">
                     {logoUrl ? (
                       <img
                         src={logoUrl}
                         alt={alianza['Nombre de la organización']}
-                        className="w-36 h-36 object-contain border-2 border-purple-400 bg-white shadow-md rounded-xl"
+                        className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 object-contain border-2 border-purple-400 bg-white shadow-md rounded-xl"
                       />
                     ) : (
                       <div className="w-36 h-36 bg-purple-900/30 rounded-xl flex items-center justify-center text-purple-300 text-4xl font-bold">
@@ -106,7 +106,7 @@ export const AlianzasSection = () => {
                       </div>
                     )}
                   </div>
-                  <span className="text-base bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] bg-clip-text text-transparent font-semibold text-center block w-full mb-2">
+                  <span className="text-base sm:text-lg md:text-xl bg-gradient-to-r from-[#d93340] to-[#a6249d] bg-clip-text text-transparent font-extrabold text-center block w-full mt-2 mb-3 sm:mb-2 mx-auto drop-shadow-[0_1px_4px_rgba(34,48,91,0.7)]">
                     {alianza['Nombre de la organización']}
                   </span>
                 </div>

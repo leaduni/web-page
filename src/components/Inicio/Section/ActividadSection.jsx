@@ -40,7 +40,7 @@ export const ActividadSection = () => {
   return (
     <section className="relative min-h-screen w-full bg-[rgb(9,9,42)] py-12 sm:py-16 lg:py-24 overflow-hidden border-0">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#1A0B2E] via-[#2D1B4E]/80 to-[#1A0B2E] opacity-90"></div>
+      <div className="absolute inset-0 bg-[rgb(9,9,42)]"></div>
 
       {/* Content Container */}
       <div className="relative container mx-auto px-4">

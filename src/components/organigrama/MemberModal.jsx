@@ -8,11 +8,32 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
   const [copiedIdx, setCopiedIdx] = useState(null);
   // Estado para expandir/cerrar habilidades técnicas
   const [showAllHardSkills, setShowAllHardSkills] = useState(false);
+  // Estado para expandir/cerrar habilidades blandas
+  const [showAllSoftSkills, setShowAllSoftSkills] = useState(false);
 
-  // Contraer la lista de habilidades técnicas al cambiar de tab
+  // Contraer la lista de habilidades al cambiar de tab
   useEffect(() => {
     setShowAllHardSkills(false);
+    setShowAllSoftSkills(false);
   }, [activeMemberTab]);
+
+  // Función helper para manejar casos sin información
+  const getDefaultText = (type) => {
+    if (type === 'premios') {
+      return 'Construyendo un legado de excelencia en LEAD UNI';
+    }
+    if (type === 'eventos') {
+      return 'Desarrollando iniciativas de liderazgo e innovación';
+    }
+    return '';
+  };
+
+  // Función para verificar si hay información real (no texto por defecto)
+  const hasRealInfo = (array, type) => {
+    if (!array || array.length === 0) return false;
+    const defaultText = getDefaultText(type);
+    return !array.every(item => item === defaultText);
+  };
   
   const tabs = [
     { id: 'info', label: 'Información' },
@@ -123,11 +144,17 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                       Premios y Reconocimientos
                     </h3>
                     <ul className="space-y-3 bg-white/5 rounded-xl p-4 border border-[#a6249d]/20">
-                      {details.eventos.premios.map((premio, idx) => (
-                        <li key={idx} className="text-white text-base">
-                          <span className="mr-2 text-[#d93340]">–</span>{premio}
+                      {details.eventos.premios && details.eventos.premios.length > 0 ? (
+                        details.eventos.premios.map((premio, idx) => (
+                          <li key={idx} className="text-white text-base">
+                            <span className="mr-2 text-[#d93340]">–</span>{premio}
+                          </li>
+                        ))
+                      ) : (
+                        <li className="text-white/70 text-base italic">
+                          <span className="mr-2 text-[#d93340]">–</span>{getDefaultText('premios')}
                         </li>
-                      ))}
+                      )}
                     </ul>
                   </div>
                   <div>
@@ -135,11 +162,17 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                       Eventos Liderados
                     </h3>
                     <ul className="space-y-3 bg-white/5 rounded-xl p-4 border border-[#a6249d]/20">
-                      {details.eventos.liderados.map((evento, idx) => (
-                        <li key={idx} className="text-white text-base">
-                          <span className="mr-2 text-[#a6249d]">–</span>{evento}
+                      {details.eventos.liderados && details.eventos.liderados.length > 0 ? (
+                        details.eventos.liderados.map((evento, idx) => (
+                          <li key={idx} className="text-white text-base">
+                            <span className="mr-2 text-[#a6249d]">–</span>{evento}
+                          </li>
+                        ))
+                      ) : (
+                        <li className="text-white/70 text-base italic">
+                          <span className="mr-2 text-[#a6249d]">–</span>{getDefaultText('eventos')}
                         </li>
-                      ))}
+                      )}
                     </ul>
                   </div>
                 </div>
@@ -151,8 +184,8 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                     <h3 className="text-xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#d93340] to-[#a6249d] drop-shadow-sm tracking-wide">
                       Habilidades Blandas
                     </h3>
-                    <div className="flex flex-wrap gap-3">
-                      {details.habilidades.soft.map((skill, idx) => (
+                    <div className="flex flex-wrap gap-3 mb-2">
+                      {(showAllSoftSkills ? details.habilidades.soft : details.habilidades.soft.slice(0, 6)).map((skill, idx) => (
                         <span
                           key={idx}
                           className="px-5 py-2 rounded-full bg-white/10 shadow-md text-white text-base font-medium backdrop-blur-sm border border-[#a6249d]/30"
@@ -160,6 +193,14 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                           {skill}
                         </span>
                       ))}
+                      {details.habilidades.soft.length > 6 && !showAllSoftSkills && (
+                        <button
+                          className="px-5 py-2 rounded-full bg-[#a6249d] text-white text-base font-semibold border border-[#a6249d]/30 hover:bg-[#d93340] transition-colors"
+                          onClick={() => setShowAllSoftSkills(true)}
+                        >
+                          +{details.habilidades.soft.length - 6}
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div>

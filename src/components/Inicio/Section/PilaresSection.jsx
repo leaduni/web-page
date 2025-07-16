@@ -258,10 +258,13 @@ export const PilaresSection = () => {
   return (
     <section
       id="pilares"
-      className="relative bg-transparent py-8 sm:py-12 lg:py-16 overflow-hidden"
+      className="relative bg-[rgb(9,9,42)] py-8 sm:py-12 lg:py-16 overflow-hidden"
     >
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-transparent"></div>
+      {/* <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#d93340]/10 via-[#a6249d]/10 to-transparent"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#a6249d]/10 via-[#d93340]/10 to-transparent"></div>
+      </div> */}
 
       {/* Content Container */}
       <div className="relative container mx-auto px-4">
@@ -310,7 +313,7 @@ export const PilaresSection = () => {
                 className="absolute inset-0 flex items-center justify-center"
               >
                 <motion.div
-                  className={`w-full max-w-[300px] h-[280px] bg-gradient-to-br from-[#2D1B4E] via-[#1A0B2E] to-black backdrop-blur-lg rounded-3xl overflow-hidden border border-purple-500/40 shadow-[0_8px_50px_-5px_rgba(147,51,234,0.5)] cursor-pointer ${
+                  className={`w-full max-w-[300px] h-auto sm:h-[280px] bg-[#1A0B2E]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-[#a6249d]/40 shadow-lg cursor-pointer ${
                     isDragging ? 'cursor-grabbing' : 'cursor-grab'
                   }`}
                   whileHover="hover"
@@ -324,18 +327,18 @@ export const PilaresSection = () => {
                     transition: isDragging ? 'none' : 'transform 0.3s ease-out',
                   }}
                 >
-                  <div className="p-6 h-full flex flex-col">
+                  <div className="p-6 h-full flex flex-col sm:p-8 md:p-10">
                     <span className="mb-3 flex items-center justify-center">
                       <img
                         src={pilares[currentIndex].image}
                         alt={pilares[currentIndex].title}
-                        className="w-16 h-16 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]"
+                        className="w-16 h-16 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]/90"
                       />
                     </span>
-                    <h3 className="text-lg font-bold bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] text-transparent bg-clip-text mb-3 select-none">
+                    <h3 className="text-base sm:text-lg font-bold bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] text-transparent bg-clip-text mb-2 sm:mb-3 select-none text-center">
                       {pilares[currentIndex].title}
                     </h3>
-                    <p className="text-white/80 text-sm flex-grow leading-relaxed select-none">
+                    <p className="text-white/80 text-xs sm:text-sm flex-grow leading-relaxed select-none text-center">
                       {pilares[currentIndex].description}
                     </p>
                   </div>
@@ -345,16 +348,16 @@ export const PilaresSection = () => {
 
             {/* Mobile Navigation */}
             <button
-              className="absolute left-2 top-1/2 -translate-y-1/2 z-30 p-0.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-2.5 md:p-3 rounded-full bg-gradient-to-br from-[#d93340] to-[#a6249d] border-2 border-[#a6249d]/40 shadow-lg hover:scale-110 transition-all duration-300 lg:p-0.5"
               onClick={() => paginate(-1)}
             >
-              <ChevronLeft className="w-3 h-3 text-white" />
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </button>
             <button
-              className="absolute right-2 top-1/2 -translate-y-1/2 z-30 p-0.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300"
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-2.5 md:p-3 rounded-full bg-gradient-to-br from-[#d93340] to-[#a6249d] border-2 border-[#a6249d]/40 shadow-lg hover:scale-110 transition-all duration-300 lg:p-0.5"
               onClick={() => paginate(1)}
             >
-              <ChevronRight className="w-3 h-3 text-white" />
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </button>
           </div>
 
@@ -401,9 +404,9 @@ export const PilaresSection = () => {
           >
             {/* Navigation Buttons */}
             <motion.button
-              className="absolute left-4 z-30 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+              className="absolute left-4 z-30 p-3 rounded-full bg-gradient-to-br from-[#d93340] to-[#a6249d] border-2 border-[#a6249d]/40 shadow-lg hover:scale-110 transition-all duration-300"
+              whileHover={{ scale: 1.12 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => paginate(-1)}
               style={{ left: '10%' }}
             >
@@ -411,9 +414,9 @@ export const PilaresSection = () => {
             </motion.button>
 
             <motion.button
-              className="absolute right-4 z-30 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+              className="absolute right-4 z-30 p-3 rounded-full bg-gradient-to-br from-[#d93340] to-[#a6249d] border-2 border-[#a6249d]/40 shadow-lg hover:scale-110 transition-all duration-300"
+              whileHover={{ scale: 1.12 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => paginate(1)}
               style={{ right: '10%' }}
             >
@@ -446,7 +449,7 @@ export const PilaresSection = () => {
               }}
             >
               <motion.div
-                className="w-[420px] h-[260px] bg-gradient-to-br from-[#2D1B4E] via-[#1A0B2E] to-black backdrop-blur-lg rounded-3xl overflow-hidden border border-purple-900/30 shadow-[0_8px_30px_-5px_rgba(147,51,234,0.3)]"
+                className="w-[420px] h-[260px] bg-[#1A0B2E]/90 backdrop-blur-lg rounded-3xl overflow-hidden border border-blue-900/30 shadow-[0_8px_30px_-5px_rgba(34,48,91,0.2)]"
                 whileHover="hover"
                 whileTap="tap"
                 variants={cardVariants}
@@ -456,13 +459,13 @@ export const PilaresSection = () => {
                     <img
                       src={pilares[(currentIndex - 2 + pilares.length) % pilares.length].image}
                       alt={pilares[(currentIndex - 2 + pilares.length) % pilares.length].title}
-                      className="w-16 h-16 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]"
+                      className="w-16 h-16 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]/90"
                     />
                   </span>
-                  <h3 className="text-lg font-bold text-white/70 mb-2 select-none">
+                  <h3 className="text-lg font-bold text-white/70 mb-2 select-none text-center">
                     {pilares[(currentIndex - 2 + pilares.length) % pilares.length].title}
                   </h3>
-                  <p className="text-white/60 text-sm flex-grow select-none">
+                  <p className="text-white/60 text-sm flex-grow select-none text-center">
                     {pilares[(currentIndex - 2 + pilares.length) % pilares.length].description}
                   </p>
                 </div>
@@ -495,7 +498,7 @@ export const PilaresSection = () => {
               }}
             >
               <motion.div
-                className="w-[450px] h-[280px] bg-gradient-to-br from-[#2D1B4E] via-[#1A0B2E] to-black backdrop-blur-lg rounded-3xl overflow-hidden border border-purple-900/30 shadow-[0_8px_30px_-5px_rgba(147,51,234,0.3)]"
+                className="w-[450px] h-[280px] bg-[#1A0B2E]/90 backdrop-blur-lg rounded-3xl overflow-hidden border border-blue-900/30 shadow-[0_8px_30px_-5px_rgba(34,48,91,0.2)]"
                 whileHover="hover"
                 whileTap="tap"
                 variants={cardVariants}
@@ -505,13 +508,13 @@ export const PilaresSection = () => {
                     <img
                       src={pilares[(currentIndex - 1 + pilares.length) % pilares.length].image}
                       alt={pilares[(currentIndex - 1 + pilares.length) % pilares.length].title}
-                      className="w-20 h-20 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]"
+                      className="w-20 h-20 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]/90"
                     />
                   </span>
-                  <h3 className="text-xl font-bold text-white/70 mb-3 select-none">
+                  <h3 className="text-xl font-bold text-white/70 mb-3 select-none text-center">
                     {pilares[(currentIndex - 1 + pilares.length) % pilares.length].title}
                   </h3>
-                  <p className="text-white/60 text-sm flex-grow select-none">
+                  <p className="text-white/60 text-sm flex-grow select-none text-center">
                     {pilares[(currentIndex - 1 + pilares.length) % pilares.length].description}
                   </p>
                 </div>
@@ -537,7 +540,7 @@ export const PilaresSection = () => {
                 }}
               >
                 <motion.div
-                  className="w-[500px] h-[300px] bg-gradient-to-br from-[#2D1B4E] via-[#1A0B2E] to-black backdrop-blur-lg rounded-3xl overflow-hidden border border-purple-500/40 shadow-[0_8px_50px_-5px_rgba(147,51,234,0.5)] hover:shadow-[0_8px_70px_-5px_rgba(147,51,234,0.6)] cursor-pointer"
+                  className="w-[500px] h-[300px] bg-[#1A0B2E]/90 backdrop-blur-lg rounded-3xl overflow-hidden border border-blue-900/40 shadow-[0_8px_50px_-5px_rgba(34,48,91,0.3)] hover:shadow-[0_8px_70px_-5px_rgba(34,48,91,0.4)] cursor-pointer"
                   whileHover="hover"
                   whileTap="tap"
                   variants={cardVariants}
@@ -548,13 +551,13 @@ export const PilaresSection = () => {
                       <img
                         src={pilares[currentIndex].image}
                         alt={pilares[currentIndex].title}
-                        className="w-24 h-24 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]"
+                        className="w-24 h-24 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]/90"
                       />
                     </span>
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] text-transparent bg-clip-text mb-1 select-none">
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] text-transparent bg-clip-text mb-1 select-none text-center">
                       {pilares[currentIndex].title}
                     </h3>
-                    <p className="text-white/80 text-lg flex-grow select-none">
+                    <p className="text-white/80 text-lg flex-grow select-none text-center">
                       {pilares[currentIndex].description}
                     </p>
                   </div>
@@ -588,7 +591,7 @@ export const PilaresSection = () => {
               }}
             >
               <motion.div
-                className="w-[420px] h-[260px] bg-gradient-to-br from-[#2D1B4E] via-[#1A0B2E] to-black backdrop-blur-lg rounded-3xl overflow-hidden border border-purple-900/30 shadow-[0_8px_30px_-5px_rgba(147,51,234,0.3)]"
+                className="w-[420px] h-[260px] bg-[#1A0B2E]/90 backdrop-blur-lg rounded-3xl overflow-hidden border border-blue-900/30 shadow-[0_8px_30px_-5px_rgba(34,48,91,0.2)]"
                 whileHover="hover"
                 whileTap="tap"
                 variants={cardVariants}
@@ -598,13 +601,13 @@ export const PilaresSection = () => {
                     <img
                       src={pilares[(currentIndex + 1) % pilares.length].image}
                       alt={pilares[(currentIndex + 1) % pilares.length].title}
-                      className="w-16 h-16 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]"
+                      className="w-16 h-16 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]/90"
                     />
                   </span>
-                  <h3 className="text-lg font-bold text-white/70 mb-2 select-none">
+                  <h3 className="text-lg font-bold text-white/70 mb-2 select-none text-center">
                     {pilares[(currentIndex + 1) % pilares.length].title}
                   </h3>
-                  <p className="text-white/60 text-sm flex-grow select-none">
+                  <p className="text-white/60 text-sm flex-grow select-none text-center">
                     {pilares[(currentIndex + 1) % pilares.length].description}
                   </p>
                 </div>
@@ -637,7 +640,7 @@ export const PilaresSection = () => {
               }}
             >
               <motion.div
-                className="w-[450px] h-[280px] bg-gradient-to-br from-[#2D1B4E] via-[#1A0B2E] to-black backdrop-blur-lg rounded-3xl overflow-hidden border border-purple-900/30 shadow-[0_8px_30px_-5px_rgba(147,51,234,0.3)]"
+                className="w-[450px] h-[280px] bg-[#1A0B2E]/90 backdrop-blur-lg rounded-3xl overflow-hidden border border-blue-900/30 shadow-[0_8px_30px_-5px_rgba(34,48,91,0.2)]"
                 whileHover="hover"
                 whileTap="tap"
                 variants={cardVariants}
@@ -647,13 +650,13 @@ export const PilaresSection = () => {
                     <img
                       src={pilares[(currentIndex + 2) % pilares.length].image}
                       alt={pilares[(currentIndex + 2) % pilares.length].title}
-                      className="w-20 h-20 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]"
+                      className="w-20 h-20 object-contain rounded-full shadow-lg border-2 border-[#a6249d]/40 bg-[#1A0B2E]/90"
                     />
                   </span>
-                  <h3 className="text-xl font-bold text-white/70 mb-3 select-none">
+                  <h3 className="text-xl font-bold text-white/70 mb-3 select-none text-center">
                     {pilares[(currentIndex + 2) % pilares.length].title}
                   </h3>
-                  <p className="text-white/60 text-sm flex-grow select-none">
+                  <p className="text-white/60 text-sm flex-grow select-none text-center">
                     {pilares[(currentIndex + 2) % pilares.length].description}
                   </p>
                 </div>
@@ -674,7 +677,7 @@ export const PilaresSection = () => {
             transition={{ duration: 0.3 }}
           >
             <motion.div
-              className="bg-gradient-to-br from-[#2D1B4E] via-[#1A0B2E] to-black backdrop-blur-xl rounded-3xl p-8 max-w-md mx-auto border border-[#a6249d]/40 shadow-[0_8px_50px_-5px_rgba(147,51,234,0.5)]"
+              className="bg-gradient-to-br from-[#22305B] via-[#181C2F] to-[#0A1026] backdrop-blur-xl rounded-3xl p-8 max-w-md mx-auto border border-blue-900/40 shadow-[0_8px_50px_-5px_rgba(34,48,91,0.3)]"
               initial={{ scale: 0.8, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.8, opacity: 0, y: 50 }}
