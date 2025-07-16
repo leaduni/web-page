@@ -136,7 +136,7 @@ const pillarContent = {
     description:
       'Desarrollo de habilidades de liderazgo, gestión de equipos y toma de decisiones estratégicas.',
   },
-  professional: {
+  profesional: {
     title: 'Desarrollo Profesional',
     description:
       'Preparación para el mundo laboral a través de networking, mentorías y desarrollo de competencias profesionales.',
