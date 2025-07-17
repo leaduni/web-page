@@ -142,7 +142,7 @@ const ApplicationPage = () => {
         {/* Contenido principal */}
         <div className="relative z-10 flex flex-col items-center w-full max-w-4xl px-4 py-10">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-2 text-center drop-shadow-lg py-5">
-            Centro Estudiantil{' '}
+            Organización Estudiantil{' '}
             <span className="bg-gradient-to-r from-[#d93340] to-[#a6249d] bg-clip-text text-transparent">
               LEAD UNI
             </span>

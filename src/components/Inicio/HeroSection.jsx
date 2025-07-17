@@ -78,7 +78,7 @@ export const HeroSection = () => {
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 mb-4 gap-8 lg:gap-12">
             <div className="flex flex-col justify-top lg:ml-[12%] text-center lg:text-left order-2 lg:order-1">
               <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 lg:mb-8 text-center lg:text-left drop-shadow-xl">
-                <span className="block text-white">Centro Estudiantil</span>
+                <span className="block text-white">Organización Estudiantil</span>
                 <span className="block bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text">
                   LEAD UNI
                 </span>
@@ -183,7 +183,7 @@ export const HeroSection = () => {
                 ¿Quiénes somos?
               </h2>
               <p className="text-white/80 text-sm sm:text-base lg:text-lg max-w-xs sm:max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto px-4 text-center">
-                Conoce más sobre nuestra historia y misión como centro estudiantil
+                Conoce más sobre nuestra historia y misión como organización estudiantil
               </p>
             </div>
           </div>
@@ -196,7 +196,7 @@ export const HeroSection = () => {
                   className="bg-[#1A0B2E]/90 backdrop-blur-lg rounded-3xl p-6 sm:p-8 md:p-10 border border-[#a6249d]/40 shadow-[0_8px_30px_-5px_rgba(34,48,91,0.2)] opacity-0 md:-translate-x-10 transition-all duration-1000 ease-out w-full max-w-full px-2 sm:max-w-md sm:px-4 lg:max-w-xl mx-auto flex flex-col items-center justify-center"
                 >
                   <p className="text-sm sm:text-base lg:text-lg text-white/90 leading-relaxed text-justify px-2 sm:px-4 text-center">
-                    <span className="text-[#d93340] font-bold">LEAD UNI</span> es un centro
+                    <span className="text-[#d93340] font-bold">LEAD UNI</span> es una organización
                     estudiantil fundado con la misión de potenciar el desarrollo integral de los
                     estudiantes universitarios a través de programas innovadores, actividades
                     formativas y oportunidades de crecimiento personal y profesional.
