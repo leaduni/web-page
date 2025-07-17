@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Header, HEADER_HEIGHT } from './components/header';
 import ContactSection from './components/ContactSection';
 // Importamos los componentes de las páginas que vamos a usar
@@ -17,6 +18,21 @@ import NotFoundPage from './pages/NotFoundPage';
 
 import './App.css';
 
+// Componente para hacer scroll hacia arriba al cambiar de ruta
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth', // Scroll suave hacia arriba
+    });
+  }, [pathname]);
+
+  return null;
+}
+
 // Dentro de Routes, definimos las rutas de nuestra aplicación
 // Cada ruta se define con un componente Route
 // El atributo path define la URL de la ruta
@@ -27,6 +43,7 @@ import './App.css';
 function App() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1A0B2E] via-[#2D1B4E] to-[#1A0B2E]">
+      <ScrollToTop />
       <Header />
       <main
         style={{ paddingTop: `${HEADER_HEIGHT}px` }}

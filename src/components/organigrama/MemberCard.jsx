@@ -18,13 +18,13 @@ const MemberCard = ({ member, onSelect }) => {
       {/* Efecto de brillo y sombra en hover */}
       <div className="absolute -inset-1 bg-gradient-to-r from-[#d93340] to-[#a6249d] rounded-2xl blur-lg opacity-0 group-hover:opacity-60 transition-all duration-500 pointer-events-none z-10"></div>
       {/* Contenido principal */}
-      <div className="relative bg-[#1A0B2E] border-2 border-[#a6249d]/40 rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 z-20 flex flex-col h-full">
+      <div className="relative  bg-[#1A0B2E] border-2 border-[#a6249d]/40 rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 z-20 flex flex-col h-full">
         {/* Imagen con overlay gradiente */}
         <div className="relative h-72 md:h-64 overflow-hidden flex-shrink-0 flex items-center justify-center bg-[#1A0B2E]">
           <img
             src={member.image}
             alt={member.name}
-            className={`w-full h-full object-cover rounded-t-2xl shadow-md transition-transform duration-500 group-hover:scale-105 ${
+            className={`w-3/4 lg:w-full h-full object-cover rounded-t-2xl shadow-md transition-transform duration-500 group-hover:scale-105 ${
               member.name === 'Miguel Anthony Castañeda Villanueva' ||
               member.name === 'Gabriel Wei Wei Siguas'
                 ? 'object-[center_50%] md:object-center'
