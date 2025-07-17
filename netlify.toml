@@ -16,6 +16,11 @@
   force = false
 
 [[redirects]]
+  from = "/vite.svg"
+  to = "/vite.svg"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
