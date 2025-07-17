@@ -39,10 +39,7 @@ export const HeroSection = () => {
         observer.observe(element);
         // Si ya está visible (por hot reload), forzar la animación
         const rect = element.getBoundingClientRect();
-        if (
-          rect.top < window.innerHeight &&
-          rect.bottom > 0
-        ) {
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
           element.classList.add('opacity-100', 'translate-y-0');
           element.classList.remove('opacity-0', 'translate-y-10');
           observer.unobserve(element);
@@ -79,7 +76,7 @@ export const HeroSection = () => {
 
         <div className="container mx-auto min-h-screen flex items-center px-6 sm:px-8 lg:px-12">
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 mb-4 gap-8 lg:gap-12">
-            <div className="flex flex-col justify-center lg:ml-[12%] text-center lg:text-left order-2 lg:order-1">
+            <div className="flex flex-col justify-top lg:ml-[12%] text-center lg:text-left order-2 lg:order-1">
               <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 lg:mb-8 text-center lg:text-left drop-shadow-xl">
                 <span className="block text-white">Centro Estudiantil</span>
                 <span className="block bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text">
@@ -118,8 +115,8 @@ export const HeroSection = () => {
               </div>
             </div>
 
-            <div className="relative w-full h-[300px] sm:h-[400px] lg:h-full flex items-center justify-center order-1 lg:order-2 lg:mt-[-40px]">
-              <div className="relative w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] lg:w-[600px] lg:h-[600px] flex items-center">
+            <div className="relative w-full h-[200px] sm:h-[400px] lg:h-full flex items-center justify-center order-1 lg:order-2 lg:mt-[-40px]">
+              <div className="relative w-[250px] h-[200px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] lg:w-[600px] lg:h-[600px] flex items-center">
                 <div className="absolute inset-0 animate-[spin_20s_linear_infinite]">
                   {/* Esfera pequeña blanca con sombra */}
                   <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 bg-white rounded-full shadow-[0_2px_8px_0_rgba(217,51,64,0.15)]" />
@@ -149,7 +146,12 @@ export const HeroSection = () => {
       </section>
 
       {/* Separador de onda y línea gradiente institucional */}
-      <svg className="w-full h-10" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        className="w-full h-10"
+        viewBox="0 0 1440 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <defs>
           <linearGradient id="wave-gradient-institucional" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#2D1B4E" stopOpacity="0" />
@@ -157,7 +159,11 @@ export const HeroSection = () => {
             <stop offset="100%" stopColor="#2D1B4E" stopOpacity="0" />
           </linearGradient>
         </defs>
-        <path fill="url(#wave-gradient-institucional)" fillOpacity="0.18" d="M0,100 C480,20 960,180 1440,100 L1440,0 L0,0 Z" />
+        <path
+          fill="url(#wave-gradient-institucional)"
+          fillOpacity="0.18"
+          d="M0,100 C480,20 960,180 1440,100 L1440,0 L0,0 Z"
+        />
       </svg>
       <hr className="my-0 border-0 h-2 bg-gradient-to-r from-transparent via-[#2D1B4E] to-transparent opacity-80 rounded-full shadow-md" />
 
@@ -225,7 +231,12 @@ export const HeroSection = () => {
       </section>
 
       {/* Separador de onda y línea gradiente institucional */}
-      <svg className="w-full h-10" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        className="w-full h-10"
+        viewBox="0 0 1440 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <defs>
           <linearGradient id="wave-gradient-institucional" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#2D1B4E" stopOpacity="0" />
@@ -233,14 +244,23 @@ export const HeroSection = () => {
             <stop offset="100%" stopColor="#2D1B4E" stopOpacity="0" />
           </linearGradient>
         </defs>
-        <path fill="url(#wave-gradient-institucional)" fillOpacity="0.18" d="M0,100 C480,20 960,180 1440,100 L1440,0 L0,0 Z" />
+        <path
+          fill="url(#wave-gradient-institucional)"
+          fillOpacity="0.18"
+          d="M0,100 C480,20 960,180 1440,100 L1440,0 L0,0 Z"
+        />
       </svg>
       <hr className="my-0 border-0 h-2 bg-gradient-to-r from-transparent via-[#2D1B4E] to-transparent opacity-80 rounded-full shadow-md" />
 
       <div className="bg-transparent">
         <PilaresSection />
         {/* Separador de onda y línea gradiente institucional */}
-        <svg className="w-full h-10" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          className="w-full h-10"
+          viewBox="0 0 1440 100"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <defs>
             <linearGradient id="wave-gradient-institucional" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#2D1B4E" stopOpacity="0" />
@@ -248,12 +268,21 @@ export const HeroSection = () => {
               <stop offset="100%" stopColor="#2D1B4E" stopOpacity="0" />
             </linearGradient>
           </defs>
-          <path fill="url(#wave-gradient-institucional)" fillOpacity="0.18" d="M0,100 C480,20 960,180 1440,100 L1440,0 L0,0 Z" />
+          <path
+            fill="url(#wave-gradient-institucional)"
+            fillOpacity="0.18"
+            d="M0,100 C480,20 960,180 1440,100 L1440,0 L0,0 Z"
+          />
         </svg>
         <hr className="my-0 border-0 h-2 bg-gradient-to-r from-transparent via-[#2D1B4E] to-transparent opacity-80 rounded-full shadow-md" />
         <AlianzasSection />
         {/* Separador de onda y línea gradiente institucional */}
-        <svg className="w-full h-10" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          className="w-full h-10"
+          viewBox="0 0 1440 100"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <defs>
             <linearGradient id="wave-gradient-institucional" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#2D1B4E" stopOpacity="0" />
@@ -261,12 +290,21 @@ export const HeroSection = () => {
               <stop offset="100%" stopColor="#2D1B4E" stopOpacity="0" />
             </linearGradient>
           </defs>
-          <path fill="url(#wave-gradient-institucional)" fillOpacity="0.18" d="M0,100 C480,20 960,180 1440,100 L1440,0 L0,0 Z" />
+          <path
+            fill="url(#wave-gradient-institucional)"
+            fillOpacity="0.18"
+            d="M0,100 C480,20 960,180 1440,100 L1440,0 L0,0 Z"
+          />
         </svg>
         <hr className="my-0 border-0 h-2 bg-gradient-to-r from-transparent via-[#2D1B4E] to-transparent opacity-80 rounded-full shadow-md" />
         <ActividadSection />
         {/* Separador de onda y línea gradiente institucional */}
-        <svg className="w-full h-10" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          className="w-full h-10"
+          viewBox="0 0 1440 100"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <defs>
             <linearGradient id="wave-gradient-institucional" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#2D1B4E" stopOpacity="0" />
@@ -274,7 +312,11 @@ export const HeroSection = () => {
               <stop offset="100%" stopColor="#2D1B4E" stopOpacity="0" />
             </linearGradient>
           </defs>
-          <path fill="url(#wave-gradient-institucional)" fillOpacity="0.18" d="M0,100 C480,20 960,180 1440,100 L1440,0 L0,0 Z" />
+          <path
+            fill="url(#wave-gradient-institucional)"
+            fillOpacity="0.18"
+            d="M0,100 C480,20 960,180 1440,100 L1440,0 L0,0 Z"
+          />
         </svg>
         <hr className="my-0 border-0 h-2 bg-gradient-to-r from-transparent via-[#2D1B4E] to-transparent opacity-80 rounded-full shadow-md" />
         <ContactoSection />
