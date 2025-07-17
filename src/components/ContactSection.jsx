@@ -38,9 +38,14 @@ const ContactSection = () => {
             </div>
 
             {/* Grid de tarjetas de contacto 3D */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6 ">
               {/* Tarjeta Email */}
-              <div className="group relative">
+              <a
+                href="mailto:leadatuni1403@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block"
+              >
                 <div
                   className="absolute inset-0 bg-gradient-to-br from-[#EA4335] to-[#d32f2f] rounded-xl transform group-hover:scale-105 transition-all duration-500 shadow-lg"
                   style={{
@@ -49,7 +54,7 @@ const ContactSection = () => {
                   }}
                 />
                 <div
-                  className="relative bg-[#09092a]/90 backdrop-blur-sm rounded-xl p-4 border border-[#EA4335]/30 hover:border-[#EA4335]/60 transition-all duration-500"
+                  className="relative bg-[#09092a]/90 backdrop-blur-sm rounded-xl p-4 border border-[#EA4335]/30 hover:border-[#EA4335]/60 transition-all duration-500 cursor-pointer"
                   style={{
                     transform: 'perspective(1000px) rotateX(3deg) rotateY(-3deg)',
                     boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
@@ -112,13 +117,18 @@ const ContactSection = () => {
                       </svg>
                     </div>
                     <h3 className="text-white font-bold text-sm">Email</h3>
-                    <p className="text-[#f3eafd] text-xs">contacto@leaduni.com</p>
+                    <p className="text-[#f3eafd] text-xs">leadatuni1403@gmail.com</p>
                   </div>
                 </div>
-              </div>
+              </a>
 
               {/* Tarjeta Instagram */}
-              <div className="group relative">
+              <a
+                href="https://www.instagram.com/lead_uni/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block"
+              >
                 <div
                   className="absolute inset-0 bg-gradient-to-br from-[#E1306C] to-[#C13584] rounded-xl transform group-hover:scale-105 transition-all duration-500 shadow-lg"
                   style={{
@@ -127,7 +137,7 @@ const ContactSection = () => {
                   }}
                 />
                 <div
-                  className="relative bg-[#09092a]/90 backdrop-blur-sm rounded-xl p-4 border border-[#E1306C]/30 hover:border-[#E1306C]/60 transition-all duration-500"
+                  className="relative bg-[#09092a]/90 backdrop-blur-sm rounded-xl p-4 border border-[#E1306C]/30 hover:border-[#E1306C]/60 transition-all duration-500 cursor-pointer"
                   style={{
                     transform: 'perspective(1000px) rotateX(3deg) rotateY(3deg)',
                     boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
@@ -152,10 +162,15 @@ const ContactSection = () => {
                     <p className="text-[#f3eafd] text-xs">@lead_uni</p>
                   </div>
                 </div>
-              </div>
+              </a>
 
               {/* Tarjeta LinkedIn */}
-              <div className="group relative">
+              <a
+                href="https://www.linkedin.com/company/lead-uni/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block"
+              >
                 <div
                   className="absolute inset-0 bg-gradient-to-br from-[#0A66C2] to-[#0077b5] rounded-xl transform group-hover:scale-105 transition-all duration-500 shadow-lg"
                   style={{
@@ -164,7 +179,7 @@ const ContactSection = () => {
                   }}
                 />
                 <div
-                  className="relative bg-[#09092a]/90 backdrop-blur-sm rounded-xl p-4 border border-[#0A66C2]/30 hover:border-[#0A66C2]/60 transition-all duration-500"
+                  className="relative bg-[#09092a]/90 backdrop-blur-sm rounded-xl p-4 border border-[#0A66C2]/30 hover:border-[#0A66C2]/60 transition-all duration-500 cursor-pointer"
                   style={{
                     transform: 'perspective(1000px) rotateX(-3deg) rotateY(-3deg)',
                     boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
@@ -190,10 +205,15 @@ const ContactSection = () => {
                     <p className="text-[#f3eafd] text-xs">LEAD UNI</p>
                   </div>
                 </div>
-              </div>
+              </a>
 
               {/* Tarjeta Twitch */}
-              <div className="group relative">
+              <a
+                href="https://www.twitch.tv/leadunioficial"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block"
+              >
                 <div
                   className="absolute inset-0 bg-gradient-to-br from-[#9146FF] to-[#6441A4] rounded-xl transform group-hover:scale-105 transition-all duration-500 shadow-lg"
                   style={{
@@ -202,7 +222,7 @@ const ContactSection = () => {
                   }}
                 />
                 <div
-                  className="relative bg-[#09092a]/90 backdrop-blur-sm rounded-xl p-4 border border-[#9146FF]/30 hover:border-[#9146FF]/60 transition-all duration-500"
+                  className="relative bg-[#09092a]/90 backdrop-blur-sm rounded-xl p-4 border border-[#9146FF]/30 hover:border-[#9146FF]/60 transition-all duration-500 cursor-pointer"
                   style={{
                     transform: 'perspective(1000px) rotateX(-3deg) rotateY(3deg)',
                     boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
@@ -227,35 +247,75 @@ const ContactSection = () => {
                     <p className="text-[#f3eafd] text-xs">leadunioficial</p>
                   </div>
                 </div>
-              </div>
-            </div>
+              </a>
 
-            {/* Tarjeta Kick - Próximamente */}
-            <div className="mb-6">
-              <div className="group relative max-w-md mx-auto">
+              {/* Tarjeta GitHub */}
+              <a
+                href="https://github.com/leaduni"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block"
+              >
                 <div
-                  className="absolute inset-0 bg-gradient-to-br from-[#53FC18]/20 to-[#00D100]/20 rounded-xl transition-all duration-500 shadow-lg opacity-50"
+                  className="absolute inset-0 bg-gradient-to-br from-[#f6f8fa] to-[#e1e4e8] rounded-xl transform group-hover:scale-105 transition-all duration-500 shadow-lg"
                   style={{
-                    transform: 'perspective(1000px) rotateX(2deg)',
+                    transform: 'perspective(1000px) rotateX(3deg) rotateY(-3deg)',
+                    boxShadow: '0 15px 30px rgba(246, 248, 250, 0.2)',
+                  }}
+                />
+                <div
+                  className="relative bg-[#09092a]/90 backdrop-blur-sm rounded-xl p-4 border border-[#f6f8fa]/30 hover:border-[#f6f8fa]/60 transition-all duration-500 cursor-pointer"
+                  style={{
+                    transform: 'perspective(1000px) rotateX(3deg) rotateY(-3deg)',
+                    boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
+                  }}
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-10 h-10 p-1 bg-gradient-to-br from-[#f6f8fa] to-[#e1e4e8] rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 mb-2">
+                      <svg
+                        width="32"
+                        height="32"
+                        viewBox="0 0 1024 1024"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
+                          transform="scale(64)"
+                          fill="#24292e"
+                        />
+                      </svg>
+                    </div>
+                    <h3 className="text-white font-bold text-sm">GitHub</h3>
+                    <p className="text-[#f3eafd] text-xs">leaduni</p>
+                  </div>
+                </div>
+              </a>
+
+              {/* Tarjeta Kick */}
+              <div className="group relative ">
+                <div
+                  className="absolute inset-0 bg-gradient-to-br from-[#53FC18]/20 to-[#00D100]/20 rounded-xl transform group-hover:scale-105 transition-all duration-500 shadow-lg opacity-50"
+                  style={{
+                    transform: 'perspective(1000px) rotateX(-3deg) rotateY(3deg)',
                     boxShadow: '0 15px 30px rgba(83, 252, 24, 0.1)',
                   }}
                 />
                 <div
-                  className="relative bg-[#09092a]/60 backdrop-blur-sm rounded-xl p-6 border border-[#53FC18]/20 transition-all duration-500"
+                  className="relative bg-[#09092a]/60 backdrop-blur-sm rounded-xl p-4 border border-[#53FC18]/20 transition-all duration-500"
                   style={{
-                    transform: 'perspective(1000px) rotateX(2deg)',
+                    transform: 'perspective(1000px) rotateX(-3deg) rotateY(3deg)',
                     boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
                   }}
                 >
                   <div className="flex flex-col items-center text-center">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#53FC18]/40 to-[#00D100]/40 rounded-lg flex items-center justify-center mb-3 opacity-50 border-2 border-[#53FC18]/30">
-                      <div className="w-6 h-6 rounded bg-gradient-to-br from-[#53FC18]/60 to-[#00D100]/60 animate-pulse"></div>
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#53FC18]/40 to-[#00D100]/40 rounded-lg flex items-center justify-center mb-2 opacity-50 border-2 border-[#53FC18]/30">
+                      <div className="w-4 h-4 rounded bg-gradient-to-br from-[#53FC18]/60 to-[#00D100]/60 animate-pulse"></div>
                     </div>
-                    <h3 className="text-white/70 font-bold text-lg mb-2">???</h3>
-                    <div className="bg-gradient-to-r from-[#53FC18]/20 to-[#00D100]/20 px-4 py-2 rounded-full border border-[#53FC18]/30 mb-2">
-                      <p className="text-[#53FC18] text-sm font-semibold">PRÓXIMAMENTE</p>
-                    </div>
-                    <p className="text-[#f3eafd]/60 text-xs">Algo emocionante se acerca...</p>
+                    <h3 className="text-white/70 font-bold text-sm ">???</h3>
+                    <p className="text-[#f3eafd] text-xs">Proximamente</p>
                   </div>
                 </div>
               </div>
