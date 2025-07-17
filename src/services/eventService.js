@@ -67,7 +67,7 @@ function formatImageUrl(url) {
 const staticFallbackUpcoming = [
   {
     nombreDelEvento: 'Podcast LeadUNI 🎙️',
-    fechaTentativaDelEvento: '30/07/2025',
+    fechaTentativaDelEvento: '03/08/2025',
     pilar: 'Liderazgo',
     imagenUrl: 'https://drive.google.com/thumbnail?id=1NyOuUKksL3elUHHUTCeOpoMK9GqKmlbg&sz=w1000',
     descripcionBreve: 'Desde el Pilar de Liderazgo de Lead UNI, estamos preparando un podcast pensado para inspirarte, retarte y ayudarte a crecer.¡Pronto en tus oídos! 👂🚀',
@@ -94,7 +94,7 @@ const staticFallbackUpcoming = [
   },
   {
     nombreDelEvento: 'Desarrollo Web💻-Pagina LeadUNI',
-    fechaTentativaDelEvento: '13/07/2025',
+    fechaTentativaDelEvento: '17/07/2025',
     pilar: 'Excelencia Académica',
     imagenUrl: 'https://drive.google.com/thumbnail?id=1ZFOlXNkpy_MTv_NE4UDSVJwAg5SnwqUh&sz=w1000',
     descripcionBreve: 'Durante este proyecto colaborativo, el equipo de Excelencia Academica desarrolló la página web oficial de LeadUNI. Tiene como objetivo representar digitalmente a la organización, mostrando proyectos, eventos, noticias, convocatoria y presentando a los miembros clave de la comunidad.',
