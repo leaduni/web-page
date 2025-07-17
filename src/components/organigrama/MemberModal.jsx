@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
-const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setActiveMemberTab, memberDetails }) => {
+const MemberModal = ({
+  selectedMember,
+  setSelectedMember,
+  activeMemberTab,
+  setActiveMemberTab,
+  memberDetails,
+}) => {
   const details = memberDetails[selectedMember.name];
   const [showingContactIdx, setShowingContactIdx] = useState(null);
   const [copiedIdx, setCopiedIdx] = useState(null);
@@ -18,7 +24,7 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
   }, [activeMemberTab]);
 
   // Función helper para manejar casos sin información
-  const getDefaultText = (type) => {
+  const getDefaultText = type => {
     if (type === 'premios') {
       return 'Construyendo un legado de excelencia en LEAD UNI';
     }
@@ -34,12 +40,12 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
     const defaultText = getDefaultText(type);
     return !array.every(item => item === defaultText);
   };
-  
+
   const tabs = [
     { id: 'info', label: 'Información' },
     { id: 'eventos', label: 'Eventos' },
     { id: 'habilidades', label: 'Habilidades' },
-    { id: 'contacto', label: 'Contacto' }
+    { id: 'contacto', label: 'Contacto' },
   ];
 
   return (
@@ -70,8 +76,12 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                 />
               </div>
               <div className="flex flex-col justify-center">
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-0 leading-tight">{selectedMember.name}</h2>
-                <p className="text-white bg-[#1A0B2E] px-2 py-1 rounded-b-lg w-fit shadow-lg mt-1 text-base md:text-lg">{selectedMember.position}</p>
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-0 leading-tight">
+                  {selectedMember.name}
+                </h2>
+                <p className="text-white bg-[#1A0B2E] px-2 py-1 rounded-b-lg w-fit shadow-lg mt-1 text-base md:text-lg">
+                  {selectedMember.position}
+                </p>
               </div>
             </div>
             {/* Móvil: imagen, nombre y cargo centrados verticalmente, todo dentro del fondo violeta */}
@@ -84,8 +94,12 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                   className="relative w-24 h-24 rounded-full object-cover border-4 border-[#1A0B2E] bg-white"
                 />
               </div>
-              <h2 className="text-lg font-bold text-white mb-1 leading-tight text-center mt-2">{selectedMember.name}</h2>
-              <p className="text-white text-sm font-medium text-center mt-0">{selectedMember.position}</p>
+              <h2 className="text-lg font-bold text-white mb-1 leading-tight text-center mt-2">
+                {selectedMember.name}
+              </h2>
+              <p className="text-white text-sm font-medium text-center mt-0">
+                {selectedMember.position}
+              </p>
             </div>
           </div>
           {/* Espaciado prudente entre header y tabs - solo móvil */}
@@ -147,12 +161,14 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                       {details.eventos.premios && details.eventos.premios.length > 0 ? (
                         details.eventos.premios.map((premio, idx) => (
                           <li key={idx} className="text-white text-base">
-                            <span className="mr-2 text-[#d93340]">–</span>{premio}
+                            <span className="mr-2 text-[#d93340]">–</span>
+                            {premio}
                           </li>
                         ))
                       ) : (
                         <li className="text-white/70 text-base italic">
-                          <span className="mr-2 text-[#d93340]">–</span>{getDefaultText('premios')}
+                          <span className="mr-2 text-[#d93340]">–</span>
+                          {getDefaultText('premios')}
                         </li>
                       )}
                     </ul>
@@ -165,12 +181,14 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                       {details.eventos.liderados && details.eventos.liderados.length > 0 ? (
                         details.eventos.liderados.map((evento, idx) => (
                           <li key={idx} className="text-white text-base">
-                            <span className="mr-2 text-[#a6249d]">–</span>{evento}
+                            <span className="mr-2 text-[#a6249d]">–</span>
+                            {evento}
                           </li>
                         ))
                       ) : (
                         <li className="text-white/70 text-base italic">
-                          <span className="mr-2 text-[#a6249d]">–</span>{getDefaultText('eventos')}
+                          <span className="mr-2 text-[#a6249d]">–</span>
+                          {getDefaultText('eventos')}
                         </li>
                       )}
                     </ul>
@@ -185,7 +203,10 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                       Habilidades Blandas
                     </h3>
                     <div className="flex flex-wrap gap-3 mb-2">
-                      {(showAllSoftSkills ? details.habilidades.soft : details.habilidades.soft.slice(0, 6)).map((skill, idx) => (
+                      {(showAllSoftSkills
+                        ? details.habilidades.soft
+                        : details.habilidades.soft.slice(0, 6)
+                      ).map((skill, idx) => (
                         <span
                           key={idx}
                           className="px-5 py-2 rounded-full bg-white/10 shadow-md text-white text-base font-medium backdrop-blur-sm border border-[#a6249d]/30"
@@ -208,7 +229,10 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                       Habilidades Técnicas
                     </h3>
                     <div className="flex flex-wrap gap-3 mb-2">
-                      {(showAllHardSkills ? details.habilidades.hard : details.habilidades.hard.slice(0, 6)).map((skill, idx) => (
+                      {(showAllHardSkills
+                        ? details.habilidades.hard
+                        : details.habilidades.hard.slice(0, 6)
+                      ).map((skill, idx) => (
                         <span
                           key={idx}
                           className="px-5 py-2 rounded-full bg-white/10 shadow-md text-white text-base font-medium backdrop-blur-sm border border-[#a6249d]/30"
@@ -251,10 +275,13 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                         if (item.type === 'phone') href = `http://wa.me/+51${value}`;
                         else if (item.type === 'link') href = value;
                         // Mostrar el correo real si está seleccionado
-                        const showReal = (showingContactIdx === idx && item.type === 'email');
+                        const showReal = showingContactIdx === idx && item.type === 'email';
                         if (item.type === 'email') {
                           return (
-                            <div key={item.label} className="relative w-full flex flex-col items-center">
+                            <div
+                              key={item.label}
+                              className="relative w-full flex flex-col items-center"
+                            >
                               {copiedIdx === idx && (
                                 <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#a6249d] text-white px-4 py-2 rounded-full shadow-lg text-sm font-semibold z-50 animate-fade-in-out pointer-events-none">
                                   ¡Copiado!
@@ -273,8 +300,14 @@ const MemberModal = ({ selectedMember, setSelectedMember, activeMemberTab, setAc
                                     }, 600);
                                   }
                                 }}
-                                onBlur={() => { setShowingContactIdx(null); setCopiedIdx(null); }}
-                                onMouseLeave={() => { setShowingContactIdx(null); setCopiedIdx(null); }}
+                                onBlur={() => {
+                                  setShowingContactIdx(null);
+                                  setCopiedIdx(null);
+                                }}
+                                onMouseLeave={() => {
+                                  setShowingContactIdx(null);
+                                  setCopiedIdx(null);
+                                }}
                                 tabIndex={0}
                               >
                                 <span className="text-white group-hover:text-white text-center break-all px-2">

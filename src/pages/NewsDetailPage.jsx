@@ -28,7 +28,6 @@ export default function NewsDetailPage() {
     const currentSrc = e.target.src;
 
     if (currentSrc.includes('drive.google.com/thumbnail')) {
-      // Si ya es thumbnail y falló, intentar con sz=w2000
       if (currentSrc.includes('sz=w1000')) {
         console.log('🔄 Reintentando con resolución mayor...');
         e.target.src = currentSrc.replace('sz=w1000', 'sz=w2000');
@@ -43,7 +42,6 @@ export default function NewsDetailPage() {
         }
       }, 1000);
     } else {
-      // Para otras URLs, usar fallback directo
       console.log('⚠️ Error en imagen no-Google Drive, usando fallback');
       e.target.src = logoLeadUniNews;
     }
@@ -64,7 +62,6 @@ export default function NewsDetailPage() {
         setError('Error al cargar la noticia');
       } finally {
         setLoading(false);
-        // Iniciar animación después de cargar los datos
         setTimeout(() => setShow(true), 5);
       }
     }
@@ -183,7 +180,7 @@ export default function NewsDetailPage() {
             </motion.div>
 
             <motion.article
-              className="prose prose-invert max-w-none text-lg mx-auto mb-12 transition-colors"
+              className="prose prose-invert max-w-none text-lg mx-auto mb-12 transition-colors prose-headings:text-white prose-p:text-justify prose-p:leading-relaxed prose-p:mb-4 "
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.7, ease: 'easeOut' }}

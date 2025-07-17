@@ -56,7 +56,7 @@ export function Header() {
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-[#a6249d]/30 via-transparent to-[#d93340]/40 group-hover:opacity-0 transition-opacity duration-300"></div>
             </div>
-            <span className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white transition-colors duration-300 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#d93340] hover:to-[#ff6ec7] focus:text-transparent focus:bg-clip-text focus:bg-gradient-to-r focus:from-[#d93340] focus:to-[#ff6ec7] active:text-transparent active:bg-clip-text active:bg-gradient-to-r active:from-[#d93340] active:to-[#ff6ec7]">
+            <span className="text-2xl sm:text-3xl font-bold tracking-tight text-[#fff] transition-colors duration-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#d93340] group-hover:to-[#ff6ec7] focus:text-transparent focus:bg-clip-text focus:bg-gradient-to-r focus:from-[#d93340] focus:to-[#ff6ec7] active:text-transparent active:bg-clip-text active:bg-gradient-to-r active:from-[#d93340] active:to-[#ff6ec7]">
               LEAD UNI
             </span>
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#d93340] to-[#a6249d] group-hover:w-full transition-all duration-300"></span>

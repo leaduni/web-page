@@ -6,7 +6,10 @@ const CARD_HEIGHT = 'h-[440px]'; // Altura intermedia para mejor equilibrio visu
 const MemberCard = ({ member, onSelect }) => {
   return (
     <motion.div
-      whileHover={{ y: -10, boxShadow: '0 8px 32px 0 rgba(139,92,246,0.25), 0 1.5px 8px 0 rgba(0,0,0,0.10)' }}
+      whileHover={{
+        y: -10,
+        boxShadow: '0 8px 32px 0 rgba(139,92,246,0.25), 0 1.5px 8px 0 rgba(0,0,0,0.10)',
+      }}
       whileTap={{ scale: 0.97 }}
       onClick={() => onSelect(member)}
       className={`relative group cursor-pointer transition-all duration-300 ${CARD_HEIGHT}`}
@@ -22,7 +25,8 @@ const MemberCard = ({ member, onSelect }) => {
             src={member.image}
             alt={member.name}
             className={`w-full h-full object-cover rounded-t-2xl shadow-md transition-transform duration-500 group-hover:scale-105 ${
-              (member.name === 'Miguel Anthony Castañeda Villanueva' || member.name === 'Gabriel Wei Wei Siguas')
+              member.name === 'Miguel Anthony Castañeda Villanueva' ||
+              member.name === 'Gabriel Wei Wei Siguas'
                 ? 'object-[center_50%] md:object-center'
                 : `object-top md:${member.imgClass || 'object-center'}`
             }`}
@@ -34,25 +38,26 @@ const MemberCard = ({ member, onSelect }) => {
         {/* Información */}
         <div className="relative z-20 p-6 flex flex-col flex-1 justify-between min-h-[120px]">
           <div>
-            <h3 className="text-xl font-bold mb-2 text-white break-words">
-              {member.name}
-            </h3>
-            <p className="text-white text-sm">
-              {member.position}
-            </p>
+            <h3 className="text-xl font-bold mb-2 text-white break-words">{member.name}</h3>
+            <p className="text-white text-sm">{member.position}</p>
           </div>
           {/* Botón ver más */}
           <div className="mt-4 flex justify-end">
             <button className="text-sm text-white hover:text-[#d93340] flex items-center gap-1 transition-colors group-hover:text-[#d93340] font-medium">
               Ver más
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" 
-                fill="none" 
-                viewBox="0 0 24 24" 
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4 transform group-hover:translate-x-1 transition-transform"
+                fill="none"
+                viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
           </div>
