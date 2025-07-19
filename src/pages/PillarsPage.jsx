@@ -1,13 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 import { Award, BookOpen, Briefcase, GraduationCap, Heart, Users, UserCircle } from 'lucide-react';
 import PillarDetails from '../components/PillarDetails';
-import PillarCarousel from '../components/PillarCarousel';
+import PillarCarousel, { PillarCarouselNavigation } from '../components/PillarCarousel';
 import { getPastEvents, getUpcomingEvents } from '../services/eventService';
 import '../styles/carousel.css';
 
 const PillarsPage = () => {
   const [pillars, setPillars] = useState([]);
   const [selectedPillar, setSelectedPillar] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const detailRef = useRef(null);
 
   useEffect(() => {
@@ -247,8 +248,15 @@ const PillarsPage = () => {
               pillars={pillars}
               selectedPillar={selectedPillar}
               onSelectPillar={handleSelectPillar}
+              currentIndex={currentIndex}
+              setCurrentIndex={setCurrentIndex}
             />
           </div>
+         <PillarCarouselNavigation
+           pillars={pillars}
+           currentIndex={currentIndex}
+           setCurrentIndex={setCurrentIndex}
+         />
 
           {selectedPillar && (
             <div className="mt-20 scroll-mt-24" ref={detailRef}>

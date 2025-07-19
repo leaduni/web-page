@@ -36,9 +36,9 @@ export const ContactoSection = () => {
           <div className="bg-[#1A0B2E]/90 backdrop-blur-lg rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#a6249d]/40 shadow-[0_8px_30px_-5px_rgba(34,48,91,0.2)] w-full max-w-xl mx-auto order-1 lg:order-2">
             <div className="text-center mb-8">
               <h2 className="text-2xl md:text-3xl font-extrabold mb-3 bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text">
-                Contactanos
+                Contáctanos
               </h2>
-              <p className="text-sm text-white/80 max-w-xs sm:max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto">
+              <p className="text-base text-white/80 max-w-xs sm:max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto">
                 Conecta con nosotros y forma parte de la comunidad LEAD UNI
               </p>
             </div>
@@ -46,7 +46,7 @@ export const ContactoSection = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="nombre" className="block text-white/80 mb-2 text-sm">
+                  <label htmlFor="nombre" className="block text-white/80 mb-2 text-base">
                     Nombre Completo
                   </label>
                   <input
@@ -54,11 +54,11 @@ export const ContactoSection = () => {
                     id="nombre"
                     name="nombre"
                     placeholder="Tu nombre"
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-[#B936F5] transition-colors text-sm"
+                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-[#B936F5] transition-colors text-base"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-white/80 mb-2 text-sm">
+                  <label htmlFor="email" className="block text-white/80 mb-2 text-base">
                     Correo Electrónico
                   </label>
                   <input
@@ -66,19 +66,19 @@ export const ContactoSection = () => {
                     id="email"
                     name="email"
                     placeholder="ejemplo@email.com"
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-[#B936F5] transition-colors text-sm"
+                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-[#B936F5] transition-colors text-base"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="asunto" className="block text-white/80 mb-2 text-sm">
+                <label htmlFor="asunto" className="block text-white/80 mb-2 text-base">
                   Asunto
                 </label>
                 <select
                   id="asunto"
                   name="asunto"
-                  className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[#B936F5] transition-colors text-sm"
+                  className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[#B936F5] transition-colors text-base"
                 >
                   <option value="" className="bg-[#1A0B2E]">
                     Selecciona un asunto
@@ -96,7 +96,7 @@ export const ContactoSection = () => {
               </div>
 
               <div>
-                <label htmlFor="mensaje" className="block text-white/80 mb-2 text-sm">
+                <label htmlFor="mensaje" className="block text-white/80 mb-2 text-base">
                   Mensaje
                 </label>
                 <textarea
@@ -104,14 +104,14 @@ export const ContactoSection = () => {
                   name="mensaje"
                   rows={4}
                   placeholder="Escribe tu mensaje aquí..."
-                  className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-[#B936F5] transition-colors resize-none text-sm"
+                  className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-[#B936F5] transition-colors resize-none text-base"
                 ></textarea>
               </div>
 
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  className="w-auto px-6 py-2 bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] text-white font-medium rounded-xl hover:opacity-90 transition-opacity text-sm"
+                  className="w-auto px-6 py-2 bg-gradient-to-r from-[#B936F5] to-[#FF1CF7] text-white font-medium rounded-xl hover:opacity-90 transition-opacity text-base"
                 >
                   Enviar Mensaje
                 </button>
