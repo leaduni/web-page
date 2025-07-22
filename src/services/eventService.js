@@ -96,7 +96,7 @@ const staticFallbackUpcoming = [
     nombreDelEvento: 'Desarrollo Web💻-Pagina LeadUNI',
     fechaTentativaDelEvento: '17/07/2025',
     pilar: 'Excelencia Académica',
-    imagenUrl: 'https://drive.google.com/thumbnail?id=1ZFOlXNkpy_MTv_NE4UDSVJwAg5SnwqUh&sz=w1000',
+    imagenUrl: 'https://drive.google.com/thumbnail?id=1tE9ae3Vgx0-_DnMaVQcoDYoX7y5LXRu0&sz=w1000',
     descripcionBreve: 'Durante este proyecto colaborativo, el equipo de Excelencia Academica desarrolló la página web oficial de LeadUNI. Tiene como objetivo representar digitalmente a la organización, mostrando proyectos, eventos, noticias, convocatoria y presentando a los miembros clave de la comunidad.',
     
     esRespaldo: true

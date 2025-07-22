@@ -1,6 +1,32 @@
 import React, { useState, useEffect } from 'react';
-const PillarCarousel = ({ pillars, selectedPillar, onSelectPillar }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+
+export function PillarCarouselNavigation({ pillars, currentIndex, setCurrentIndex }) {
+  return (
+    <div className="w-full flex flex-col items-center justify-center mt-8 mb-4">
+      <div className="flex items-center text-white/60 text-xs mb-2">
+        <span>←</span>
+        <span className="mx-2">Desliza para explorar</span>
+        <span>→</span>
+      </div>
+      <div className="flex justify-center gap-2 mt-2">
+        {pillars.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 border-2 border-[#a6249d]/40 ${index === currentIndex ? 'bg-gradient-to-r from-[#d93340] to-[#a6249d] shadow-lg' : 'bg-[#2D1B4E] hover:bg-[#d93340]'}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const PillarCarousel = ({ pillars, selectedPillar, onSelectPillar, currentIndex, setCurrentIndex }) => {
+  // Estados para drag/swipe
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [dragOffset, setDragOffset] = useState(0);
+
   const rotateCarousel = (direction) => {
     const newIndex = direction === 'next' 
       ? (currentIndex + 1) % pillars.length 
@@ -13,8 +39,73 @@ const PillarCarousel = ({ pillars, selectedPillar, onSelectPillar }) => {
       if (index !== -1) setCurrentIndex(index);
     }
   }, [selectedPillar]);
+
+  // Handlers para drag/swipe
+  const handleTouchStart = e => {
+    const touch = e.touches[0];
+    setDragStart({ x: touch.clientX, y: touch.clientY });
+    setIsDragging(true);
+    setDragOffset(0);
+  };
+  const handleTouchMove = e => {
+    if (!isDragging) return;
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - dragStart.x;
+    const deltaY = touch.clientY - dragStart.y;
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      e.preventDefault();
+      setDragOffset(deltaX);
+    }
+  };
+  const handleTouchEnd = () => {
+    if (!isDragging) return;
+    const threshold = 50;
+    if (Math.abs(dragOffset) > threshold) {
+      if (dragOffset > 0) {
+        rotateCarousel('prev');
+      } else {
+        rotateCarousel('next');
+      }
+    }
+    setIsDragging(false);
+    setDragOffset(0);
+  };
+  const handleMouseDown = e => {
+    setDragStart({ x: e.clientX, y: e.clientY });
+    setIsDragging(true);
+    setDragOffset(0);
+  };
+  const handleMouseMove = e => {
+    if (!isDragging) return;
+    const deltaX = e.clientX - dragStart.x;
+    setDragOffset(deltaX);
+  };
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+    const threshold = 50;
+    if (Math.abs(dragOffset) > threshold) {
+      if (dragOffset > 0) {
+        rotateCarousel('prev');
+      } else {
+        rotateCarousel('next');
+      }
+    }
+    setIsDragging(false);
+    setDragOffset(0);
+  };
+
   return (
-    <div className="carousel-container relative h-[400px] w-full overflow-hidden perspective">
+    <div
+      className="carousel-container relative h-[400px] w-full overflow-hidden perspective select-none"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+    >
       <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-20 md:left-4">
         <button
           onClick={() => rotateCarousel('prev')}
@@ -34,13 +125,12 @@ const PillarCarousel = ({ pillars, selectedPillar, onSelectPillar }) => {
       <div 
         className="carousel relative w-full h-full transform-style-3d transition-transform duration-500"
         style={{
-          transform: `rotateY(${currentIndex * -(360 / pillars.length)}deg)`,
+          transform: `rotateY(${currentIndex * -(360 / pillars.length) + (isDragging ? dragOffset * 0.2 : 0)}deg)`,
         }}
       >
         {pillars.map((pillar, index) => {
           const angle = (360 / pillars.length) * index;
           const radius = 300; 
-          
           return (
             <div
               key={pillar.id}
