@@ -258,9 +258,6 @@ const MemberModal = ({
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {(() => {
                       const labels = [
-                        { label: 'Correo personal', type: 'email' },
-                        { label: 'Correo institucional', type: 'email' },
-                        { label: 'Celular', type: 'phone' },
                         { label: 'LinkedIn', type: 'link' },
                         { label: 'Curriculum Vitae', type: 'link' },
                         { label: 'Github', type: 'link' },
