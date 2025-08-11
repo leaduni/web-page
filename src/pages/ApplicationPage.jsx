@@ -1,10 +1,169 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
-import { Users, Calendar, Heart, Star, ArrowRight } from 'lucide-react';
+import FormCard from '../components/application/FormCard';
+import FormField from '../components/application/FormField';
+import TextInput from '../components/application/TextInput';
+import SelectInput from '../components/application/SelectInput';
+import PillarOption from '../components/application/PillarOption';
+// Removemos la importación de iconos de Lucide React
+// import { GraduationCap, Users, BookOpen, Heart, Building2, Megaphone } from 'lucide-react';
+
+const facultyOptions = [
+  { value: 'fim', label: 'Facultad de Ingeniería Mecánica' },
+  { value: 'fiee', label: 'Facultad de Ingeniería Eléctrica y Electrónica' },
+  { value: 'fic', label: 'Facultad de Ingeniería Civil' },
+  { value: 'fiq', label: 'Facultad de Ingeniería Química y Textil' },
+  { value: 'figmm', label: 'Facultad de Ingeniería Geológica, Minera y Metalúrgica' },
+  { value: 'fia', label: 'Facultad de Ingeniería Ambiental' },
+  { value: 'fip', label: 'Facultad de Ingeniería Pesquera' },
+  { value: 'fie', label: 'Facultad de Ingeniería Económica' },
+  { value: 'fiaa', label: 'Facultad de Ingeniería Arquitectura y Artes' },
+];
+
+const careerOptions = [
+  { value: 'sistemas', label: 'Ing. de Sistemas' },
+  { value: 'industrial', label: 'Ing. Industrial' },
+  { value: 'mecatronica', label: 'Ing. Mecatrónica' },
+  { value: 'civil', label: 'Ing. Civil' },
+  { value: 'ambiental', label: 'Ing. Ambiental' },
+  { value: 'mecanica', label: 'Ing. Mecánica' },
+  { value: 'electrica', label: 'Ing. Eléctrica' },
+  { value: 'electronica', label: 'Ing. Electrónica' },
+  { value: 'quimica', label: 'Ing. Química' },
+  { value: 'textil', label: 'Ing. Textil' },
+  { value: 'minera', label: 'Ing. de Minas' },
+  { value: 'metalurgica', label: 'Ing. Metalúrgica' },
+  { value: 'pesquera', label: 'Ing. Pesquera' },
+  { value: 'economica', label: 'Ing. Económica' },
+  { value: 'arquitectura', label: 'Arquitectura' },
+];
+
+const cycleOptions = [
+  { value: '1', label: '1er Ciclo' },
+  { value: '2', label: '2do Ciclo' },
+  { value: '3', label: '3er Ciclo' },
+  { value: '4', label: '4to Ciclo' },
+  { value: '5', label: '5to Ciclo' },
+  { value: '6', label: '6to Ciclo' },
+  { value: '7', label: '7mo Ciclo' },
+  { value: '8', label: '8vo Ciclo' },
+  { value: '9', label: '9no Ciclo' },
+  { value: '10', label: '10mo Ciclo' },
+];
+
+const pillarOptions = [
+  {
+    id: 'academic',
+    image: '/pillars/ExcelenciaAcademica.png',
+    name: 'Excelencia Académica',
+    alt: 'Ícono de Excelencia Académica',
+  },
+  {
+    id: 'women',
+    image: '/pillars/ImpulsoFemenino.png',
+    name: 'Impulso Femenino',
+    alt: 'Ícono de Impulso Femenino',
+  },
+  {
+    id: 'academia',
+    image: '/pillars/LeadAcademia.png',
+    name: 'LEAD Academia',
+    alt: 'Ícono de LEAD Academia',
+  },
+  {
+    id: 'social',
+    image: '/pillars/ImpactoSocial.png',
+    name: 'Impacto Social',
+    alt: 'Ícono de Impacto Social',
+  },
+  {
+    id: 'chapter',
+    image: '/pillars/DesarrolloDelCapitulo.png',
+    name: 'Desarrollo de Capítulo',
+    alt: 'Ícono de Desarrollo de Capítulo',
+  },
+  {
+    id: 'marketing',
+    image: '/pillars/Marketing.png',
+    name: 'Marketing',
+    alt: 'Ícono de Marketing',
+  },
+  {
+    id: 'leadership',
+    image: '/pillars/Liderazgo.png',
+    name: 'Liderazgo',
+    alt: 'Ícono de Liderazgo',
+  },
+  {
+    id: 'profesional',
+    image: '/pillars/DesarrolloProfesional.png',
+    name: 'Desarrollo Profesional',
+    alt: 'Ícono de Desarrollo Profesional',
+  },
+];
+
+const pillarContent = {
+  academic: {
+    title: 'Excelencia Académica',
+    description:
+      'Programa enfocado en potenciar el rendimiento académico y desarrollar habilidades de estudio efectivas.',
+  },
+  women: {
+    title: 'Impulso Femenino',
+    description: 'Iniciativa dedicada a empoderar y promover el liderazgo femenino en campos STEM.',
+  },
+  academia: {
+    title: 'LEAD Academia',
+    description:
+      'Formación integral en habilidades técnicas y blandas para futuros líderes en ingeniería.',
+  },
+  social: {
+    title: 'Impacto Social',
+    description:
+      'Proyectos orientados a crear cambios positivos en la comunidad a través de la ingeniería.',
+  },
+  chapter: {
+    title: 'Desarrollo de Capítulo',
+    description: 'Gestión y crecimiento del capítulo estudiantil, fortaleciendo la comunidad LEAD.',
+  },
+  marketing: {
+    title: 'Marketing',
+    description:
+      'Estrategias de comunicación y promoción para dar visibilidad a las iniciativas del capítulo.',
+  },
+  leadership: {
+    title: 'Liderazgo',
+    description:
+      'Desarrollo de habilidades de liderazgo, gestión de equipos y toma de decisiones estratégicas.',
+  },
+  profesional: {
+    title: 'Desarrollo Profesional',
+    description:
+      'Preparación para el mundo laboral a través de networking, mentorías y desarrollo de competencias profesionales.',
+  },
+};
+
+const VISIBLE_PILLARS = 5; // cantidad de pilares visibles en el carrusel (impar)
 
 const ApplicationPage = () => {
   const theme = useTheme();
+  const [formData, setFormData] = useState({
+    fullName: '',
+    phone: '',
+    email: '',
+    faculty: '',
+    career: '',
+    cycle: '',
+  });
+  const [selectedPillar, setSelectedPillar] = useState(null);
+  const [pillarSpecificData, setPillarSpecificData] = useState({
+    projectType: '',
+    skills: '',
+  });
+  const [leadUniDefinition, setLeadUniDefinition] = useState('');
   const [randomSpheres, setRandomSpheres] = useState([]);
+  const [showImage, setShowImage] = useState(false);
+  const [currentPillarIndex, setCurrentPillarIndex] = useState(0);
 
   // Colores disponibles para las esferas
   const sphereColors = [
@@ -18,9 +177,10 @@ const ApplicationPage = () => {
 
   // Función para generar posición aleatoria
   const getRandomPosition = () => {
+    // Generar posiciones completamente aleatorias
     const top = Math.random() * 80 + 10; // Entre 10% y 90%
     const left = Math.random() * 80 + 10; // Entre 10% y 90%
-    
+
     return {
       top: `${top}%`,
       left: `${left}%`,
@@ -65,8 +225,129 @@ const ApplicationPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleJoinCommunity = () => {
-    window.open('https://lu.ma/dculvoh1', '_blank');
+  // Efecto para controlar la visibilidad de la imagen decorativa
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      // Mostrar imagen después de que el usuario haya scrolleado más allá de la sección de bienvenida
+      // La sección de bienvenida tiene aproximadamente 100vh, así que mostramos la imagen después de 80vh
+      if (scrollPosition > windowHeight * 0.6) {
+        setShowImage(true);
+      } else {
+        setShowImage(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Autoselección del pilar central
+  useEffect(() => {
+    const centerIndex =
+      (currentPillarIndex + Math.floor(VISIBLE_PILLARS / 2)) % pillarOptions.length;
+    setSelectedPillar(pillarOptions[centerIndex].id);
+    // eslint-disable-next-line
+  }, [currentPillarIndex]);
+
+  // Mover el carrusel para centrar el pilar seleccionado
+  const moveToCenter = visibleIdx => {
+    // visibleIdx: índice en el array de visibles (0 a VISIBLE_PILLARS-1)
+    // Queremos que visibleIdx quede en el centro
+    const diff = visibleIdx - Math.floor(VISIBLE_PILLARS / 2);
+    setCurrentPillarIndex(prev => (prev + diff + pillarOptions.length) % pillarOptions.length);
+  };
+
+  // Obtener los pilares visibles en el carrusel
+  const getVisiblePillars = () => {
+    const visible = [];
+    for (let i = 0; i < VISIBLE_PILLARS; i++) {
+      visible.push(pillarOptions[(currentPillarIndex + i) % pillarOptions.length]);
+    }
+    return visible;
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const handlePillarSpecificChange = (field, value) => {
+    setPillarSpecificData(prev => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const scrollToForm = () => {
+    const formSection = document.getElementById('application-form');
+    if (formSection) {
+      formSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
+  const scrollToInfo = () => {
+    const infoSection = document.getElementById('info-section');
+    if (infoSection) {
+      infoSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
+  const handleSubmitForm = () => {
+    // Verificar que todos los campos requeridos estén completos
+    if (
+      !formData.fullName ||
+      !formData.phone ||
+      !formData.email ||
+      !formData.faculty ||
+      !formData.career ||
+      !formData.cycle ||
+      !selectedPillar ||
+      !pillarSpecificData.projectType ||
+      !pillarSpecificData.skills ||
+      !leadUniDefinition
+    ) {
+      alert('Por favor, completa todos los campos requeridos antes de enviar el formulario.');
+      return;
+    }
+
+    // Obtener el nombre del pilar seleccionado
+    const selectedPillarName =
+      pillarOptions.find(pillar => pillar.id === selectedPillar)?.name || '';
+
+    // Construir la URL del formulario de Google con los parámetros
+    const googleFormUrl = new URL(
+      'https://docs.google.com/forms/d/e/1FAIpQLSc1mIy-z6khAdySOylpJIDZVmwZHDznzrjxRbH44jBqDW0dcw/viewform'
+    );
+
+    // Agregar los parámetros de entrada
+    const params = new URLSearchParams({
+      usp: 'pp_url',
+      'entry.2005620554': formData.fullName, // Nombres y Apellidos
+      'entry.1201849899': formData.phone, // Número de celular
+      'entry.1045781291': formData.email, // Dirección de correo electrónico
+      'entry.1065046570': facultyOptions.find(f => f.value === formData.faculty)?.label || '', // Facultad
+      'entry.1166974658': careerOptions.find(c => c.value === formData.career)?.label || '', // Carrera
+      'entry.1403026133': cycleOptions.find(cy => cy.value === formData.cycle)?.label || '', // Ciclo Relativo
+      'entry.21194440': pillarSpecificData.projectType, // ¿Cuál fue tu principal motivo para postular a este Pilar?
+      'entry.5426552': pillarSpecificData.skills, // ¿Qué habilidades te ayudarían a destacar en este pilar?
+      'entry.1624972609': leadUniDefinition, // Para ti, ¿qué es LEAD UNI?
+    });
+
+    googleFormUrl.search = params.toString();
+
+    // Redirigir al formulario de Google
+    window.open(googleFormUrl.toString(), '_blank');
   };
 
   return (
@@ -74,9 +355,9 @@ const ApplicationPage = () => {
       className="min-h-screen relative overflow-hidden [&::-webkit-scrollbar]:hidden"
       style={{
         background: 'linear-gradient(to bottom right, #09092a 0%, #36042f 100%)',
-        scrollbarWidth: 'none',
-        msOverflowStyle: 'none',
-        WebkitScrollbar: { display: 'none' },
+        scrollbarWidth: 'none', // Firefox
+        msOverflowStyle: 'none', // Internet Explorer 10+
+        WebkitScrollbar: { display: 'none' }, // Chrome, Safari, Opera
       }}
     >
       {/* Esferas decorativas aleatorias */}
@@ -93,28 +374,11 @@ const ApplicationPage = () => {
         />
       ))}
 
-      {/* Esferas decorativas estáticas adicionales */}
-      <div className="absolute z-0 pointer-events-none w-full h-full">
-        {/* Esfera grande superior izquierda */}
-        <span className="absolute top-[-60px] left-[-60px] w-48 h-48 rounded-full bg-gradient-to-br from-[#d93340] to-[#a6249d] opacity-40 blur-2xl" />
-        {/* Esfera mediana inferior derecha */}
-        <span className="absolute bottom-[-40px] right-[-40px] w-32 h-32 rounded-full bg-gradient-to-br from-[#7957f1] to-[#d93340] opacity-30 blur-2xl" />
-        {/* Esfera pequeña centro izquierda */}
-        <span className="absolute top-1/2 left-[-30px] w-20 h-20 rounded-full bg-gradient-to-br from-[#a6249d] to-[#7957f1] opacity-30 blur-xl" />
-        {/* Esfera mediana superior derecha */}
-        <span className="absolute top-10 right-[-50px] w-28 h-28 rounded-full bg-gradient-to-br from-[#d93340] to-[#7957f1] opacity-25 blur-2xl" />
-        {/* Esfera pequeña inferior centro */}
-        <span className="absolute bottom-[-30px] left-1/2 w-16 h-16 rounded-full bg-gradient-to-br from-[#a6249d] to-[#d93340] opacity-20 blur-xl" />
-      </div>
-
-      {/* Sección principal con fondo negro y esferas animadas */}
+      {/* Sección de bienvenida con fondo negro y esferas animadas */}
       <section className="w-full flex flex-col items-center justify-center min-h-screen pt-10 pb-6 z-20 relative overflow-hidden">
         {/* Fondo negro */}
         <div className="absolute top-0 left-0 w-full h-full z-0">
-          <div
-            className="w-full h-full"
-            style={{ background: 'rgb(9,9,42)', minHeight: '100%', borderRadius: 0 }}
-          ></div>
+          <div className="w-full h-full bg-[rgb(9,9,42)] min-h-[100%] border-0"></div>
         </div>
 
         {/* Esferas animadas */}
@@ -130,145 +394,306 @@ const ApplicationPage = () => {
           {/* Esfera 5 */}
           <span className="animate-bubble5 absolute bottom-1/4 right-1/4 w-14 h-14 rounded-full bg-gradient-to-br from-[#d93340] via-[#a6249d] to-[#030c40] opacity-60 blur-2xl" />
         </div>
-
-        {/* Logo */}
         <img
           src="/logo-lead-uni.png"
           alt="Logo LEAD UNI"
-          className="w-1/2 max-w-lg object-contain shadow-xl mb-4 bg-transparent relative z-10"
-          style={{ marginTop: '60px' }}
+          className="w-1/3 max-w-xs object-contain shadow-xl mb-4 bg-transparent relative z-10"
         />
-
-        {/* Contenido principal */}
-        <div className="relative z-10 flex flex-col items-center w-full max-w-4xl px-4 py-10">
+        <div className="relative z-10 flex flex-col items-center w-full max-w-2xl px-4 py-10">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-2 text-center drop-shadow-lg py-5">
-            Organización Estudiantil{' '}
+            Centro Estudiantil{' '}
             <span className="bg-gradient-to-r from-[#d93340] to-[#a6249d] bg-clip-text text-transparent">
               LEAD UNI
             </span>
           </h1>
-          
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 bg-[#d93340]/20 border border-[#d93340]/40 rounded-full px-6 py-3 mb-6">
-              <Calendar className="w-5 h-5 text-[#d93340]" />
-              <span className="text-[#d93340] font-semibold">Convocatoria Cerrada</span>
-            </div>
-            
-            <p className="text-xl text-[#f3eafd] text-center mb-6 max-w-2xl">
-              Actualmente no estamos en temporada de convocatoria. ¡Pero no te preocupes! 
-              Puedes unirte a nuestra comunidad general y estar al tanto de las próximas oportunidades.
-            </p>
-          </div>
-
-          {/* Tarjetas informativas */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 w-full max-w-4xl">
-            <div className="bg-gradient-to-br from-[#d93340]/20 to-[#19092a]/40 rounded-xl p-6 border border-[#d93340]/30">
-              <div className="flex items-center justify-center mb-4">
-                <Users className="w-8 h-8 text-[#d93340]" />
-              </div>
-              <h3 className="text-lg font-semibold text-[#d93340] mb-2 text-center">Comunidad Activa</h3>
-              <p className="text-[#f3eafd] text-center text-sm">
-                Únete a nuestra comunidad general y conecta con otros estudiantes apasionados por el liderazgo.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-[#a6249d]/20 to-[#19092a]/40 rounded-xl p-6 border border-[#a6249d]/30">
-              <div className="flex items-center justify-center mb-4">
-                <Star className="w-8 h-8 text-[#a6249d]" />
-              </div>
-              <h3 className="text-lg font-semibold text-[#a6249d] mb-2 text-center">Próximas Oportunidades</h3>
-              <p className="text-[#f3eafd] text-center text-sm">
-                Recibe notificaciones sobre futuras convocatorias y eventos especiales.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-[#7957f1]/20 to-[#19092a]/40 rounded-xl p-6 border border-[#7957f1]/30">
-              <div className="flex items-center justify-center mb-4">
-                <Heart className="w-8 h-8 text-[#7957f1]" />
-              </div>
-              <h3 className="text-lg font-semibold text-[#7957f1] mb-2 text-center">Desarrollo Continuo</h3>
-              <p className="text-[#f3eafd] text-center text-sm">
-                Accede a recursos, talleres y contenido exclusivo para tu crecimiento personal y profesional.
-              </p>
-            </div>
-          </div>
-
-          {/* Botón de unirse a la comunidad */}
-          <div className="text-center">
-            <button 
-              className="bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white px-8 py-4 rounded-full shadow-lg font-bold text-lg hover:scale-105 transition flex items-center gap-3 mx-auto"
-              onClick={handleJoinCommunity}
+          <p className="text-lg text-[#f3eafd] text-center mb-2">
+            Formando líderes para transformar el futuro a través de excelencia académica, desarrollo
+            profesional e impacto social.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center mt-4">
+            <button
+              className="bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white px-8 py-2 rounded-full shadow-lg font-bold hover:scale-105 transition"
+              onClick={scrollToForm}
             >
-              <span>Unirse a la Comunidad LEAD UNI</span>
-              <ArrowRight className="w-5 h-5" />
+              Únete
             </button>
-            <p className="text-[#f3eafd]/70 text-sm mt-3">
-              Te redirigiremos a nuestra plataforma de comunidad
-            </p>
+            <button
+              className="border-2 border-[#a6249d] text-white px-8 py-2 rounded-full shadow-lg font-bold hover:scale-105 transition bg-[#030c40]/80"
+              onClick={scrollToInfo}
+            >
+              Descubre
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Sección informativa adicional */}
-      <section className="w-full flex flex-col items-center justify-center py-16 px-4 z-20 relative">
+      {/* Sección informativa con fondo negro */}
+      <section
+        id="info-section"
+        className="w-full flex flex-col items-center justify-center min-h-screen py-8 px-4 z-20 relative"
+      >
         <div className="absolute top-0 left-0 w-full h-full z-0">
           <div
             className="w-full h-full"
             style={{ background: 'rgb(9,9,42)', minHeight: '100%', borderRadius: 0 }}
           ></div>
         </div>
-        
-        <div className="max-w-4xl w-full bg-[#19092a]/80 rounded-2xl shadow-xl p-8 border border-[#a6249d]/40 relative z-10">
-          <h2 className="text-3xl font-bold text-center mb-8">
-            <span className="text-white">
-              ¿Qué puedes esperar?
+        <div className="max-w-3xl w-full bg-[#19092a]/80 rounded-2xl shadow-xl p-6 mb-8 border border-[#a6249d]/40 relative z-10">
+          <h2 className="text-2xl font-bold text-[#d93340] mb-2 text-center">
+            ¿Por qué unirte a{' '}
+            <span className="bg-gradient-to-r from-[#d93340] to-[#a6249d] bg-clip-text text-transparent">
+              LEAD UNI
             </span>
+            ?
           </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-[#d93340] mb-4">En la Comunidad General:</h3>
-              <ul className="space-y-3 text-[#f3eafd]">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-[#d93340] rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Notificaciones sobre próximas convocatorias</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-[#d93340] rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Eventos y talleres abiertos a la comunidad</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-[#d93340] rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Recursos y contenido educativo</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-[#d93340] rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Networking con otros estudiantes</span>
-                </li>
+          <ul className="list-disc list-inside text-[#f3eafd] text-lg space-y-2 mb-6 py-4">
+            <li>Desarrolla habilidades de liderazgo y trabajo en equipo.</li>
+            <li>Participa en proyectos de impacto social y académico.</li>
+            <li>Accede a talleres, charlas y mentorías exclusivas.</li>
+            <li>Conecta con una red de estudiantes y profesionales en ingeniería.</li>
+            <li>¡Y mucho más!</li>
+          </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
+            <div className="bg-gradient-to-br from-[#d93340]/30 to-[#19092a]/20 rounded-xl p-6 shadow-lg flex flex-col items-center">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" className="mb-2">
+                <circle cx="12" cy="12" r="10" fill="#fff" opacity="0.2" />
+                <path
+                  d="M12 6v6l4 2"
+                  stroke="#fff"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <h3 className="text-xl font-semibold text-[#d93340] mb-1">Cronograma</h3>
+              <ul className="text-[#f3eafd] text-base list-disc list-inside">
+                <li>Postulación: hasta 31 de agosto</li>
+                <li>Entrevistas: 2-6 de septiembre</li>
+                <li>Resultados: 10 de septiembre</li>
               </ul>
             </div>
-            
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-[#a6249d] mb-4">Próximas Convocatorias:</h3>
-              <ul className="space-y-3 text-[#f3eafd]">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-[#a6249d] rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Convocatoria de nuevos miembros (temporada regular)</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-[#a6249d] rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Programas especiales de liderazgo</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-[#a6249d] rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Proyectos de impacto social</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-[#a6249d] rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Mentorías y desarrollo profesional</span>
-                </li>
+            <div className="bg-gradient-to-br from-[#19092a]/30 to-[#bf2a51]/20 rounded-xl p-6 shadow-lg flex flex-col items-center">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" className="mb-2">
+                <rect x="3" y="4" width="16" height="16" rx="10" fill="#fff" opacity="0.2" />
+                <path
+                  d="M8 12l2 2 4-4"
+                  stroke="#fff"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <h3 className="text-xl font-semibold text-[#d93340] mb-1">Requisitos</h3>
+              <ul className="text-[#f3eafd] text-base list-disc list-inside">
+                <li>Ser estudiante de la UNI</li>
+                <li>Tener interés en liderazgo y trabajo en equipo</li>
+                <li>Compromiso con el desarrollo personal y profesional</li>
               </ul>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sección de formulario y cuadros para rellenar datos */}
+      <section
+        id="application-form"
+        className="w-full flex flex-col items-center justify-center min-h-screen py-8 px-4 z-20 relative"
+      >
+        {/* Imagen decorativa SOLO para la sección de inscripción, visible en escritorio */}
+        <div className="hidden lg:flex absolute right-0 top-0 h-full w-1/2 items-center justify-center z-0 pointer-events-none opacity-100">
+          <div className="w-full h-full flex items-center justify-center relative">
+            <img
+              src="/student_stem.png"
+              alt="Students in STEM"
+              className="object-contain mx-auto"
+              style={{ display: 'block' }}
+            />
+          </div>
+        </div>
+        <div className="container mx-auto px-4 py-8 flex flex-col lg:flex-row">
+          <div className="lg:w-1/2">
+            <FormCard
+              title={<span className="text-white">Información General</span>}
+              subtitle="Cuentamos un poco más sobre ti"
+            >
+              <FormField label="Nombres y Apellidos">
+                <TextInput
+                  value={formData.fullName}
+                  onChange={e => handleInputChange('fullName', e.target.value)}
+                  placeholder="Ingresa tu nombre completo"
+                />
+              </FormField>
+              <FormField label="Número de Celular">
+                <TextInput
+                  type="tel"
+                  value={formData.phone}
+                  onChange={e => handleInputChange('phone', e.target.value)}
+                  placeholder="Ej: 999 999 999"
+                />
+              </FormField>
+              <FormField label="Dirección de Correo Electrónico">
+                <TextInput
+                  type="email"
+                  value={formData.email}
+                  onChange={e => handleInputChange('email', e.target.value)}
+                  placeholder="ejemplo@correo.com"
+                />
+              </FormField>
+              <FormField label="Facultad">
+                <SelectInput
+                  options={facultyOptions}
+                  value={formData.faculty}
+                  onChange={value => handleInputChange('faculty', value)}
+                  placeholder="Selecciona tu facultad"
+                />
+              </FormField>
+              <FormField label="Carrera">
+                <SelectInput
+                  options={careerOptions}
+                  value={formData.career}
+                  onChange={value => handleInputChange('career', value)}
+                  placeholder="Selecciona tu carrera"
+                />
+              </FormField>
+              <FormField label="Ciclo Relativo">
+                <SelectInput
+                  options={cycleOptions}
+                  value={formData.cycle}
+                  onChange={value => handleInputChange('cycle', value)}
+                  placeholder="Selecciona tu ciclo"
+                />
+              </FormField>
+            </FormCard>
+
+            {/* Carrusel SOLO de íconos de pilares */}
+            <div className="text-center mb-8 w-full max-w-lg mx-auto">
+              <h3 className="text-lg font-medium mb-6 text-[#ec46e1]">Seleccione el Pilar</h3>
+              <div
+                className="flex items-center justify-center gap-2 relative"
+                style={{ minHeight: 80 }}
+              >
+                <div className="flex gap-2 items-center transition-all duration-300 ease-in-out">
+                  {getVisiblePillars().map((pillar, idx) => {
+                    const isCenter = idx === Math.floor(VISIBLE_PILLARS / 2);
+                    return (
+                      <div
+                        key={pillar.id}
+                        className={`transition-all duration-500 ease-in-out rounded-xl ${
+                          isCenter
+                            ? 'scale-110 ring-4 ring-[#d93340]/60 ring-offset-2 z-10'
+                            : 'opacity-60 blur-[2px] hover:opacity-90 hover:blur-0 cursor-pointer z-0'
+                        }`}
+                        style={{ zIndex: isCenter ? 2 : 1 }}
+                        onClick={() => {
+                          if (!isCenter) moveToCenter(idx);
+                        }}
+                      >
+                        <PillarOption
+                          id={pillar.id}
+                          image={pillar.image}
+                          alt={pillar.alt}
+                          selected={isCenter}
+                          onClick={() => {}}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* INFORMACIÓN SOBRE EL PILAR */}
+            {selectedPillar && (
+              <FormCard title={<span className="text-white">INFORMACIÓN SOBRE EL PILAR</span>}>
+                <div className="text-white">
+                  <h3 className="text-xl font-bold mb-2 text-[#ff6ec7]">
+                    {pillarContent[selectedPillar].title}
+                  </h3>
+                  <p className="text-white/90">{pillarContent[selectedPillar].description}</p>
+                </div>
+              </FormCard>
+            )}
+            {/* INFORMACIÓN ESPECÍFICA PARA POSTULAR AL PILAR */}
+            {selectedPillar && (
+              <FormCard
+                title={
+                  <span className="text-white">
+                    INFORMACIÓN ESPECÍFICA PARA POSTULAR AL{' '}
+                    <span className="text-white">PILAR</span>
+                  </span>
+                }
+              >
+                <div className="text-white">
+                  <FormField
+                    label={
+                      <span className="text-[#ff6ec7] font-semibold">
+                        ¿Cuál fue tu principal motivo para postular a este Pilar?
+                      </span>
+                    }
+                  >
+                    <TextInput
+                      value={pillarSpecificData.projectType}
+                      onChange={e => handlePillarSpecificChange('projectType', e.target.value)}
+                      placeholder="Describe tus motivos para postular a este pilar"
+                      className="text-white border-2 border-[#a6249d]/60 focus:border-[#d93340] bg-transparent"
+                    />
+                  </FormField>
+                  <FormField
+                    label={
+                      <span className="text-[#ff6ec7] font-semibold">
+                        ¿Qué habilidades te ayudarían a destacar en este pilar?
+                      </span>
+                    }
+                  >
+                    <TextInput
+                      value={pillarSpecificData.skills}
+                      onChange={e => handlePillarSpecificChange('skills', e.target.value)}
+                      placeholder="Menciona las habilidades que posees o quieres desarrollar"
+                      className="text-white border-2 border-[#a6249d]/60 focus:border-[#d93340] bg-transparent"
+                    />
+                  </FormField>
+                </div>
+              </FormCard>
+            )}
+            {/* REFLEXIÓN FINAL */}
+            {selectedPillar && (
+              <FormCard
+                title={
+                  <span className="text-white">
+                    REFLEXIÓN <span className="text-white">FINAL</span>
+                  </span>
+                }
+              >
+                <div className="text-white">
+                  <FormField
+                    label={
+                      <span className="text-[#ff6ec7] font-semibold">
+                        Para ti, ¿qué es LEAD UNI?
+                      </span>
+                    }
+                  >
+                    <TextInput
+                      value={leadUniDefinition}
+                      onChange={e => setLeadUniDefinition(e.target.value)}
+                      placeholder="Comparte tu visión sobre LEAD UNI"
+                      className="text-white border-2 border-[#a6249d]/60 focus:border-[#d93340] bg-transparent"
+                    />
+                  </FormField>
+                </div>
+              </FormCard>
+            )}
+            {/* Apartado para enviar solicitud */}
+            {selectedPillar && (
+              <div className="flex flex-col items-center mt-8">
+                <button
+                  className="bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white px-10 py-3 rounded-full shadow-lg font-bold text-lg hover:scale-105 transition"
+                  type="button"
+                  onClick={handleSubmitForm}
+                >
+                  Enviar Solicitud
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -276,4 +701,4 @@ const ApplicationPage = () => {
   );
 };
 
-export default ApplicationPage; 
+export default ApplicationPage;

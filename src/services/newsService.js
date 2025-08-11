@@ -1,4 +1,5 @@
 // Este servicio proporciona funciones para obtener datos de noticias
+import localNews from '../../backups/noticias.json';
 
 // Configuración del caché
 const CACHE_KEY = 'lead_uni_news_cache';
@@ -410,67 +411,10 @@ function generateContent(description, tags) {
   return content;
 }
 
-const simulatedApiData = [
-  {
-    id: 1,
-    marcaTemporal: '10/07/2025 18:58:01',
-    tituloDeLaNoticia: 'LEAD UNI en Microsoft',
-    descripciónDeLaNoticia:
-      'El pasado 7 de julio, tuvimos la oportunidad de presentar a LEAD UNI en las oficinas de Microsoft Perú, compartiendo los avances que hemos logrado como organización estudiantil desde nuestra formación.\n\nDurante la jornada, expusimos nuestra visión, estructura y las iniciativas que venimos impulsando con mucho compromiso y pasión. También compartimos los primeros avances de los proyectos desarrollados por los distintos pilares de la organización, demostrando cómo, en poco tiempo, hemos logrado articular ideas con impacto en diversas áreas clave de nuestra comunidad.\n\nContamos con la grata presencia de Luis Coronel y Antonny Porlles, quienes acompañaron esta presentación y compartieron su perspectiva como miembros con amplia trayectoria dentro de la comunidad LEAD, enriqueciendo aún más esta experiencia para nosotros.\n\nEste espacio marcó un paso importante en nuestro crecimiento, reafirmando que cuando el talento se une con propósito, grandes cosas pueden lograrse. ¡Vamos con todo, LEAD UNI! 💜',
-    tagsContenido: 'Actividad Interna, Comunicado, Oportunidad, Resumen Mensual',
-    'redactor (tuNombre)': 'Diogo Abregu',
-    imagenDeLaNoticia: 'https://drive.google.com/open?id=1V4QoR4RLf-miHSOftQA1135IbPmde8PD',
-    linkDeLaImagen: '',
-    pilarRepresentante: 'LEAD UNI',
-    tagsEnfoque: 'Organización, Crecimiento',
-    tagsPúblico: 'General',
-  },
-  {
-    id: 2,
-    marcaTemporal: '10/07/2025 22:13:18',
-    tituloDeLaNoticia: 'Desarrollo de la Pagina Web LEAD UNI',
-    descripciónDeLaNoticia:
-      'En LEAD UNI sabemos que comunicar quiénes somos y lo que hacemos es tan importante como hacerlo con pasión. Por eso, una de nuestras primeras metas como organización fue comenzar a construir nuestra página web oficial: un espacio que represente nuestra identidad, nuestros pilares y nuestras ganas de transformar realidades.\n\nEl desarrollo de la web comenzó con la idea clara de que no solo debía ser informativa, sino también una carta de presentación viva de todo el trabajo que estamos haciendo como comunidad.\n\nDesde las primeras semanas nos organizamos en base a reuniones de planificación, donde cada integrante del equipo pudo aportar ideas y plantear mejoras. Poco a poco, fuimos asignando tareas, definiendo componentes y estructurando las secciones clave: desde el histórico de proyectos y el organigrama, hasta los pilares, convocatorias y la actividad reciente.\n\nGracias al compromiso del equipo, a una buena comunicación y a nuestra metodología basada en GitHub Projects, pudimos dividir el trabajo de manera ordenada y avanzar de forma constante. Cada línea de código, cada revisión y cada diseño fueron pensados para construir una web hecha con propósito.\n\nHoy seguimos avanzando en su desarrollo, puliendo los últimos detalles para brindar una experiencia clara, cercana y auténtica. Muy pronto estará disponible al público, y no podríamos estar más emocionados de compartirla con todos ustedes.\n\nPorque esto es solo el comienzo. 💻✨\n¡Vamos LEAD UNI!',
-    tagsContenido: 'Reconocimiento, Actividad Interna',
-    'redactor (tuNombre)': 'Diogo Abregu',
-    imagenDeLaNoticia: 'https://drive.google.com/open?id=1FCypvIUp0nSbRiTCffFAuiHad9oudIvu',
-    linkDeLaImagen: '',
-    pilarRepresentante: 'P. Excelencia Académica, P. Impacto Social',
-    tagsEnfoque: 'Logro, Anuncio',
-    tagsPúblico: 'General',
-  },
-];
+// Usar el JSON normalizado como fuente local para el último fallback
+const simulatedApiData = localNews;
 
-const emergencyFallbackData = [
-  {
-    id: 1,
-    marcaTemporal: '10/07/2025 18:58:01',
-    tituloDeLaNoticia: 'LEAD UNI en Microsoft',
-    descripciónDeLaNoticia:
-      'El pasado 7 de julio, tuvimos la oportunidad de presentar a LEAD UNI en las oficinas de Microsoft Perú, compartiendo los avances que hemos logrado como organización estudiantil desde nuestra formación.\n\nDurante la jornada, expusimos nuestra visión, estructura y las iniciativas que venimos impulsando con mucho compromiso y pasión. También compartimos los primeros avances de los proyectos desarrollados por los distintos pilares de la organización, demostrando cómo, en poco tiempo, hemos logrado articular ideas con impacto en diversas áreas clave de nuestra comunidad.\n\nContamos con la grata presencia de Luis Coronel y Antonny Porlles, quienes acompañaron esta presentación y compartieron su perspectiva como miembros con amplia trayectoria dentro de la comunidad LEAD, enriqueciendo aún más esta experiencia para nosotros.\n\nEste espacio marcó un paso importante en nuestro crecimiento, reafirmando que cuando el talento se une con propósito, grandes cosas pueden lograrse. ¡Vamos con todo, LEAD UNI! 💜',
-    tagsContenido: 'Actividad Interna, Comunicado, Oportunidad, Resumen Mensual',
-    'redactor (tuNombre)': 'Diogo Abregu',
-    imagenDeLaNoticia: 'https://drive.google.com/open?id=1V4QoR4RLf-miHSOftQA1135IbPmde8PD',
-    linkDeLaImagen: '',
-    pilarRepresentante: 'LEAD UNI',
-    tagsEnfoque: 'Organización, Crecimiento',
-    tagsPúblico: 'General',
-  },
-  {
-    id: 2,
-    marcaTemporal: '10/07/2025 22:13:18',
-    tituloDeLaNoticia: 'Desarrollo de la Pagina Web LEAD UNI',
-    descripciónDeLaNoticia:
-      'En LEAD UNI sabemos que comunicar quiénes somos y lo que hacemos es tan importante como hacerlo con pasión. Por eso, una de nuestras primeras metas como organización fue comenzar a construir nuestra página web oficial: un espacio que represente nuestra identidad, nuestros pilares y nuestras ganas de transformar realidades.\n\nEl desarrollo de la web comenzó con la idea clara de que no solo debía ser informativa, sino también una carta de presentación viva de todo el trabajo que estamos haciendo como comunidad.\n\nDesde las primeras semanas nos organizamos en base a reuniones de planificación, donde cada integrante del equipo pudo aportar ideas y plantear mejoras. Poco a poco, fuimos asignando tareas, definiendo componentes y estructurando las secciones clave: desde el histórico de proyectos y el organigrama, hasta los pilares, convocatorias y la actividad reciente.\n\nGracias al compromiso del equipo, a una buena comunicación y a nuestra metodología basada en GitHub Projects, pudimos dividir el trabajo de manera ordenada y avanzar de forma constante. Cada línea de código, cada revisión y cada diseño fueron pensados para construir una web hecha con propósito.\n\nHoy seguimos avanzando en su desarrollo, puliendo los últimos detalles para brindar una experiencia clara, cercana y auténtica. Muy pronto estará disponible al público, y no podríamos estar más emocionados de compartirla con todos ustedes.\n\nPorque esto es solo el comienzo. 💻✨\n¡Vamos LEAD UNI!',
-    tagsContenido: 'Reconocimiento, Actividad Interna',
-    'redactor (tuNombre)': 'Diogo Abregu',
-    imagenDeLaNoticia: 'https://drive.google.com/open?id=1FCypvIUp0nSbRiTCffFAuiHad9oudIvu',
-    linkDeLaImagen: '',
-    pilarRepresentante: 'P. Excelencia Académica, P. Impacto Social',
-    tagsEnfoque: 'Logro, Anuncio',
-    tagsPúblico: 'General',
-  },
-];
+const emergencyFallbackData = localNews;
 
 /**
  * Obtiene todas las noticias desde el endpoint con sistema de caché

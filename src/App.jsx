@@ -17,8 +17,6 @@ import PillarsPage from './pages/PillarsPage';
 import OrganizationPage from './pages/OrganizationPage';
 import NotFoundPage from './pages/NotFoundPage';
 
-import './App.css';
-
 // Componente para hacer scroll hacia arriba al cambiar de ruta
 function ScrollToTop() {
   const { pathname } = useLocation();

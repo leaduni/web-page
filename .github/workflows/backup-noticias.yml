@@ -1,0 +1,37 @@
+name: Backup Noticias Mensual
+
+on:
+  schedule:
+    - cron: '0 17 1 * *' # 1 de cada mes a las 17:00 UTC (12 PM Perú)
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Instalar dependencias
+        run: npm install csv-parse
+
+      - name: Ejecutar script de backup
+        run: node scripts/descargar-json.js
+
+      - name: Commit y Push de backups
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Backup noticias automático: $(date +'%Y-%m-%d %H:%M')"
+          commit_user_name: 'Diogo Abregu [bot]'
+          commit_user_email: diogo.abregu.g@uni.pe
+          branch: main
+          file_pattern: backups/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
