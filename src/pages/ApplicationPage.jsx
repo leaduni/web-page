@@ -303,7 +303,9 @@ const ApplicationPage = () => {
     }
   };
 
-  const handleSubmitForm = () => {
+  const handleSubmitForm = async () => {
+    // Limpiar estados de modal previos
+    setModal({ type: null, message: '', open: false });
     // Verificar que todos los campos requeridos estén completos
     if (
       !formData.fullName ||
@@ -317,7 +319,12 @@ const ApplicationPage = () => {
       !pillarSpecificData.skills ||
       !leadUniDefinition
     ) {
-      alert('Por favor, completa todos los campos requeridos antes de enviar el formulario.');
+      setModal({
+        type: 'warning',
+        title: 'Campos incompletos',
+        message: 'Por favor, completa todos los campos requeridos antes de enviar el formulario.',
+        open: true,
+      });
       return;
     }
 
@@ -326,29 +333,55 @@ const ApplicationPage = () => {
       pillarOptions.find(pillar => pillar.id === selectedPillar)?.name || '';
 
     // Construir la URL del formulario de Google con los parámetros
-    const googleFormUrl = new URL(
-      'https://docs.google.com/forms/d/e/1FAIpQLSc1mIy-z6khAdySOylpJIDZVmwZHDznzrjxRbH44jBqDW0dcw/viewform'
-    );
+    const FORM_URL =
+      'https://docs.google.com/forms/d/e/1FAIpQLSc1mIy-z6khAdySOylpJIDZVmwZHDznzrjxRbH44jBqDW0dcw/formResponse';
 
-    // Agregar los parámetros de entrada
-    const params = new URLSearchParams({
-      usp: 'pp_url',
-      'entry.2005620554': formData.fullName, // Nombres y Apellidos
-      'entry.1201849899': formData.phone, // Número de celular
-      'entry.1045781291': formData.email, // Dirección de correo electrónico
-      'entry.1065046570': facultyOptions.find(f => f.value === formData.faculty)?.label || '', // Facultad
-      'entry.1166974658': careerOptions.find(c => c.value === formData.career)?.label || '', // Carrera
-      'entry.1403026133': cycleOptions.find(cy => cy.value === formData.cycle)?.label || '', // Ciclo Relativo
-      'entry.21194440': pillarSpecificData.projectType, // ¿Cuál fue tu principal motivo para postular a este Pilar?
-      'entry.5426552': pillarSpecificData.skills, // ¿Qué habilidades te ayudarían a destacar en este pilar?
-      'entry.1624972609': leadUniDefinition, // Para ti, ¿qué es LEAD UNI?
-    });
+    const f = formData;
+    const data = new FormData();
+    data.append('entry.2005620554', f.fullName); // Nombres y Apellidos
+    data.append('entry.1201849899', f.phone); // Número de celular
+    data.append('entry.1045781291', f.email); // Dirección de correo electrónico
+    data.append('entry.1065046570', f.faculty); // Facultad
+    data.append('entry.1166974658', f.career); // Carrera
+    data.append('entry.1403026133', cycleOptions.find(cy => cy.value === f.cycle)?.label || ''); // Ciclo Relativo
+    data.append('entry.21194440', pillarSpecificData.projectType); // ¿Cuál fue tu principal motivo para postular a este Pilar?
+    data.append('entry.5426552', pillarSpecificData.skills); // ¿Qué habilidades te ayudarían a destacar en este pilar?
+    data.append('entry.1624972609', leadUniDefinition); // Para ti, ¿qué es LEAD UNI?
 
-    googleFormUrl.search = params.toString();
-
-    // Redirigir al formulario de Google
-    window.open(googleFormUrl.toString(), '_blank');
+    try {
+      await fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: data });
+      setModal({
+        type: 'success',
+        title: '¡Postulación enviada! 🎉',
+        message:
+          'Tu postulación fue registrada correctamente. ¡Felicitaciones! Pronto nos pondremos en contacto contigo. 💜',
+        open: true,
+      });
+      // Reset manual de campos
+      setFormData({
+        fullName: '',
+        phone: '',
+        email: '',
+        faculty: '',
+        career: '',
+        cycle: '',
+      });
+      setSelectedPillar(null);
+      setPillarSpecificData({ projectType: '', skills: '' });
+      setLeadUniDefinition('');
+    } catch {
+      setModal({
+        type: 'error',
+        title: 'No se pudo enviar',
+        message: 'Ocurrió un problema al enviar. Inténtalo nuevamente en unos momentos.',
+        open: true,
+      });
+    }
   };
+
+  // Estado y componente para modales
+  const [modal, setModal] = useState({ type: null, title: '', message: '', open: false });
+  const closeModal = () => setModal(m => ({ ...m, open: false }));
 
   return (
     <div
@@ -361,6 +394,67 @@ const ApplicationPage = () => {
       }}
     >
       {/* Esferas decorativas aleatorias */}
+      {/* Modal de feedback */}
+      {modal.open && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center px-4">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={closeModal} />
+          <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-b from-[#101030] to-[#190b2c] animate-in fade-in zoom-in duration-300">
+            <div
+              className={`px-6 py-4 border-b flex items-center gap-2 ${
+                modal.type === 'success'
+                  ? 'bg-gradient-to-r from-emerald-500/20 to-green-400/10'
+                  : modal.type === 'error'
+                    ? 'bg-gradient-to-r from-rose-500/20 to-red-400/10'
+                    : 'bg-gradient-to-r from-amber-500/20 to-yellow-400/10'
+              }`}
+            >
+              <span className="text-lg">
+                {modal.type === 'success' && '✅'}
+                {modal.type === 'error' && '⚠️'}
+                {modal.type === 'warning' && '📝'}
+              </span>
+              <h3 className="text-white font-semibold text-base">{modal.title}</h3>
+            </div>
+            <div className="p-6 space-y-4">
+              <p className="text-gray-200 text-sm leading-relaxed whitespace-pre-line">
+                {modal.message}
+              </p>
+              {modal.type === 'success' && (
+                <p className="text-xs text-emerald-300/80">
+                  Revisa tu correo en los próximos días para más novedades.
+                </p>
+              )}
+              {modal.type === 'warning' && (
+                <ul className="text-xs text-amber-200/80 list-disc ml-5 space-y-1">
+                  <li>Nombre completo</li>
+                  <li>Contacto (celular y correo)</li>
+                  <li>Facultad y carrera</li>
+                  <li>Ciclo y selección de pilar</li>
+                  <li>Motivación y habilidades</li>
+                  <li>Definición de LEAD UNI</li>
+                </ul>
+              )}
+              <div className="flex justify-end pt-2">
+                <button
+                  onClick={closeModal}
+                  className="px-5 py-2 text-sm font-medium rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-colors"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+            <div
+              className={`h-1 w-full ${
+                modal.type === 'success'
+                  ? 'bg-gradient-to-r from-emerald-400 via-green-500 to-emerald-400'
+                  : modal.type === 'error'
+                    ? 'bg-gradient-to-r from-red-400 via-rose-500 to-red-400'
+                    : 'bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-400'
+              } animate-pulse`}
+            />
+          </div>
+        </div>
+      )}
       {randomSpheres.map(sphere => (
         <div
           key={sphere.id}

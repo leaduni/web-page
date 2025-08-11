@@ -16,6 +16,36 @@ let memoryCache = {
   },
 };
 
+// Parser robusto para fechas "dd/mm/yyyy hh:mm:ss" (o con '-') usado para ordenar de más nuevo a más antiguo
+function formattedTime(dateString) {
+  try {
+    if (!dateString || typeof dateString !== 'string') return new Date(0);
+    const trimmed = dateString.trim();
+    if (!trimmed) return new Date(0);
+
+    const [datePartRaw, timePartRaw] = trimmed.split(' ');
+    const datePart = datePartRaw || '';
+    const timePart = timePartRaw || '00:00:00';
+
+    const [dayStr, monthStr, yearStr] = datePart.includes('/')
+      ? datePart.split('/')
+      : datePart.split('-');
+    const day = parseInt(dayStr || '1', 10);
+    const month = parseInt(monthStr || '1', 10);
+    const year = parseInt(yearStr || '1970', 10);
+
+    const [hStr, mStr, sStr] = timePart.split(':');
+    const hours = parseInt(hStr || '0', 10) || 0;
+    const minutes = parseInt(mStr || '0', 10) || 0;
+    const seconds = parseInt(sStr || '0', 10) || 0;
+
+    return new Date(year, (month || 1) - 1, day || 1, hours, minutes, seconds);
+  } catch (e) {
+    if (DEBUG_MODE) console.warn('formattedTime parse error:', e);
+    return new Date(0);
+  }
+}
+
 /**
  * Obtiene datos del localStorage si están disponibles y son válidos
  * @returns {Array|null} - Datos del caché o null si no son válidos
@@ -107,7 +137,7 @@ function formatNewsData(rawData, index = 0) {
       .replace(/[^a-z0-9\s]/g, '') // Remover caracteres especiales
       .replace(/\s+/g, '-') // Reemplazar espacios con guiones
       .replace(/-+/g, '-') // Reemplazar múltiples guiones con uno solo
-      .replace(/^-|-$/g, '') // Remover guiones al inicio y final
+      .replace(/(^-)|(-$)/g, '') // Remover guiones al inicio y final
       .substring(0, 50); // Limitar longitud
 
     const finalId = slug || `noticia-${idx + 1}`;
@@ -159,6 +189,14 @@ function formatNewsData(rawData, index = 0) {
     title: title,
     description: description,
     date: formatDate(dateField),
+    marcaTemporal: dateField || '',
+    timestamp: (() => {
+      try {
+        return formattedTime(dateField).getTime();
+      } catch {
+        return 0;
+      }
+    })(),
     readTime: calculateReadTime(description),
     author: author,
     imageUrl: formatImageUrl(image1),
@@ -189,7 +227,7 @@ function formatDate(dateString) {
     // Si viene en formato "10/07/2025 18:58:01" o "21/06/2025 18:43:37"
     const [datePart] = dateString.split(' ');
     const [day, month, year] = datePart.split('/');
-    const date = new Date(year, month - 1, day);
+    // new Date(year, month - 1, day) // no se usa directamente, se devuelve formateada abajo
 
     const months = [
       'Enero',
@@ -416,6 +454,8 @@ const simulatedApiData = localNews;
 
 const emergencyFallbackData = localNews;
 
+// Nota: formattedTime está declarado como function arriba para que esté disponible en todo el archivo
+
 /**
  * Obtiene todas las noticias desde el endpoint con sistema de caché
  * @returns {Promise<Array>} Lista de noticias formateadas
@@ -434,7 +474,9 @@ export async function getAllNews() {
     const newsArray = rawData.noticias || [];
 
     // Formatear los datos
-    const formattedNews = newsArray.map((item, index) => formatNewsData(item, index));
+    const formattedNews = newsArray
+      .map((item, index) => formatNewsData(item, index))
+      .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
 
     // Guardar en caché
     setCachedData(formattedNews);
@@ -448,7 +490,7 @@ export async function getAllNews() {
     const cachedData = getCachedData();
     if (cachedData) {
       console.log('📦 Usando datos del caché como fallback');
-      return cachedData;
+      return [...cachedData].sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
     }
 
     // Si no hay caché válido, intentar usar caché expirado
@@ -465,18 +507,22 @@ export async function getAllNews() {
 
     if (expiredCache) {
       console.log('⚠️ Usando caché expirado como fallback');
-      return expiredCache;
+      return [...expiredCache].sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
     }
 
     // Si no hay caché disponible, usar datos de emergencia (datos más recientes)
     console.log('� Usando datos de emergencia como fallback');
     try {
-      return emergencyFallbackData.map((item, index) => formatNewsData(item, index));
+      return emergencyFallbackData
+        .map((item, index) => formatNewsData(item, index))
+        .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
     } catch (emergencyError) {
       console.error('Error con datos de emergencia, usando datos simulados:', emergencyError);
       // Último recurso: datos simulados originales
       console.log('� Usando datos simulados como último recurso');
-      return simulatedApiData.map((item, index) => formatNewsData(item, index));
+      return simulatedApiData
+        .map((item, index) => formatNewsData(item, index))
+        .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
     }
   }
 }

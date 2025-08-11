@@ -4,8 +4,7 @@ import { Calendar } from 'lucide-react';
 import EventModal from '../components/EventModal';
 import CountdownTimer from '../components/CountdownTimer';
 
-
-const parseFechaLatina = (fechaStr) => {
+const parseFechaLatina = fechaStr => {
   if (!fechaStr) return null;
 
   if (fechaStr.includes('/')) {
@@ -18,9 +17,9 @@ const parseFechaLatina = (fechaStr) => {
   return isNaN(isoDate) ? null : isoDate;
 };
 
-const isTodayOrFuture = (date) => {
+const isTodayOrFuture = date => {
   const today = new Date();
-  today.setHours(0, 0, 0, 0); 
+  today.setHours(0, 0, 0, 0);
   const d = new Date(date);
   d.setHours(0, 0, 0, 0);
   return d >= today;
@@ -35,10 +34,10 @@ const PillarDetails = ({ pillar }) => {
 
   const toggleEvents = () => {
     setShowUpcoming(!showUpcoming);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
-  const handleOpenModal = (event) => {
+  const handleOpenModal = event => {
     setSelectedEvent(event);
     setModalOpen(true);
   };
@@ -47,11 +46,8 @@ const PillarDetails = ({ pillar }) => {
 
   //Filtro para eventos próximos
   const filteredUpcoming = [...pillar.upcoming]
-    .filter((event) => {
+    .filter(event => {
       const eventDate = parseFechaLatina(event.fechaTentativaDelEvento);
-      console.log('Evento próximo recibido:', event.nombreDelEvento);
-      console.log('Fecha cruda:', event.fechaTentativaDelEvento);
-      console.log('Fecha parseada:', eventDate);
 
       if (!eventDate || isNaN(eventDate)) {
         console.warn('Fecha inválida:', event.fechaTentativaDelEvento);
@@ -60,17 +56,16 @@ const PillarDetails = ({ pillar }) => {
 
       return isTodayOrFuture(eventDate);
     })
-    .sort((a, b) =>
-      parseFechaLatina(a.fechaTentativaDelEvento) - parseFechaLatina(b.fechaTentativaDelEvento)
+    .sort(
+      (a, b) =>
+        parseFechaLatina(a.fechaTentativaDelEvento) - parseFechaLatina(b.fechaTentativaDelEvento)
     );
   const filteredPast = [...pillar.events]
-    .filter((event) => {
+    .filter(event => {
       const date = parseFechaLatina(event.fechaDelEvento);
       return date && !isTodayOrFuture(date);
     })
-    .sort((a, b) =>
-      parseFechaLatina(b.fechaDelEvento) - parseFechaLatina(a.fechaDelEvento)
-    );
+    .sort((a, b) => parseFechaLatina(b.fechaDelEvento) - parseFechaLatina(a.fechaDelEvento));
 
   let eventsToShow = showUpcoming ? filteredUpcoming : filteredPast;
 
@@ -80,10 +75,9 @@ const PillarDetails = ({ pillar }) => {
   const endIndex = startIndex + eventosPorPagina;
   eventsToShow = showUpcoming ? eventsToShow : eventsToShow.slice(startIndex, endIndex);
 
-
-  console.log("Pilar recibido:", pillar.name);
-  console.log("Eventos filtrados (upcoming):", filteredUpcoming);
-  console.log("EventsToShow (que sí se deben renderizar):", eventsToShow);
+  console.log('Pilar recibido:', pillar.name);
+  console.log('Eventos filtrados (upcoming):', filteredUpcoming);
+  console.log('EventsToShow (que sí se deben renderizar):', eventsToShow);
 
   return (
     <div className="bg-[#1A0B2E]/90 backdrop-blur-sm rounded-2xl p-8 border-2 border-[#a6249d]/40 shadow-lg animate-fadeIn">
@@ -101,15 +95,23 @@ const PillarDetails = ({ pillar }) => {
             <h2 className="text-2xl font-bold text-white drop-shadow-md">Pilar {pillar.name}</h2>
           </div>
           <p className="text-white mb-6">{pillar.description}</p>
-          <h3 className="text-xl font-semibold bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text mb-3">Misión</h3>
+          <h3 className="text-xl font-semibold bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text mb-3">
+            Misión
+          </h3>
           <p className="text-white mb-6">{pillar.mission}</p>
-          <h3 className="text-xl font-semibold bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text mb-3">Actividades</h3>
+          <h3 className="text-xl font-semibold bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text mb-3">
+            Actividades
+          </h3>
           <ul className="list-disc pl-5 mb-6">
             {pillar.activities.map((activity, index) => (
-              <li key={index} className="text-white mb-2">{activity}</li>
+              <li key={index} className="text-white mb-2">
+                {activity}
+              </li>
             ))}
           </ul>
-          <h3 className="text-xl font-semibold bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text mb-3">Coordinador</h3>
+          <h3 className="text-xl font-semibold bg-gradient-to-r from-[#d93340] to-[#a6249d] text-transparent bg-clip-text mb-3">
+            Coordinador
+          </h3>
           <p className="text-white">{pillar.coordinator}</p>
         </div>
 
@@ -173,7 +175,7 @@ const PillarDetails = ({ pillar }) => {
                     />
                     <div className="absolute top-4 right-4">
                       <span className="bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white text-xs px-3 py-1 rounded-full shadow-md">
-                       {pillar.name}
+                        {pillar.name}
                       </span>
                     </div>
                     {showUpcoming && event.fechaTentativaDelEvento && (
@@ -184,7 +186,11 @@ const PillarDetails = ({ pillar }) => {
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#1A0B2E]/90 to-transparent p-4">
                       <div className="flex items-center text-[#a6249d] text-sm mb-2">
                         <Calendar size={16} className="mr-2" />
-                        <span>{event.fechaTentativaDelEvento || event.fechaDelEvento || 'Fecha no disponible'}</span>
+                        <span>
+                          {event.fechaTentativaDelEvento ||
+                            event.fechaDelEvento ||
+                            'Fecha no disponible'}
+                        </span>
                       </div>
                       <h4 className="text-white font-semibold">
                         {event.nombreDelEvento || event.title}
@@ -203,14 +209,14 @@ const PillarDetails = ({ pillar }) => {
           {!showUpcoming && totalPages > 1 && (
             <div className="flex justify-center mt-4 space-x-2">
               <button
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 className={`px-3 py-1 rounded ${currentPage === 1 ? 'bg-[#a6249d]/20 text-[#a6249d] cursor-not-allowed' : 'bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white hover:from-[#a6249d] hover:to-[#d93340]'}`}
                 disabled={currentPage === 1}
               >
                 Anterior
               </button>
 
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(num => (
                 <button
                   key={num}
                   onClick={() => setCurrentPage(num)}
@@ -221,7 +227,7 @@ const PillarDetails = ({ pillar }) => {
               ))}
 
               <button
-                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 className={`px-3 py-1 rounded ${currentPage === totalPages ? 'bg-[#a6249d]/20 text-[#a6249d] cursor-not-allowed' : 'bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white hover:from-[#a6249d] hover:to-[#d93340]'}`}
                 disabled={currentPage === totalPages}
               >

@@ -13,7 +13,7 @@ const SelectInput = ({ options, value, onChange, placeholder = 'Select an option
       <div
         className="w-full px-4 py-2 rounded-md border flex justify-between items-center cursor-pointer"
         style={{
-          backgroundColor: 'rgba(15, 2, 37, 0.3)',
+          backgroundColor: 'rgba(15, 2, 37, 1)',
           borderColor: 'rgba(255, 110, 199, 0.3)',
           color: theme.colors.text.light,
         }}

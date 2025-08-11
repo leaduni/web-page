@@ -15,7 +15,7 @@ const defaultTheme = {
       dark: '#0f0225',
     },
     form: {
-      background: 'rgba(15, 2, 37, 0.7)',
+      background: 'rgba(15, 2, 37, 1)',
       border: '#ff6ec7',
     },
   },
