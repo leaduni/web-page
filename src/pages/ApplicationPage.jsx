@@ -9,33 +9,54 @@ import PillarOption from '../components/application/PillarOption';
 // import { GraduationCap, Users, BookOpen, Heart, Building2, Megaphone } from 'lucide-react';
 
 const facultyOptions = [
-  { value: 'fim', label: 'Facultad de Ingeniería Mecánica' },
-  { value: 'fiee', label: 'Facultad de Ingeniería Eléctrica y Electrónica' },
-  { value: 'fic', label: 'Facultad de Ingeniería Civil' },
-  { value: 'fiq', label: 'Facultad de Ingeniería Química y Textil' },
-  { value: 'figmm', label: 'Facultad de Ingeniería Geológica, Minera y Metalúrgica' },
-  { value: 'fia', label: 'Facultad de Ingeniería Ambiental' },
-  { value: 'fip', label: 'Facultad de Ingeniería Pesquera' },
-  { value: 'fie', label: 'Facultad de Ingeniería Económica' },
-  { value: 'fiaa', label: 'Facultad de Ingeniería Arquitectura y Artes' },
+  { value: 'FAUA', label: 'Facultad de Arquitectura, Urbanismo y Artes' },
+  { value: 'FC', label: 'Facultad de Ciencias' },
+  { value: 'FIA', label: 'Facultad de Ingeniería Ambiental' },
+  { value: 'FIC', label: 'Facultad de Ingeniería Civil' },
+  { value: 'FIEECS', label: 'Facultad de Ingeniería Económica, Estadística y Ciencias Sociales' },
+  { value: 'FIEE', label: 'Facultad de Ingeniería Eléctrica y Electrónica' },
+  { value: 'FIGMM', label: 'Facultad de Ingeniería Geológica, Minera y Metalúrgica' },
+  { value: 'FIIS', label: 'Facultad de Ingeniería Industrial y de Sistemas' },
+  { value: 'FIM', label: 'Facultad de Ingeniería Mecánica' },
+  { value: 'FIP', label: 'Facultad de Ingeniería de Petróleo, Gas Natural y Petroquímica' },
+  { value: 'FIQT', label: 'Facultad de Ingeniería Química y Textil' },
 ];
 
 const careerOptions = [
-  { value: 'sistemas', label: 'Ing. de Sistemas' },
-  { value: 'industrial', label: 'Ing. Industrial' },
-  { value: 'mecatronica', label: 'Ing. Mecatrónica' },
-  { value: 'civil', label: 'Ing. Civil' },
-  { value: 'ambiental', label: 'Ing. Ambiental' },
-  { value: 'mecanica', label: 'Ing. Mecánica' },
-  { value: 'electrica', label: 'Ing. Eléctrica' },
-  { value: 'electronica', label: 'Ing. Electrónica' },
-  { value: 'quimica', label: 'Ing. Química' },
-  { value: 'textil', label: 'Ing. Textil' },
-  { value: 'minera', label: 'Ing. de Minas' },
-  { value: 'metalurgica', label: 'Ing. Metalúrgica' },
-  { value: 'pesquera', label: 'Ing. Pesquera' },
-  { value: 'economica', label: 'Ing. Económica' },
-  { value: 'arquitectura', label: 'Arquitectura' },
+  { value: 'Arquitectura', label: 'Arquitectura' },
+  { value: 'Física', label: 'Física' },
+  { value: 'Matemática', label: 'Matemática' },
+  { value: 'Química', label: 'Química' },
+  { value: 'Ciencia de la Computación', label: 'Ciencia de la Computación' },
+  { value: 'Ingeniería Sanitaria', label: 'Ingeniería Sanitaria' },
+  { value: 'Ingeniería Ambiental', label: 'Ingeniería Ambiental' },
+  {
+    value: 'Ingeniería de Higiene y Seguridad Industrial',
+    label: 'Ingeniería de Higiene y Seguridad Industrial',
+  },
+  { value: 'Ingeniería de Software', label: 'Ingeniería de Software' },
+
+  { value: 'Ingeniería Civil', label: 'Ingeniería Civil' },
+  { value: 'Ingeniería Económica', label: 'Ingeniería Económica' },
+  { value: 'Ingeniería Estadística', label: 'Ingeniería Estadística' },
+  { value: 'Ingeniería Eléctrica', label: 'Ingeniería Eléctrica' },
+  { value: 'Ingeniería Electrónica', label: 'Ingeniería Electrónica' },
+  { value: 'Ingeniería de Telecomunicaciones', label: 'Ingeniería de Telecomunicaciones' },
+  { value: 'Ingeniería de Ciberseguridad', label: 'Ingeniería de Ciberseguridad' },
+  { value: 'Ingeniería Geológica', label: 'Ingeniería Geológica' },
+  { value: 'Ingeniería de Minas', label: 'Ingeniería de Minas' },
+  { value: 'Ingeniería Metalúrgica', label: 'Ingeniería Metalúrgica' },
+  { value: 'Ingeniería Industrial', label: 'Ingeniería Industrial' },
+  { value: 'Ingeniería de Sistemas', label: 'Ingeniería de Sistemas' },
+  { value: 'Ingeniería Mecánica', label: 'Ingeniería Mecánica' },
+  { value: 'Ingeniería Mecánica-Eléctrica', label: 'Ingeniería Mecánica-Eléctrica' },
+  { value: 'Ingeniería Naval', label: 'Ingeniería Naval' },
+  { value: 'Ingeniería Mecatrónica', label: 'Ingeniería Mecatrónica' },
+  { value: 'Ingeniería Aeroespacial', label: 'Ingeniería Aeroespacial' },
+  { value: 'Ingeniería de Petróleo y Gas Natural', label: 'Ingeniería de Petróleo y Gas Natural' },
+  { value: 'Ingeniería Petroquímica', label: 'Ingeniería Petroquímica' },
+  { value: 'Ingeniería Química', label: 'Ingeniería Química' },
+  { value: 'Ingeniería Textil', label: 'Ingeniería Textil' },
 ];
 
 const cycleOptions = [
@@ -334,12 +355,14 @@ const ApplicationPage = () => {
 
     const params = new URLSearchParams();
     const f = formData;
+    const facultyLabel = facultyOptions.find(opt => opt.value === f.faculty)?.label || '';
+    const careerLabel = careerOptions.find(opt => opt.value === f.career)?.label || '';
     params.set('usp', 'pp_url'); // modo prefill
     params.set('entry.2005620554', f.fullName); // Nombres y Apellidos
     params.set('entry.1201849899', f.phone); // Número de celular
     params.set('entry.1045781291', f.email); // Dirección de correo electrónico
-    params.set('entry.1065046570', f.faculty); // Facultad
-    params.set('entry.1166974658', f.career); // Carrera
+    params.set('entry.1065046570', facultyLabel); // Facultad (label)
+    params.set('entry.1166974658', careerLabel); // Carrera (label)
     params.set('entry.1403026133', cycleOptions.find(cy => cy.value === f.cycle)?.label || ''); // Ciclo Relativo
     params.set('entry.21194440', pillarSpecificData.projectType); // Motivo Pilar
     params.set('entry.5426552', pillarSpecificData.skills); // Habilidades

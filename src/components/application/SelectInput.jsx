@@ -28,7 +28,7 @@ const SelectInput = ({ options, value, onChange, placeholder = 'Select an option
 
       {isOpen && (
         <div
-          className="absolute z-10 w-full mt-1 rounded-md overflow-hidden"
+          className="absolute z-10 w-full mt-1 rounded-md max-h-56 overflow-y-auto"
           style={{
             backgroundColor: theme.colors.form.background,
             border: `1px solid rgba(255, 110, 199, 0.3)`,
