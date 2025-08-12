@@ -180,6 +180,7 @@ const ApplicationPage = () => {
   const [pillarSpecificData, setPillarSpecificData] = useState({
     projectType: '',
     skills: '',
+    secondOption: '',
   });
   const [leadUniDefinition, setLeadUniDefinition] = useState('');
   const [randomSpheres, setRandomSpheres] = useState([]);
@@ -328,56 +329,83 @@ const ApplicationPage = () => {
     // Limpiar estados de modal previos
     setModal({ type: null, message: '', open: false });
     // Verificar que todos los campos requeridos estén completos
-    if (
-      !formData.fullName ||
-      !formData.phone ||
-      !formData.email ||
-      !formData.faculty ||
-      !formData.career ||
-      !formData.cycle ||
-      !selectedPillar ||
-      !pillarSpecificData.projectType ||
-      !pillarSpecificData.skills ||
-      !leadUniDefinition
-    ) {
-      setModal({
-        type: 'warning',
-        title: 'Campos incompletos',
-        message: 'Por favor, completa todos los campos requeridos antes de enviar el formulario.',
-        open: true,
-      });
+    // Verificar que todos los campos requeridos estén completos
+    if (!formData.fullName || !formData.phone || !formData.email || 
+        !formData.faculty || !formData.career || !formData.cycle || 
+        !selectedPillar || !pillarSpecificData.projectType || 
+        !pillarSpecificData.skills || !pillarSpecificData.secondOption || !leadUniDefinition) {
+      alert('Por favor, completa todos los campos requeridos antes de enviar el formulario.');
       return;
     }
-
-    // Construir la URL de Google Forms con campos prellenados y redirigir
-    const FORM_VIEW_URL =
-      'https://docs.google.com/forms/d/e/1FAIpQLSc1mIy-z6khAdySOylpJIDZVmwZHDznzrjxRbH44jBqDW0dcw/viewform';
-
-    const params = new URLSearchParams();
-    const f = formData;
-    const facultyLabel = facultyOptions.find(opt => opt.value === f.faculty)?.label || '';
-    const careerLabel = careerOptions.find(opt => opt.value === f.career)?.label || '';
-    params.set('usp', 'pp_url'); // modo prefill
-    params.set('entry.2005620554', f.fullName); // Nombres y Apellidos
-    params.set('entry.1201849899', f.phone); // Número de celular
-    params.set('entry.1045781291', f.email); // Dirección de correo electrónico
-    params.set('entry.1065046570', facultyLabel); // Facultad (label)
-    params.set('entry.1166974658', careerLabel); // Carrera (label)
-    params.set('entry.890700137', cycleOptions.find(cy => cy.value === f.cycle)?.label || ''); // Ciclo Relativo
-    params.set('entry.21194440', pillarSpecificData.projectType); // Motivo Pilar
-    params.set('entry.5426552', pillarSpecificData.skills); // Habilidades
-    params.set('entry.1624972609', leadUniDefinition); // ¿Qué es LEAD UNI?
-
-    // Abrir en una nueva pestaña con datos prellenados y mostrar modal de éxito en esta página
-    const url = `${FORM_VIEW_URL}?${params.toString()}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-    setModal({
-      type: 'success',
-      title: '¡Formulario listo para enviar! 🎉',
-      message:
-        'Abrimos el formulario de Google en una nueva pestaña con tus datos prellenados. Revísalo y haz clic en "Enviar" para completar tu postulación. 💜',
-      open: true,
+    // Obtener el nombre del pilar seleccionado
+    const selectedPillarName = pillarOptions.find(pillar => pillar.id === selectedPillar)?.name || '';
+    
+    // Crear un iframe oculto para enviar el formulario
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.name = 'hidden-iframe-' + Date.now();
+    document.body.appendChild(iframe);
+    
+    // Crear un formulario temporal
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://docs.google.com/forms/d/e/1FAIpQLSc1mIy-z6khAdySOylpJIDZVmwZHDznzrjxRbH44jBqDW0dcw/formResponse';
+    form.target = iframe.name;
+    
+    // Definir todos los campos del formulario
+    const fields = {
+      'entry.2005620554': formData.fullName, // Nombres y Apellidos
+      'entry.1201849899': formData.phone, // Número de celular
+      'entry.1045781291': formData.email, // Dirección de correo electrónico
+      'entry.1065046570': facultyOptions.find(f => f.value === formData.faculty)?.label || '', // Facultad
+      'entry.1166974658': careerOptions.find(c => c.value === formData.career)?.label || '', // Carrera
+      'entry.890700137': cycleOptions.find(cy => cy.value === formData.cycle)?.label || '', // Ciclo Relativo
+      'entry.1728942457': pillarOptions.find(p => p.id === selectedPillar)?.name || '', // Pilar Principal Seleccionado
+      'entry.21194440': pillarSpecificData.projectType, // ¿Cuál fue tu principal motivo para postular a este Pilar?
+      'entry.5426552': pillarSpecificData.skills, // ¿Qué habilidades te ayudarían a destacar en este pilar?
+      'entry.1624972609': leadUniDefinition, // Para ti, ¿qué es LEAD UNI?
+      'entry.1107660664': pillarSpecificData.secondOption, // Segunda Opción de Pilar
+    };
+    
+    // Crear inputs ocultos para cada campo
+    Object.entries(fields).forEach(([name, value]) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
     });
+    
+    // Agregar el formulario al DOM y enviarlo
+    document.body.appendChild(form);
+    form.submit();
+
+    // Limpiar después de un tiempo y mostrar mensaje de éxito
+    setTimeout(() => {
+      document.body.removeChild(form);
+      document.body.removeChild(iframe);
+      
+      // Mostrar mensaje de éxito
+      alert('¡Solicitud enviada exitosamente! Gracias por postular a LEAD UNI.');
+      
+      // Limpiar el formulario después del envío exitoso
+      setFormData({
+        fullName: '',
+        phone: '',
+        email: '',
+        faculty: '',
+        career: '',
+        cycle: '',
+      });
+      setSelectedPillar(null);
+      setPillarSpecificData({
+        projectType: '',
+        skills: '',
+        secondOption: '',
+      });
+      setLeadUniDefinition('');
+      setCurrentPillarIndex(0);
+    }, 2000);
   };
 
   // Estado y componente para modales
@@ -699,12 +727,28 @@ const ApplicationPage = () => {
 
             {/* INFORMACIÓN SOBRE EL PILAR */}
             {selectedPillar && (
-              <FormCard title={<span className="text-white">INFORMACIÓN SOBRE EL PILAR</span>}>
+              <FormCard title={`Selecionate `+ pillarContent[selectedPillar].title}>
                 <div className="text-white">
-                  <h3 className="text-xl font-bold mb-2 text-[#ff6ec7]">
-                    {pillarContent[selectedPillar].title}
+                  <h3
+                    className="text-xl font-bold mb-2 bg-gradient-to-r from-[#bf2a51] to-[#a6249d] bg-clip-text text-transparent"
+                  >
+                    {`Información sobre el pilar`}
                   </h3>
-                  <p className="text-white/90">{pillarContent[selectedPillar].description}</p>
+                  <p className="text-[#efb1ed]">{pillarContent[selectedPillar].description}</p>
+                  <FormField label="Segunda Opción">
+                    <SelectInput
+                      options={Object.entries(pillarContent)
+                        .filter(([key]) => key !== selectedPillar)
+                        .map(([key, value]) => ({
+                          value: value.title,
+                          label: value.title,
+                        }))
+                      }
+                      value={pillarSpecificData.secondOption}
+                      onChange={value => handlePillarSpecificChange('secondOption', value)}
+                      placeholder="Selecciona tu segunda opción de pilar"
+                    />
+                  </FormField>
                 </div>
               </FormCard>
             )}
@@ -785,7 +829,7 @@ const ApplicationPage = () => {
                   type="button"
                   onClick={handleSubmitForm}
                 >
-                  Inscríbete Ahora
+                  Enviar Solicitud
                 </button>
               </div>
             )}
