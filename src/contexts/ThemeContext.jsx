@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 const defaultTheme = {
   colors: {
+    tittle: "#ffffff",
     primary: '#ff6ec7',
     secondary: '#7873f5',
     accent: '#ff4dcd',
