@@ -328,55 +328,33 @@ const ApplicationPage = () => {
       return;
     }
 
-    // Obtener el nombre del pilar seleccionado
-    const selectedPillarName =
-      pillarOptions.find(pillar => pillar.id === selectedPillar)?.name || '';
+    // Construir la URL de Google Forms con campos prellenados y redirigir
+    const FORM_VIEW_URL =
+      'https://docs.google.com/forms/d/e/1FAIpQLSc1mIy-z6khAdySOylpJIDZVmwZHDznzrjxRbH44jBqDW0dcw/viewform';
 
-    // Construir la URL del formulario de Google con los parámetros
-    const FORM_URL =
-      'https://docs.google.com/forms/d/e/1FAIpQLSc1mIy-z6khAdySOylpJIDZVmwZHDznzrjxRbH44jBqDW0dcw/formResponse';
-
+    const params = new URLSearchParams();
     const f = formData;
-    const data = new FormData();
-    data.append('entry.2005620554', f.fullName); // Nombres y Apellidos
-    data.append('entry.1201849899', f.phone); // Número de celular
-    data.append('entry.1045781291', f.email); // Dirección de correo electrónico
-    data.append('entry.1065046570', f.faculty); // Facultad
-    data.append('entry.1166974658', f.career); // Carrera
-    data.append('entry.1403026133', cycleOptions.find(cy => cy.value === f.cycle)?.label || ''); // Ciclo Relativo
-    data.append('entry.21194440', pillarSpecificData.projectType); // ¿Cuál fue tu principal motivo para postular a este Pilar?
-    data.append('entry.5426552', pillarSpecificData.skills); // ¿Qué habilidades te ayudarían a destacar en este pilar?
-    data.append('entry.1624972609', leadUniDefinition); // Para ti, ¿qué es LEAD UNI?
+    params.set('usp', 'pp_url'); // modo prefill
+    params.set('entry.2005620554', f.fullName); // Nombres y Apellidos
+    params.set('entry.1201849899', f.phone); // Número de celular
+    params.set('entry.1045781291', f.email); // Dirección de correo electrónico
+    params.set('entry.1065046570', f.faculty); // Facultad
+    params.set('entry.1166974658', f.career); // Carrera
+    params.set('entry.1403026133', cycleOptions.find(cy => cy.value === f.cycle)?.label || ''); // Ciclo Relativo
+    params.set('entry.21194440', pillarSpecificData.projectType); // Motivo Pilar
+    params.set('entry.5426552', pillarSpecificData.skills); // Habilidades
+    params.set('entry.1624972609', leadUniDefinition); // ¿Qué es LEAD UNI?
 
-    try {
-      await fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: data });
-      setModal({
-        type: 'success',
-        title: '¡Postulación enviada! 🎉',
-        message:
-          'Tu postulación fue registrada correctamente. ¡Felicitaciones! Pronto nos pondremos en contacto contigo. 💜',
-        open: true,
-      });
-      // Reset manual de campos
-      setFormData({
-        fullName: '',
-        phone: '',
-        email: '',
-        faculty: '',
-        career: '',
-        cycle: '',
-      });
-      setSelectedPillar(null);
-      setPillarSpecificData({ projectType: '', skills: '' });
-      setLeadUniDefinition('');
-    } catch {
-      setModal({
-        type: 'error',
-        title: 'No se pudo enviar',
-        message: 'Ocurrió un problema al enviar. Inténtalo nuevamente en unos momentos.',
-        open: true,
-      });
-    }
+    // Abrir en una nueva pestaña con datos prellenados y mostrar modal de éxito en esta página
+    const url = `${FORM_VIEW_URL}?${params.toString()}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+    setModal({
+      type: 'success',
+      title: '¡Formulario listo para enviar! 🎉',
+      message:
+        'Abrimos el formulario de Google en una nueva pestaña con tus datos prellenados. Revísalo y haz clic en "Enviar" para completar tu postulación. 💜',
+      open: true,
+    });
   };
 
   // Estado y componente para modales
