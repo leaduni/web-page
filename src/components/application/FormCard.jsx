@@ -13,7 +13,7 @@ const FormCard = ({ title, subtitle, children }) => {
         boxShadow: '0 8px 32px 0 rgba(0,0,0,0.25), 0 1.5px 4px 0 rgba(255,110,199,0.10)',
       }}
     >
-      <h2 className="text-xl font-semibold mb-1" style={{ color: theme.colors.primary }}>
+      <h2 className="text-xl font-semibold mb-1" style={{ color: theme.colors.tittle }}>
         {title}
       </h2>
 
