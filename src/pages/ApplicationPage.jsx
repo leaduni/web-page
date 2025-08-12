@@ -785,7 +785,7 @@ const ApplicationPage = () => {
                   type="button"
                   onClick={handleSubmitForm}
                 >
-                  Enviar Solicitud
+                  Inscríbete Ahora
                 </button>
               </div>
             )}
