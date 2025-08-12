@@ -727,7 +727,13 @@ const ApplicationPage = () => {
 
             {/* INFORMACIÓN SOBRE EL PILAR */}
             {selectedPillar && (
-              <FormCard title={`Selecionate `+ pillarContent[selectedPillar].title}>
+              <FormCard
+                title={
+                  <span className="text-white">
+                    SELECCIONASTE <span className="text-white"> pillarContent[selectedPillar].title </span>
+                  </span>
+                }
+              >
                 <div className="text-white">
                   <h3
                     className="text-xl font-bold mb-2 bg-gradient-to-r from-[#bf2a51] to-[#a6249d] bg-clip-text text-transparent"
@@ -735,7 +741,13 @@ const ApplicationPage = () => {
                     {`Información sobre el pilar`}
                   </h3>
                   <p className="text-[#efb1ed]">{pillarContent[selectedPillar].description}</p>
-                  <FormField label="Segunda Opción">
+                  <FormField
+                    label={
+                      <span className="text-[#ff6ec7] font-semibold">
+                        Escoja su segunda opción
+                      </span>
+                    }
+                  >
                     <SelectInput
                       options={Object.entries(pillarContent)
                         .filter(([key]) => key !== selectedPillar)
