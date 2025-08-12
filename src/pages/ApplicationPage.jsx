@@ -363,7 +363,7 @@ const ApplicationPage = () => {
     params.set('entry.1045781291', f.email); // Dirección de correo electrónico
     params.set('entry.1065046570', facultyLabel); // Facultad (label)
     params.set('entry.1166974658', careerLabel); // Carrera (label)
-    params.set('entry.1403026133', cycleOptions.find(cy => cy.value === f.cycle)?.label || ''); // Ciclo Relativo
+    params.set('entry.890700137', cycleOptions.find(cy => cy.value === f.cycle)?.label || ''); // Ciclo Relativo
     params.set('entry.21194440', pillarSpecificData.projectType); // Motivo Pilar
     params.set('entry.5426552', pillarSpecificData.skills); // Habilidades
     params.set('entry.1624972609', leadUniDefinition); // ¿Qué es LEAD UNI?
