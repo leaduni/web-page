@@ -330,28 +330,44 @@ const ApplicationPage = () => {
     setModal({ type: null, message: '', open: false });
     // Verificar que todos los campos requeridos estén completos
     // Verificar que todos los campos requeridos estén completos
-    if (!formData.fullName || !formData.phone || !formData.email || 
-        !formData.faculty || !formData.career || !formData.cycle || 
-        !selectedPillar || !pillarSpecificData.projectType || 
-        !pillarSpecificData.skills || !pillarSpecificData.secondOption || !leadUniDefinition) {
-      alert('Por favor, completa todos los campos requeridos antes de enviar el formulario.');
+    if (
+      !formData.fullName ||
+      !formData.phone ||
+      !formData.email ||
+      !formData.faculty ||
+      !formData.career ||
+      !formData.cycle ||
+      !selectedPillar ||
+      !pillarSpecificData.projectType ||
+      !pillarSpecificData.skills ||
+      !pillarSpecificData.secondOption ||
+      !leadUniDefinition
+    ) {
+      setModal({
+        type: 'warning',
+        title: 'Campos incompletos',
+        message: 'Por favor, completa todos los campos requeridos antes de enviar el formulario.',
+        open: true,
+      });
       return;
     }
     // Obtener el nombre del pilar seleccionado
-    const selectedPillarName = pillarOptions.find(pillar => pillar.id === selectedPillar)?.name || '';
-    
+    const selectedPillarName =
+      pillarOptions.find(pillar => pillar.id === selectedPillar)?.name || '';
+
     // Crear un iframe oculto para enviar el formulario
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
     iframe.name = 'hidden-iframe-' + Date.now();
     document.body.appendChild(iframe);
-    
+
     // Crear un formulario temporal
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = 'https://docs.google.com/forms/d/e/1FAIpQLSc1mIy-z6khAdySOylpJIDZVmwZHDznzrjxRbH44jBqDW0dcw/formResponse';
+    form.action =
+      'https://docs.google.com/forms/d/e/1FAIpQLSc1mIy-z6khAdySOylpJIDZVmwZHDznzrjxRbH44jBqDW0dcw/formResponse';
     form.target = iframe.name;
-    
+
     // Definir todos los campos del formulario
     const fields = {
       'entry.2005620554': formData.fullName, // Nombres y Apellidos
@@ -366,7 +382,7 @@ const ApplicationPage = () => {
       'entry.1624972609': leadUniDefinition, // Para ti, ¿qué es LEAD UNI?
       'entry.1107660664': pillarSpecificData.secondOption, // Segunda Opción de Pilar
     };
-    
+
     // Crear inputs ocultos para cada campo
     Object.entries(fields).forEach(([name, value]) => {
       const input = document.createElement('input');
@@ -375,7 +391,7 @@ const ApplicationPage = () => {
       input.value = value;
       form.appendChild(input);
     });
-    
+
     // Agregar el formulario al DOM y enviarlo
     document.body.appendChild(form);
     form.submit();
@@ -384,10 +400,16 @@ const ApplicationPage = () => {
     setTimeout(() => {
       document.body.removeChild(form);
       document.body.removeChild(iframe);
-      
+
       // Mostrar mensaje de éxito
-      alert('¡Solicitud enviada exitosamente! Gracias por postular a LEAD UNI.');
-      
+      setModal({
+        type: 'success',
+        title: '¡Postulación enviada! 🎉',
+        message:
+          'Tu postulación fue registrada correctamente. ¡Felicitaciones! Pronto nos pondremos en contacto contigo. 💜',
+        open: true,
+      });
+
       // Limpiar el formulario después del envío exitoso
       setFormData({
         fullName: '',
@@ -730,22 +752,19 @@ const ApplicationPage = () => {
               <FormCard
                 title={
                   <span className="text-white">
-                    SELECCIONASTE <span className="text-white"> pillarContent[selectedPillar].title </span>
+                    SELECCIONASTE{' '}
+                    <span className="text-white"> {pillarContent[selectedPillar].title} </span>
                   </span>
                 }
               >
                 <div className="text-white">
-                  <h3
-                    className="text-xl font-bold mb-2 bg-gradient-to-r from-[#bf2a51] to-[#a6249d] bg-clip-text text-transparent"
-                  >
+                  <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-[#bf2a51] to-[#a6249d] bg-clip-text text-transparent">
                     {`Información sobre el pilar`}
                   </h3>
                   <p className="text-[#efb1ed]">{pillarContent[selectedPillar].description}</p>
                   <FormField
                     label={
-                      <span className="text-[#ff6ec7] font-semibold">
-                        Escoja su segunda opción
-                      </span>
+                      <span className="text-[#ff6ec7] font-semibold">Escoja su segunda opción</span>
                     }
                   >
                     <SelectInput
@@ -754,8 +773,7 @@ const ApplicationPage = () => {
                         .map(([key, value]) => ({
                           value: value.title,
                           label: value.title,
-                        }))
-                      }
+                        }))}
                       value={pillarSpecificData.secondOption}
                       onChange={value => handlePillarSpecificChange('secondOption', value)}
                       placeholder="Selecciona tu segunda opción de pilar"
