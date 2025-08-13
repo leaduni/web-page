@@ -22,8 +22,24 @@ const facultyOptions = [
   { value: 'FIQT', label: 'Facultad de Ingeniería Química y Textil' },
 ];
 
+// Mapeo de facultades a carreras
+const facultyCareerMapping = {
+  'FAUA': ['Arquitectura'],
+  'FC': ['Ingeniería Física', 'Química', 'Física', 'Matemática', 'Ciencia de la Computación'],
+  'FIA': ['Ingeniería Sanitaria', 'Ingeniería de Higiene y Seguridad Industrial', 'Ingeniería Ambiental'],
+  'FIC': ['Ingeniería Civil'],
+  'FIEECS': ['Ingeniería Económica', 'Ingeniería Estadística'],
+  'FIEE': ['Ingeniería Eléctrica', 'Ingeniería Electrónica', 'Ingeniería de Telecomunicaciones', 'Ingeniería de Ciberseguridad'],
+  'FIGMM': ['Ingeniería de Minas', 'Ingeniería Geológica', 'Ingeniería Metalúrgica'],
+  'FIIS': ['Ingeniería de Software', 'Ingeniería Industrial', 'Ingeniería de Sistemas'],
+  'FIM': ['Ingeniería Mecánica', 'Ingeniería Mecánica-Eléctrica', 'Ingeniería Naval', 'Ingeniería Mecatrónica', 'Ingeniería Aeroespacial'],
+  'FIP': ['Ingeniería de Petróleo y Gas Natural', 'Ingeniería Petroquímica'],
+  'FIQT': ['Ingeniería Química', 'Ingeniería Textil'],
+};
+
 const careerOptions = [
   { value: 'Arquitectura', label: 'Arquitectura' },
+  { value: 'Ingeniería Física', label: 'Ingeniería Física' },
   { value: 'Física', label: 'Física' },
   { value: 'Matemática', label: 'Matemática' },
   { value: 'Química', label: 'Química' },
@@ -35,7 +51,6 @@ const careerOptions = [
     label: 'Ingeniería de Higiene y Seguridad Industrial',
   },
   { value: 'Ingeniería de Software', label: 'Ingeniería de Software' },
-
   { value: 'Ingeniería Civil', label: 'Ingeniería Civil' },
   { value: 'Ingeniería Económica', label: 'Ingeniería Económica' },
   { value: 'Ingeniería Estadística', label: 'Ingeniería Estadística' },
@@ -291,11 +306,30 @@ const ApplicationPage = () => {
     return visible;
   };
 
+  // Función para obtener las carreras filtradas según la facultad seleccionada
+  const getFilteredCareerOptions = () => {
+    if (!formData.faculty) {
+      return [];
+    }
+    
+    const careerNames = facultyCareerMapping[formData.faculty] || [];
+    return careerOptions.filter(career => careerNames.includes(career.value));
+  };
+
   const handleInputChange = (field, value) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value,
-    }));
+    setFormData(prev => {
+      const newData = {
+        ...prev,
+        [field]: value,
+      };
+      
+      // Si se cambia la facultad, limpiar la carrera seleccionada
+      if (field === 'faculty') {
+        newData.career = '';
+      }
+      
+      return newData;
+    });
   };
 
   const handlePillarSpecificChange = (field, value) => {
@@ -686,6 +720,7 @@ const ApplicationPage = () => {
               </FormField>
               <FormField label="Facultad">
                 <SelectInput
+                  id="faculty-dropdown"
                   options={facultyOptions}
                   value={formData.faculty}
                   onChange={value => handleInputChange('faculty', value)}
@@ -694,14 +729,16 @@ const ApplicationPage = () => {
               </FormField>
               <FormField label="Carrera">
                 <SelectInput
-                  options={careerOptions}
+                  id="career-dropdown"
+                  options={getFilteredCareerOptions()}
                   value={formData.career}
                   onChange={value => handleInputChange('career', value)}
-                  placeholder="Selecciona tu carrera"
+                  placeholder={formData.faculty ? "Selecciona tu carrera" : "Primero selecciona una facultad"}
                 />
               </FormField>
               <FormField label="Ciclo Relativo">
                 <SelectInput
+                  id="cycle-dropdown"
                   options={cycleOptions}
                   value={formData.cycle}
                   onChange={value => handleInputChange('cycle', value)}
@@ -768,6 +805,7 @@ const ApplicationPage = () => {
                     }
                   >
                     <SelectInput
+                      id="second-option-dropdown"
                       options={Object.entries(pillarContent)
                         .filter(([key]) => key !== selectedPillar)
                         .map(([key, value]) => ({
