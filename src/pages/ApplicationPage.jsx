@@ -612,9 +612,9 @@ const ApplicationPage = () => {
               </svg>
               <h3 className="text-xl font-semibold text-[#d93340] mb-1">Cronograma</h3>
               <ul className="text-[#f3eafd] text-base list-disc list-inside">
-                <li>Postulación: hasta 31 de agosto</li>
-                <li>Entrevistas: 2-6 de septiembre</li>
-                <li>Resultados: 10 de septiembre</li>
+                <li>Postulación: hasta 2 de septiembre</li>
+                <li>Entrevistas: 3-12 de septiembre</li>
+                <li>Resultados: 17 de septiembre</li>
               </ul>
             </div>
             <div className="bg-gradient-to-br from-[#19092a]/30 to-[#bf2a51]/20 rounded-xl p-6 shadow-lg flex flex-col items-center">
