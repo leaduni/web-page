@@ -24,17 +24,32 @@ const facultyOptions = [
 
 // Mapeo de facultades a carreras
 const facultyCareerMapping = {
-  'FAUA': ['Arquitectura'],
-  'FC': ['Ingeniería Física', 'Química', 'Física', 'Matemática', 'Ciencia de la Computación'],
-  'FIA': ['Ingeniería Sanitaria', 'Ingeniería de Higiene y Seguridad Industrial', 'Ingeniería Ambiental'],
-  'FIC': ['Ingeniería Civil'],
-  'FIEECS': ['Ingeniería Económica', 'Ingeniería Estadística'],
-  'FIEE': ['Ingeniería Eléctrica', 'Ingeniería Electrónica', 'Ingeniería de Telecomunicaciones', 'Ingeniería de Ciberseguridad'],
-  'FIGMM': ['Ingeniería de Minas', 'Ingeniería Geológica', 'Ingeniería Metalúrgica'],
-  'FIIS': ['Ingeniería de Software', 'Ingeniería Industrial', 'Ingeniería de Sistemas'],
-  'FIM': ['Ingeniería Mecánica', 'Ingeniería Mecánica-Eléctrica', 'Ingeniería Naval', 'Ingeniería Mecatrónica', 'Ingeniería Aeroespacial'],
-  'FIP': ['Ingeniería de Petróleo y Gas Natural', 'Ingeniería Petroquímica'],
-  'FIQT': ['Ingeniería Química', 'Ingeniería Textil'],
+  FAUA: ['Arquitectura'],
+  FC: ['Ingeniería Física', 'Química', 'Física', 'Matemática', 'Ciencia de la Computación'],
+  FIA: [
+    'Ingeniería Sanitaria',
+    'Ingeniería de Higiene y Seguridad Industrial',
+    'Ingeniería Ambiental',
+  ],
+  FIC: ['Ingeniería Civil'],
+  FIEECS: ['Ingeniería Económica', 'Ingeniería Estadística'],
+  FIEE: [
+    'Ingeniería Eléctrica',
+    'Ingeniería Electrónica',
+    'Ingeniería de Telecomunicaciones',
+    'Ingeniería de Ciberseguridad',
+  ],
+  FIGMM: ['Ingeniería de Minas', 'Ingeniería Geológica', 'Ingeniería Metalúrgica'],
+  FIIS: ['Ingeniería de Software', 'Ingeniería Industrial', 'Ingeniería de Sistemas'],
+  FIM: [
+    'Ingeniería Mecánica',
+    'Ingeniería Mecánica-Eléctrica',
+    'Ingeniería Naval',
+    'Ingeniería Mecatrónica',
+    'Ingeniería Aeroespacial',
+  ],
+  FIP: ['Ingeniería de Petróleo y Gas Natural', 'Ingeniería Petroquímica'],
+  FIQT: ['Ingeniería Química', 'Ingeniería Textil'],
 };
 
 const careerOptions = [
@@ -311,7 +326,7 @@ const ApplicationPage = () => {
     if (!formData.faculty) {
       return [];
     }
-    
+
     const careerNames = facultyCareerMapping[formData.faculty] || [];
     return careerOptions.filter(career => careerNames.includes(career.value));
   };
@@ -322,12 +337,12 @@ const ApplicationPage = () => {
         ...prev,
         [field]: value,
       };
-      
+
       // Si se cambia la facultad, limpiar la carrera seleccionada
       if (field === 'faculty') {
         newData.career = '';
       }
-      
+
       return newData;
     });
   };
@@ -733,7 +748,9 @@ const ApplicationPage = () => {
                   options={getFilteredCareerOptions()}
                   value={formData.career}
                   onChange={value => handleInputChange('career', value)}
-                  placeholder={formData.faculty ? "Selecciona tu carrera" : "Primero selecciona una facultad"}
+                  placeholder={
+                    formData.faculty ? 'Selecciona tu carrera' : 'Primero selecciona una facultad'
+                  }
                 />
               </FormField>
               <FormField label="Ciclo Relativo">

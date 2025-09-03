@@ -11,6 +11,7 @@ import KickPromotionModal from './components/KickPromotionModal';
 
 import HomePage from './pages/HomePage';
 import ApplicationPage from './pages/ApplicationPage';
+import ApplicationPageDisabled from './pages/ApplicationPageDisabled';
 import NewsPage from './pages/NewsPage';
 import NewsDetailPage from './pages/NewsDetailPage';
 import PillarsPage from './pages/PillarsPage';
@@ -40,6 +41,7 @@ function ScrollToTop() {
 // y la ruta "/about" renderiza el componente About
 
 function App() {
+  const isApplicationOpen = false;
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1A0B2E] via-[#2D1B4E] to-[#1A0B2E]">
       <ScrollToTop />
@@ -50,7 +52,10 @@ function App() {
       >
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/application" element={<ApplicationPage />} />
+          <Route
+            path="/application"
+            element={isApplicationOpen ? <ApplicationPage /> : <ApplicationPageDisabled />}
+          />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/pillars" element={<PillarsPage />} />
           <Route path="/news/:id" element={<NewsDetailPage />} />
