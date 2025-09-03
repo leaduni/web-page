@@ -2,7 +2,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Header, HEADER_HEIGHT } from './components/header';
 import ContactSection from './components/ContactSection';
-import KickPromotionModal from './components/KickPromotionModal';
+import PromotionModal from './components/PromotionModal';
 // Importamos los componentes de las páginas que vamos a usar
 // En este caso, Home y About son componentes que representan páginas
 // de nuestra aplicación
@@ -68,7 +68,7 @@ function App() {
       <ContactSection />
 
       {/* Modal de promoción de Kick */}
-      <KickPromotionModal />
+      {/* <PromotionModal /> */}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink } from 'lucide-react';
 
-const KickPromotionModal = () => {
+const PromotionModal = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -140,4 +140,4 @@ const KickPromotionModal = () => {
   );
 };
 
-export default KickPromotionModal;
+export default PromotionModal;
