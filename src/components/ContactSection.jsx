@@ -38,7 +38,7 @@ const ContactSection = () => {
             </div>
 
             {/* Grid de tarjetas de contacto 3D */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6 ">
+            <div className="grid grid-cols-2 gap-4 mb-6 ">
               {/* Tarjeta Email */}
               <a
                 href="mailto:leadatuni1403@gmail.com"
@@ -207,48 +207,6 @@ const ContactSection = () => {
                 </div>
               </a>
 
-              {/* Tarjeta Twitch */}
-              <a
-                href="https://www.twitch.tv/leadunioficial"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative block"
-              >
-                <div
-                  className="absolute inset-0 bg-gradient-to-br from-[#9146FF] to-[#6441A4] rounded-xl transform group-hover:scale-105 transition-all duration-500 shadow-lg"
-                  style={{
-                    transform: 'perspective(1000px) rotateX(-3deg) rotateY(3deg)',
-                    boxShadow: '0 15px 30px rgba(145, 70, 255, 0.3)',
-                  }}
-                />
-                <div
-                  className="relative bg-[#09092a]/90 backdrop-blur-sm rounded-xl p-4 border border-[#9146FF]/30 hover:border-[#9146FF]/60 transition-all duration-500 cursor-pointer"
-                  style={{
-                    transform: 'perspective(1000px) rotateX(-3deg) rotateY(3deg)',
-                    boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
-                  }}
-                >
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-10 h-10 p-1 bg-gradient-to-br from-[#9146FF] to-[#6441A4] rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 mb-2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlSpace="preserve"
-                        viewBox="0 0 2400 2800"
-                        className="w-6 h-6"
-                      >
-                        <path fill="#fff" d="m2200 1300-400 400h-400l-350 350v-350H600V200h1600z" />
-                        <g fill="#9146ff">
-                          <path d="M500 0 0 500v1800h600v500l500-500h400l900-900V0H500zm1700 1300-400 400h-400l-350 350v-350H600V200h1600v1100z" />
-                          <path d="M1700 550h200v600h-200zm-550 0h200v600h-200z" />
-                        </g>
-                      </svg>
-                    </div>
-                    <h3 className="text-white font-bold text-sm">Twitch</h3>
-                    <p className="text-[#f3eafd] text-xs">leadunioficial</p>
-                  </div>
-                </div>
-              </a>
-
               {/* Tarjeta GitHub */}
               <a
                 href="https://github.com/leaduni"
@@ -290,63 +248,6 @@ const ContactSection = () => {
                     </div>
                     <h3 className="text-white font-bold text-sm">GitHub</h3>
                     <p className="text-[#f3eafd] text-xs">leaduni</p>
-                  </div>
-                </div>
-              </a>
-
-              {/* Tarjeta Kick */}
-              <a
-                href="https://kick.com/lead-uni"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative block"
-              >
-                <div
-                  className="absolute inset-0 bg-gradient-to-br from-[#53FC18] to-[#00D100] rounded-xl transform group-hover:scale-105 transition-all duration-500 shadow-lg"
-                  style={{
-                    transform: 'perspective(1000px) rotateX(-3deg) rotateY(3deg)',
-                    boxShadow: '0 15px 30px rgba(83, 252, 24, 0.3)',
-                  }}
-                />
-                <div
-                  className="relative bg-[#09092a]/90 backdrop-blur-sm rounded-xl p-4 border border-[#53FC18]/30 hover:border-[#53FC18]/60 transition-all duration-500 cursor-pointer"
-                  style={{
-                    transform: 'perspective(1000px) rotateX(-3deg) rotateY(3deg)',
-                    boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
-                  }}
-                >
-                  <div className="flex flex-col items-center text-center h-full justify-between">
-                    <div className="w-10 h-10 p-1 bg-gradient-to-br from-[#53FC18] to-[#00D100] rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 mb-2">
-                      <svg
-                        width="24"
-                        height="8"
-                        viewBox="0 0 933 300"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-6 h-auto"
-                      >
-                        <g clipPath="url(#kick_dark__clip0_9790_492437)">
-                          <g clipPath="url(#kick_dark__clip1_9790_492437)">
-                            <path
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              d="M0 0H100V66.6667H133.333V33.3333H166.667V0H266.667V100H233.333V133.333H200V166.667H233.333V200H266.667V300H166.667V266.667H133.333V233.333H100V300H0V0ZM666.667 0H766.667V66.6667H800V33.3333H833.333V0H933.333V100H900V133.333H866.667V166.667H900V200H933.333V300H833.333V266.667H800V233.333H766.667V300H666.667V0ZM300 0H400V300H300V0ZM533.333 0H466.667V33.3333H433.333V266.667H466.667V300H533.333H633.333V200H533.333V100H633.333V0H533.333Z"
-                              fill="#FFF"
-                            />
-                          </g>
-                        </g>
-                        <defs>
-                          <clipPath id="kick_dark__clip0_9790_492437">
-                            <rect width="933" height="300" fill="white" />
-                          </clipPath>
-                          <clipPath id="kick_dark__clip1_9790_492437">
-                            <rect width="933.333" height="300" fill="white" />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                    </div>
-                    <h3 className="text-white font-bold text-sm">Kick</h3>
-                    <p className="text-[#f3eafd] text-xs">lead-uni</p>
                   </div>
                 </div>
               </a>
