@@ -1,0 +1,98 @@
+name: Update Organization Data
+
+# Trigger manual - solo ejecutable a mano desde GitHub Actions
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Razón para actualizar los datos del organigrama'
+        required: false
+        default: 'Actualización manual de datos'
+
+jobs:
+  update-organigrama:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del código
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      # 3. Instalar dependencias
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Ejecutar el script de descarga
+      - name: Download and update organigrama data
+        run: |
+          echo "🚀 Ejecutando script de actualización del organigrama..."
+          node scripts/descargar-json-organigrama.js
+          echo "✅ Script ejecutado exitosamente"
+
+      # 5. Verificar si hay cambios
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet backups/organigrama.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "📝 No hay cambios en los datos del organigrama"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "📊 Se detectaron cambios en los datos del organigrama"
+          fi
+
+      # 6. Mostrar diferencias (si las hay)
+      - name: Show changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          echo "📋 Cambios detectados:"
+          git diff --stat backups/organigrama.json
+          echo ""
+          echo "📄 Diferencias detalladas:"
+          git diff backups/organigrama.json || true
+
+      # 7. Commit y push de los cambios
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          # Agregar el archivo actualizado
+          git add backups/organigrama.json
+
+          # Crear commit con información detallada
+          COMMIT_MSG="🔄 Actualizar datos del organigrama
+
+          Motivo: ${{ github.event.inputs.reason }}
+          Ejecutado por: ${{ github.actor }}
+          Fecha: $(date '+%Y-%m-%d %H:%M:%S UTC')
+
+          - Datos actualizados desde Google Sheets
+          - Archivo: backups/organigrama.json"
+
+          git commit -m "$COMMIT_MSG"
+          git push
+
+      # 8. Resumen final
+      - name: Summary
+        run: |
+          echo "🎯 Proceso completado"
+          if [ "${{ steps.check_changes.outputs.changed }}" == "true" ]; then
+            echo "✅ Datos del organigrama actualizados y committeados"
+            echo "📊 Los cambios están disponibles en el repositorio"
+          else
+            echo "ℹ️  No se detectaron cambios - los datos ya están actualizados"
+          fi
+          echo "🔗 Ejecutado por: ${{ github.actor }}"
+          echo "📝 Motivo: ${{ github.event.inputs.reason }}"

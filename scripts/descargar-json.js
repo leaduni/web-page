@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url';
 async function descargarJSON() {
   const url =
     'https://docs.google.com/spreadsheets/d/1s2srg36pKAqHvxwrCZrTSao4ivIpa1zUkGlFkRpYl4A/export?format=csv&gid=1744794553';
-
   // Usa fetch global si existe (Node 18+), si no, hace fallback a node-fetch
   const fetchFn = globalThis.fetch || (await import('node-fetch')).default;
   const response = await fetchFn(url);

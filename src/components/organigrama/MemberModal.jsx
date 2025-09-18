@@ -7,9 +7,9 @@ const MemberModal = ({
   setSelectedMember,
   activeMemberTab,
   setActiveMemberTab,
-  memberDetails,
+  getMemberDetails,
 }) => {
-  const details = memberDetails[selectedMember.name];
+  const details = getMemberDetails(selectedMember.name);
   const [showingContactIdx, setShowingContactIdx] = useState(null);
   const [copiedIdx, setCopiedIdx] = useState(null);
   // Estado para expandir/cerrar habilidades técnicas
