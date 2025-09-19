@@ -394,5 +394,27 @@
     "habilidadesTecnicas": "- Python\n- C++\n- SQL",
     "habilidadesBlandas": "- Liderazgo\n- Trabajo en equipo\n- Innovación\n- Comunicación Efectiva",
     "fotoPersonal": "https://drive.google.com/open?id=1xKztnpmIZkQ4K_cbz6_KqH90FfGmTwFI"
+  },
+  {
+    "id": 19,
+    "marcaTemporal": "18/9/2025 19:19:26",
+    "nombreCompleto": "Camilo Roger Callupe Menejes",
+    "correoPersonal": "callupecamilo1@gmail.com",
+    "correoInstitucional": "camilo.callupe.m@uni.pe",
+    "numeroCelular": "953739106",
+    "carreraProfesional": "Ingeniería Electrónica",
+    "biografiaBreve": "Soy miembro del Pilar de Excelencia Académica en LEAD UNI. Estoy estudiando la carrera de Ingeniería Electrónica y a lo largo de mis estudios he vivido distintos tipos de eventos, he participado en proyectos de POO, fui subdirector de Talento Humano en IEEE PES UNMSM, he participado en el voluntariado Conexión al Futuro del CEPS-UNI. Mis intereses principales son los proyectos de IA aplicada y Ciencia de Datos. Mi propósito es impactar positivamente en la comunidad UNI y en el camino nutrirme de habilidades tanto técnicas como blandas así como formar conexiones de gran significado.",
+    "area": "Excelencia Académica",
+    "cargo": "Miembro",
+    "linkedin": "https://www.linkedin.com/in/camilo-roger-callupe-menejes/",
+    "curriculumVitae": "",
+    "github": "https://github.com/cmcrog",
+    "portafolio": "",
+    "otro": "",
+    "premiosReconocimientos": "Ninguno",
+    "eventosLiderados": "Colaborador en el Taller de Electricidad para Escolares (Conexión al Futuro)",
+    "habilidadesTecnicas": "Python\nC++",
+    "habilidadesBlandas": "Comunicación efectiva\nTrabajo en equipo \nProactividad\nResponsabilidad",
+    "fotoPersonal": "https://drive.google.com/open?id=1FODOYWPVyRgPapuLDYiRWmk8O0aK2QLZ"
   }
 ]
