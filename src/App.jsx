@@ -1,8 +1,8 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Header, HEADER_HEIGHT } from './components/header';
-import ContactSection from './components/ContactSection';
 import PromotionModal from './components/PromotionModal';
+import ContactSection from './components/ContactSection';
 // Importamos los componentes de las páginas que vamos a usar
 // En este caso, Home y About son componentes que representan páginas
 // de nuestra aplicación
@@ -17,6 +17,7 @@ import NewsDetailPage from './pages/NewsDetailPage';
 import PillarsPage from './pages/PillarsPage';
 import OrganizationPage from './pages/OrganizationPage';
 import NotFoundPage from './pages/NotFoundPage';
+import AIRecapPage from './pages/ai-recap';
 
 // Componente para hacer scroll hacia arriba al cambiar de ruta
 function ScrollToTop() {
@@ -42,6 +43,7 @@ function ScrollToTop() {
 
 function App() {
   const isApplicationOpen = false;
+  const location = useLocation();
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1A0B2E] via-[#2D1B4E] to-[#1A0B2E]">
       <ScrollToTop />
@@ -60,6 +62,7 @@ function App() {
           <Route path="/pillars" element={<PillarsPage />} />
           <Route path="/news/:id" element={<NewsDetailPage />} />
           <Route path="/organization" element={<OrganizationPage />} />
+          <Route path="/ai-recap" element={<AIRecapPage />} />
           <Route path="*" element={<NotFoundPage />} />
           {/* La ruta "*" captura todas las rutas que no coinciden con las anteriores */}
           {/* Esto es útil para mostrar una página 404 o Not Found */}
@@ -67,8 +70,8 @@ function App() {
       </main>
       <ContactSection />
 
-      {/* Modal de promoción de Kick */}
-      {/* <PromotionModal /> */}
+      {/* Modal de promoción en Home */}
+      {location.pathname === '/' && <PromotionModal />}
     </div>
   );
 }

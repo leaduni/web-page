@@ -244,6 +244,7 @@ export const pillars = [
 export const departments = [
   { id: 'todos', label: 'Todos' },
   { id: 'direccion', label: 'Dirección General' },
+  { id: 'junta-directiva', label: 'Junta Directiva' },
   { id: 'liderazgo', label: 'Liderazgo' },
   { id: 'academica', label: 'Excelencia Académica' },
   { id: 'profesional', label: 'Desarrollo Profesional' },

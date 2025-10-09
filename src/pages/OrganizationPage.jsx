@@ -130,7 +130,7 @@ const OrganizationPage = () => {
             className="flex overflow-x-hidden gap-2 px-12 py-4 rounded-xl border-2 border-[#a6249d]/40 scrollbar-none shadow-lg"
             style={{ scrollBehavior: 'smooth' }}
           >
-            {departments.map((dept, idx) => (
+            {departments.map((dept, _) => (
               <button
                 key={dept.id}
                 onClick={() => setActiveTab(dept.id)}
@@ -157,9 +157,15 @@ const OrganizationPage = () => {
 
         {/* Grid de miembros */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {members[activeTab]?.map(member => (
-            <MemberCard key={member.name} member={member} onSelect={setSelectedMember} />
-          ))}
+          {activeTab !== 'junta-directiva'
+            ? members[activeTab]?.map(member => (
+                <MemberCard key={member.name} member={member} onSelect={setSelectedMember} />
+              ))
+            : members['todos']
+                .slice(0, 13)
+                .map(member => (
+                  <MemberCard key={member.name} member={member} onSelect={setSelectedMember} />
+                ))}
         </div>
 
         {/* Modal de miembro */}

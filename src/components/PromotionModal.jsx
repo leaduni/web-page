@@ -6,16 +6,16 @@ const PromotionModal = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    // Verificar si el modal ya se mostró hoy
-    const lastShown = localStorage.getItem('kickModalLastShown');
-    const modalEndDate = localStorage.getItem('kickModalEndDate');
+    // Verificar si el modal ya se mostró hoy (claves nuevas para evento)
+    const lastShown = localStorage.getItem('promoModalLastShown');
+    const modalEndDate = localStorage.getItem('promoModalEndDate');
     const today = new Date().toDateString();
 
     // Si no hay fecha de fin guardada, establecer 7 días desde hoy
     if (!modalEndDate) {
       const endDate = new Date();
       endDate.setDate(endDate.getDate() + 7);
-      localStorage.setItem('kickModalEndDate', endDate.toISOString());
+      localStorage.setItem('promoModalEndDate', endDate.toISOString());
     }
 
     // Verificar si aún está dentro del período de 7 días
@@ -26,17 +26,14 @@ const PromotionModal = () => {
       // Mostrar el modal después de 2 segundos
       const timer = setTimeout(() => {
         setShowModal(true);
-        localStorage.setItem('kickModalLastShown', today);
+        localStorage.setItem('promoModalLastShown', today);
       }, 2000);
 
       return () => clearTimeout(timer);
     }
   }, []);
 
-  const handleKickRedirect = () => {
-    window.open('https://kick.com/lead-uni', '_blank', 'noopener,noreferrer');
-    setShowModal(false);
-  };
+  // Kick channel decommissioned
 
   const handleClose = () => {
     setShowModal(false);
@@ -59,8 +56,8 @@ const PromotionModal = () => {
             exit={{ scale: 0.8, opacity: 0, y: 50 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
           >
-            {/* Header Convocatoria Abierta */}
-            <div className="relative bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] p-6 text-center">
+            {/* Header Evento AI Recap */}
+            <div className="relative bg-gradient-to-r from-[#d93340] to-[#a6249d] p-6 text-center">
               <button
                 onClick={handleClose}
                 className="absolute top-4 right-4 p-2 rounded-full bg-black/20 hover:bg-black/40 transition-colors"
@@ -77,7 +74,7 @@ const PromotionModal = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-10 h-10"
                 >
-                  <circle cx="24" cy="24" r="24" fill="#06B6D4" />
+                  <circle cx="24" cy="24" r="24" fill="#a6249d" />
                   <path
                     d="M24 14v12m0 0v8m0-8h8m-8 0h-8"
                     stroke="#fff"
@@ -88,51 +85,37 @@ const PromotionModal = () => {
                 </svg>
               </div>
 
-              <h2 className="text-2xl font-bold text-white mb-2">¡Convocatoria Abierta!</h2>
-              <p className="text-white/90 text-sm">
-                La página de aplicación para Lead UNI ya está disponible.
-              </p>
+              <h2 className="text-2xl font-bold text-white mb-2">¡Nuevo Evento: AI Recap 2025!</h2>
+              <p className="text-white/90 text-sm">Tendencias, demos y aprendizajes clave de IA.</p>
             </div>
 
-            {/* Contenido Convocatoria */}
+            {/* Contenido Evento AI Recap */}
             <div className="p-6 space-y-4">
               <div className="text-center space-y-3">
-                <h3 className="text-lg font-semibold text-white">
-                  ¿Quieres ser parte de LEAD UNI?
-                </h3>
+                <h3 className="text-lg font-semibold text-white">AI Recap 2025</h3>
                 <p className="text-gray-300 text-sm leading-relaxed">
-                  ¡La convocatoria está abierta! Puedes aplicar ahora mismo desde la nueva página de
-                  aplicación.
-                  <br />
-                  <span className="text-[#06B6D4] font-semibold">
-                    No pierdas la oportunidad de formar parte de la comunidad universitaria más
-                    innovadora.
-                  </span>
+                  Un resumen práctico y actualizado sobre Inteligencia Artificial: agentes, LLMs,
+                  casos reales y puesta en producción. ¡Acompáñanos y aprende con demos y
+                  experiencias del mundo real!
                 </p>
               </div>
 
-              {/* Botones */}
-              <div className="flex flex-col gap-3 pt-4">
-                <a
-                  href="/application"
-                  className="w-full bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white font-semibold py-3 px-6 rounded-xl hover:from-[#2563EB] hover:to-[#0891B2] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-[#06B6D4]/25"
-                  onClick={handleClose}
-                >
-                  <span>Ir a la Convocatoria</span>
-                  <ExternalLink className="w-4 h-4" />
-                </a>
+              <a
+                href="/ai-recap"
+                className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white font-semibold py-3 px-6 rounded-xl hover:brightness-110 transition-all duration-300 shadow-lg shadow-pink-900/20"
+                onClick={handleClose}
+              >
+                <span>Visitar AI Recap</span>
+                <ExternalLink className="w-4 h-4" />
+              </a>
 
-                <button
-                  onClick={handleClose}
-                  className="w-full bg-white/10 text-white font-medium py-2 px-6 rounded-xl hover:bg-white/20 transition-all duration-300 border border-white/20"
-                >
-                  Tal vez después
-                </button>
-              </div>
+              <button
+                onClick={handleClose}
+                className="w-full bg-white/10 text-white font-medium py-2 px-6 rounded-xl hover:bg-white/20 transition-all duration-300 border border-white/20"
+              >
+                Tal vez después
+              </button>
             </div>
-
-            {/* Decoración */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#3B82F6] via-[#06B6D4] to-[#3B82F6] animate-pulse"></div>
           </motion.div>
         </motion.div>
       )}
