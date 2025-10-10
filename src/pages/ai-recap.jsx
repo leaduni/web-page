@@ -1,27 +1,68 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { CalendarDays, MapPin, Users, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+// Small badge renderer for expertise logos
+function BadgeIcons({ badges }) {
+  if (!badges || badges.length === 0) return null;
+  return (
+    <div className="flex items-center gap-1.5 flex-wrap">
+      {badges.map(b =>
+        b.src ? (
+          <img
+            key={b.src}
+            src={b.src}
+            alt={b.alt || 'Expertise'}
+            title={b.title || b.alt || 'Expertise'}
+            className="w-5 h-5 sm:w-6 sm:h-6 object-contain rounded-[4px] ring-1 ring-white/15"
+          />
+        ) : (
+          <span
+            key={b.label}
+            className="text-[11px] sm:text-[12px] px-1.5 py-0.5 rounded bg-white/10 border border-white/10 text-white/80"
+            title={b.title || b.label}
+          >
+            {b.label}
+          </span>
+        )
+      )}
+    </div>
+  );
+}
+
+BadgeIcons.propTypes = {
+  badges: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        src: PropTypes.string,
+        alt: PropTypes.string,
+        title: PropTypes.string,
+      }),
+      PropTypes.shape({
+        label: PropTypes.string,
+        title: PropTypes.string,
+      }),
+    ])
+  ),
+};
 
 // Simple, local speaker modal component
 function SpeakerModal({ speaker, onClose }) {
   if (!speaker) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center px-3 sm:px-4">
-      <motion.button
-        type="button"
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
-        aria-label="Cerrar"
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
       />
-      <motion.div
-        role="dialog"
-        aria-modal="true"
-        className="relative z-10 w-full max-w-[92vw] sm:max-w-md md:max-w-2xl lg:max-w-3xl rounded-2xl bg-[#120a22] border border-[#a6249d]/30 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
+      <motion.dialog
+        open
+        className="relative z-10 w-full max-w-[92vw] sm:max-w-lg md:max-w-3xl lg:max-w-4xl rounded-2xl bg-[#120a22] border border-[#a6249d]/30 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
         initial={{ opacity: 0, y: 16, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 16, scale: 0.98 }}
@@ -36,17 +77,27 @@ function SpeakerModal({ speaker, onClose }) {
         </button>
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Left image */}
-          <div className="relative min-h-[200px] md:min-h-[240px] bg-black/20">
+          <div className="relative min-h-[220px] md:min-h-[260px] bg-black/20">
             <img
               src={speaker.image}
               alt={speaker.name}
               className={`w-full h-full object-cover ${speaker.imgClass || ''}`}
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-[#d93340]/10 to-transparent" />
+            {String(speaker.name).toLowerCase().includes('misterio') && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="px-3 py-1.5 rounded-full bg-white/10 text-white/90 text-sm md:text-base border border-white/20">
+                  Próximamente
+                </span>
+              </div>
+            )}
           </div>
           {/* Right content */}
           <div className="p-5 md:p-7">
-            <h3 className="text-xl md:text-2xl font-extrabold text-white mb-1">{speaker.name}</h3>
+            <div className="flex items-center gap-2 md:gap-3 mb-1">
+              <h3 className="text-xl md:text-2xl font-extrabold text-white">{speaker.name}</h3>
+              <BadgeIcons badges={speaker.badges} />
+            </div>
             <p className="text-[#ff6ec7] font-semibold text-sm md:text-base">{speaker.title}</p>
             <p className="text-white/80 text-xs md:text-sm mt-2">{speaker.company}</p>
             <div className="h-px w-full my-4 md:my-5 bg-gradient-to-r from-[#d93340]/60 to-[#a6249d]/60" />
@@ -70,7 +121,7 @@ function SpeakerModal({ speaker, onClose }) {
             )}
           </div>
         </div>
-      </motion.div>
+      </motion.dialog>
     </div>
   );
 }
@@ -83,6 +134,7 @@ SpeakerModal.propTypes = {
     company: PropTypes.string,
     description: PropTypes.string,
     imgClass: PropTypes.string,
+    badges: PropTypes.array,
     links: PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string,
@@ -99,6 +151,20 @@ export default function AIRecapPage() {
   const [status, setStatus] = useState({ type: null, message: '' });
   const [confirmOpen, setConfirmOpen] = useState(false);
 
+  // Lock body scroll while any modal is open
+  useEffect(() => {
+    const hasModal = Boolean(selectedSpeaker) || Boolean(confirmOpen);
+    const prev = document.body.style.overflow;
+    if (hasModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = prev || '';
+    }
+    return () => {
+      document.body.style.overflow = prev || '';
+    };
+  }, [selectedSpeaker, confirmOpen]);
+
   // Google Forms endpoint (provided)
   const FORM_URL =
     'https://docs.google.com/forms/u/1/d/e/1FAIpQLScnOPPrG_Cf51euKCjot4GboV2LpC0WYG9_1QnevAQV01rdOQ/formResponse';
@@ -109,43 +175,19 @@ export default function AIRecapPage() {
     carrera: 'entry.1915342240',
   };
 
-  // Placeholder speakers; replace with real data later
+  // Placeholder: Ponentes pendientes de confirmar
   const speakers = useMemo(
-    () => [
-      {
-        name: 'Ponente 1',
-        title: 'AI Researcher',
-        company: 'Empresa / Universidad',
-        image: '/student_stem.png',
+    () =>
+      Array.from({ length: 4 }).map((_, i) => ({
+        name: `Misterio ${i + 1}`,
+        title: 'Por anunciar',
+        company: '',
+        image: '/image-ponente.png',
+        badges: [{ label: 'TBA', title: 'Por anunciar' }],
         description:
-          'Explorando el impacto real de la IA en la industria y la academia. Charlaremos sobre agentes, RAG y tendencias 2025.',
-        links: [{ label: 'LinkedIn', href: 'https://www.linkedin.com' }],
-      },
-      {
-        name: 'Ponente 2',
-        title: 'Data Scientist',
-        company: 'Tech Company',
-        image: '/student_stem.png',
-        description:
-          'Casos prácticos de IA aplicada: de la idea al prototipo. Cómo llevar un proyecto de IA a producción.',
-      },
-      {
-        name: 'Ponente 3',
-        title: 'ML Engineer',
-        company: 'Startup AI',
-        image: '/student_stem.png',
-        description:
-          'Infraestructura y mejores prácticas para escalar modelos y pipelines de ML en 2025.',
-      },
-      {
-        name: 'Ponente 4',
-        title: 'Product Manager',
-        company: 'AI Products',
-        image: '/student_stem.png',
-        description:
-          'Diseñando productos impulsados por IA: enfoque en usuario, métricas y experimentación.',
-      },
-    ],
+          'Pronto revelaremos a nuestros ponentes invitados. ¡Mantente atento a las novedades!',
+        links: [],
+      })),
     []
   );
 
@@ -179,9 +221,9 @@ export default function AIRecapPage() {
       {/* Hero */}
       <section className="relative w-full h-[52vh] sm:h-[60vh] overflow-hidden">
         <img
-          src="/student_stem.png"
+          src="/logo-lead-uni.png"
           alt="AI Recap Hero"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-1/2 h-1/2 mx-auto my-auto object-cover"
         />
         <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(9,9,42,0.6),rgba(166,36,157,0.35))]" />
         <div className="relative z-10 h-full container mx-auto px-6 flex flex-col justify-center">
@@ -196,14 +238,36 @@ export default function AIRecapPage() {
           </p>
           <div className="mt-6 flex flex-wrap gap-4 text-sm text-white/90">
             <span className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1">
-              <CalendarDays className="w-4 h-4 text-[#ff6ec7]" /> Octubre 2025
+              <CalendarDays className="w-4 h-4 text-[#ff6ec7]" /> 24 de octubre 2025
             </span>
             <span className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1">
               <MapPin className="w-4 h-4 text-[#ff6ec7]" /> UNI — LEAD UNI
             </span>
             <span className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1">
-              <Users className="w-4 h-4 text-[#ff6ec7]" /> 4 ponentes
+              <Users className="w-4 h-4 text-[#ff6ec7]" /> Ponentes por confirmar
             </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Agenda / Minuta */}
+      <section className="container mx-auto px-6 py-6">
+        <div className="rounded-2xl border border-[#a6249d]/30 bg-[#120a22] p-6 md:p-8">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1 text-white/90">
+              <CalendarDays className="w-4 h-4 text-[#ff6ec7]" /> 24 de octubre 2025
+            </span>
+            <span className="inline-flex items-center gap-2 bg-white/5 rounded-full px-3 py-1 text-white/80 border border-white/10">
+              Minuta: Próximamente
+            </span>
+          </div>
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            {['Charlas temáticas', 'Panel de discusión', 'Networking con empresas'].map(item => (
+              <div key={item} className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
+                <p className="text-white font-semibold">{item}</p>
+                <p className="text-white/60 text-sm mt-1">Horario por confirmar</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -213,26 +277,56 @@ export default function AIRecapPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
           <div className="lg:col-span-2">
             <h2 className="text-2xl md:text-3xl font-bold mb-3">Sobre el evento</h2>
-            <p className="text-white/80 leading-relaxed">
-              En AI Recap compartimos aprendizajes, demos y perspectivas de expertos que trabajan
-              con IA hoy. Desde agentes y LLMs hasta puesta en producción y diseño de producto.
-            </p>
+            <div className="space-y-4 text-white/80">
+              <p>
+                AI Recap es un evento organizado por LEAD UNI que reúne a estudiantes de múltiples
+                carreras en torno a la innovación y la tecnología. A través de charlas temáticas, un
+                panel de discusión y espacios de interacción con empresas, buscamos inspirar,
+                conectar y abrir oportunidades de desarrollo académico y profesional.
+              </p>
+              <div>
+                <h3 className="text-white font-semibold mb-2">Objetivos</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>Difundir tendencias actuales en innovación y tecnología.</li>
+                  <li>Facilitar el networking con empresas y profesionales destacados.</li>
+                  <li>Generar oportunidades de desarrollo académico, profesional y laboral.</li>
+                  <li>Promover el interés de estudiantes de múltiples disciplinas.</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-white font-semibold mb-2">Para empresas</h3>
+                <p>
+                  Ofrecemos la oportunidad de conectar directamente con founders de LEAD Perú y con
+                  una red estratégica de aliados del ecosistema tecnológico. Además, brindamos la
+                  posibilidad de instalar stands corporativos para:
+                </p>
+                <ul className="list-disc pl-5 mt-2 space-y-1">
+                  <li>Presentar proyectos e iniciativas de innovación.</li>
+                  <li>Interactuar con estudiantes de diversas carreras.</li>
+                  <li>Identificar y atraer talento para sus equipos.</li>
+                </ul>
+              </div>
+            </div>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-3 text-[#ff6ec7]">Auspiciadores</h3>
-            <div className="grid grid-cols-3 gap-3">
-              {[
-                { src: '/logo-lead-uni.png', alt: 'LEAD UNI' },
-                { src: '/vite.svg', alt: 'Vite' },
-                { src: '/pillars/Marketing.png', alt: 'Marketing' },
-              ].map(s => (
-                <div
-                  key={s.alt}
-                  className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center"
-                >
-                  <img src={s.src} alt={s.alt} className="max-h-10 object-contain" />
-                </div>
-              ))}
+            <h3 className="text-lg font-semibold mb-3 text-[#ff6ec7]">Empresas confirmadas</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {/* Microsoft */}
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                <img
+                  src="/microsoft-logo.png"
+                  alt="Microsoft"
+                  className="max-h-12 sm:max-h-14 object-contain"
+                />
+              </div>
+              {/* BCP */}
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                <img src="/logo-bcp.png" alt="BCP" className="max-h-10 object-contain" />
+              </div>
+              {/* Próximamente placeholder */}
+              <div className="p-3 rounded-xl bg-white/[0.03] border border-dashed border-white/20 text-white/60 italic flex items-center justify-center">
+                <span className="text-sm sm:text-base">Próximamente</span>
+              </div>
             </div>
           </div>
         </div>
@@ -252,12 +346,22 @@ export default function AIRecapPage() {
                 <img
                   src={sp.image}
                   alt={sp.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
+                    sp.name.toLowerCase().includes('misterio') ? 'grayscale' : ''
+                  }`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                {sp.name.toLowerCase().includes('misterio') && (
+                  <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[11px] bg-white/10 border border-white/20 text-white/80">
+                    Próximamente
+                  </span>
+                )}
               </div>
               <div className="p-4">
-                <h3 className="text-lg font-bold">{sp.name}</h3>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-lg font-bold">{sp.name}</h3>
+                  <BadgeIcons badges={sp.badges} />
+                </div>
                 <p className="text-sm text-[#ff6ec7]">{sp.title}</p>
                 <p className="text-xs text-white/70 mt-1 line-clamp-2">{sp.description}</p>
               </div>
@@ -357,19 +461,16 @@ export default function AIRecapPage() {
       <AnimatePresence>
         {confirmOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center px-3 sm:px-4">
-            <motion.button
-              type="button"
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-              onClick={() => setConfirmOpen(false)}
-              aria-label="Cerrar"
+            <motion.div
+              aria-hidden="true"
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
             />
-            <motion.div
-              role="dialog"
-              aria-modal="true"
+            <motion.dialog
+              open
               className="relative z-10 w-full max-w-[90vw] sm:max-w-sm md:max-w-md rounded-2xl bg-[#120a22] border border-[#a6249d]/30 shadow-2xl overflow-hidden"
               initial={{ opacity: 0, y: 16, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -399,7 +500,7 @@ export default function AIRecapPage() {
                   </button>
                 </div>
               </div>
-            </motion.div>
+            </motion.dialog>
           </div>
         )}
       </AnimatePresence>
