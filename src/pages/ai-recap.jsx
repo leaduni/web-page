@@ -219,12 +219,8 @@ export default function AIRecapPage() {
   return (
     <div className="min-h-screen w-full bg-[rgb(9,9,42)] text-white">
       {/* Hero */}
+
       <section className="relative w-full h-[52vh] sm:h-[60vh] overflow-hidden">
-        <img
-          src="/logo-lead-uni.png"
-          alt="AI Recap Hero"
-          className="absolute inset-0 w-1/2 h-1/2 mx-auto my-auto object-cover"
-        />
         <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(9,9,42,0.6),rgba(166,36,157,0.35))]" />
         <div className="relative z-10 h-full container mx-auto px-6 flex flex-col justify-center">
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
