@@ -240,7 +240,7 @@ export default function AIRecapPage() {
               <MapPin className="w-4 h-4 text-[#ff6ec7]" /> UNI — LEAD UNI
             </span>
             <span className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1">
-              <Users className="w-4 h-4 text-[#ff6ec7]" /> Ponentes por confirmar
+              <Users className="w-4 h-4 text-[#ff6ec7]" /> Ponentes a ser Revelados
             </span>
           </div>
         </div>
@@ -289,40 +289,23 @@ export default function AIRecapPage() {
                   <li>Promover el interés de estudiantes de múltiples disciplinas.</li>
                 </ul>
               </div>
-              <div>
-                <h3 className="text-white font-semibold mb-2">Para empresas</h3>
-                <p>
-                  Ofrecemos la oportunidad de conectar directamente con founders de LEAD Perú y con
-                  una red estratégica de aliados del ecosistema tecnológico. Además, brindamos la
-                  posibilidad de instalar stands corporativos para:
-                </p>
-                <ul className="list-disc pl-5 mt-2 space-y-1">
-                  <li>Presentar proyectos e iniciativas de innovación.</li>
-                  <li>Interactuar con estudiantes de diversas carreras.</li>
-                  <li>Identificar y atraer talento para sus equipos.</li>
-                </ul>
-              </div>
+              {/* Sección para empresas removida temporalmente hasta confirmar derechos de uso */}
             </div>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-3 text-[#ff6ec7]">Empresas confirmadas</h3>
+            <h3 className="text-lg font-semibold mb-3 text-[#ff6ec7]">Empresas</h3>
+            <p className="text-white/70 mb-3">
+              Tenemos grandes empresas detrás. Pronto anunciaremos más detalles.
+            </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {/* Microsoft */}
-              <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-                <img
-                  src="/microsoft-logo.png"
-                  alt="Microsoft"
-                  className="max-h-12 sm:max-h-14 object-contain"
-                />
-              </div>
-              {/* BCP */}
-              <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-                <img src="/logo-bcp.png" alt="BCP" className="max-h-10 object-contain" />
-              </div>
-              {/* Próximamente placeholder */}
-              <div className="p-3 rounded-xl bg-white/[0.03] border border-dashed border-white/20 text-white/60 italic flex items-center justify-center">
-                <span className="text-sm sm:text-base">Próximamente</span>
-              </div>
+              {['Misterio 1', 'Misterio 2', 'Próximamente'].map(name => (
+                <div
+                  key={name}
+                  className="p-3 rounded-xl bg-white/[0.03] border border-dashed border-white/20 text-white/70 italic flex items-center justify-center"
+                >
+                  <span className="text-sm sm:text-base">{name}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -333,10 +316,10 @@ export default function AIRecapPage() {
         <h2 className="text-2xl md:text-3xl font-bold mb-6">Ponentes</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {speakers.map(sp => (
-            <button
+            <div
               key={sp.name}
-              onClick={() => setSelectedSpeaker(sp)}
-              className="group text-left rounded-2xl overflow-hidden border border-[#a6249d]/30 bg-[#120a22] hover:bg-[#160e29] transition-all duration-300"
+              aria-disabled="true"
+              className="group text-left rounded-2xl overflow-hidden border border-[#a6249d]/30 bg-[#120a22] transition-all duration-300 cursor-default"
             >
               <div className="relative h-40 w-full overflow-hidden">
                 <img
@@ -361,7 +344,7 @@ export default function AIRecapPage() {
                 <p className="text-sm text-[#ff6ec7]">{sp.title}</p>
                 <p className="text-xs text-white/70 mt-1 line-clamp-2">{sp.description}</p>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </section>
