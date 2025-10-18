@@ -147,7 +147,7 @@ SpeakerModal.propTypes = {
 
 export default function AIRecapPage() {
   const [selectedSpeaker, setSelectedSpeaker] = useState(null);
-  const [form, setForm] = useState({ nombre: '', carrera: '', email: '' });
+  const [form, setForm] = useState({ nombre: '', carrera: '', email: '', telefono: '', dni: '' });
   const [status, setStatus] = useState({ type: null, message: '' });
   const [confirmOpen, setConfirmOpen] = useState(false);
 
@@ -173,6 +173,8 @@ export default function AIRecapPage() {
     nombre: 'entry.472759893',
     email: 'entry.670715888',
     carrera: 'entry.1915342240',
+    dni: 'entry.1677198235',
+    telefono: 'entry.1150935404',
   };
 
   // Placeholder: Ponentes pendientes de confirmar
@@ -204,12 +206,15 @@ export default function AIRecapPage() {
       data.append(FIELDS.nombre, form.nombre);
       data.append(FIELDS.carrera, form.carrera);
       data.append(FIELDS.email, form.email);
+      // optional fields
+      if (form.dni) data.append(FIELDS.dni, form.dni);
+      if (form.telefono) data.append(FIELDS.telefono, form.telefono);
 
       await fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: data });
 
       setStatus({ type: 'success', message: '¡Registro enviado! Te contactaremos por correo.' });
       setConfirmOpen(true);
-      setForm({ nombre: '', carrera: '', email: '' });
+      setForm({ nombre: '', carrera: '', email: '', telefono: '', dni: '' });
     } catch (err) {
       console.error('AI Recap registration error:', err);
       setStatus({ type: 'error', message: 'No se pudo enviar. Inténtalo nuevamente.' });
@@ -390,6 +395,20 @@ export default function AIRecapPage() {
               />
             </div>
             <div>
+              <label htmlFor="ai-dni" className="block text-sm mb-2 text-white/80">
+                DNI
+              </label>
+              <input
+                type="text"
+                name="dni"
+                id="ai-dni"
+                value={form.dni}
+                onChange={e => setForm(f => ({ ...f, dni: e.target.value }))}
+                placeholder="DNI"
+                className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-[#B936F5]"
+              />
+            </div>
+            <div>
               <label htmlFor="ai-carrera" className="block text-sm mb-2 text-white/80">
                 Carrera
               </label>
@@ -416,6 +435,20 @@ export default function AIRecapPage() {
                 onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                 placeholder="tucorreo@uni.pe"
                 required
+                className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-[#B936F5]"
+              />
+            </div>
+            <div>
+              <label htmlFor="ai-telefono" className="block text-sm mb-2 text-white/80">
+                Teléfono
+              </label>
+              <input
+                type="text"
+                name="telefono"
+                id="ai-telefono"
+                value={form.telefono}
+                onChange={e => setForm(f => ({ ...f, telefono: e.target.value }))}
+                placeholder="Ej: 999999999"
                 className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-[#B936F5]"
               />
             </div>
