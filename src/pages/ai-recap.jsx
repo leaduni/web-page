@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { CalendarDays, MapPin, Users, X } from 'lucide-react';
+import { CalendarDays, MapPin, Users, X, Gift } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Small badge renderer for expertise logos
@@ -77,11 +77,11 @@ function SpeakerModal({ speaker, onClose }) {
         </button>
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Left image */}
-          <div className="relative min-h-[220px] md:min-h-[260px] bg-black/20">
+          <div className="relative min-h-[220px] md:min-h-[260px] bg-white/[0.03]">
             <img
               src={speaker.image}
               alt={speaker.name}
-              className={`w-full h-full object-cover ${speaker.imgClass || ''}`}
+              className={`w-full h-full object-contain p-3 ${speaker.imgClass || ''}`}
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-[#d93340]/10 to-transparent" />
             {String(speaker.name).toLowerCase().includes('misterio') && (
@@ -177,19 +177,55 @@ export default function AIRecapPage() {
     telefono: 'entry.1150935404',
   };
 
-  // Placeholder: Ponentes pendientes de confirmar
+  // Ponentes confirmados
   const speakers = useMemo(
-    () =>
-      Array.from({ length: 4 }).map((_, i) => ({
-        name: `Misterio ${i + 1}`,
-        title: 'Por anunciar',
+    () => [
+      {
+        name: 'Gera Flores',
+        title:
+          'Logística inteligente: aplicaciones de IA para optimizar la logística en e-commerce',
         company: '',
-        image: '/image-ponente.png',
-        badges: [{ label: 'TBA', title: 'Por anunciar' }],
+        image: '/ponentes/gera.jpg',
+        badges: [{ label: 'Logística' }, { label: 'E-commerce' }, { label: 'IA aplicada' }],
         description:
-          'Pronto revelaremos a nuestros ponentes invitados. ¡Mantente atento a las novedades!',
+          'Conoceremos cómo la inteligencia artificial está transformando la logística en el e-commerce. A partir de su experiencia aplicando IA en distintos procesos y proyectos, exploraremos cómo esta tecnología permite anticipar la demanda, mejorar la eficiencia operativa y optimizar la experiencia del cliente.',
         links: [],
-      })),
+      },
+      {
+        name: 'Renato Amapanqui',
+        title: 'Creando soluciones con IA, por todos y para todos',
+        company: '',
+        image: '/ponentes/renato.jpg',
+        badges: [
+          { label: 'Impacto social' },
+          { label: 'Accesibilidad' },
+          { label: 'Colaboración' },
+        ],
+        description:
+          'Exploraremos cómo la inteligencia artificial puede mejorar la vida de las personas y resolver problemas complejos, destacando la importancia de la colaboración y la responsabilidad en su desarrollo y uso.',
+        links: [],
+      },
+      {
+        name: 'Luis Tipacti',
+        title: 'Despertando la IA Generativa en Entel',
+        company: '',
+        image: '/ponentes/luis.jpg',
+        badges: [{ label: 'Telco' }, { label: 'IA generativa' }, { label: 'Productividad' }],
+        description:
+          'Ponencia sobre el camino de Entel en el despliegue de la Inteligencia Artificial Generativa como herramienta de gestión, productividad y cultura. Un camino de curiosidad, experimentación y evolución continua.',
+        links: [],
+      },
+      {
+        name: 'Anthony Alcalá',
+        title: 'El año de las Frontier Firms',
+        company: '',
+        image: '/ponentes/anthony.jpg',
+        badges: [{ label: 'Tendencias' }, { label: 'Agentes' }, { label: 'Futuro del trabajo' }],
+        description:
+          'Descubre las tendencias que están redefiniendo el futuro del trabajo. El Índice de Tendencias Laborales 2025 revela cómo los agentes de IA están transformando equipos, impulsando la productividad y generando nuevos roles profesionales.',
+        links: [],
+      },
+    ],
     []
   );
 
@@ -245,7 +281,7 @@ export default function AIRecapPage() {
               <MapPin className="w-4 h-4 text-[#ff6ec7]" /> UNI — LEAD UNI
             </span>
             <span className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1">
-              <Users className="w-4 h-4 text-[#ff6ec7]" /> Ponentes a ser Revelados
+              <Users className="w-4 h-4 text-[#ff6ec7]" /> 4 ponentes
             </span>
           </div>
         </div>
@@ -299,18 +335,24 @@ export default function AIRecapPage() {
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-3 text-[#ff6ec7]">Empresas</h3>
-            <p className="text-white/70 mb-3">
-              Tenemos grandes empresas detrás. Pronto anunciaremos más detalles.
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {['Misterio 1', 'Misterio 2', 'Próximamente'].map(name => (
-                <div
-                  key={name}
-                  className="p-3 rounded-xl bg-white/[0.03] border border-dashed border-white/20 text-white/70 italic flex items-center justify-center"
-                >
-                  <span className="text-sm sm:text-base">{name}</span>
-                </div>
-              ))}
+            <p className="text-white/70 mb-3">Empresas confirmadas hasta el momento.</p>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center">
+                <img
+                  src="/microsoft-logo.png"
+                  alt="Microsoft"
+                  title="Microsoft"
+                  className="h-12 sm:h-16 object-contain"
+                />
+              </div>
+              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center">
+                <img
+                  src="/logo-entel.png"
+                  alt="Entel"
+                  title="Entel"
+                  className="h-10 sm:h-12 object-contain"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -319,27 +361,22 @@ export default function AIRecapPage() {
       {/* Speakers */}
       <section className="container mx-auto px-6 py-6">
         <h2 className="text-2xl md:text-3xl font-bold mb-6">Ponentes</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           {speakers.map(sp => (
-            <div
+            <button
               key={sp.name}
-              aria-disabled="true"
-              className="group text-left rounded-2xl overflow-hidden border border-[#a6249d]/30 bg-[#120a22] transition-all duration-300 cursor-default"
+              onClick={() => setSelectedSpeaker(sp)}
+              className="group text-left rounded-2xl overflow-hidden border border-[#a6249d]/30 bg-[#120a22] hover:bg-[#160e29] transition-all duration-300"
             >
-              <div className="relative h-40 w-full overflow-hidden">
+              <div
+                className="relative w-full overflow-hidden bg-white/[0.03]"
+                style={{ paddingTop: '100%' }}
+              >
                 <img
                   src={sp.image}
                   alt={sp.name}
-                  className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
-                    sp.name.toLowerCase().includes('misterio') ? 'grayscale' : ''
-                  }`}
+                  className={`absolute inset-0 w-full h-full object-contain object-center p-2 ${sp.name.toLowerCase().includes('misterio') ? 'grayscale' : ''}`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                {sp.name.toLowerCase().includes('misterio') && (
-                  <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[11px] bg-white/10 border border-white/20 text-white/80">
-                    Próximamente
-                  </span>
-                )}
               </div>
               <div className="p-4">
                 <div className="flex items-center gap-2">
@@ -349,8 +386,31 @@ export default function AIRecapPage() {
                 <p className="text-sm text-[#ff6ec7]">{sp.title}</p>
                 <p className="text-xs text-white/70 mt-1 line-clamp-2">{sp.description}</p>
               </div>
-            </div>
+            </button>
           ))}
+        </div>
+      </section>
+
+      {/* Sponsor adicional */}
+      <section className="container mx-auto px-6 py-6">
+        <div className="relative rounded-2xl border border-[#a6249d]/30 bg-[#120a22] p-6 md:p-8 overflow-hidden">
+          <div className="pointer-events-none absolute -inset-16 bg-[radial-gradient(circle_at_center,rgba(166,36,157,0.15),transparent_60%)]" />
+          <h3 className="relative z-10 text-lg font-semibold mb-2 text-[#ff6ec7]">
+            Sponsor oficial
+          </h3>
+          <p className="relative z-10 text-white/70 text-sm mb-4">
+            Gracias a su apoyo este evento es posible.
+          </p>
+          <div className="relative z-10 flex items-center justify-center">
+            <div className="inline-flex items-center justify-center rounded-2xl bg-white/[0.04] border border-white/10 px-6 py-4 shadow-[0_0_40px_rgba(166,36,157,0.2)]">
+              <img
+                src="/logo-manantial.png"
+                alt="Manantial Tecnológico"
+                title="Manantial Tecnológico"
+                className="h-14 sm:h-20 object-contain"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -461,6 +521,26 @@ export default function AIRecapPage() {
               </button>
             </div>
           </form>
+        </div>
+      </section>
+
+      {/* Aviso de sorteo */}
+      <section className="container mx-auto px-6 pb-10">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5 flex items-start gap-3">
+          <div className="mt-0.5 shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#d93340] to-[#a6249d] text-white/95">
+            <Gift className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="inline-flex items-center gap-2 mb-1">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 border border-white/10 text-white/80">
+                Sorteo
+              </span>
+            </div>
+            <p className="text-white/90 text-sm md:text-base">
+              Estaremos sorteando <span className="font-semibold">1 beca de DataCamp</span> entre
+              los asistentes del evento.
+            </p>
+          </div>
         </div>
       </section>
 
