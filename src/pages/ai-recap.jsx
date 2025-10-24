@@ -299,10 +299,14 @@ export default function AIRecapPage() {
             </span>
           </div>
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-            {['Charlas temáticas', 'Panel de discusión', 'Networking con empresas'].map(item => (
-              <div key={item} className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                <p className="text-white font-semibold">{item}</p>
-                <p className="text-white/60 text-sm mt-1">Horario por confirmar</p>
+            {[
+              { nombre: 'Charlas temáticas', hora: '4:20 p.m. – 5:30 p.m.' },
+              { nombre: 'Panel de discusión', hora: '5:50 p.m. – 6:20 p.m.' },
+              { nombre: 'Networking con empresas', hora: '7:30 p.m. – 8:00 p.m.' }
+            ].map(evento => (
+              <div key={evento.nombre} className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
+                <p className="text-white font-semibold">{evento.nombre}</p>
+                <p className="text-white/60 text-sm mt-1">{evento.hora}</p>
               </div>
             ))}
           </div>
