@@ -397,26 +397,39 @@ export default function AIRecapPage() {
 
       {/* Sponsor adicional */}
       <section className="container mx-auto px-6 py-6">
-        <div className="relative rounded-2xl border border-[#a6249d]/30 bg-[#120a22] p-6 md:p-8 overflow-hidden">
-          <div className="pointer-events-none absolute -inset-16 bg-[radial-gradient(circle_at_center,rgba(166,36,157,0.15),transparent_60%)]" />
-          <h3 className="relative z-10 text-lg font-semibold mb-2 text-[#ff6ec7]">
-            Sponsor oficial
-          </h3>
-          <p className="relative z-10 text-white/70 text-sm mb-4">
-            Gracias a su apoyo este evento es posible.
-          </p>
-          <div className="relative z-10 flex items-center justify-center">
-            <div className="inline-flex items-center justify-center rounded-2xl bg-white/[0.04] border border-white/10 px-6 py-4 shadow-[0_0_40px_rgba(166,36,157,0.2)]">
-              <img
-                src="/logo-manantial.png"
-                alt="Manantial Tecnológico"
-                title="Manantial Tecnológico"
-                className="h-14 sm:h-20 object-contain"
-              />
-            </div>
+      <div className="relative rounded-2xl border border-[#a6249d]/30 bg-[#120a22] p-6 md:p-8 overflow-hidden">
+        <div className="pointer-events-none absolute -inset-16 bg-[radial-gradient(circle_at_center,rgba(166,36,157,0.15),transparent_60%)]" />
+        <h3 className="relative z-10 text-lg font-semibold mb-2 text-[#ff6ec7]">
+          Sponsors oficiales
+        </h3>
+        <p className="relative z-10 text-white/70 text-sm mb-4">
+          Gracias a su apoyo este evento es posible.
+        </p>
+    
+        {/* Contenedor de sponsors */}
+        <div className="relative z-10 flex flex-wrap items-center justify-center gap-6">
+          {/* Sponsor 1 */}
+          <div className="inline-flex items-center justify-center rounded-2xl bg-white/[0.04] border border-white/10 px-6 py-4 shadow-[0_0_40px_rgba(166,36,157,0.2)]">
+            <img
+              src="/logo-manantial.png"
+              alt="Manantial Tecnológico"
+              title="Manantial Tecnológico"
+              className="h-14 sm:h-20 object-contain"
+            />
+          </div>
+    
+          {/* Sponsor 2 */}
+          <div className="inline-flex items-center justify-center rounded-2xl bg-white/[0.04] border border-white/10 px-6 py-4 shadow-[0_0_40px_rgba(166,36,157,0.2)]">
+            <img
+              src="/logo-wplace.png"
+              alt="WPlace"
+              title="WPlace"
+              className="h-14 sm:h-20 object-contain"
+            />
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Registro */}
       <section className="container mx-auto px-6 py-12">
