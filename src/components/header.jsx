@@ -30,7 +30,7 @@ export function Header() {
     { path: '/news', label: 'Noticias' },
     { path: '/pillars', label: 'Pilares' },
     { path: '/application', label: 'Convocatoria' },
-    { path: '/ai-recap', label: 'AI RECAP' },
+    { path: '/lead-gala', label: 'LEAD GALA' },
   ];
 
   return (

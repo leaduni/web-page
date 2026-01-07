@@ -363,32 +363,36 @@ export default function AIRecapPage() {
       </section>
 
       {/* Speakers */}
-      <section className="container mx-auto px-6 py-6">
+      <section className="container mx-auto px-6 py-8">
         <h2 className="text-2xl md:text-3xl font-bold mb-6">Ponentes</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {speakers.map(sp => (
             <button
               key={sp.name}
               onClick={() => setSelectedSpeaker(sp)}
-              className="group text-left rounded-2xl overflow-hidden border border-[#a6249d]/30 bg-[#120a22] hover:bg-[#160e29] transition-all duration-300"
+              className="group text-left rounded-2xl overflow-hidden border border-[#a6249d]/30 bg-[#120a22] hover:bg-[#160e29] transition-all duration-300 max-w-xs w-full mx-auto flex flex-col"
             >
               <div
                 className="relative w-full overflow-hidden bg-white/[0.03]"
-                style={{ paddingTop: '100%' }}
+                style={{ paddingTop: '80%' }}
               >
                 <img
                   src={sp.image}
                   alt={sp.name}
-                  className={`absolute inset-0 w-full h-full object-contain object-center p-2 ${sp.name.toLowerCase().includes('misterio') ? 'grayscale' : ''}`}
+                  className={`absolute inset-0 w-full h-full object-cover object-center p-2 ${sp.name
+                    .toLowerCase()
+                    .includes('misterio') ? 'grayscale' : ''}`}
                 />
               </div>
-              <div className="p-4">
-                <div className="flex items-center gap-2">
-                  <h3 className="text-lg font-bold">{sp.name}</h3>
+              <div className="p-4 flex-1 flex flex-col">
+                <div className="flex items-center gap-2 mb-1">
+                  <h3 className="text-base md:text-lg font-bold">{sp.name}</h3>
                   <BadgeIcons badges={sp.badges} />
                 </div>
-                <p className="text-sm text-[#ff6ec7]">{sp.title}</p>
-                <p className="text-xs text-white/70 mt-1 line-clamp-2">{sp.description}</p>
+                <p className="text-xs md:text-sm text-[#ff6ec7] leading-snug">{sp.title}</p>
+                <p className="text-[11px] md:text-xs text-white/70 mt-1 line-clamp-2">
+                  {sp.description}
+                </p>
               </div>
             </button>
           ))}

@@ -131,7 +131,7 @@ export default function NewsDetailPage() {
               </div>
             )}
 
-            <div className="flex flex-col items-center gap-2 mb-8">
+            <div className="flex flex-col items-center gap-2 mb-6">
               <div className="flex items-center gap-2 text-white">
                 <User className="w-5 h-5" />
                 <span className="font-semibold">Escrito por {newsItem.author}</span>
@@ -147,6 +147,18 @@ export default function NewsDetailPage() {
                 </span>
               </div>
             </div>
+
+            {/* Enlace destacado a la página especial de AI Recap */}
+            {newsItem.title && newsItem.title.toLowerCase().includes('ai recap') && (
+              <div className="mb-8 flex justify-center">
+                <Link
+                  to="/ai-recap"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white font-semibold shadow-lg shadow-pink-900/30 hover:brightness-110 transition-all duration-300 text-sm sm:text-base"
+                >
+                  Ver página especial del AI Recap
+                </Link>
+              </div>
+            )}
 
             <motion.div
               className="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden mb-10 shadow-lg cursor-pointer"

@@ -10,7 +10,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "preview": "vite preview",
-    "fetch:news": "node scripts/descargar-json.js"
+    "fetch:news": "node scripts/descargar-json.js",
+    "update:browserslist": "npx update-browserslist-db@latest"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",

@@ -150,7 +150,15 @@ function formatNewsData(rawData, index = 0) {
     rawData.titulo || rawData.Titulo || rawData['tituloDeLaNoticia'] || `Noticia ${index + 1}`;
   const description =
     rawData.descripcion || rawData.Descripcion || rawData['descripciónDeLaNoticia'] || '';
-  const dateField = rawData['hora-registro'] || rawData.fecha || rawData['marcaTemporal'] || '';
+
+  // Campo de fecha original
+  let dateField = rawData['hora-registro'] || rawData.fecha || rawData['marcaTemporal'] || '';
+
+  // Override específico para la noticia de AI Recap si la fecha enviada desde el formulario no coincide
+  if (title && String(title).toLowerCase().includes('ai recap')) {
+    // 24 de octubre de 2025, 20:00:00
+    dateField = '24/10/2025 20:00:00';
+  }
   const author =
     rawData.redactante ||
     rawData.Redactor ||

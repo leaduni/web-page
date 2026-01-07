@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Header, HEADER_HEIGHT } from './components/header';
 import PromotionModal from './components/PromotionModal';
+import LeadGalaModal from './components/LeadGalaModal';
 import ContactSection from './components/ContactSection';
 // Importamos los componentes de las páginas que vamos a usar
 // En este caso, Home y About son componentes que representan páginas
@@ -18,6 +19,7 @@ import PillarsPage from './pages/PillarsPage';
 import OrganizationPage from './pages/OrganizationPage';
 import NotFoundPage from './pages/NotFoundPage';
 import AIRecapPage from './pages/ai-recap';
+import LeadGalaPage from './pages/LeadGalaPage';
 
 // Componente para hacer scroll hacia arriba al cambiar de ruta
 function ScrollToTop() {
@@ -62,6 +64,8 @@ function App() {
           <Route path="/pillars" element={<PillarsPage />} />
           <Route path="/news/:id" element={<NewsDetailPage />} />
           <Route path="/organization" element={<OrganizationPage />} />
+          <Route path="/lead-gala" element={<LeadGalaPage />} />
+          {/* Ruta AI Recap mantenida para referencia, sin acceso desde menú */}
           <Route path="/ai-recap" element={<AIRecapPage />} />
           <Route path="*" element={<NotFoundPage />} />
           {/* La ruta "*" captura todas las rutas que no coinciden con las anteriores */}
@@ -70,8 +74,8 @@ function App() {
       </main>
       <ContactSection />
 
-      {/* Modal de promoción en Home */}
-      {location.pathname === '/' && <PromotionModal />}
+      {/* Modal de LEAD GALA en Home */}
+      {location.pathname === '/' && <LeadGalaModal />}
     </div>
   );
 }

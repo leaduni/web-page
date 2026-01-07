@@ -21,6 +21,18 @@ const alianzasDeRespaldo = [
       'Impulsar el crecimiento integral de los estudiantes, promoviendo espacios de formación, liderazgo e innovación mediante actividades conjuntas que generen impacto dentro y fuera de la universidad.',
     'Logo de la organización': 'https://i.postimg.cc/C54XqHDj/ieee-rama.png',
   },
+  {
+    'Nombre de la organización': 'KetherLabs',
+    'Objetivo de la alianza':
+      'Alianza estratégica para fomentar la innovación tecnológica y el desarrollo profesional mediante colaboraciones que impulsen proyectos tecnológicos y oportunidades de crecimiento para los estudiantes.',
+    'Logo de la organización': 'https://drive.google.com/thumbnail?id=1YmEDZ5l0LGrAQKrMvrgZeD_ddBFQLT_g&sz=w800',
+  },
+  {
+    'Nombre de la organización': 'LaboralAI',
+    'Objetivo de la alianza':
+      'Colaboración para impulsar la inteligencia artificial aplicada y el desarrollo profesional, proporcionando oportunidades de aprendizaje y crecimiento en el ámbito laboral y tecnológico.',
+    'Logo de la organización': 'https://drive.google.com/thumbnail?id=1UFfsL_wXO1SfUG8NVdOtsVsw2V6Tjb0M&sz=w800',
+  },
 ];
 
 export const AlianzasSection = () => {
@@ -76,6 +88,16 @@ export const AlianzasSection = () => {
             if (logoUrl && logoUrl.includes('drive.google.com/open?id=')) {
               const fileId = logoUrl.split('id=')[1];
               logoUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+            } else if (logoUrl && logoUrl.includes('drive.google.com/file/d/')) {
+              // Manejar formato drive.google.com/file/d/ID/view
+              const match = logoUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
+              if (match) {
+                const fileId = match[1];
+                logoUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+              }
+            } else if (logoUrl && logoUrl.includes('drive.google.com/thumbnail?id=')) {
+              // Si ya está en formato thumbnail, usar directamente
+              // No necesita conversión
             }
 
             return (
