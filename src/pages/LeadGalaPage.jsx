@@ -44,28 +44,48 @@ const LeadGalaPage = () => {
     },
     {
       id: 5,
-      src: 'https://drive.google.com/thumbnail?id=1E6i6B_KiVaUct2JS0sWzxQzMusIA1LOd&sz=w1000',
+      src: 'https://drive.google.com/thumbnail?id=1M5uRM5A8MwuE84BmQjRVlMnblD3w1WHT&sz=w1000',
       alt: 'Galería LEAD GALA 2025 - Imagen 5'
     },
     {
       id: 6,
-      src: 'https://drive.google.com/thumbnail?id=1K7ZZQV5J4_K0JnkjppXI0Go6cjBPACSW&sz=w1000',
+      src: 'https://drive.google.com/thumbnail?id=1ZO3Th41YtWnDV3P54uMrSj2LE7fym57t&sz=w1000',
       alt: 'Galería LEAD GALA 2025 - Imagen 6'
     },
     {
       id: 7,
-      src: 'https://drive.google.com/thumbnail?id=1IpuJH6k2NtGqG1Dbn48yHLJk7XMfy_Ex&sz=w1000',
+      src: 'https://drive.google.com/thumbnail?id=1PqpZW0ic4U4MC5XNgtjcdyxlMKmGALCC&sz=w1000',
       alt: 'Galería LEAD GALA 2025 - Imagen 7'
     },
     {
       id: 8,
-      src: 'https://drive.google.com/thumbnail?id=19raGuRG3rQMsTjmhDeFRJn8Lol1zoHWF&sz=w1000',
+      src: 'https://drive.google.com/thumbnail?id=1xqJwGSlt9-4ny3KpsqmGh-x7vmS0ubVM&sz=w1000',
       alt: 'Galería LEAD GALA 2025 - Imagen 8'
     },
     {
       id: 9,
-      src: 'https://drive.google.com/thumbnail?id=13U51-VXz7qcehwLlgnMvodvF8fmblYf6&sz=w1000',
+      src: 'https://drive.google.com/thumbnail?id=1K7ZZQV5J4_K0JnkjppXI0Go6cjBPACSW&sz=w1000',
       alt: 'Galería LEAD GALA 2025 - Imagen 9'
+    },
+    {
+      id: 10,
+      src: 'https://drive.google.com/thumbnail?id=1IpuJH6k2NtGqG1Dbn48yHLJk7XMfy_Ex&sz=w1000',
+      alt: 'Galería LEAD GALA 2025 - Imagen 10'
+    },
+    {
+      id: 11,
+      src: 'https://drive.google.com/thumbnail?id=19raGuRG3rQMsTjmhDeFRJn8Lol1zoHWF&sz=w1000',
+      alt: 'Galería LEAD GALA 2025 - Imagen 11'
+    },
+    {
+      id: 12,
+      src: 'https://drive.google.com/thumbnail?id=17_xg8cmMUiENG2Y7urXYnhehSO6MHm_J&sz=w1000',
+      alt: 'Galería LEAD GALA 2025 - Imagen 12'
+    },
+    {
+      id: 13,
+      src: 'https://drive.google.com/thumbnail?id=13U51-VXz7qcehwLlgnMvodvF8fmblYf6&sz=w1000',
+      alt: 'Galería LEAD GALA 2025 - Imagen 13'
     }
   ], []);
 
@@ -1231,7 +1251,7 @@ const LeadGalaPage = () => {
                       <img
                         src={carouselImages[currentImageIndex].src}
                         alt={carouselImages[currentImageIndex].alt}
-                        className={`w-full h-full object-contain rounded-lg shadow-2xl transition-opacity duration-300 ${
+                        className={`w-full h-full object-cover rounded-lg shadow-2xl transition-opacity duration-300 ${
                           isImageLoading ? 'opacity-0' : 'opacity-100'
                         }`}
                         style={{ 
