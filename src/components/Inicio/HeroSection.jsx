@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
 import microsoftTeam from '../../assets/images/IMG_5097.jpeg';
 import { AlianzasSection } from './Section/AlianzasSection';
 import { ActividadSection } from './Section/ActividadSection';
@@ -87,7 +89,7 @@ export const HeroSection = () => {
                 Formando líderes para transformar el futuro a través de excelencia académica,
                 desarrollo profesional e impacto social.
               </p>
-              <div className="flex gap-4 lg:gap-6 flex-col justify-center lg:justify-start sm:flex-row w-full sm:w-auto mt-4">
+              <div className="flex gap-3 lg:gap-4 flex-col justify-center lg:justify-start sm:flex-row w-full sm:w-auto mt-4 flex-wrap">
                 <div className="relative group cursor-pointer mb-3 sm:mb-0">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-[#d93340] to-[#a6249d] rounded-full opacity-75 group-hover:opacity-100 transition duration-300"></div>
                   <button
@@ -100,7 +102,7 @@ export const HeroSection = () => {
                     </span>
                   </button>
                 </div>
-                <div className="relative group cursor-pointer">
+                <div className="relative group cursor-pointer mb-3 sm:mb-0">
                   <div className="absolute -inset-0.5 rounded-full pointer-events-none bg-gradient-to-r from-[#d93340] via-[#ff6ec7] to-[#a6249d]" />
                   <button
                     type="button"
@@ -111,6 +113,18 @@ export const HeroSection = () => {
                       Descubre
                     </span>
                   </button>
+                </div>
+                {/* Botón LEAD Peru - Estilo diferenciado */}
+                <div className="relative group mb-3 sm:mb-0">
+                  <a
+                    href="https://www.leadmindset.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative w-full sm:w-auto px-6 py-3 lg:py-4 rounded-full leading-none flex items-center justify-center gap-2 bg-[#a6249d] hover:bg-[#8d1f88] text-white border-2 border-[#a6249d] hover:border-[#d93340] transition-all duration-300 hover:-translate-y-1 active:translate-y-0 group shadow-lg shadow-[#a6249d]/30 hover:shadow-[#a6249d]/50"
+                  >
+                    <span className="text-base lg:text-lg font-medium select-none">Conoce LEAD PERU</span>
+                    <ExternalLink size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
+                  </a>
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logoImage from '../assets/logo-lead.jpg';
 export const HEADER_HEIGHT = 72;
@@ -70,6 +70,18 @@ export function Header() {
               {link.label}
             </NavLink>
           ))}
+          {/* Botón LEAD Peru */}
+          <motion.a
+            href="https://www.leadmindset.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative px-4 py-2 mx-1 font-bold text-sm rounded-lg overflow-hidden transition-all duration-300 group bg-gradient-to-r from-[#d93340] to-[#a6249d] hover:from-[#a6249d] hover:to-[#d93340] flex items-center gap-2"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className="relative z-10 text-white">LEAD PERU</span>
+            <ExternalLink size={14} className="relative z-10 text-white" />
+          </motion.a>
         </nav>
         {/* Botón del menú móvil */}
         <button
@@ -106,6 +118,16 @@ export function Header() {
                     {link.label}
                   </Link>
                 ))}
+                {/* Botón LEAD Peru en menú móvil */}
+                <a
+                  href="https://www.leadmindset.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg font-bold px-4 py-3 rounded-lg transition-all duration-300 bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white hover:from-[#a6249d] hover:to-[#d93340] flex items-center justify-center gap-2"
+                >
+                  LEAD Peru
+                  <ExternalLink size={18} />
+                </a>
               </nav>
             </div>
           </motion.div>
