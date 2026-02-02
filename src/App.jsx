@@ -63,7 +63,7 @@ function App() {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/pillars" element={<PillarsPage />} />
           <Route path="/news/:id" element={<NewsDetailPage />} />
-          <Route path="/organization" element={<OrganizationPage />} />
+          {/*<Route path="/organization" element={<OrganizationPage />} />*/}
           <Route path="/lead-gala" element={<LeadGalaPage />} />
           {/* Ruta AI Recap mantenida para referencia, sin acceso desde menú */}
           <Route path="/ai-recap" element={<AIRecapPage />} />
