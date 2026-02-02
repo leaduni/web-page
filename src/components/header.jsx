@@ -26,7 +26,7 @@ export function Header() {
   }, [location.pathname]);
   const navLinks = [
     { path: '/', label: 'Inicio' },
-    { path: '/organization', label: 'Organigrama' },
+    //{ path: '/organization', label: 'Organigrama' },
     { path: '/news', label: 'Noticias' },
     { path: '/pillars', label: 'Pilares' },
     { path: '/application', label: 'Convocatoria' },
