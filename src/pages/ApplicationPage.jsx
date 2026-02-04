@@ -414,22 +414,22 @@ const ApplicationPage = () => {
     const form = document.createElement('form');
     form.method = 'POST';
     form.action =
-      'https://docs.google.com/forms/d/e/1FAIpQLSc1mIy-z6khAdySOylpJIDZVmwZHDznzrjxRbH44jBqDW0dcw/formResponse';
+      'https://docs.google.com/forms/d/e/1Bz3bj6rv20WJp-1kGKtyAuhkqld4MQoeai4h2QbJSr8/formResponse';
     form.target = iframe.name;
 
     // Definir todos los campos del formulario
     const fields = {
-      'entry.2005620554': formData.fullName, // Nombres y Apellidos
-      'entry.1201849899': formData.phone, // Número de celular
-      'entry.1045781291': formData.email, // Dirección de correo electrónico
-      'entry.1065046570': facultyOptions.find(f => f.value === formData.faculty)?.label || '', // Facultad
-      'entry.1166974658': careerOptions.find(c => c.value === formData.career)?.label || '', // Carrera
-      'entry.890700137': cycleOptions.find(cy => cy.value === formData.cycle)?.label || '', // Ciclo Relativo
-      'entry.1728942457': pillarOptions.find(p => p.id === selectedPillar)?.name || '', // Pilar Principal Seleccionado
-      'entry.21194440': pillarSpecificData.projectType, // ¿Cuál fue tu principal motivo para postular a este Pilar?
-      'entry.5426552': pillarSpecificData.skills, // ¿Qué habilidades te ayudarían a destacar en este pilar?
-      'entry.1624972609': leadUniDefinition, // Para ti, ¿qué es LEAD UNI?
-      'entry.1107660664': pillarSpecificData.secondOption, // Segunda Opción de Pilar
+      'entry.317981427': formData.fullName, // Nombres y Apellidos
+      'entry.1312029446': formData.phone, // Número de celular
+      'entry.69970983': formData.email, // Dirección de correo electrónico
+      'entry.102258199': facultyOptions.find(f => f.value === formData.faculty)?.label || '', // Facultad
+      'entry.860146192': careerOptions.find(c => c.value === formData.career)?.label || '', // Carrera
+      'entry.1028646354': cycleOptions.find(cy => cy.value === formData.cycle)?.label || '', // Ciclo Relativo
+      'entry.310263679': pillarOptions.find(p => p.id === selectedPillar)?.name || '', // Pilar Principal Seleccionado
+      'entry.710130242': pillarSpecificData.projectType, // ¿Cuál fue tu principal motivo para postular a este Pilar?
+      'entry.228396424': pillarSpecificData.skills, // ¿Qué habilidades te ayudarían a destacar en este pilar?
+      'entry.1067734972': leadUniDefinition, // Para ti, ¿qué es LEAD UNI?
+      'entry.1628932164': pillarSpecificData.secondOption, // Segunda Opción de Pilar
     };
 
     // Crear inputs ocultos para cada campo
