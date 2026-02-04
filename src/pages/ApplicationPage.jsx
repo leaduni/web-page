@@ -202,6 +202,7 @@ const ApplicationPage = () => {
     fullName: '',
     phone: '',
     email: '',
+    linkedin: '',
     faculty: '',
     career: '',
     cycle: '',
@@ -212,7 +213,7 @@ const ApplicationPage = () => {
     skills: '',
     secondOption: '',
   });
-  const [leadUniDefinition, setLeadUniDefinition] = useState('');
+  const [wheredidyoufindus, setwheredidyoufindus] = useState('');
   const [randomSpheres, setRandomSpheres] = useState([]);
   const [showImage, setShowImage] = useState(false);
   const [currentPillarIndex, setCurrentPillarIndex] = useState(0);
@@ -383,6 +384,7 @@ const ApplicationPage = () => {
       !formData.fullName ||
       !formData.phone ||
       !formData.email ||
+      !formData.linkedin ||
       !formData.faculty ||
       !formData.career ||
       !formData.cycle ||
@@ -390,7 +392,7 @@ const ApplicationPage = () => {
       !pillarSpecificData.projectType ||
       !pillarSpecificData.skills ||
       !pillarSpecificData.secondOption ||
-      !leadUniDefinition
+      !wheredidyoufindus
     ) {
       setModal({
         type: 'warning',
@@ -427,7 +429,7 @@ const ApplicationPage = () => {
       'entry.310263679': pillarOptions.find(p => p.id === selectedPillar)?.name || '', // Pilar Principal Seleccionado
       'entry.710130242': pillarSpecificData.projectType, // ¿Cuál fue tu principal motivo para postular a este Pilar?
       'entry.228396424': pillarSpecificData.skills, // ¿Qué habilidades te ayudarían a destacar en este pilar?
-      'entry.1067734972': leadUniDefinition, // Para ti, ¿qué es LEAD UNI?
+      'entry.1067734972': wheredidyoufindus, // Para ti, ¿qué es LEAD UNI?
       'entry.1628932164': pillarSpecificData.secondOption, // Segunda Opción de Pilar
     };
 
@@ -473,7 +475,7 @@ const ApplicationPage = () => {
         skills: '',
         secondOption: '',
       });
-      setLeadUniDefinition('');
+      setwheredidyoufindus('');
       setCurrentPillarIndex(0);
     }, 2000);
   };
@@ -527,6 +529,7 @@ const ApplicationPage = () => {
                 <ul className="text-xs text-amber-200/80 list-disc ml-5 space-y-1">
                   <li>Nombre completo</li>
                   <li>Contacto (celular y correo)</li>
+                  <li>LinkedIN</li>
                   <li>Facultad y carrera</li>
                   <li>Ciclo y selección de pilar</li>
                   <li>Motivación y habilidades</li>
@@ -732,6 +735,13 @@ const ApplicationPage = () => {
                   placeholder="ejemplo@correo.com"
                 />
               </FormField>
+              <FormField label="Enlace a LinkedIn">
+                <TextInput
+                  value={formData.linkedin}
+                  onChange={e => handleInputChange('linkedin', e.target.value)}
+                  placeholder="www.linkedin.com"
+                />
+              </FormField>
               <FormField label="Facultad">
                 <SelectInput
                   id="faculty-dropdown"
@@ -891,13 +901,13 @@ const ApplicationPage = () => {
                   <FormField
                     label={
                       <span className="text-[#ff6ec7] font-semibold">
-                        Para ti, ¿qué es LEAD UNI?
+                        ¿Cómo descubriste a LEAD UNI?
                       </span>
                     }
                   >
                     <TextInput
-                      value={leadUniDefinition}
-                      onChange={e => setLeadUniDefinition(e.target.value)}
+                      value={wheredidyoufindus}
+                      onChange={e => setwheredidyoufindus(e.target.value)}
                       placeholder="Comparte tu visión sobre LEAD UNI"
                       className="text-white border-2 border-[#a6249d]/60 focus:border-[#d93340] bg-transparent"
                     />
