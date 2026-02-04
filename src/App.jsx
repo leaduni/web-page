@@ -44,7 +44,7 @@ function ScrollToTop() {
 // y la ruta "/about" renderiza el componente About
 
 function App() {
-  const isApplicationOpen = false;
+  const isApplicationOpen = true;
   const location = useLocation();
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1A0B2E] via-[#2D1B4E] to-[#1A0B2E]">
