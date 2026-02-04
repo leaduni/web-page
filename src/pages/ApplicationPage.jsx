@@ -413,10 +413,9 @@ const ApplicationPage = () => {
     // Crear un formulario temporal
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action =
-      'https://docs.google.com/forms/d/e/1FAIpQLSe4VImLFawragMP7er99uPfDDK53N3Wet1N_eRY1WI3Kmkdxw/formResponse';
+    form.action = 'https://docs.google.com/forms/d/e/1FAIpQLSe4VImLFawragMP7er99uPfDDK53N3Wet1N_eRY1WI3Kmkdxw/formResponse';
     form.target = iframe.name;
-
+    form.style.display = 'none';
     // Definir todos los campos del formulario
     const fields = {
       'entry.317981427': formData.fullName, // Nombres y Apellidos
