@@ -414,7 +414,7 @@ const ApplicationPage = () => {
     const form = document.createElement('form');
     form.method = 'POST';
     form.action =
-      'https://docs.google.com/forms/d/e/1Bz3bj6rv20WJp-1kGKtyAuhkqld4MQoeai4h2QbJSr8/formResponse';
+      'https://docs.google.com/forms/d/e/1FAIpQLSe4VImLFawragMP7er99uPfDDK53N3Wet1N_eRY1WI3Kmkdxw/formResponse';
     form.target = iframe.name;
 
     // Definir todos los campos del formulario
