@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Header, HEADER_HEIGHT } from './components/header';
 import PromotionModal from './components/PromotionModal';
+import ApplicationPageOnlyForm from './pages/ApplicationPageOnlyForm';
 import LeadGalaModal from './components/LeadGalaModal';
 import ContactSection from './components/ContactSection';
 // Importamos los componentes de las páginas que vamos a usar
@@ -45,6 +46,7 @@ function ScrollToTop() {
 
 function App() {
   const isApplicationOpen = true;
+  const isApplicationOnlyForm = true;
   const location = useLocation();
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1A0B2E] via-[#2D1B4E] to-[#1A0B2E]">
@@ -58,7 +60,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route
             path="/application"
-            element={isApplicationOpen ? <ApplicationPage /> : <ApplicationPageDisabled />}
+            element={isApplicationOpen ? (isApplicationOnlyForm ? <ApplicationPageOnlyForm /> : <ApplicationPage />) : <ApplicationPageDisabled />}
           />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/pillars" element={<PillarsPage />} />
