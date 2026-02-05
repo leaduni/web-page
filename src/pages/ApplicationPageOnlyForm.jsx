@@ -121,7 +121,7 @@ const ApplicationPageOnlyForm = () => {
           </p>
 
           <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSe4VImLFawragMP7er99uPfDDK53N3Wet1N_eRY1WI3Kmkdxw/viewform"
+            href="https://docs.google.com/forms/d/e/1FAIpQLScQfuCThzQQnpF6Xb5-eNVMdpu6LA7X7fvP5Z7B_hVdSNu0mQ/viewform"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative inline-flex items-center justify-center bg-gradient-to-r from-[#d93340] to-[#a6249d] text-white px-10 py-5 rounded-full shadow-[0_0_20px_rgba(217,51,64,0.5)] font-bold text-xl md:text-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_40px_rgba(166,36,157,0.7)]"
@@ -148,3 +148,4 @@ const ApplicationPageOnlyForm = () => {
 };
 
 export default ApplicationPageOnlyForm;
+
